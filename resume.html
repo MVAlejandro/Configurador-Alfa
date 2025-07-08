@@ -47,15 +47,26 @@
                 <div class="prop">
                     <!-- Card Capacidad de carga -->
                     <div class="cap card mb-5">
-                    <div class="card-body">
-                        <h5 class="card-title">Capacidad de carga</h5>
-                        <p class="card-text">
-                        <ul>
-                            <li>Estático: 2200 kg</li>
-                            <li>Dinámico: 1400 kg</li>
-                        </ul>   
-                        </p>
-                    </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Capacidad de carga</h5>
+                            <p class="card-text">
+                                <table class="table table-borderless">
+                                    <thead>
+                                        
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Estática:</td>
+                                            <td id="cap-est"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dinámica:</td>
+                                            <td id="cap-din"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </p>
+                        </div>
                     </div>
                     <!-- Card Descripción -->
                     <div class="desc card mb-5">
@@ -74,12 +85,12 @@
             <div class="col-sm-8 modelo d-flex flex-column justify-content-center align-items-end">
                 <div class="cap card mt-5 me-5">
                     <div class="card-body">
-                        <h5 class="card-title">Costo: $$$</h5>
+                        <h5 class="card-title">Costo: <span id="precio-fin"></span></h5>
                         <p class="card-text">
                             <ul>
-                                <li>Desgloce 1: $$</li>
-                                <li>Desgloce 2: $$</li>
-                                <li>Desgloce 3: $$</li>
+                                <li>Desgloce 1: <span id="desgloce1"></span></li>
+                                <li>Desgloce 2: <span id="desgloce2"></span></li>
+                                <li>Desgloce 3: <span id="desgloce3"></span></li>
                             </ul>   
                         </p>
                     </div>
