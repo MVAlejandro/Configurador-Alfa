@@ -49,6 +49,13 @@
     border-top: 1px solid black;
 }
 
+/*--- contenedor principal ---*/
+
+#estadoTarima , #tipoTarima{
+    list-style: none;
+    font-weight: bold;
+}
+
 /*--- footer ---*/
 
 #site-footer {
