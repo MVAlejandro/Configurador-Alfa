@@ -1,56 +1,82 @@
 
+// Crear evento al dar click en botón Regresar
+document.getElementById('btn-reg').addEventListener('click', function () {
+  window.location.href = './index.html';
+});
+
 // Recuperar los datos del localStorage
 const formDataJSON = localStorage.getItem('formData');
 const formData = JSON.parse(formDataJSON);  // Convertir JSON string a un objeto
 console.log(formDataJSON);
 
 
+// Verificar que el localStorage no esté vacio
+if (!formData) {
+  alert('No hay datos disponibles. Redirigiendo...');
+  window.location.href = './index.html';
+}
+
+
 // CARACTERISTICAS //
 // Obtener el contenedor ul donde se agregarán los li
 const resumenLista = document.getElementById('resumenLista');
 
-// Crear el contenido HTML para estado y tipo
-let estadoTexto;
-if (formData.estado === '1') {
-    estadoTexto = 'Nueva';
-} else {
-    estadoTexto = 'Reciclada';
-}
-
-switch (formData.tipo) {
-    case '1':
-        tipoTexto = 'Ciega';
-        break;
-    case '2':
-        tipoTexto = 'Barrote';
-        break;
-    case '3':
-        tipoTexto = 'Tacón';
-        break;
-    default:
-        tipoTexto = 'Tacón chico';
-        break;
-}
-
-// Insertar el estado y tipo 
-resumenLista.insertAdjacentHTML('beforeend', 
-    `<li id="estadoTarima">Estado: ${estadoTexto}</li>
-    <li id="tipoTarima">Tipo: ${tipoTexto}</li>`
-);
+// Función para generar el tamaño de la tarima
+function crearTamGral(largoG, anchoG, grosorG) {
+        resumenLista.insertAdjacentHTML('beforeend', 
+            `<li id="tamGral">Tamaño: ${largoG}" x ${anchoG}" x ${grosorG}"</li>`
+        );
+    }
 
 // Función para generar los elementos de las tablas
-function crearElemLista(nombre, cantidad, largo, ancho, grosor) {
-    resumenLista.insertAdjacentHTML('beforeend', 
-        `<li>${nombre}: ${cantidad} | ${largo}" x ${ancho}" x ${grosor}"</li>`
-    );
+    function crearElemLista(nombre, cantidad, largo, ancho, grosor) {
+        resumenLista.insertAdjacentHTML('beforeend', 
+            `<li>${nombre}: ${cantidad} | ${largo}" x ${ancho}" x ${grosor}"</li>`
+        );
+    }
+
+// Definir tipo de tarima
+let tipoTexto;
+if (formData.tipo === '1') {
+    tipoTexto = 'Nueva';
+} else {
+    tipoTexto = 'Reciclada';
 }
 
-// Llamar a la función para cada tabla con sus datos correspondientes
-crearElemLista('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS);
-crearElemLista('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
-crearElemLista('Tacón grueso', formData.cantidadTAG, formData.largoTAG, formData.anchoTAG, formData.grosorTAG);
-crearElemLista('Tacón delgado', formData.cantidadTAC, formData.largoTAC, formData.anchoTAC, formData.grosorTAC);
-crearElemLista('Tablas de carga', formData.cantidadTC, formData.largoTC, formData.anchoTC, formData.grosorTC);
+// Definir subtipo de tarima  y generar los elementos de las tablas
+let subtipoTexto;
+if (formData.subtipo === '2') {
+    subtipoTexto = 'Barrote';
+    // Insertar el tipo, subtipo y tamaño 
+    resumenLista.insertAdjacentHTML('beforeend', 
+        `<li id="tipoTarima">Tipo: ${tipoTexto}</li>
+        <li id="subtipoTarima">Subtipo: ${subtipoTexto}</li>`
+    );
+
+    crearTamGral(formData.largoGral, formData.anchoGral, formData.grosorGral);
+
+    // Llamar a la función para cada tabla con sus datos correspondientes
+    crearElemLista('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS);
+    crearElemLista('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
+    crearElemLista('Barrote', formData.cantidadB, formData.largoB, formData.anchoB, formData.grosorB);
+
+} else if (formData.subtipo === '3'){
+    subtipoTexto = 'Tacón';
+    // Insertar el tipo, subtipo y tamaño
+    resumenLista.insertAdjacentHTML('beforeend', 
+        `<li id="tipoTarima">Tipo: ${tipoTexto}</li>
+        <li id="subtipoTarima">Subtipo: ${subtipoTexto}</li>`
+    );
+
+    crearTamGral(formData.largoGral, formData.anchoGral, formData.grosorGral);
+
+    // Llamar a la función para cada tabla con sus datos correspondientes
+    crearElemLista('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS);
+    crearElemLista('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
+    crearElemLista('Tacón grueso', formData.cantidadTAG, formData.largoTAG, formData.anchoTAG, formData.grosorTAG);
+    crearElemLista('Tacón delgado', formData.cantidadTAC, formData.largoTAC, formData.anchoTAC, formData.grosorTAC);
+    crearElemLista('Tablas de carga', formData.cantidadTC, formData.largoTC, formData.anchoTC, formData.grosorTC);
+}
 
 
 // PROPIEDADES //

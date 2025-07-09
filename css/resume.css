@@ -51,7 +51,7 @@
 
 /*--- contenedor principal ---*/
 
-#estadoTarima , #tipoTarima{
+#tipoTarima , #subtipoTarima, #tamGral{
     list-style: none;
     font-weight: bold;
 }

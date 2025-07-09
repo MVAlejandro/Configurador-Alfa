@@ -1,9 +1,20 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1; 
+}
+
+/*--- Barra de relleno superior ---*/
 #top-bar {
     background-color: #8FC74A;
     height: 38.4px;
 }
 
-/*--- nav principal ---*/
+/*--- Nav principal ---*/
 #nav-pr {
     background-color: #7B7B7B;
     border: 1px solid white;
@@ -25,7 +36,7 @@
     border-right: 1px solid black;
 }
 
-/*--- nav secundario ---*/
+/*--- Nav secundario ---*/
 
 #nav-sec {
     background-color: #F5F5F5;
@@ -36,7 +47,7 @@
     color: black;
 }
 
-/*--- contenido principal ---*/
+/*--- Contenido principal ---*/
 
 .op-des {
     font-weight: bold;
@@ -50,7 +61,12 @@
     border: none !important;
 }
 
-input {
+#tamGral {
+    border: 1px solid red;
+    width: 50px;
+}
+
+.nb {
     border: none !important;
     padding: 5px !important;
 }
@@ -61,7 +77,7 @@ input {
     margin: 0;
 }
 
-/*--- footer ---*/
+/*--- Footer ---*/
 
 #site-footer {
     background-color: #222222;
