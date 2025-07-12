@@ -8,67 +8,46 @@ main {
   flex: 1; 
 }
 
-/*--- Barra de relleno superior ---*/
-#top-bar {
+/*--- BARRA DE RELLENO SUPERIOR ---*/
+#top_bar {
     background-color: #8FC74A;
     height: 38.4px;
 }
 
-/*--- Nav principal ---*/
-#nav-pr {
+/*--- BARRA DE NAVEGACION PRINCIPAL ---*/
+#nav_principal {
     background-color: #7B7B7B;
     border: 1px solid white;
     height: 74.8px;
     padding: 0px 50px 0px 40px;
 }
 
-#nav-logo {
+#nav_logo {
     padding: 10px   
 }
 
-#nav-op1 {
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-}
+/*--- BARRA DE NAVEGACION SECUNDARIO ---*/
 
-#nav-op3 {
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-}
-
-/*--- Nav secundario ---*/
-
-#nav-sec {
+#nav_secundario {
     background-color: #F5F5F5;
 }
 
-#btn-sig {
+#btn_agregar {
     border: 1px solid #7B7B7B;
-    color: black;
 }
 
-/*--- Contenido principal ---*/
+/*--- CONTENIDO PRINCIPAL ---*/
 
-.op-des {
+.titulo_opcion {
     font-weight: bold;
 }
 
-.car-des {
+.titulo_caracteristica {
     font-weight: 500;
 }
 
 .accordion-item {
     border: none !important;
-}
-
-#tamGral {
-    border: 1px solid red;
-    width: 50px;
-}
-
-.nb {
-    border: none !important;
-    padding: 5px !important;
 }
 
 .no-arrows::-webkit-outer-spin-button,
@@ -77,12 +56,17 @@ main {
     margin: 0;
 }
 
-/*--- Footer ---*/
+/*--- Logo por defecto en página principal ---*/
+#logo_main {
+    opacity: 0.7;
+}
 
-#site-footer {
+/*--- FOOTER ---*/
+
+#site_footer {
     background-color: #222222;
 }
 
-#foot-txt {
+#texto_footer {
     color: white;
 }
