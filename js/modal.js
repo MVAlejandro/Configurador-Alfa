@@ -1,17 +1,4 @@
 
-const modelo = document.getElementById('modelo');
-
-// Crear evento al dar click en botón Regresar
-document.getElementById('btn_regresar').addEventListener('click', function () {
-  window.location.href = './resumen.html';
-});
-
-// MOSTRAR LA INFORMACION GUARDADA DEL CONFIGURADOR
-// Recuperar los datos del localStorage
-const formDataJSON = localStorage.getItem('formData');
-const formData = JSON.parse(formDataJSON);  // Convertir JSON string a un objeto
-console.log(formDataJSON);
-
 // CARACTERISTICAS //
 // Obtener el contenedor ul donde se agregarán los li
 const lista_resumen = document.getElementById('lista_resumen');

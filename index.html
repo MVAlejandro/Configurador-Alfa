@@ -38,7 +38,7 @@
             <div class="col-sm-4 select-bar d-flex flex-column justify-content-center">
                 <div class="opciones_tarima">
                     <!-- Tipo de la tarima -->
-                    <div class="op-est d-flex align-items-center mb-3">
+                    <div id="op_tipo" class="d-flex align-items-center mb-3">
                         <p class="titulo_opcion mb-0 me-3">TIPO:</p>
                         <select id="tipo" class="form-select" aria-label="Default select example">
                             <option value="1">Nueva</option>
@@ -46,7 +46,7 @@
                         </select>
                     </div>
                     <!-- Subtipo de la tarima -->
-                    <div class="op-tip d-flex align-items-center mb-3">
+                    <div id="op_subtipo" class="d-flex align-items-center mb-3">
                         <p class="titulo_opcion mb-0 me-3">SUBTIPO: </p>
                         <select id="subtipo" class="form-select" aria-label="Default select example">
                             <option value="1">---</option>
@@ -54,8 +54,12 @@
                             <option value="3">Tacón</option>
                         </select>
                     </div>
+                    <!-- Acomodo de la tarima -->
+                    <div id="op_acomodo" class="d-flex align-items-center mb-3">
+                        
+                    </div>
                     <!-- Tamaño de la tarima -->
-                     <div class="op-tip d-flex align-items-center mb-4">
+                     <div class="op_tamaño d-flex align-items-center mb-4">
                         <p class="titulo_opcion mb-0 me-3">TAMAÑO: </p>
                         <div class="d-flex">
                             <input type="number" id="largoGral" class="form-control no-arrows" min="1" placeholder="Largo">
@@ -88,8 +92,8 @@
     </footer>
     
 <script src="./js/nav.js"></script>
-<script src="./js/index_formulario.js"></script>
-<script src="./js/index.js"></script>
+<script src="./js/index_formulario.js" type="module"></script>
+<script src="./js/index.js" type="module"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
 </html>
