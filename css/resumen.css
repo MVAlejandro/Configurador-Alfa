@@ -43,11 +43,17 @@ main {
 /*--- CONTENIDO PRINCIPAL ---*/
 .item_lista {
     font-size: 18px;
+    border-bottom: 1px solid black; 
+    padding-bottom: 5px;
 }
 
-.costo {
+.no-arrows::-webkit-outer-spin-button,
+.no-arrows::-webkit-inner-spin-button {
+    -webkit-appearance: none;
     margin: 0;
 }
+
+
 
 /*--- FOOTER ---*/
 

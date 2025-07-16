@@ -20,9 +20,17 @@
     padding-bottom: 5px;
 }
 
+.sub_descripcion {
+    list-style: circle;
+}
+
+#costo_unitario {
+    font-weight: bold;
+}
+
 /*--- Estilos específicos de listas ---*/
 
-#tipoTarima , #subtipoTarima, #tamGral{
+#tipoTarima , #subtipoTarima,#acomodoTarima, #tamGral{
     list-style: none;
     font-weight: bold;
 }

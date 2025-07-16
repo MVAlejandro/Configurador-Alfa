@@ -40,7 +40,7 @@
     <main id="main" class="container">
         <div class="row d-flex">
             <!-- Card con productos agregados -->
-            <div class="col-sm-6 d-flex flex-column justify-content-between position-relative mt-4">
+            <div class="col-sm-8 d-flex flex-column justify-content-between position-relative mt-4">
                 <div id="lista_productos" class="card">
                     
                 </div>
@@ -51,11 +51,11 @@
                     <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between">
                                 <h5 id="productos_total_texto">Total en Productos</h5>
-                            <span id="productos_total">1</span>
+                            <span id="productos_total">0</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between">
-                            <h5 id="precio_total_texto">Valoración inicial sin IVA</h5>
-                            <span id="precio_total">$830</span>
+                            <h5 id="precio_total_texto">Valoración inicial (sin IVA)</h5>
+                            <span id="precio_total">$0</span>
                         </li>
                     </ul>
                 </div>
@@ -79,10 +79,21 @@
                             <div class="col-sm-4 d-flex flex-column justify-content-center">
                                 <h2 class="mt-5 mb-3">Propiedades</h2>
                                 <div id="propiedades">
+                                    <!-- Card Descripción -->
+                                    <div id="descripcion" class="card card_modal mb-5">
+                                    <div class="card-body">
+                                        <h5 class="card-title titulo_campo">Descripción</h5>
+                                        <p class="card-text">
+                                            <ul id="lista_resumen">
+                                                
+                                            </ul>
+                                        </p>
+                                    </div>
+                                    </div>
                                     <!-- Card Capacidad de carga -->
-                                    <div id="capacidad_carga" class="card card_modal mb-5">
+                                    <div id="capacidad_carga" class="card card_modal mb-2">
                                         <div class="card-body">
-                                            <h5 class="card-title">Capacidad de carga</h5>
+                                            <h5 class="card-title titulo_campo">Capacidad de carga</h5>
                                             <p class="card-text">
                                                 <table class="table table-borderless">
                                                     <tbody>
@@ -99,17 +110,6 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <!-- Card Descripción -->
-                                    <div id="descripcion" class="card card_modal mb-5">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Descripción</h5>
-                                        <p class="card-text">
-                                            <ul id="lista_resumen">
-                                                
-                                            </ul>
-                                        </p>
-                                    </div>
-                                    </div>
                                 </div>
                             </div>
 
@@ -118,7 +118,7 @@
                                 <!-- Card Precio -->
                                 <div id="costo" class="card card_modal mt-5 me-5 align-self-end">
                                     <div class="card-body">
-                                        <h5 class="card-title">Valoración inicial sin IVA: <span id="costo_final"></span></h5> 
+                                        <p class="card-title">Valoración inicial sin IVA: <span id="costo_unitario"></span></p> 
                                     </div>
                                 </div>
                                 <!-- Imagen Modelo -->
@@ -127,7 +127,7 @@
                                 </div>
                                 <!-- Logo Modal -->
                                 <div id="logo_modal" class="position-absolute bottom-0 end-0 mb-3 me-1">
-                                    <img src="./assets/Logo-Color-PNG-500x400-2.png" alt="Logo" width="80px" id="logo_footer" class="me-4">
+                                    <img src="./assets/Logo-Color-PNG-500x400-1.png" alt="Logo" width="80px" id="logo_footer" class="me-4">
                                 </div>
                             </div>
                         </div>

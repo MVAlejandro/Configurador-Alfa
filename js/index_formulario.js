@@ -13,29 +13,28 @@ document.addEventListener('DOMContentLoaded', function () {
     const plano_tarima = document.getElementById('plano_tarima');
 
     subtipo.addEventListener('change', function () {
-        const seleccion = subtipo.value;
 
-        if (seleccion === '1') {
+        if (subtipo.value === '1') {
             op_acomodo.innerHTML = ``;
             caracteristicas_tarima.innerHTML = ``;
             plano_tarima.innerHTML = `<img src="./assets/Logo-Color-PNG-500x400-2.png" alt="Logo" height="230px" id="logo_main" class="mt-4">`;
-        } else if (seleccion === '2') {
+        } else if (subtipo.value === 'Barrote') {
             op_acomodo.innerHTML = 
             `<p class="titulo_opcion mb-0 me-3">Acomodo: </p>
                 <select id="acomodo" class="form-select" aria-label="Default select example">
-                    <option value="1">Tradicional</option>
-                    <option value="2">Invertido</option>
+                    <option value="Tradicional">Tradicional</option>
+                    <option value="Invertido">Invertido</option>
                 </select>`;
             caracteristicas_tarima.innerHTML = 
                 `<div class="accordion" id="accordionCaracter">
                     <!-- TABLA SUPERIOR -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <p class="titulo_caracteristica mb-0 me-3">Tabla superior</p>
                         </button>
                         </h2>
-                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
                                 <!-- Cantidad -->
                                 <div class="row mb-3">
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-6">
                                         <input type="number" id="largoTS" class="form-control nb no-arrows">
-                                        <p class="error" id="error-lTS" style="color: red;"></p>
+                                        <p class="error invalid-feedback" id="error-lTS" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -70,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-6">
                                         <input type="number" id="anchoTS" class="form-control nb no-arrows">
-                                        <p class="error" id="error-aTS" style="color: red;"></p>
+                                        <p class="error invalid-feedback" id="error-aTS" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -81,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-6">
                                         <input type="number" id="grosorTS" class="form-control nb no-arrows">
-                                        <p class="error" id="error-gTS" style="color: red;"></p>
+                                        <p class="error invalid-feedback" id="error-gTS" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -89,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div class="row mb-2">
                                     <div class="offset-md-1 col-md-3 text-end">
                                     </div>
-                                    <div id="separacion" class="col-md-6">
+                                    <div id="separacionTS" class="col-md-6">
                                         
                                     </div>
                                 </div>
@@ -101,11 +100,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     <!-- TABLA INFERIOR -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <p class="titulo_caracteristica mb-0 me-3">Tabla inferior</p>
                         </button>
                         </h2>
-                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
                                 <!-- Cantidad -->
                                 <div class="row mb-3">
@@ -120,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         </select>
                                     </div>
                                 </div>
+
                                 <!-- Largo -->
                                 <div class="row mb-2">
                                     <div class="offset-md-1 col-md-3 text-end">
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-6">
                                         <input type="number" id="largoTI" class="form-control nb no-arrows">
-                                        <p class="error" id="error-lTI" style="color: red;"></p>
+                                        <p class="error invalid-feedback" id="error-lTI" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-6">
                                         <input type="number" id="anchoTI" class="form-control nb no-arrows">
-                                        <p class="error" id="error-aTI" style="color: red;"></p>
+                                        <p class="error invalid-feedback" id="error-aTI" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -149,9 +149,26 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-6">
                                         <input type="number" id="grosorTI" class="form-control nb no-arrows">
-                                        <p class="error" id="error-gTI" style="color: red;"></p>
+                                        <p class="error invalid-feedback" id="error-gTI" style="color: red;"></p>
                                     </div>
                                 </div>
+
+                                <!-- Arreglo -->
+                                <div class="row mb-3">
+                                    <div class="col-md-3">
+                                        <label for="arregloTI" class="col-form-label">Arreglo:</label>
+                                    </div>
+                                    <div class="col-md-7 mb-3">
+                                        <select id="arregloTI" class="form-select nb">
+                                            <option value="Distribuido">Distribuido</option>
+                                            <option value="Especial">Especial</option>
+                                        </select>
+                                    </div>
+                                    <div id="arreglo_especial" class="col-md-10">
+                                        
+                                    </div>
+                                </div>
+
                             </div>                            
                         </div>
                     </div>
@@ -159,11 +176,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     <!-- BARROTES -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             <p class="titulo_caracteristica mb-0 me-3">Barrotes</p>
                         </button>
                         </h2>
-                        <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse">
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
                                 <!-- Cantidad -->
                                 <div class="row mb-3">
@@ -179,19 +196,18 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                 </div>
 
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                    <label class="form-check-label" for="inlineRadio1">1</label>
+                                <!-- Tipo de barrote -->
+                                <div class="row mb-3">
+                                    <div class="col-md-3">
+                                        <label for="tipoB" class="col-form-label"></label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <select id="tipoB" class="form-select nb">
+                                            <option value="Con saque">Con saque</option>
+                                            <option value="Corrido">Corrido</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                    <label class="form-check-label" for="inlineRadio2">2</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
-                                    <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
-                                </div>
-
 
                                 <!-- Largo -->
                                 <div class="row mb-2">
@@ -200,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-6">
                                         <input type="number" id="largoB" class="form-control nb no-arrows">
-                                        <p class="error" id="error-lB" style="color: red;"></p>
+                                        <p class="error invalid-feedback" id="error-lB" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -211,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-6">
                                         <input type="number" id="anchoB" class="form-control nb no-arrows">
-                                        <p class="error" id="error-aB" style="color: red;"></p>
+                                        <p class="error invalid-feedback" id="error-aB" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -222,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-6">
                                         <input type="number" id="grosorB" class="form-control nb no-arrows">
-                                        <p class="error" id="error-gB" style="color: red;"></p>
+                                        <p class="error invalid-feedback" id="error-gB" style="color: red;"></p>
                                     </div>
                                 </div>
                             </div>
@@ -230,22 +246,39 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 </div>
                 <br><br>`;
-            plano_tarima.innerHTML= `<img src="./assets/ST02N.png" alt="Plano de la tarima" height="300px">`;
+
+            const arreglo_especial = document.getElementById('arreglo_especial');
+            const arregloTI = document.getElementById('arregloTI');
+
+            arregloTI.addEventListener('change', function () {
+                if (arregloTI.value === 'Especial'){
+                    arreglo_especial.innerHTML = 
+                    `<input type="text" id="arregloEsp" class="form-control nb">
+                    <p class="error" id="error-esp" style="color: red;"></p>`;
+                }
+            });
+            plano_tarima.innerHTML = `<img src="./assets/ST02N.png" alt="Plano de la tarima" height="300px">`;
             // Llamar a la función después de renderizar
             requestAnimationFrame(() => {
                 inicializarValidaciones();
             });
-        } else if (seleccion === '3') {
+        } else if (subtipo.value === 'Tacón') {
+            op_acomodo.innerHTML = 
+            `<p class="titulo_opcion mb-0 me-3">Acomodo: </p>
+                <select id="acomodo" class="form-select" aria-label="Default select example">
+                    <option value="Tradicional">Tradicional</option>
+                    <option value="Invertido">Invertido</option>
+                </select>`;
             caracteristicas_tarima.innerHTML = 
                 `<div class="accordion" id="accordionCaracter">
                     <!-- TABLA SUPERIOR -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <p class="titulo_caracteristica mb-0 me-3">Tabla superior</p>
                         </button>
                         </h2>
-                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
                                 <!-- Cantidad -->
                                 <div class="row mb-3">
@@ -269,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-6">
                                         <input type="number" id="largoTS" class="form-control nb no-arrows">
-                                        <p class="error" id="error-lTS" style="color: red;"></p>
+                                        <p class="error invalid-feedback" id="error-lTS" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -280,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-6">
                                         <input type="number" id="anchoTS" class="form-control nb no-arrows">
-                                        <p class="error" id="error-aTS" style="color: red;"></p>
+                                        <p class="error invalid-feedback" id="error-aTS" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -291,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-6">
                                         <input type="number" id="grosorTS" class="form-control nb no-arrows">
-                                        <p class="error" id="error-gTS" style="color: red;"></p>
+                                        <p class="error invalid-feedback" id="error-gTS" style="color: red;"></p>
                                     </div>
                                 </div>
                                 
@@ -299,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div class="row mb-2">
                                     <div class="offset-md-1 col-md-3 text-end">
                                     </div>
-                                    <div id="separacion" class="col-md-6">
+                                    <div id="separacionTS" class="col-md-6">
                                         
                                     </div>
                                 </div>
@@ -310,11 +343,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     <!-- TABLA INFERIOR -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <p class="titulo_caracteristica mb-0 me-3">Tabla inferior</p>
                         </button>
                         </h2>
-                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
                                 <!-- Cantidad -->
                                 <div class="row mb-3">
@@ -365,11 +398,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     <!-- TACON -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             <p class="titulo_caracteristica mb-0 me-3">Tacón</p>
                         </button>
                         </h2>
-                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
                                 <!-- Cantidad -->
                                 <div class="row mb-3">
@@ -421,11 +454,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     <!-- TABLAS DE CARGA -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                             <p class="titulo_caracteristica mb-0 me-3">Tablas de carga</p>
                         </button>
                         </h2>
-                        <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse">
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
                                 <!-- Cantidad -->
                                 <div class="row mb-3">

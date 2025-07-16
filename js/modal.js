@@ -11,60 +11,66 @@ function crearTamGral(largoG, anchoG, grosorG) {
     }
 
 // Función para generar los elementos de las tablas
-function crearElemLista(nombre, cantidad, largo, ancho, grosor) {
+function crearElemListaB(nombre, cantidad, largo, ancho, grosor, nombre2, subDes) {
+    lista_resumen.insertAdjacentHTML('beforeend', 
+        `<li>${nombre}: ${cantidad} * ${largo}" x ${ancho}" x ${grosor}"</li>
+        <li class="sub_descripcion ms-4">${nombre2}: ${subDes}</li>`
+    );
+}
+
+function crearElemListaT(nombre, cantidad, largo, ancho, grosor) {
     lista_resumen.insertAdjacentHTML('beforeend', 
         `<li>${nombre}: ${cantidad} * ${largo}" x ${ancho}" x ${grosor}"</li>`
     );
 }
 
-// Definir tipo de tarima
-let tipo_texto;
-if (formData.tipo === '1') {
-    tipo_texto = 'Nueva';
-} else {
-    tipo_texto = 'Reciclada';
-}
-
 // Definir subtipo de tarima  y generar los elementos de las tablas
 // TARIMA DE BARROTE
-let subtipo_texto;
-if (formData.subtipo === '2') {
-    subtipo_texto = 'Barrote';
-    // Insertar el tipo, subtipo y tamaño 
+if (formData.subtipo === 'Barrote') {
+    // Insertar el tipo, subtipo, acomodo y tamaño 
     lista_resumen.insertAdjacentHTML('beforeend', 
-        `<li id="tipoTarima">Tipo: ${tipo_texto}</li>
-        <li id="subtipoTarima">Subtipo: ${subtipo_texto}</li>`
+        `<li id="tipoTarima">Tipo: ${formData.tipo}</li>
+        <li id="subtipoTarima">Subtipo: ${formData.subtipo}</li>
+        <li id="acomodoTarima">Acomodo: ${formData.acomodo}</li>`
     );
 
     crearTamGral(formData.largoGral, formData.anchoGral, formData.grosorGral);
 
     // Llamar a la función para cada tabla con sus datos correspondientes
-    crearElemLista('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS);
-    crearElemLista('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
-    crearElemLista('Barrote', formData.cantidadB, formData.largoB, formData.anchoB, formData.grosorB);
+    crearElemListaB('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS, 'Separación', formData.separacionTS);
+    crearElemListaB('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI, 'Arreglo', formData.arregloTI);
+    crearElemListaB('Barrote', formData.cantidadB, formData.largoB, formData.anchoB, formData.grosorB, 'Tipo', formData.tipoB);
 
     // Insertar el modelo de tarima de barrote
-    modelo.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes" width="520px" class="d-block mx-auto">`;
+    if (formData.tipo === 'Nueva') {
+        modelo.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes" width="520px" class="d-block mx-auto">`;
+    } else if (formData.tipo === 'Reciclada') {
+        modelo.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes" width="520px" class="d-block mx-auto">`;
+    }
 
 // TARIMA DE TACON
-} else if (formData.subtipo === '3'){
-    subtipo_texto = 'Tacón';
+} else if (formData.subtipo === 'Tacón'){
     // Insertar el tipo, subtipo y tamaño
     lista_resumen.insertAdjacentHTML('beforeend', 
-        `<li id="tipoTarima">Tipo: ${tipo_texto}</li>
-        <li id="subtipoTarima">Subtipo: ${subtipo_texto}</li>`
+        `<li id="tipoTarima">Tipo: ${formData.tipo}</li>
+        <li id="subtipoTarima">Subtipo: ${formData.subtipo}</li>
+        <li id="acomodoTarima">Acomodo: ${formData.acomodo}</li>`
     );
 
     crearTamGral(formData.largoGral, formData.anchoGral, formData.grosorGral);
 
     // Llamar a la función para cada tabla con sus datos correspondientes
-    crearElemLista('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS);
-    crearElemLista('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
-    crearElemLista('Tacón', formData.cantidadTA, formData.largoTA, formData.anchoTA, formData.grosorTA);
-    crearElemLista('Tablas de carga', formData.cantidadTC, formData.largoTC, formData.anchoTC, formData.grosorTC);
+    crearElemListaB('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS, 'Separación', formData.separacionTS);
+    crearElemListaT('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
+    crearElemListaT('Tacón', formData.cantidadTA, formData.largoTA, formData.anchoTA, formData.grosorTA);
+    crearElemListaT('Tablas de carga', formData.cantidadTC, formData.largoTC, formData.anchoTC, formData.grosorTC);
 
     // Insertar el modelo de tarima de tacón
-    modelo.innerHTML = `<img src="./assets/Tarima-con-tacon-nueva.png" alt="Tarima con tacón nueva" width="520px" class="d-block mx-auto"></img>`;
+    if (formData.tipo === 'Nueva') {
+        modelo.innerHTML = `<img src="./assets/Tarima-con-tacon-nueva.png" alt="Tarima con tacón nueva" width="520px" class="d-block mx-auto"></img>`;
+    } else if (formData.tipo === 'Reciclada') {
+        modelo.innerHTML = `<img src="./assets/Tarima-de-Tacon-reciclada.jpg" alt="Tarima con tacón nueva" width="520px" class="d-block mx-auto"></img>`;
+    }
 }
 
 
@@ -87,27 +93,11 @@ capacidad_dinamica.insertAdjacentHTML('beforeend',
 
 
 // COSTO //
-// Valores para calcular los costos
-const costoBase = 500; // costo base tarima
-const costoTablaSuperior = 100; // tabla superior
-const costoTablaInferior = 80; // tabla inferior
-const costoTaconGrueso = 50; // tacón grueso
-const costoTaconChico = 30; // tacón chico
-const costoCarga = 70; // tablas de carga
-
-// Fórmula cálculo de costos
-const desgloce1 = costoBase + costoTablaSuperior; // base + tabla superior
-const desgloce2 = costoTablaInferior + costoTaconGrueso; // tabla inferior + tacón grueso
-const desgloce3 = costoTaconChico + costoCarga; // tacón chico + tablas de carga
-
-// Precio final = Suma de desgloces
-const precioFinal = desgloce1 + desgloce2 + desgloce3;
-
 // Definir elementos para mostrar la información
-  const precioFinalElement = document.getElementById('costo_final');
+  const costo_unitario = document.getElementById('costo_unitario');
 
 // Mostrar valores de los resultados
-precioFinalElement.insertAdjacentHTML('beforeend', 
-    `$${precioFinal.toFixed(2)}`
+costo_unitario.insertAdjacentHTML('beforeend', 
+    `$${formData.precioUnit}`
 );
 

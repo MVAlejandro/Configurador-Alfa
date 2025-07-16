@@ -1,7 +1,7 @@
 
 // VALIDACIONES GENERALES
 // Función para validar que ningún input es inválido
-// PONER EN CADA ARCHIVO QUE LA OCUPE =>    const campos = document.querySelectorAll('input');
+  // PONER EN CADA ARCHIVO QUE LA OCUPE =>    const campos = document.querySelectorAll('input');
 export function validarCamposInvalidos(campos) {
   for (let campo of campos) {
     if (campo.classList.contains('is-invalid')) {
@@ -37,7 +37,7 @@ export function validarAnchoTS(anchoTSIn, largoGralIn, cantidadTSIn, errorTS2) {
     const cantidadTS = parseFloat(cantidadTSIn.value.trim());
     const anchoTS = parseFloat(anchoTSIn.value.trim());
 
-    const separacionText = document.getElementById('separacion');
+    const separacionText = document.getElementById('separacionTS');
 
     const separacion = ((largoGral - (anchoTS * cantidadTS)) / (cantidadTS - 1)).toFixed(2);
 
@@ -55,6 +55,24 @@ export function validarAnchoTS(anchoTSIn, largoGralIn, cantidadTSIn, errorTS2) {
   });
 }
 // Validar Grueso de Tabla Superior
+export function validarGrosorTS(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTS3) {
+  grosorTSIn.addEventListener('input', function () {
+    const grosorTS = parseFloat(grosorTSIn.value.trim());
+    const anchoB = parseFloat(anchoBIn.value.trim());
+	const grosorTI = parseFloat(grosorTIIn.value.trim());
+	const grosorGral = parseFloat(grosorGralIn.value.trim());
+
+    if ((grosorTS+anchoB+grosorTI) ===  grosorGral) {
+      errorTS3.textContent = '';
+      grosorTSIn.classList.remove('is-invalid');
+      grosorTSIn.classList.add('is-valid');
+    } else {
+      errorTS3.textContent = 'El grosor supera la altura general';
+      grosorTSIn.classList.add('is-invalid');
+      grosorTSIn.classList.remove('is-valid');
+    }
+  });
+}
 
 
 	// TABLA INFERIOR
@@ -94,6 +112,24 @@ export function validarAnchoTI(anchoTSIn, anchoTIIn, errorTI2) {
   });
 }
 // Validar Grueso de Tabla Inferior
+export function validarGrosorTI(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTI3) {
+  grosorTIIn.addEventListener('input', function () {
+    const grosorTI = parseFloat(grosorTIIn.value.trim());
+    const grosorTS = parseFloat(grosorTSIn.value.trim());
+    const anchoB = parseFloat(anchoBIn.value.trim());
+	const grosorGral = parseFloat(grosorGralIn.value.trim());
+
+    if ((grosorTS+anchoB+grosorTI) ===  grosorGral) {
+      errorTI3.textContent = '';
+      grosorTIIn.classList.remove('is-invalid');
+      grosorTIIn.classList.add('is-valid');
+    } else {
+      errorTI3.textContent = 'El grosor supera la altura general';
+      grosorTIIn.classList.add('is-invalid');
+      grosorTIIn.classList.remove('is-valid');
+    }
+  });
+}
 
 // VALIDACIONES BARROTES
 	// BARROTE
@@ -135,5 +171,19 @@ export function validarAnchoB(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, er
   });
 }
 // Validar Grueso de Tabla Barrote
+export function validarGrosorB(grosorBIn, errorB3) {
+grosorBIn.addEventListener('input', function () {
+  const grosorB = parseFloat(grosorBIn.value.trim());
 
+  if (grosorB >= 1 && grosorB <= 3) {
+    errorB3.textContent = '';
+    grosorBIn.classList.remove('is-invalid');
+    grosorBIn.classList.add('is-valid');
+  } else {
+    errorB3.textContent = 'El grosor no puede ser de ese tamaño';
+    grosorBIn.classList.add('is-invalid');
+    grosorBIn.classList.remove('is-valid');
+}
+});
+}
 
