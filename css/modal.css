@@ -24,7 +24,7 @@
     list-style: circle;
 }
 
-#costo_unitario {
+#costo_unitario, #costo_total {
     font-weight: bold;
 }
 

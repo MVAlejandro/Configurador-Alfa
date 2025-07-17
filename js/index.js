@@ -7,6 +7,8 @@ import {validarCamposInvalidos,
         validarLargoB, validarAnchoB, validarGrosorB} from "./validaciones/validaBarrote.js"
 // Importar funciones de validación Tacón
 
+// Declarar el arreglo para guardar los objetos, y recupera en caso de existir
+let carrito = JSON.parse(localStorage.getItem("carrito")) || []; 
 // Declarar el objeto formData para después
 let formData = {};
 
@@ -102,6 +104,7 @@ export function inicializarValidaciones() {
 document.getElementById('btn_agregar').addEventListener('click', function(event) {
     event.preventDefault();
 
+    let cantidad = 1;
     // Obtener los valores de los campos del formulario
     const tipo = document.getElementById('tipo').value;
     const subtipo = document.getElementById('subtipo').value;
@@ -127,6 +130,7 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
     // TARIMA DE BARROTE
     if (subtipo === 'Barrote') {
         let arregloTI = document.getElementById('arregloTI').value;
+        let distBar = "Estándar";
 
         // Si se elige un arreglo especial capturar la descripción
         if (arregloTI === 'Especial') {
@@ -139,6 +143,12 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         const largoB = parseFloat(document.getElementById('largoB').value);
         const anchoB = parseFloat(document.getElementById('anchoB').value);
         const grosorB = parseFloat(document.getElementById('grosorB').value);
+
+        // Si se elige saque capturar la distribución
+        if (tipoB.value === 'Con saque') {
+            let distBar_texto = document.getElementById('distBar').value;
+            distBar = distBar_texto;
+        }
 
         // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
         // Validar si algún campo está vacío
@@ -173,18 +183,17 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
 
         // Crear un objeto con todos los datos del formulario
         formData = {
-            tipo, subtipo, acomodo, precioUnit,
+            tipo, subtipo, acomodo, precioUnit, cantidad,
             largoGral, anchoGral, grosorGral,
             cantidadTS, largoTS, anchoTS, grosorTS, separacionTS,
             cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
-            cantidadB, tipoB, largoB, anchoB, grosorB
+            cantidadB, tipoB, largoB, anchoB, grosorB, distBar
         };
 
-        // Convertir el objeto JSON a string
-        const formDataJSON = JSON.stringify(formData);
-
-        // Guardar el JSON en localStorage
-        localStorage.setItem('formData', formDataJSON);
+        // Agregar el objeto creado al carrito
+        carrito.push(formData);
+        // Guardar el carrito en localStorage
+        localStorage.setItem("carrito", JSON.stringify(carrito));
         // Limpiar los campos
         location.reload();
          // Mostrar alerta de agregado correctamente
@@ -238,7 +247,7 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
 
         // Crear un objeto con todos los datos del formulario
         formData = {
-            tipo, subtipo, acomodo, precioUnit,
+            tipo, subtipo, acomodo, precioUnit, cantidad,
             largoGral, anchoGral, grosorGral,
             cantidadTS, largoTS, anchoTS, grosorTS, separacionTS,
             cantidadTI, largoTI, anchoTI, grosorTI,
@@ -246,11 +255,10 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
             cantidadTC, largoTC, anchoTC, grosorTC
         };
 
-        // Convertir el objeto JSON a string
-        const formDataJSON = JSON.stringify(formData);
-
-        // Guardar el JSON en localStorage
-        localStorage.setItem('formData', formDataJSON);
+        // Agregar el objeto creado al carrito
+        carrito.push(formData);
+        // Guardar el carrito en localStorage
+        localStorage.setItem("carrito", JSON.stringify(carrito));
         // Limpiar los campos
         location.reload();
         // Mostrar alerta de agregado correctamente

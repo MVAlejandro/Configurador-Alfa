@@ -7,6 +7,8 @@ import {inicializarValidaciones} from './index.js';
 // MOSTRAR EL FORMULARIO DE ACUERDO AL SUBTIPO DE TARIMA
 // Identificar el subtipo y el contenedor principal
 document.addEventListener('DOMContentLoaded', function () {
+    const op_tamaño = document.getElementById('op_tamaño');
+
     const subtipo = document.getElementById('subtipo');
     const op_acomodo = document.getElementById('op_acomodo');
     const caracteristicas_tarima = document.getElementById('caracteristicas_tarima');
@@ -16,15 +18,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (subtipo.value === '1') {
             op_acomodo.innerHTML = ``;
+            op_tamaño.innerHTML =
+                `<div class="d-flex align-items-center">
+                    <div class="me-2 text-center">
+                        <input type="number" id="largoGral" class="form-control no-arrows gral" min="1" placeholder="Largo">
+                    </div>
+                    <span class="mx-2">x</span>
+                    <div class="me-2 text-center">
+                        <input type="number" id="anchoGral" class="form-control no-arrows gral" min="1" placeholder="Ancho">
+                    </div>
+                    <span class="mx-2">x</span>
+                    <div class="text-center">
+                        <input type="number" id="grosorGral" class="form-control no-arrows gral" min="1" placeholder="Grosor">
+                    </div>
+                </div>`;
             caracteristicas_tarima.innerHTML = ``;
             plano_tarima.innerHTML = `<img src="./assets/Logo-Color-PNG-500x400-2.png" alt="Logo" height="230px" id="logo_main" class="mt-4">`;
         } else if (subtipo.value === 'Barrote') {
             op_acomodo.innerHTML = 
-            `<p class="titulo_opcion mb-0 me-3">Acomodo: </p>
-                <select id="acomodo" class="form-select" aria-label="Default select example">
-                    <option value="Tradicional">Tradicional</option>
-                    <option value="Invertido">Invertido</option>
-                </select>`;
+                `<p class="titulo_opcion mb-0 me-3">Acomodo: </p>
+                    <select id="acomodo" class="form-select" aria-label="Default select example">
+                        <option value="Tradicional">Tradicional</option>
+                        <option value="Invertido">Invertido</option>
+                    </select>`;
+
+            op_tamaño.innerHTML =
+                `<div class="d-flex align-items-center">
+                    <div class="me-2 text-center">
+                        <input type="number" id="largoGral" class="form-control no-arrows gral" value="48" min="1" placeholder="Largo">
+                        <small class="text-muted">Largo</small>
+                    </div>
+                    <span class="mx-2">x</span>
+                    <div class="me-2 text-center">
+                        <input type="number" id="anchoGral" class="form-control no-arrows gral" value="40" min="1" placeholder="Ancho">
+                        <small class="text-muted">Ancho</small>
+                    </div>
+                    <span class="mx-2">x</span>
+                    <div class="text-center">
+                        <input type="number" id="grosorGral" class="form-control no-arrows gral" value="5" min="1" placeholder="Grosor">
+                        <small class="text-muted">Grosor</small>
+                    </div>
+                </div>`;
+
             caracteristicas_tarima.innerHTML = 
                 `<div class="accordion" id="accordionCaracter">
                     <!-- TABLA SUPERIOR -->
@@ -57,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="largoTS" class="col-form-label">Largo:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="largoTS" class="form-control nb no-arrows">
+                                        <input type="number" value="40" id="largoTS" class="form-control nb no-arrows">
                                         <p class="error invalid-feedback" id="error-lTS" style="color: red;"></p>
                                     </div>
                                 </div>
@@ -68,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="anchoTS" class="col-form-label">Ancho:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="anchoTS" class="form-control nb no-arrows">
+                                        <input type="number" value="3.5" id="anchoTS" class="form-control nb no-arrows">
                                         <p class="error invalid-feedback" id="error-aTS" style="color: red;"></p>
                                     </div>
                                 </div>
@@ -79,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="grosorTS" class="col-form-label">Espesor:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="grosorTS" class="form-control nb no-arrows">
+                                        <input type="number" value="0.62" id="grosorTS" class="form-control nb no-arrows">
                                         <p class="error invalid-feedback" id="error-gTS" style="color: red;"></p>
                                     </div>
                                 </div>
@@ -126,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="largoTI" class="col-form-label">Largo:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="largoTI" class="form-control nb no-arrows">
+                                        <input type="number" value="40" id="largoTI" class="form-control nb no-arrows">
                                         <p class="error invalid-feedback" id="error-lTI" style="color: red;"></p>
                                     </div>
                                 </div>
@@ -137,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="anchoTI" class="col-form-label">Ancho:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="anchoTI" class="form-control nb no-arrows">
+                                        <input type="number" value="3.5" id="anchoTI" class="form-control nb no-arrows">
                                         <p class="error invalid-feedback" id="error-aTI" style="color: red;"></p>
                                     </div>
                                 </div>
@@ -148,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="grosorTI" class="col-form-label">Espesor:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="grosorTI" class="form-control nb no-arrows">
+                                        <input type="number" value="0.62" id="grosorTI" class="form-control nb no-arrows">
                                         <p class="error invalid-feedback" id="error-gTI" style="color: red;"></p>
                                     </div>
                                 </div>
@@ -198,15 +233,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                 <!-- Tipo de barrote -->
                                 <div class="row mb-3">
-                                    <div class="col-md-3">
-                                        <label for="tipoB" class="col-form-label"></label>
+                                    <div class="col-md-3 text-end">
+                                        <label for="tipoB" class="col-form-label">Tipo:</label>
                                     </div>
                                     <div class="col-md-7">
                                         <select id="tipoB" class="form-select nb">
-                                            <option value="Con saque">Con saque</option>
                                             <option value="Corrido">Corrido</option>
+                                            <option value="Con saque">Con saque</option>
                                         </select>
                                     </div>
+                                </div>
+
+                                <div id="distribucion_barrote" class="row mb-3">
+                                    
                                 </div>
 
                                 <!-- Largo -->
@@ -215,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="largoB" class="col-form-label">Largo:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="largoB" class="form-control nb no-arrows">
+                                        <input type="number" value="48" id="largoB" class="form-control nb no-arrows">
                                         <p class="error invalid-feedback" id="error-lB" style="color: red;"></p>
                                     </div>
                                 </div>
@@ -226,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="anchoB" class="col-form-label">Altura:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="anchoB" class="form-control nb no-arrows">
+                                        <input type="number" value="3.5" id="anchoB" class="form-control nb no-arrows">
                                         <p class="error invalid-feedback" id="error-aB" style="color: red;"></p>
                                     </div>
                                 </div>
@@ -237,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="grosorB" class="col-form-label">Espesor:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="grosorB" class="form-control nb no-arrows">
+                                        <input type="number" value="0.25" id="grosorB" class="form-control nb no-arrows">
                                         <p class="error invalid-feedback" id="error-gB" style="color: red;"></p>
                                     </div>
                                 </div>
@@ -247,16 +286,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
                 <br><br>`;
 
+            // Si se elige el arreglo especial, mostrar campo para describirlo
             const arreglo_especial = document.getElementById('arreglo_especial');
             const arregloTI = document.getElementById('arregloTI');
 
             arregloTI.addEventListener('change', function () {
-                if (arregloTI.value === 'Especial'){
+                if (arregloTI.value === 'Distribuido'){
                     arreglo_especial.innerHTML = 
-                    `<input type="text" id="arregloEsp" class="form-control nb">
+                    ``;
+                } else if (arregloTI.value === 'Especial') {
+                    arreglo_especial.innerHTML = 
+                    `<input type="text" id="arregloEsp" class="form-control nb" placeholder="Describa su arreglo.">
                     <p class="error" id="error-esp" style="color: red;"></p>`;
                 }
             });
+
+            // Si se elige barrote con saque, mostrar campo para describirlo
+            const distribucion_barrote = document.getElementById('distribucion_barrote');
+            const tipoB = document.getElementById('tipoB');
+
+            tipoB.addEventListener('change', function () {
+                if (tipoB.value === 'Corrido'){
+                    distribucion_barrote.innerHTML = ``;
+                } else if (tipoB.value === 'Con saque') {
+                    distribucion_barrote.innerHTML = 
+                    `<div class="col-md-3">
+                        <label for="distBar" class="col-form-label">Distribución:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" id="distBar" class="form-control nb" value="Estándar" placeholder="Describa la distribución.">
+                        <p class="error" id="error-dist" style="color: red;"></p>
+                    </div>`;
+                }
+            });
+
             plano_tarima.innerHTML = `<img src="./assets/ST02N.png" alt="Plano de la tarima" height="300px">`;
             // Llamar a la función después de renderizar
             requestAnimationFrame(() => {
@@ -269,6 +332,25 @@ document.addEventListener('DOMContentLoaded', function () {
                     <option value="Tradicional">Tradicional</option>
                     <option value="Invertido">Invertido</option>
                 </select>`;
+
+            op_tamaño.innerHTML =
+                `<div class="d-flex align-items-center">
+                    <div class="me-2 text-center">
+                        <input type="number" id="largoGral" class="form-control no-arrows gral" value="48" min="1" placeholder="Largo">
+                        <small class="text-muted">Largo</small>
+                    </div>
+                    <span class="mx-2">x</span>
+                    <div class="me-2 text-center">
+                        <input type="number" id="anchoGral" class="form-control no-arrows gral" value="40" min="1" placeholder="Ancho">
+                        <small class="text-muted">Ancho</small>
+                    </div>
+                    <span class="mx-2">x</span>
+                    <div class="text-center">
+                        <input type="number" id="grosorGral" class="form-control no-arrows gral" value="5" min="1" placeholder="Grosor">
+                        <small class="text-muted">Grosor</small>
+                    </div>
+                </div>`;
+            
             caracteristicas_tarima.innerHTML = 
                 `<div class="accordion" id="accordionCaracter">
                     <!-- TABLA SUPERIOR -->

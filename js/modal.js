@@ -11,10 +11,9 @@ function crearTamGral(largoG, anchoG, grosorG) {
     }
 
 // Función para generar los elementos de las tablas
-function crearElemListaB(nombre, cantidad, largo, ancho, grosor, nombre2, subDes) {
+function crearElemListaB(nombre, cantidad, largo, ancho, grosor) {
     lista_resumen.insertAdjacentHTML('beforeend', 
-        `<li>${nombre}: ${cantidad} * ${largo}" x ${ancho}" x ${grosor}"</li>
-        <li class="sub_descripcion ms-4">${nombre2}: ${subDes}</li>`
+        `<li>${nombre}: ${cantidad} * ${largo}" x ${ancho}" x ${grosor}"</li>`
     );
 }
 
@@ -24,80 +23,82 @@ function crearElemListaT(nombre, cantidad, largo, ancho, grosor) {
     );
 }
 
-// Definir subtipo de tarima  y generar los elementos de las tablas
-// TARIMA DE BARROTE
-if (formData.subtipo === 'Barrote') {
-    // Insertar el tipo, subtipo, acomodo y tamaño 
+function crearElemListaSec(nombre, descripcion) {
     lista_resumen.insertAdjacentHTML('beforeend', 
-        `<li id="tipoTarima">Tipo: ${formData.tipo}</li>
-        <li id="subtipoTarima">Subtipo: ${formData.subtipo}</li>
-        <li id="acomodoTarima">Acomodo: ${formData.acomodo}</li>`
+        `<li class="sub_descripcion ms-4">${nombre}: ${descripcion}</li>`
     );
-
-    crearTamGral(formData.largoGral, formData.anchoGral, formData.grosorGral);
-
-    // Llamar a la función para cada tabla con sus datos correspondientes
-    crearElemListaB('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS, 'Separación', formData.separacionTS);
-    crearElemListaB('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI, 'Arreglo', formData.arregloTI);
-    crearElemListaB('Barrote', formData.cantidadB, formData.largoB, formData.anchoB, formData.grosorB, 'Tipo', formData.tipoB);
-
-    // Insertar el modelo de tarima de barrote
-    if (formData.tipo === 'Nueva') {
-        modelo.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes" width="520px" class="d-block mx-auto">`;
-    } else if (formData.tipo === 'Reciclada') {
-        modelo.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes" width="520px" class="d-block mx-auto">`;
-    }
-
-// TARIMA DE TACON
-} else if (formData.subtipo === 'Tacón'){
-    // Insertar el tipo, subtipo y tamaño
-    lista_resumen.insertAdjacentHTML('beforeend', 
-        `<li id="tipoTarima">Tipo: ${formData.tipo}</li>
-        <li id="subtipoTarima">Subtipo: ${formData.subtipo}</li>
-        <li id="acomodoTarima">Acomodo: ${formData.acomodo}</li>`
-    );
-
-    crearTamGral(formData.largoGral, formData.anchoGral, formData.grosorGral);
-
-    // Llamar a la función para cada tabla con sus datos correspondientes
-    crearElemListaB('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS, 'Separación', formData.separacionTS);
-    crearElemListaT('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
-    crearElemListaT('Tacón', formData.cantidadTA, formData.largoTA, formData.anchoTA, formData.grosorTA);
-    crearElemListaT('Tablas de carga', formData.cantidadTC, formData.largoTC, formData.anchoTC, formData.grosorTC);
-
-    // Insertar el modelo de tarima de tacón
-    if (formData.tipo === 'Nueva') {
-        modelo.innerHTML = `<img src="./assets/Tarima-con-tacon-nueva.png" alt="Tarima con tacón nueva" width="520px" class="d-block mx-auto"></img>`;
-    } else if (formData.tipo === 'Reciclada') {
-        modelo.innerHTML = `<img src="./assets/Tarima-de-Tacon-reciclada.jpg" alt="Tarima con tacón nueva" width="520px" class="d-block mx-auto"></img>`;
-    }
 }
 
+// Función para llenar toda la información en el modal
+function abrirModalItem(formData) {
+    // Limpiar contenedores antes de insertar la información
+    lista_resumen.innerHTML = '';
+    modelo.innerHTML = '';
+    capacidad_estatica.innerHTML = '';
+    capacidad_dinamica.innerHTML = '';
+    costo_unitario.innerHTML = '';
 
-// PROPIEDADES //
-// Fórmula para calcular la capacidad de carga
-const capacidad_estatica_calculo = ((formData.largoTS * formData.anchoTS * formData.grosorTS) + (formData.largoTI * formData.anchoTI * formData.grosorTI)) * 10;
-const capacidad_dinamica_calculo = capacidad_estatica_calculo * 0.64;
+    // Insertar información general
+    lista_resumen.insertAdjacentHTML('beforeend', `
+        <li id="tipoTarima">Tipo: ${formData.tipo}</li>
+        <li id="subtipoTarima">Subtipo: ${formData.subtipo}</li>
+        <li id="acomodoTarima">Acomodo: ${formData.acomodo}</li>
+    `);
 
-// Mostrar los resultados en la tabla
-const capacidad_estatica = document.getElementById('capacidad_estatica');
-const capacidad_dinamica = document.getElementById('capacidad_dinamica');
-  
-// Mostrar valores calculados
-capacidad_estatica.insertAdjacentHTML('beforeend', 
-    `${capacidad_estatica_calculo.toFixed(2)} kg`
-);
-capacidad_dinamica.insertAdjacentHTML('beforeend', 
-    `${capacidad_dinamica_calculo.toFixed(2)} kg`
-);
+    crearTamGral(formData.largoGral, formData.anchoGral, formData.grosorGral);
 
+    // Insertar información TARIMA DE BARROTE
+    if (formData.subtipo === 'Barrote') {
+        crearElemListaB('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS);
+        crearElemListaSec('Separación', formData.separacionTS);
+        crearElemListaB('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
+        crearElemListaSec('Arreglo', formData.arregloTI);
+        crearElemListaB('Barrote', formData.cantidadB, formData.largoB, formData.anchoB, formData.grosorB);
+        crearElemListaSec('Tipo', formData.tipoB);
+        crearElemListaSec('Distribución', formData.distBar);
 
-// COSTO //
-// Definir elementos para mostrar la información
-  const costo_unitario = document.getElementById('costo_unitario');
+        // Insertar el modelo de tarima de barrote
+        if (formData.tipo === 'Nueva') {
+            modelo.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes nueva" width="520px" class="d-block mx-auto">`;
+        } else {
+            modelo.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes reciclada" width="520px" class="d-block mx-auto">`;
+        }
+    // Insertar información TARIMA DE TACON
+    } else if (formData.subtipo === 'Tacón') {
+        crearElemListaB('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS, 'Separación', formData.separacionTS);
+        crearElemListaT('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
+        crearElemListaT('Tacón', formData.cantidadTA, formData.largoTA, formData.anchoTA, formData.grosorTA);
+        crearElemListaT('Tablas de carga', formData.cantidadTC, formData.largoTC, formData.anchoTC, formData.grosorTC);
 
-// Mostrar valores de los resultados
-costo_unitario.insertAdjacentHTML('beforeend', 
-    `$${formData.precioUnit}`
-);
+        // Insertar el modelo de tarima de tacón
+        if (formData.tipo === 'Nueva') {
+            modelo.innerHTML = `<img src="./assets/Tarima-con-tacon-nueva.png" alt="Tarima de tacón nueva" width="520px" class="d-block mx-auto">`;
+        } else {
+            modelo.innerHTML = `<img src="./assets/Tarima-de-Tacon-reciclada.jpg" alt="Tarima de tacón reciclada" width="520px" class="d-block mx-auto">`;
+        }
+    }
+
+    // PROPIEDADES //
+    // Fórmula para calcular la capacidad de carga
+    const capacidad_estatica_calculo = ((formData.largoTS * formData.anchoTS * formData.grosorTS) + (formData.largoTI * formData.anchoTI * formData.grosorTI)) * 10;
+    const capacidad_dinamica_calculo = capacidad_estatica_calculo * 0.64;
+
+    // Mostrar los valores calculados
+    capacidad_estatica.innerHTML = `${capacidad_estatica_calculo.toFixed(2)} kg`;
+    capacidad_dinamica.innerHTML = `${capacidad_dinamica_calculo.toFixed(2)} kg`;
+
+    // COSTO //
+    // Mostrar valores de los resultados
+    costo_unitario.innerHTML = `$${formData.precioUnit}`;
+
+    const total = formData.precioUnit * formData.cantidad;
+    const totalFormateado = total.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+
+    costo_total.innerHTML = `$${totalFormateado}`;
+};
+
+const modalProducto = document.getElementById('modal_producto');
 

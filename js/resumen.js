@@ -1,68 +1,142 @@
+
 // Crear evento al dar click en botón Regresar
 document.getElementById('btn_regresar').addEventListener('click', function () {
-  window.location.href = './index.html';
+    window.location.href = './index.html';
 });
 
 // Recuperar los datos del localStorage
-const formDataJSON = localStorage.getItem('formData');
-const formData = JSON.parse(formDataJSON);  // Convertir JSON string a un objeto
-console.log(formDataJSON);
+const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+console.log(carrito);
+
 
 const lista_productos = document.getElementById('lista_productos');
 const titulo_modal = document.getElementById('titulo_modal');
+// Declarar variables de precio total
+const precio_total_texto = document.getElementById('precio_total');
+let precio_total = 0;
+// Declarar variables de cantidad total
+const productos_total_texto = document.getElementById('productos_total');
 
 // Verificar que el localStorage no esté vacio
-if (!formData) {
-  lista_productos.insertAdjacentHTML('beforeend',
-    `<div id="item_container_1" class="card-body">
-        No se ha agregado ningún producto.
-    </div>`
-);
+if (!carrito) {
+    lista_productos.insertAdjacentHTML('beforeend',
+        `<div id="item_container_1" class="card-body">
+            No se ha agregado ningún producto.
+        </div>`
+    );
+}
+
+// Función para actualizar la cantidad total y sumar el precio total
+function actualizarCantidadTotal() {
+    let productos_total = 0;
+    let precio_total = 0;
+
+    const inputs = document.querySelectorAll('.cantidad_producto');
+
+    inputs.forEach((input, index) => {
+        const cantidad = parseInt(input.value.trim());
+        if (!isNaN(cantidad) && cantidad > 0) {
+            productos_total += cantidad;
+            precio_total += cantidad * carrito[index].precioUnit;
+        }
+    });
+
+    productos_total_texto.innerText = productos_total;
+    precio_total_texto.innerText = "$" + precio_total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 // Función para generar los elementos
-function crearItemLista(subtipo, tipo, largo, ancho, grosor, precio) {
-    lista_productos.insertAdjacentHTML('beforeend', 
-        `<div id="item_container_1" class="card-body">
-            <div class="row d-flex">
-                <div id="miniatura_item" class="col-sm-3 d-flex justify-content-center align-items-center">
-                    
-                </div>
-                <div class="col-sm-9">
-                    <div class="row mb-2">
-                        <div class="col-9">
-                            <p id="item1" class="item_lista">Tarima de ${subtipo}, ${tipo} (${largo}" x ${ancho}" x ${grosor}")</p>
-                        </div>
-                        <div class="col text-center">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_producto">
-                                Detalles
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row d-flex">
-                        <div class="col-9 d-flex align-items-end">
-                            <input type="number" class="form-control no-arrows ms-auto text-center cantidad_producto w-25" placeholder="Cantidad">
-                        </div>
-                        <div class="col  d-flex justify-content-center align-items-end">
-                            <p class="costo text-center mb-2"><strong>$${precio}</strong></p>
-                        </div>
-                    </div> 
-                </div>
+carrito.forEach((formData, index) => {
+    console.log(formData);
+    const item = 
+    `<div id="item_container_${index + 1}" class="card-body border mb-3">
+        <button id="btn_eliminar_${index + 1}" type="button" class="btn-close" aria-label="Close"></button>
+        <div class="row d-flex">
+            <div id="miniatura_item_${index + 1}" class="col-sm-3 d-flex justify-content-center align-items-center">
+            
             </div>
-        </div>`);
-    const miniatura_item = document.getElementById('miniatura_item');
+            <div class="col-sm-9">
+                <div class="row mb-2">
+                    <div class="col-9">
+                        <p id="item${index + 1}_texto" class="item_lista">
+                            Tarima de ${formData.subtipo}, ${formData.tipo} (${formData.largoGral}" x ${formData.anchoGral}" x ${formData.grosorGral}")
+                        </p>
+                    </div>
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-primary abrir-modal" data-bs-toggle="modal" data-bs-target="#modal_producto" data-index="${index}">
+                            Detalles
+                        </button>
+                    </div>
+                </div>
+                <div class="row d-flex mb-3">
+                    <div class="col-9 d-flex align-items-end">
+                        <input type="number" value="${formData.cantidad}" id="item${index + 1}_cantidad" class="form-control no-arrows ms-auto text-center cantidad_producto w-25" placeholder="Cantidad">
+                    </div>
+                    <div class="col d-flex justify-content-center align-items-end">
+                        <p id="item${index + 1}_precio" class="costo text-center mb-2"><strong>$${formData.precioUnit}</strong></p>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>`;
+
+    lista_productos.insertAdjacentHTML('beforeend', item);
+
+    // Declarar el botón de eliminar producto
+    const btn_eliminar = document.getElementById(`btn_eliminar_${index + 1}`);
+
+    btn_eliminar.addEventListener('click', () => {
+        // Eliminar el producto del arreglo
+        carrito.splice(index, 1);
+
+        // Actualizar el localStorage
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        location.reload();
+    });
+
+    // Asignar cada miniatura por item
+    const miniatura_item = document.getElementById(`miniatura_item_${index + 1}`);
     if (formData.tipo === 'Nueva' && formData.subtipo === 'Barrote') {
-        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="" width="110px">`;
+        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes nueva" width="110px">`;
     } else if (formData.tipo === 'Reciclada' && formData.subtipo === 'Barrote') {
-        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="" width="110px">`;
+        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes reciclada" width="110px">`;
     } else if (formData.tipo === 'Nueva' && formData.subtipo === 'Tacón') {
-        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-tacon-nueva.png" alt="" width="110px">`;
+        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-tacon-nueva.png" alt="Tarima de tacón nueva" width="110px">`;
     } else if (formData.tipo === 'Reciclada' && formData.subtipo === 'Tacón') {
-        miniatura_item.innerHTML = `<img src="./assets/Tarima-de-Tacon-reciclada.jpg" alt="" width="110px">`;
+        miniatura_item.innerHTML = `<img src="./assets/Tarima-de-Tacon-reciclada.jpg" alt="Tarima de tacón reciclada" width="110px">`;
     };
         
-    titulo_modal.insertAdjacentHTML('beforeend', `<p id="titulo_item1">Tarima de ${subtipo}, ${tipo} (${largo}" x ${ancho}" x ${grosor}")</p>`);
-}
+    // Agregar evento de abrir el modal a cada botón
+    const btn_detalles = document.querySelectorAll('.abrir-modal');
 
-// Llamar a la función para insertar el producto guardado en localStorage en la card correspondiente
-    crearItemLista(formData.subtipo, formData.tipo, formData.largoGral, formData.anchoGral, formData.grosorGral, formData.precioUnit);
+    btn_detalles.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const index = btn.getAttribute('data-index');
+            const formData = carrito[index];
+
+            titulo_modal.innerHTML = 
+                `Tarima de ${formData.subtipo}, ${formData.tipo} (${formData.largoGral}" x ${formData.anchoGral}" x ${formData.grosorGral}")`;
+            
+            abrirModalItem(formData);
+        });
+    });
+});
+
+document.querySelectorAll('.cantidad_producto').forEach((input, index) => {
+    input.addEventListener('input', (e) => {
+        const nuevaCantidad = parseInt(e.target.value.trim());
+
+        // Actualizar cantidad en el carrito si es válida
+        if (!isNaN(nuevaCantidad) && nuevaCantidad >= 0) {
+            carrito[index].cantidad = nuevaCantidad;
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+        }
+
+        // Actualizar totales
+        actualizarCantidadTotal();
+    });
+});
+
+// Calcular al iniciar por si ya hay cantidades
+actualizarCantidadTotal();
+

@@ -59,16 +59,26 @@
                         
                     </div>
                     <!-- Tamaño de la tarima -->
-                     <div class="op_tamaño d-flex align-items-center mb-4">
-                        <p class="titulo_opcion mb-0 me-3">TAMAÑO: </p>
-                        <div class="d-flex">
-                            <input type="number" id="largoGral" class="form-control no-arrows" min="1" placeholder="Largo">
-                            <span class="my-1 mx-2">x</span>
-                            <input type="number" id="anchoGral" class="form-control no-arrows" min="1" placeholder="Ancho">
-                            <span class="my-1 mx-2">x</span>
-                            <input type="number" id="grosorGral" class="form-control no-arrows" min="1" placeholder="Grosor">
+                    <div class="d-flex flex-column mb-4">
+                        <div class="d-flex align-items-center">
+                            <p class="titulo_opcion mb-0 me-3">TAMAÑO: </p>
+                            <div id="op_tamaño" class="d-flex flex-column">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-2 text-center">
+                                        <input type="number" id="largoGral" class="form-control no-arrows gral" min="1" placeholder="Largo">
+                                    </div>
+                                    <span class="mx-2">x</span>
+                                    <div class="me-2 text-center">
+                                        <input type="number" id="anchoGral" class="form-control no-arrows gral" min="1" placeholder="Ancho">
+                                    </div>
+                                    <span class="mx-2">x</span>
+                                    <div class="text-center">
+                                        <input type="number" id="grosorGral" class="form-control no-arrows gral" min="1" placeholder="Grosor">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
+                    </div>
                 </div>
     
                 <!-- Características -->
