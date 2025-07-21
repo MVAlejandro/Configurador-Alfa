@@ -24,7 +24,7 @@
     list-style: circle;
 }
 
-#costo_unitario, #costo_total {
+#costo_unitario, #costo_total, #cantidad_total {
     font-weight: bold;
 }
 
@@ -33,6 +33,10 @@
 #tipoTarima , #subtipoTarima,#acomodoTarima, #tamGral{
     list-style: none;
     font-weight: bold;
+}
+
+#distTS {
+    list-style: none;
 }
 
 /*--- Logo en pantalla por defecto ---*/

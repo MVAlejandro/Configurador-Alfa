@@ -13,29 +13,31 @@ export function validarCamposInvalidos(campos) {
 
 	// TABLA SUPERIOR
 // Validar Largo de Tabla Superior
-export function validarLargoTS(largoTSIn, anchoGralIn, errorTS1) {
+export function validarLargoTSB(largoTSIn, anchoGralIn, errorLargo) {
     largoTSIn.addEventListener('input', function () {
-        const anchoGral = parseFloat(anchoGralIn.value.trim());
         const largoTS = parseFloat(largoTSIn.value.trim());
+        const anchoGral = parseFloat(anchoGralIn.value.trim());
 
-        if (largoTS === 0){
-            errorTS1.textContent = 'El largo no puede ser 0';
+        if (isNaN(largoTS) || largoTS <= 0) {
+            errorLargo.textContent = 'El largo debe ser un número mayor a 0';
             largoTSIn.classList.add('is-invalid');
             largoTSIn.classList.remove('is-valid');
         } else if (largoTS === anchoGral) {
-            errorTS1.textContent = '';
+            errorLargo.textContent = '';
             largoTSIn.classList.remove('is-invalid');
             largoTSIn.classList.add('is-valid');
         } else {
-            errorTS1.textContent = 'El largo de la tabla debe ser igual al ancho general';
+            errorLargo.textContent = 'El largo de la tabla debe ser igual al ancho general';
             largoTSIn.classList.add('is-invalid');
             largoTSIn.classList.remove('is-valid');
-    }
+        }
     });
 }
 
+//
+
 // Validar Ancho de Tabla Superior
-export function validarAnchoTS(anchoTSIn, largoGralIn, cantidadTSIn, errorTS2) {
+export function validarAnchoTSB(anchoTSIn, largoGralIn, cantidadTSIn, errorTS2) {
     anchoTSIn.addEventListener('input', function () {
         const largoGral = parseFloat(largoGralIn.value.trim());
         const cantidadTS = parseFloat(cantidadTSIn.value.trim());
@@ -45,7 +47,7 @@ export function validarAnchoTS(anchoTSIn, largoGralIn, cantidadTSIn, errorTS2) {
 
         const separacion = ((largoGral - (anchoTS * cantidadTS)) / (cantidadTS - 1)).toFixed(2);
 
-        if (anchoTS === 0){
+        if (isNaN(anchoTS) || anchoTS === 0){
             errorTS2.textContent = 'El ancho no puede ser 0';
             anchoTSIn.classList.add('is-invalid');
             anchoTSIn.classList.remove('is-valid');
@@ -62,39 +64,37 @@ export function validarAnchoTS(anchoTSIn, largoGralIn, cantidadTSIn, errorTS2) {
         }
     });
 }
-// Validar Grueso de Tabla Superior
-export function validarGrosorTS(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTS3) {
+
+// Validar Grosor de Tabla Superior
+export function validarGrosorTSB(grosorTSIn, grosorGralIn, errorGrosor) {
     grosorTSIn.addEventListener('input', function () {
         const grosorTS = parseFloat(grosorTSIn.value.trim());
-        const anchoB = parseFloat(anchoBIn.value.trim());
-        const grosorTI = parseFloat(grosorTIIn.value.trim());
         const grosorGral = parseFloat(grosorGralIn.value.trim());
 
-        if (grosorTS === 0){
-            errorTS3.textContent = 'El grosor no puede ser 0';
+        if (isNaN(grosorTS) || grosorTS <= 0) {
+            errorGrosor.textContent = 'El espesor debe ser un número mayor a 0';
             grosorTSIn.classList.add('is-invalid');
             grosorTSIn.classList.remove('is-valid');
-        } else if ((grosorTS+anchoB+grosorTI) <=  grosorGral) {
-            errorTS3.textContent = '';
+        } else if (grosorTS < grosorGral) {
+            errorGrosor.textContent = '';
             grosorTSIn.classList.remove('is-invalid');
             grosorTSIn.classList.add('is-valid');
         } else {
-            errorTS3.textContent = 'El grosor supera la altura general';
+            errorGrosor.textContent = 'El grosor supera la altura general';
             grosorTSIn.classList.add('is-invalid');
             grosorTSIn.classList.remove('is-valid');
         }
     });
 }
 
-
 	// TABLA INFERIOR
 // Validar Largo de Tabla Inferior
-export function validarLargoTI(largoTIIn, anchoGralIn, errorTI1) {
+export function validarLargoTIB(largoTIIn, anchoGralIn, errorTI1) {
     largoTIIn.addEventListener('input', function () {
         const anchoGral = parseFloat(anchoGralIn.value.trim());
         const largoTI = parseFloat(largoTIIn.value.trim());
 
-        if (largoTI === 0){
+        if (isNaN(largoTI) || largoTI === 0){
             errorTI1.textContent = 'El largo no puede ser 0';
             grosorTIIn.classList.add('is-invalid');
             grosorTIIn.classList.remove('is-valid');
@@ -111,12 +111,12 @@ export function validarLargoTI(largoTIIn, anchoGralIn, errorTI1) {
 }
 
 // Validar Ancho de Tabla Inferior
-export function validarAnchoTI(anchoTSIn, anchoTIIn, errorTI2) {
+export function validarAnchoTIB(anchoTSIn, anchoTIIn, errorTI2) {
     anchoTIIn.addEventListener('input', function () {
         const anchoTS = parseFloat(anchoTSIn.value.trim());
         const anchoTI = parseFloat(anchoTIIn.value.trim());
 
-        if (anchoTI === 0){
+        if (isNaN(anchoTI) || anchoTI === 0){
             errorTI2.textContent = 'El largo no puede ser 0';
             anchoTIIn.classList.add('is-invalid');
             anchoTIIn.classList.remove('is-valid');
@@ -131,15 +131,16 @@ export function validarAnchoTI(anchoTSIn, anchoTIIn, errorTI2) {
         }
     });
 }
+
 // Validar Grueso de Tabla Inferior
-export function validarGrosorTI(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTI3) {
+export function validarGrosorTIB(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTI3) {
     grosorTIIn.addEventListener('input', function () {
         const grosorTI = parseFloat(grosorTIIn.value.trim());
         const grosorTS = parseFloat(grosorTSIn.value.trim());
         const anchoB = parseFloat(anchoBIn.value.trim());
         const grosorGral = parseFloat(grosorGralIn.value.trim());
 
-        if (grosorTI === 0){
+        if (isNaN(grosorTI) || grosorTI === 0){
             errorTI3.textContent = 'El grosor no puede ser 0';
             grosorTIIn.classList.add('is-invalid');
             grosorTIIn.classList.remove('is-valid');
@@ -155,7 +156,6 @@ export function validarGrosorTI(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, 
     });
 }
 
-// VALIDACIONES BARROTES
 	// BARROTE
 // Validar Largo de Tabla Barrote
 export function validarLargoB(largoBIn, largoGralIn, errorB1) {
@@ -163,7 +163,7 @@ export function validarLargoB(largoBIn, largoGralIn, errorB1) {
         const largoGral = parseFloat(largoGralIn.value.trim());
         const largoB = parseFloat(largoBIn.value.trim());
 
-        if (largoB === 0){
+        if (isNaN(largoB) || largoB === 0){
             errorB1.textContent = 'El largo no puede ser 0';
             largoBIn.classList.add('is-invalid');
             largoBIn.classList.remove('is-valid');
@@ -187,7 +187,7 @@ export function validarAnchoB(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, er
         const grosorTI = parseFloat(grosorTIIn.value.trim());
         const grosorGral = parseFloat(grosorGralIn.value.trim());
 
-        if (anchoB === 0){
+        if (isNaN(anchoB) || anchoB === 0){
             errorB2.textContent = 'El ancho no puede ser 0';
             anchoBIn.classList.add('is-invalid');
             anchoBIn.classList.remove('is-valid');
@@ -207,7 +207,7 @@ export function validarGrosorB(grosorBIn, errorB3) {
     grosorBIn.addEventListener('input', function () {
         const grosorB = parseFloat(grosorBIn.value.trim());
 
-        if (grosorB === 0){
+        if (isNaN(grosorB) || grosorB === 0){
             errorB3.textContent = 'El grosor no puede ser 0';
             grosorBIn.classList.add('is-invalid');
             grosorBIn.classList.remove('is-valid');

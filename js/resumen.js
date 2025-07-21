@@ -26,6 +26,15 @@ if (!carrito) {
     );
 }
 
+// Verificar que el arreglo no esté vacío
+if (carrito.length === 0) {
+    lista_productos.insertAdjacentHTML('beforeend',
+        `<div id="item_container_1" class="card-body">
+            No se ha agregado ningún producto.
+        </div>`
+    );
+}
+
 // Función para actualizar la cantidad total y sumar el precio total
 function actualizarCantidadTotal() {
     let productos_total = 0;
@@ -68,14 +77,20 @@ carrito.forEach((formData, index) => {
                         </button>
                     </div>
                 </div>
+
                 <div class="row d-flex mb-3">
-                    <div class="col-9 d-flex align-items-end">
-                        <input type="number" value="${formData.cantidad}" id="item${index + 1}_cantidad" class="form-control no-arrows ms-auto text-center cantidad_producto w-25" placeholder="Cantidad">
+                    <div class="col-9 d-flex align-items-end justify-content-end">
+                        <label for="item${index + 1}_cantidad" class="col-form-label me-3">Lote estimado:</label>
+                        <input type="number" value="${formData.cantidad}" id="item${index + 1}_cantidad" class="form-control no-arrows text-center cantidad_producto w-25" placeholder="Cantidad">
                     </div>
                     <div class="col d-flex justify-content-center align-items-end">
-                        <p id="item${index + 1}_precio" class="costo text-center mb-2"><strong>$${formData.precioUnit}</strong></p>
+                        <p id="item${index + 1}_precio" class="costo text-center mb-2">
+                            <strong>$${formData.precioUnit}</strong>
+                        </p>
                     </div>
-                </div> 
+                </div>
+
+
             </div>
         </div>
     </div>`;

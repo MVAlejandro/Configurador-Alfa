@@ -11,15 +11,9 @@ function crearTamGral(largoG, anchoG, grosorG) {
     }
 
 // Función para generar los elementos de las tablas
-function crearElemListaB(nombre, cantidad, largo, ancho, grosor) {
+function crearElemListaPrin(nombre, cantidad, largo, ancho, grosor) {
     lista_resumen.insertAdjacentHTML('beforeend', 
-        `<li>${nombre}: ${cantidad} * ${largo}" x ${ancho}" x ${grosor}"</li>`
-    );
-}
-
-function crearElemListaT(nombre, cantidad, largo, ancho, grosor) {
-    lista_resumen.insertAdjacentHTML('beforeend', 
-        `<li>${nombre}: ${cantidad} * ${largo}" x ${ancho}" x ${grosor}"</li>`
+        `<li><u>${nombre}:</u> ${cantidad} * (${largo}" x ${ancho}" x ${grosor}")</li>`
     );
 }
 
@@ -49,13 +43,27 @@ function abrirModalItem(formData) {
 
     // Insertar información TARIMA DE BARROTE
     if (formData.subtipo === 'Barrote') {
-        crearElemListaB('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS);
-        crearElemListaSec('Separación', formData.separacionTS);
-        crearElemListaB('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
+        lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
+        // Mostrar tabla superior (puede ser una o varias)
+        if (Array.isArray(formData.tablaSuperior)) {
+            formData.tablaSuperior.forEach((tabla, i) => {
+                const titulo = formData.tablaSuperior.length > 1 ? `Tabla superior ${i + 1}` : 'Tabla superior';
+                crearElemListaPrin(titulo, tabla.cantidadTS, tabla.largoTS, tabla.anchoTS, tabla.grosorTS);
+            });
+            crearElemListaSec('Separación', formData.tablaSuperior[0].separacionTS);
+        }
+        lista_resumen.insertAdjacentHTML('beforeend', 
+            `<li id="distTS"><strong>Distribución:</strong> ${formData.distribucionTS}</li>`);
+        lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
+        crearElemListaPrin('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
         crearElemListaSec('Arreglo', formData.arregloTI);
-        crearElemListaB('Barrote', formData.cantidadB, formData.largoB, formData.anchoB, formData.grosorB);
+        lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
+        crearElemListaPrin('Barrote', formData.cantidadB, formData.largoB, formData.anchoB, formData.grosorB);
         crearElemListaSec('Tipo', formData.tipoB);
-        crearElemListaSec('Distribución', formData.distBar);
+
+        if (formData.tipoB === 'Con saque') {
+            crearElemListaSec('Distribución saque', formData.distBar);
+        }
 
         // Insertar el modelo de tarima de barrote
         if (formData.tipo === 'Nueva') {
@@ -65,10 +73,23 @@ function abrirModalItem(formData) {
         }
     // Insertar información TARIMA DE TACON
     } else if (formData.subtipo === 'Tacón') {
-        crearElemListaB('Tabla superior', formData.cantidadTS, formData.largoTS, formData.anchoTS, formData.grosorTS, 'Separación', formData.separacionTS);
-        crearElemListaT('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
-        crearElemListaT('Tacón', formData.cantidadTA, formData.largoTA, formData.anchoTA, formData.grosorTA);
-        crearElemListaT('Tablas de carga', formData.cantidadTC, formData.largoTC, formData.anchoTC, formData.grosorTC);
+        lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
+        // Mostrar tabla superior (puede ser una o varias)
+        if (Array.isArray(formData.tablaSuperior)) {
+            formData.tablaSuperior.forEach((tabla, i) => {
+                const titulo = formData.tablaSuperior.length > 1 ? `Tabla superior ${i + 1}` : 'Tabla superior';
+                crearElemListaPrin(titulo, tabla.cantidadTS, tabla.largoTS, tabla.anchoTS, tabla.grosorTS);
+            });
+            crearElemListaSec('Separación', formData.tablaSuperior[0].separacionTS);
+        }
+        lista_resumen.insertAdjacentHTML('beforeend', 
+            `<li id="distTS"><strong>Distribución:</strong> ${formData.distribucionTS}</li>`);
+        lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
+        crearElemListaPrin('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
+        lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
+        crearElemListaPrin('Tacón', formData.cantidadTA, formData.largoTA, formData.anchoTA, formData.grosorTA);
+        lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
+        crearElemListaPrin('Tablas de carga', formData.cantidadTC, formData.largoTC, formData.anchoTC, formData.grosorTC);
 
         // Insertar el modelo de tarima de tacón
         if (formData.tipo === 'Nueva') {
@@ -80,7 +101,8 @@ function abrirModalItem(formData) {
 
     // PROPIEDADES //
     // Fórmula para calcular la capacidad de carga
-    const capacidad_estatica_calculo = ((formData.largoTS * formData.anchoTS * formData.grosorTS) + (formData.largoTI * formData.anchoTI * formData.grosorTI)) * 10;
+    const ts = formData.tablaSuperior[0]; // usar el primero como referencia
+    const capacidad_estatica_calculo = ((ts.largoTS * ts.anchoTS * ts.grosorTS) + (formData.largoTI * formData.anchoTI * formData.grosorTI)) * 10;
     const capacidad_dinamica_calculo = capacidad_estatica_calculo * 0.64;
 
     // Mostrar los valores calculados
@@ -90,6 +112,8 @@ function abrirModalItem(formData) {
     // COSTO //
     // Mostrar valores de los resultados
     costo_unitario.innerHTML = `$${formData.precioUnit}`;
+
+    cantidad_total.innerHTML= `${formData.cantidad}`;
 
     const total = formData.precioUnit * formData.cantidad;
     const totalFormateado = total.toLocaleString('en-US', {

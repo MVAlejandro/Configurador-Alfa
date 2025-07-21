@@ -2,10 +2,12 @@
 // IMPORTACIÓN DE FUNCIONES EXTERNAS
 // Importar funciones de validación Barrote
 import {validarCamposInvalidos,
-        validarLargoTS, validarAnchoTS, validarGrosorTS, 
-        validarLargoTI, validarAnchoTI, validarGrosorTI,
+        validarLargoTSB, validarAnchoTSB, validarGrosorTSB, 
+        validarLargoTIB, validarAnchoTIB, validarGrosorTIB,
         validarLargoB, validarAnchoB, validarGrosorB} from "./validaciones/validaBarrote.js"
 // Importar funciones de validación Tacón
+import {validarLargoTST, validarAnchoTST,  
+        validarLargoTIT, validarAnchoTIT} from "./validaciones/validaTacon.js"
 
 // Declarar el arreglo para guardar los objetos, y recupera en caso de existir
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []; 
@@ -14,9 +16,8 @@ let formData = {};
 
 
 // VALIDACIONES DE LOS CAMPOS INTRODUCIDOS
-// Función que inicia las validaciones
-export function inicializarValidaciones() {
-    // Validaciones generales
+// Función que inicia las validaciones de barrote
+export function inicializarValidacionesB() {
     const largoGralIn = document.getElementById('largoGral');
     const anchoGralIn = document.getElementById('anchoGral');
     const grosorGralIn = document.getElementById('grosorGral');
@@ -31,16 +32,11 @@ export function inicializarValidaciones() {
     const anchoTIIn = document.getElementById('anchoTI');
     const grosorTIIn = document.getElementById('grosorTI');
 
-    // Validaciones barrotes 
     const cantidadBIn = document.getElementById('cantidadB');
     const largoBIn = document.getElementById('largoB');
     const anchoBIn = document.getElementById('anchoB');
     const grosorBIn = document.getElementById('grosorB');
 
-    const errorB1 = document.getElementById('error-lB');
-    const errorB2 = document.getElementById('error-aB');
-    const errorB3 = document.getElementById('error-gB');
-    
     const errorTS1 = document.getElementById('error-lTS');
     const errorTS2 = document.getElementById('error-aTS');
     const errorTS3 = document.getElementById('error-gTS');
@@ -49,36 +45,40 @@ export function inicializarValidaciones() {
     const errorTI2 = document.getElementById('error-aTI');
     const errorTI3 = document.getElementById('error-gTI');
 
+    const errorB1 = document.getElementById('error-lB');
+    const errorB2 = document.getElementById('error-aB');
+    const errorB3 = document.getElementById('error-gB');
+
         // TABLA SUPERIOR
     // Validación Largo Tabla Superior
     if (largoTSIn && anchoGralIn && errorTS1) {
-        validarLargoTS(largoTSIn, anchoGralIn, errorTS1);
+        validarLargoTSB(largoTSIn, anchoGralIn, errorTS1);
     }
 
     // Validación Ancho Tabla Superior
     if (anchoTSIn && largoGralIn && cantidadTSIn && errorTS2) {
-        validarAnchoTS(anchoTSIn, largoGralIn, cantidadTSIn, errorTS2);
+        validarAnchoTSB(anchoTSIn, largoGralIn, cantidadTSIn, errorTS2);
     }
 
     // Validación Grueso Tabla Superior
     if (anchoBIn && grosorTSIn && grosorTIIn && grosorGralIn && errorTS3) {
-        validarGrosorTS(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTS3);
+        validarGrosorTSB(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTS3);
     }
 
         // TABLA INFERIOR
     // Validación Largo Tabla Inferior
     if (largoTIIn && anchoGralIn && errorTI1) {
-        validarLargoTI(largoTIIn, anchoGralIn, errorTI1);
+        validarLargoTIB(largoTIIn, anchoGralIn, errorTI1);
     }
 
     // Validación Ancho Tabla Inferior
     if (anchoTSIn && anchoTIIn && errorTI2) {
-        validarAnchoTI(anchoTSIn, anchoTIIn, errorTI2);
+        validarAnchoTIB(anchoTSIn, anchoTIIn, errorTI2);
     }
 
     // Validación Grueso Tabla Inferior
     if (anchoBIn && grosorTSIn && grosorTIIn && grosorGralIn && errorTI3) {
-        validarGrosorTI(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTI3);
+        validarGrosorTIB(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTI3);
     }
   
         // BARROTE
@@ -98,6 +98,67 @@ export function inicializarValidaciones() {
     }
 }
 
+// Función que inicia las validaciones de tacón
+export function inicializarValidacionesT() {
+    // Validaciones generales
+    const largoGralIn = document.getElementById('largoGral');
+    const anchoGralIn = document.getElementById('anchoGral');
+    const grosorGralIn = document.getElementById('grosorGral');
+
+    const cantidadTSIn = document.getElementById('cantidadTS');
+    const largoTSIn = document.getElementById('largoTS');
+    const anchoTSIn = document.getElementById('anchoTS');
+    const grosorTSIn = document.getElementById('grosorTS');
+
+    const cantidadTIIn = document.getElementById('cantidadTI');
+    const largoTIIn = document.getElementById('largoTI');
+    const anchoTIIn = document.getElementById('anchoTI');
+    const grosorTIIn = document.getElementById('grosorTI');
+    
+    const errorTS1 = document.getElementById('error-lTS');
+    const errorTS2 = document.getElementById('error-aTS');
+    const errorTS3 = document.getElementById('error-gTS');
+
+    const errorTI1 = document.getElementById('error-lTI');
+    const errorTI2 = document.getElementById('error-aTI');
+    const errorTI3 = document.getElementById('error-gTI');
+
+        // TABLA SUPERIOR
+    // Validación Largo Tabla Superior
+    if (largoTSIn && anchoGralIn && errorTS1) {
+        validarLargoTST(largoTSIn, anchoGralIn, errorTS1);
+    }
+
+    // Validación Ancho Tabla Superior
+    if (anchoTSIn && largoGralIn && cantidadTSIn && errorTS2) {
+        validarAnchoTST(anchoTSIn, largoGralIn, cantidadTSIn, errorTS2);
+    }
+
+    // Validación Grueso Tabla Superior
+    // if (anchoBIn && grosorTSIn && grosorTIIn && grosorGralIn && errorTS3) {
+    //     validarGrosorTS(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTS3);
+    // }
+
+        // TABLA INFERIOR
+    // Validación Largo Tabla Inferior
+    if (largoTIIn && anchoGralIn && errorTI1) {
+        validarLargoTIT(largoTIIn, anchoGralIn, errorTI1);
+    }
+
+    // Validación Ancho Tabla Inferior
+    if (anchoTSIn && anchoTIIn && errorTI2) {
+        validarAnchoTIT(anchoTSIn, anchoTIIn, errorTI2);
+    }
+
+    // Validación Grueso Tabla Inferior
+    // if (anchoBIn && grosorTSIn && grosorTIIn && grosorGralIn && errorTI3) {
+    //     validarGrosorTI(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTI3);
+    // }
+  
+        // TACON
+
+}
+
 
 // GUARDAR INFORMACION EN JSON AL DAR CLICK EN "AGREGAR"
 // Crear evento al dar click al botón Agregar
@@ -108,6 +169,7 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
     // Obtener los valores de los campos del formulario
     const tipo = document.getElementById('tipo').value;
     const subtipo = document.getElementById('subtipo').value;
+    if (subtipo === "1") { return }
     const acomodo = document.getElementById('acomodo').value;
         
     // Obtener los datos de las tablas compartidos entre ambos tipos de tarima
@@ -115,11 +177,75 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
     const anchoGral = parseFloat(document.getElementById('anchoGral').value);
     const grosorGral = parseFloat(document.getElementById('grosorGral').value);
 
-    const cantidadTS = parseInt(document.getElementById('cantidadTS').value);
-    const largoTS = parseFloat(document.getElementById('largoTS').value);
-    const anchoTS = parseFloat(document.getElementById('anchoTS').value);
-    const grosorTS = parseFloat(document.getElementById('grosorTS').value);
-    const separacionTS = ((largoGral - (anchoTS * cantidadTS)) / (cantidadTS - 1)).toFixed(2);
+    const variacionTS = document.getElementById('variacionTS')?.value || 'Único';
+
+    let tablaSuperiorData = [];
+    let cantidadTS, largoTS, anchoTS, grosorTS, separacionTS;
+
+    if (variacionTS === 'Único') {
+        // Recolección estándar
+        cantidadTS = parseInt(document.getElementById('cantidadTS').value);
+        largoTS = parseFloat(document.getElementById('largoTS').value);
+        anchoTS = parseFloat(document.getElementById('anchoTS').value);
+        grosorTS = parseFloat(document.getElementById('grosorTS').value);
+
+        // Validar antes de guardar los valores
+        if (!cantidadTS || !largoTS || !anchoTS || !grosorTS) {
+            alert('Por favor completa todos los campos de la tabla superior.');
+            return;
+        }
+
+        separacionTS = ((anchoGral - (anchoTS * cantidadTS)) / (cantidadTS - 1)).toFixed(2);
+
+        tablaSuperiorData.push({
+            cantidadTS, largoTS, anchoTS, grosorTS, separacionTS
+        });
+
+    } else if (variacionTS === 'Variable') {
+        const numVar = parseInt(document.getElementById('num_variacion').value);
+
+        if (num_variacion === "1") {
+            return
+        }
+
+        let totalOcupado = 0;
+        let totalCantidad = 0;
+
+        // Temporales para guardar y luego empujar
+        const variacionesTemp = []; 
+
+        for (let i = 0; i < numVar; i++) {
+            const cant = parseInt(document.getElementById(`cantidadTS-${i}`).value);
+            const largo = parseFloat(document.getElementById(`largoTS-${i}`).value);
+            const ancho = parseFloat(document.getElementById(`anchoTS-${i}`).value);
+            const grosor = parseFloat(document.getElementById(`grosorTS-${i}`).value);
+
+            if (!cant || !largo || !ancho || !grosor) {
+                alert(`Por favor completa todos los campos de la Variación ${i + 1}`);
+                return;
+            }
+
+            totalCantidad += cant;
+            totalOcupado += ancho * cant;
+
+            variacionesTemp.push({
+                cantidadTS: cant,
+                largoTS: largo,
+                anchoTS: ancho,
+                grosorTS: grosor
+                // separacionTS se agregará después
+            });
+        }
+
+        const separacionGlobal = ((anchoGral - totalOcupado) / (totalCantidad - 1)).toFixed(2);
+
+        // Agregar separación a cada entrada
+        variacionesTemp.forEach(variacion => {
+            variacion.separacionTS = separacionGlobal;
+            tablaSuperiorData.push(variacion);
+        });
+    }
+
         
     const cantidadTI = parseInt(document.getElementById('cantidadTI').value);
     const largoTI = parseFloat(document.getElementById('largoTI').value);
@@ -129,13 +255,31 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
     // Obtener los datos de las tablas dependiendo el tipo de tarima
     // TARIMA DE BARROTE
     if (subtipo === 'Barrote') {
+        let distribucionTS = "Estándar";
         let arregloTI = document.getElementById('arregloTI').value;
         let distBar = "Estándar";
 
+        // Si la variación de tablas superiores está activa, captura la descripción
+        if (variacionTS === 'Variable') {
+            const distribucionTS_texto = document.getElementById('distribucionTS').value;
+            if (distribucionTS_texto === "") {
+                alert('Por favor, coloque la descripción de la distribución superior');
+                return;
+            } else {
+                distribucionTS = distribucionTS_texto
+            }
+        }
+
+
         // Si se elige un arreglo especial capturar la descripción
         if (arregloTI === 'Especial') {
-            let arregloEsp = document.getElementById('arregloEsp').value;
-            arregloTI = arregloEsp;
+            const arregloTI_texto = document.getElementById('arregloEsp').value;
+            if (arregloTI_texto === "") {
+                alert('Por favor, coloque la descripción del arreglo inferior');
+                return;
+            } else {
+                arregloTI = arregloTI_texto
+            }
         }
 
         const cantidadB = parseInt(document.getElementById('cantidadB').value);
@@ -146,20 +290,24 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
 
         // Si se elige saque capturar la distribución
         if (tipoB.value === 'Con saque') {
-            let distBar_texto = document.getElementById('distBar').value;
-            distBar = distBar_texto;
+            const distBar_texto = document.getElementById('distBar').value;
+            if (distBar_texto === "") {
+                alert('Por favor, coloque la descripción de la distribución del saque');
+                return;
+            } else {
+                distBar = distBar_texto
+            }
         }
 
         // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
-        // Validar si algún campo está vacío
-        if (!largoGral || !anchoGral || !grosorGral ||
-            !cantidadTS || !largoTS || !anchoTS || !grosorTS ||
+        if (!largoGral || !anchoGral || !grosorGral || 
             !cantidadTI || !largoTI || !anchoTI || !grosorTI ||
             !cantidadB || !largoB || !anchoB || !grosorB) {
-                
+                    
             alert('Por favor, complete todos los campos para agregar el producto.');
             return;
         }
+        
         // Validar si hay campos inválidos
         const campos = document.querySelectorAll('input');
         if (!validarCamposInvalidos(campos)) {
@@ -185,7 +333,7 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         formData = {
             tipo, subtipo, acomodo, precioUnit, cantidad,
             largoGral, anchoGral, grosorGral,
-            cantidadTS, largoTS, anchoTS, grosorTS, separacionTS,
+            tablaSuperior: tablaSuperiorData, distribucionTS,
             cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
             cantidadB, tipoB, largoB, anchoB, grosorB, distBar
         };
@@ -201,6 +349,19 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
 
     // TARIMA DE TACON
     } else if (subtipo === 'Tacón'){
+        let distribucionTS = "Estándar";
+
+        // Si la variación de tablas superiores está activa, captura la descripción
+        if (variacionTS === 'Variable') {
+            const distribucionTS_texto = document.getElementById('distribucionTS').value;
+            if (distribucionTS_texto === "") {
+                alert('Por favor, coloque la descripción de la distribución superior');
+                return;
+            } else {
+                distribucionTS = distribucionTS_texto
+            }
+        }
+
         const cantidadTA = parseInt(document.getElementById('cantidadTA').value);
         const largoTA = parseFloat(document.getElementById('largoTA').value);
         const anchoTA = parseFloat(document.getElementById('anchoTA').value);
@@ -214,7 +375,6 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
         // Verificar si algún campo está vacío
         if (!largoGral || !anchoGral || !grosorGral ||
-            !cantidadTS || !largoTS || !anchoTS || !grosorTS ||
             !cantidadTI || !largoTI || !anchoTI || !grosorTI ||
             !cantidadTA || !largoTA || !anchoTA || !grosorTA ||
             !cantidadTC || !largoTC || !anchoTC || !grosorTC) {
@@ -249,7 +409,7 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         formData = {
             tipo, subtipo, acomodo, precioUnit, cantidad,
             largoGral, anchoGral, grosorGral,
-            cantidadTS, largoTS, anchoTS, grosorTS, separacionTS,
+            tablaSuperior: tablaSuperiorData, distribucionTS,
             cantidadTI, largoTI, anchoTI, grosorTI,
             cantidadTA, largoTA, anchoTA, grosorTA,
             cantidadTC, largoTC, anchoTC, grosorTC
@@ -264,6 +424,5 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         // Mostrar alerta de agregado correctamente
         alert('Datos guardados correctamente.');
     }
-
 });
 

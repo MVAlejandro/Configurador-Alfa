@@ -1,8 +1,7 @@
 
 // IMPORTACIÓN DE FUNCIONES EXTERNAS
-// Importar funciones de validación Barrote
-import {inicializarValidaciones} from './index.js';
-// Importar funciones de validación Tacón
+// Importar funciones de validación
+import {inicializarValidacionesB, inicializarValidacionesT} from './index.js';
 
 // MOSTRAR EL FORMULARIO DE ACUERDO AL SUBTIPO DE TARIMA
 // Identificar el subtipo y el contenedor principal
@@ -71,63 +70,78 @@ document.addEventListener('DOMContentLoaded', function () {
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
-                                <!-- Cantidad -->
+                                <!-- Variación -->
                                 <div class="row mb-3">
                                     <div class="col-md-3">
-                                        <label for="cantidadTS" class="col-form-label">Cantidad:</label>
+                                        <label for="variacionTS" class="col-form-label">Grosor:</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <select id="cantidadTS" class="form-select nb">
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
+                                        <select id="variacionTS" class="form-select nb">
+                                        <option value="Único">Único</option>
+                                        <option value="Variable">Variable</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <!-- Largo -->
-                                <div class="row mb-2">
-                                    <div class="offset-md-1 col-md-3 text-end">
-                                        <label for="largoTS" class="col-form-label">Largo:</label>
+                                <div id="tabla_superior">
+                                    <!-- Cantidad -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <label for="cantidadTS" class="col-form-label">Cantidad:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <select id="cantidadTS" class="form-select nb">
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <input type="number" value="40" id="largoTS" class="form-control nb no-arrows">
-                                        <p class="error invalid-feedback" id="error-lTS" style="color: red;"></p>
+
+                                    <!-- Largo -->
+                                    <div class="row mb-2">
+                                        <div class="offset-md-1 col-md-3 text-end">
+                                            <label for="largoTS" class="col-form-label">Largo:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" value="40" id="largoTS" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-lTS" style="color: red;"></p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Ancho -->
+                                    <div class="row mb-2">
+                                        <div class="offset-md-1 col-md-3 text-end">
+                                            <label for="anchoTS" class="col-form-label">Ancho:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" value="3.5" id="anchoTS" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-aTS" style="color: red;"></p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Grosor -->
+                                    <div class="row mb-2">
+                                        <div class="offset-md-1 col-md-3 text-end">
+                                            <label for="grosorTS" class="col-form-label">Espesor:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" value="0.62" id="grosorTS" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-gTS" style="color: red;"></p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Separación -->
+                                    <div class="row mb-2">
+                                        <div class="offset-md-1 col-md-3 text-end">
+                                        </div>
+                                        <div id="separacionTS" class="col-md-6">
+                                                    
+                                        </div>
                                     </div>
                                 </div>
-
-                                <!-- Ancho -->
-                                <div class="row mb-2">
-                                    <div class="offset-md-1 col-md-3 text-end">
-                                        <label for="anchoTS" class="col-form-label">Ancho:</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="number" value="3.5" id="anchoTS" class="form-control nb no-arrows">
-                                        <p class="error invalid-feedback" id="error-aTS" style="color: red;"></p>
-                                    </div>
-                                </div>
-
-                                <!-- Grosor -->
-                                <div class="row mb-2">
-                                    <div class="offset-md-1 col-md-3 text-end">
-                                        <label for="grosorTS" class="col-form-label">Espesor:</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="number" value="0.62" id="grosorTS" class="form-control nb no-arrows">
-                                        <p class="error invalid-feedback" id="error-gTS" style="color: red;"></p>
-                                    </div>
-                                </div>
-
-                                <!-- Separación -->
-                                <div class="row mb-2">
-                                    <div class="offset-md-1 col-md-3 text-end">
-                                    </div>
-                                    <div id="separacionTS" class="col-md-6">
-                                        
-                                    </div>
-                                </div>
-
+                                
                             </div>
                         </div>
                     </div>
@@ -238,14 +252,20 @@ document.addEventListener('DOMContentLoaded', function () {
                                     </div>
                                     <div class="col-md-7">
                                         <select id="tipoB" class="form-select nb">
-                                            <option value="Corrido">Corrido</option>
                                             <option value="Con saque">Con saque</option>
+                                            <option value="Corrido">Corrido</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div id="distribucion_barrote" class="row mb-3">
-                                    
+                                    <div class="col-md-3">
+                                        <label for="distBar" class="col-form-label">Distribución:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" id="distBar" class="form-control nb" value="Estándar" placeholder="Describa la distribución.">
+                                        <p class="error" id="error-dist" style="color: red;"></p>
+                                    </div>
                                 </div>
 
                                 <!-- Largo -->
@@ -286,6 +306,179 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
                 <br><br>`;
 
+            // Si se elige variación de grosor en Tabla superior mostrar un formulario distinto
+            const variacionTS = document.getElementById('variacionTS');
+            const tabla_superior = document.getElementById('tabla_superior');
+
+            variacionTS.addEventListener('change', function () {
+                if (variacionTS.value === 'Único'){
+                    tabla_superior.innerHTML = 
+                        `<!-- Cantidad -->
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="cantidadTS" class="col-form-label">Cantidad:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <select id="cantidadTS" class="form-select nb">
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Largo -->
+                        <div class="row mb-2">
+                            <div class="offset-md-1 col-md-3 text-end">
+                                <label for="largoTS" class="col-form-label">Largo:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" value="40" id="largoTS" class="form-control nb no-arrows">
+                                <p class="error invalid-feedback" id="error-lTS" style="color: red;"></p>
+                            </div>
+                        </div>
+
+                        <!-- Ancho -->
+                        <div class="row mb-2">
+                            <div class="offset-md-1 col-md-3 text-end">
+                                <label for="anchoTS" class="col-form-label">Ancho:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" value="3.5" id="anchoTS" class="form-control nb no-arrows">
+                                <p class="error invalid-feedback" id="error-aTS" style="color: red;"></p>
+                            </div>
+                        </div>
+
+                        <!-- Grosor -->
+                        <div class="row mb-2">
+                            <div class="offset-md-1 col-md-3 text-end">
+                                <label for="grosorTS" class="col-form-label">Espesor:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" value="0.62" id="grosorTS" class="form-control nb no-arrows">
+                                <p class="error invalid-feedback" id="error-gTS" style="color: red;"></p>
+                            </div>
+                        </div>
+
+                        <!-- Separación -->
+                        <div class="row mb-2">
+                            <div class="offset-md-1 col-md-3 text-end">
+                            </div>
+                            <div id="separacionTS" class="col-md-6">
+                                        
+                            </div>
+                        </div>`;
+                } else if (variacionTS.value === 'Variable') {
+                    tabla_superior.innerHTML = 
+                        `<div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="num_variacion" class="col-form-label">Variantes:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <select id="num_variacion" class="form-select nb">
+                                    <option value="">Seleccione...</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="repeticiones">
+                        
+                        </div>
+                        
+                        <!-- Arreglo -->
+                        <div id="distribucion_superior">
+                        
+                        </div>`;
+
+                    const num_variacion = document.getElementById('num_variacion');
+                    const repeticiones = document.getElementById('repeticiones');
+                    const distribucion_superior = document.getElementById('distribucion_superior');
+
+                    num_variacion.addEventListener('change', function () {
+                        const numVar = parseInt(this.value);
+                        repeticiones.innerHTML = '';
+                        // No generar si no se eligió un valor
+                        if (!numVar) return;
+
+                        for (let i = 0; i < numVar; i++) {
+                            repeticiones.innerHTML += 
+                            `<h5>Variación ${i + 1}</h5>
+                                <!-- Cantidad -->
+                                <div class="row mb-3">
+                                    <div class="col-md-3">
+                                        <label for="cantidadTS-${i}" class="col-form-label">Cantidad:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <select id="cantidadTS-${i}" class="form-select nb">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Largo -->
+                                <div class="row mb-2">
+                                    <div class="offset-md-1 col-md-3 text-end">
+                                        <label for="largoTS-${i}" class="col-form-label">Largo:</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" id="largoTS-${i}" class="form-control nb no-arrows">
+                                        <p class="error invalid-feedback" id="error-lTS-${i}" style="color: red;"></p>
+                                    </div>
+                                </div>
+
+                                <!-- Ancho -->
+                                <div class="row mb-2">
+                                    <div class="offset-md-1 col-md-3 text-end">
+                                        <label for="anchoTS-${i}" class="col-form-label">Ancho:</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" id="anchoTS-${i}" class="form-control nb no-arrows">
+                                        <p class="error invalid-feedback" id="error-aTS-${i}" style="color: red;"></p>
+                                    </div>
+                                </div>
+
+                                <!-- Grosor -->
+                                <div class="row mb-2">
+                                    <div class="offset-md-1 col-md-3 text-end">
+                                        <label for="grosorTS-${i}" class="col-form-label">Espesor:</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" id="grosorTS-${i}" class="form-control nb no-arrows">
+                                        <p class="error invalid-feedback" id="error-gTS-${i}" style="color: red;"></p>
+                                    </div>
+                                </div>
+
+                                <!-- Separación -->
+                                <div class="row mb-2">
+                                    <div class="offset-md-1 col-md-3 text-end">
+                                    </div>
+                                    <div id="separacionTS-${i}" class="col-md-6">
+                                                
+                                    </div>
+                                </div>
+                                <hr>`;
+                        }
+                    
+                    distribucion_superior.innerHTML = 
+                        `<div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="distribucionTS" class="col-form-label">Distribución:</label>
+                            </div>
+                            <div class="col-md-7 mb-3">
+                                <input type="text" id="distribucionTS" class="form-control nb" placeholder="Describa su distribución.">
+                                <p class="error" id="error-dist" style="color: red;"></p>
+                            </div>
+                        </div>`;
+                    });
+                }
+            });
+
             // Si se elige el arreglo especial, mostrar campo para describirlo
             const arreglo_especial = document.getElementById('arreglo_especial');
             const arregloTI = document.getElementById('arregloTI');
@@ -320,10 +513,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-            plano_tarima.innerHTML = `<img src="./assets/ST02N.png" alt="Plano de la tarima" height="300px">`;
+            plano_tarima.innerHTML = `<img src="./assets/ST02N.png" alt="Plano de la tarima" height="280px">`;
             // Llamar a la función después de renderizar
             requestAnimationFrame(() => {
-                inicializarValidaciones();
+                inicializarValidacionesB();
             });
         } else if (subtipo.value === 'Tacón') {
             op_acomodo.innerHTML = 
@@ -362,60 +555,75 @@ document.addEventListener('DOMContentLoaded', function () {
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
-                                <!-- Cantidad -->
+                                <!-- Variación -->
                                 <div class="row mb-3">
                                     <div class="col-md-3">
-                                        <label for="cantidadTS" class="col-form-label">Cantidad:</label>
+                                        <label for="variacionTS" class="col-form-label">Grosor:</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <select id="cantidadTS" class="form-select nb">
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
+                                        <select id="variacionTS" class="form-select nb">
+                                        <option value="Único">Único</option>
+                                        <option value="Variable">Variable</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <!-- Largo -->
-                                <div class="row mb-2">
-                                    <div class="offset-md-1 col-md-3 text-end">
-                                        <label for="largoTS" class="col-form-label">Largo:</label>
+                                <div id="tabla_superior">
+                                    <!-- Cantidad -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <label for="cantidadTS" class="col-form-label">Cantidad:</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <select id="cantidadTS" class="form-select nb">
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <input type="number" id="largoTS" class="form-control nb no-arrows">
-                                        <p class="error invalid-feedback" id="error-lTS" style="color: red;"></p>
-                                    </div>
-                                </div>
 
-                                <!-- Ancho -->
-                                <div class="row mb-2">
-                                    <div class="offset-md-1 col-md-3 text-end">
-                                        <label for="anchoTS" class="col-form-label">Ancho:</label>
+                                    <!-- Largo -->
+                                    <div class="row mb-2">
+                                        <div class="offset-md-1 col-md-3 text-end">
+                                            <label for="largoTS" class="col-form-label">Largo:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" value="40" id="largoTS" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-lTS" style="color: red;"></p>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <input type="number" id="anchoTS" class="form-control nb no-arrows">
-                                        <p class="error invalid-feedback" id="error-aTS" style="color: red;"></p>
-                                    </div>
-                                </div>
 
-                                <!-- Grosor -->
-                                <div class="row mb-2">
-                                    <div class="offset-md-1 col-md-3 text-end">
-                                        <label for="grosorTS" class="col-form-label">Espesor:</label>
+                                    <!-- Ancho -->
+                                    <div class="row mb-2">
+                                        <div class="offset-md-1 col-md-3 text-end">
+                                            <label for="anchoTS" class="col-form-label">Ancho:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" value="3.5" id="anchoTS" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-aTS" style="color: red;"></p>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <input type="number" id="grosorTS" class="form-control nb no-arrows">
-                                        <p class="error invalid-feedback" id="error-gTS" style="color: red;"></p>
+
+                                    <!-- Grosor -->
+                                    <div class="row mb-2">
+                                        <div class="offset-md-1 col-md-3 text-end">
+                                            <label for="grosorTS" class="col-form-label">Espesor:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" value="0.62" id="grosorTS" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-gTS" style="color: red;"></p>
+                                        </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Separación -->
-                                <div class="row mb-2">
-                                    <div class="offset-md-1 col-md-3 text-end">
-                                    </div>
-                                    <div id="separacionTS" class="col-md-6">
-                                        
+
+                                    <!-- Separación -->
+                                    <div class="row mb-2">
+                                        <div class="offset-md-1 col-md-3 text-end">
+                                        </div>
+                                        <div id="separacionTS" class="col-md-6">
+                                                    
+                                        </div>
                                     </div>
                                 </div>
 
@@ -439,7 +647,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <div class="col-md-7">
                                         <select id="cantidadTI" class="form-select nb">
                                         <option value="3">3</option>
-                                        <option value="4">4</option>
                                         <option value="5">5</option>
                                         </select>
                                     </div>
@@ -451,7 +658,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="largoTI" class="col-form-label">Largo:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="largoTI" class="form-control nb no-arrows">
+                                        <input type="number" value="40" id="largoTI" class="form-control nb no-arrows">
+                                        <p class="error invalid-feedback" id="error-lTI" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -461,7 +669,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="anchoTI" class="col-form-label">Ancho:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="anchoTI" class="form-control nb no-arrows">
+                                        <input type="number" value="3.5" id="anchoTI" class="form-control nb no-arrows">
+                                        <p class="error invalid-feedback" id="error-aTI" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -471,7 +680,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="grosorTI" class="col-form-label">Espesor:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="grosorTI" class="form-control nb no-arrows">
+                                        <input type="number" value="0.62" id="grosorTI" class="form-control nb no-arrows">
+                                        <p class="error invalid-feedback" id="error-gTI" style="color: red;"></p>
                                     </div>
                                 </div>
                             </div>                            
@@ -507,7 +717,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="largoTA" class="col-form-label">Largo:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="largoTA" class="form-control nb no-arrows">
+                                        <input type="number" value="5" id="largoTA" class="form-control nb no-arrows">
+                                        <p class="error invalid-feedback" id="error-lTA" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -517,7 +728,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="anchoTA" class="col-form-label">Ancho:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="anchoTA" class="form-control nb no-arrows">
+                                        <input type="number" value="3.5" id="anchoTA" class="form-control nb no-arrows">
+                                        <p class="error invalid-feedback" id="error-aTA" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -527,7 +739,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="grosorTA" class="col-form-label">Espesor:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="grosorTA" class="form-control nb no-arrows">
+                                        <input type="number" value="3.5" id="grosorTA" class="form-control nb no-arrows">
+                                        <p class="error invalid-feedback" id="error-gTA" style="color: red;"></p>
                                     </div>
                                 </div>
                             </div>
@@ -562,7 +775,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="largoTC" class="col-form-label">Largo:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="largoTC" class="form-control nb no-arrows">
+                                        <input type="number" value="48" id="largoTC" class="form-control nb no-arrows">
+                                        <p class="error invalid-feedback" id="error-lTC" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -572,7 +786,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="anchoTC" class="col-form-label">Ancho:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="anchoTC" class="form-control nb no-arrows">
+                                        <input type="number" value="3.5" id="anchoTC" class="form-control nb no-arrows">
+                                        <p class="error invalid-feedback" id="error-aTC" style="color: red;"></p>
                                     </div>
                                 </div>
 
@@ -582,7 +797,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <label for="grosorTC" class="col-form-label">Espesor:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" id="grosorTC" class="form-control nb no-arrows">
+                                        <input type="number" value="0.62" id="grosorTC" class="form-control nb no-arrows">
+                                        <p class="error invalid-feedback" id="error-gTC" style="color: red;"></p>
                                     </div>
                                 </div>
                             </div>
@@ -590,10 +806,172 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 </div>
                 <br><br>`;
-            plano_tarima.innerHTML= `<img src="./assets/TC02N2.png" alt="Plano de la tarima" height="300px">`;
+
+            // Si se elige variación de grosor en Tabla superior mostrar un formulario distinto
+            const variacionTS = document.getElementById('variacionTS');
+            const tabla_superior = document.getElementById('tabla_superior');
+
+            variacionTS.addEventListener('change', function () {
+                if (variacionTS.value === 'Único'){
+                    tabla_superior.innerHTML = 
+                        `<!-- Cantidad -->
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="cantidadTS" class="col-form-label">Cantidad:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <select id="cantidadTS" class="form-select nb">
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Largo -->
+                        <div class="row mb-2">
+                            <div class="offset-md-1 col-md-3 text-end">
+                                <label for="largoTS" class="col-form-label">Largo:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" value="40" id="largoTS" class="form-control nb no-arrows">
+                                <p class="error invalid-feedback" id="error-lTS" style="color: red;"></p>
+                            </div>
+                        </div>
+
+                        <!-- Ancho -->
+                        <div class="row mb-2">
+                            <div class="offset-md-1 col-md-3 text-end">
+                                <label for="anchoTS" class="col-form-label">Ancho:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" value="3.5" id="anchoTS" class="form-control nb no-arrows">
+                                <p class="error invalid-feedback" id="error-aTS" style="color: red;"></p>
+                            </div>
+                        </div>
+
+                        <!-- Grosor -->
+                        <div class="row mb-2">
+                            <div class="offset-md-1 col-md-3 text-end">
+                                <label for="grosorTS" class="col-form-label">Espesor:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" value="0.62" id="grosorTS" class="form-control nb no-arrows">
+                                <p class="error invalid-feedback" id="error-gTS" style="color: red;"></p>
+                            </div>
+                        </div>
+
+                        <!-- Separación -->
+                        <div class="row mb-2">
+                            <div class="offset-md-1 col-md-3 text-end">
+                            </div>
+                            <div id="separacionTS" class="col-md-6">
+                                        
+                            </div>
+                        </div>`;
+                } else if (variacionTS.value === 'Variable') {
+                    tabla_superior.innerHTML = 
+                        `<div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="num_variacion" class="col-form-label">Variantes:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <select id="num_variacion" class="form-select nb">
+                                    <option value="">Seleccione...</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="repeticiones">
+                        
+                        </div>
+                        
+                        <!-- Arreglo -->
+                        <div id="distribucion_superior">
+                        
+                        </div>`;
+
+                    const num_variacion = document.getElementById('num_variacion');
+                    const repeticiones = document.getElementById('repeticiones');
+                    const distribucion_superior = document.getElementById('distribucion_superior');
+
+                    num_variacion.addEventListener('change', function () {
+                        const numVar = parseInt(this.value);
+                        repeticiones.innerHTML = '';
+                        // No generar si no se eligió un valor
+                        if (!numVar) return;
+
+                        for (let i = 0; i < numVar; i++) {
+                            repeticiones.innerHTML += 
+                            `<h5>Variación ${i + 1}</h5>
+                                <!-- Cantidad -->
+                                <div class="row mb-3">
+                                    <div class="col-md-3">
+                                        <label for="cantidadTS-${i}" class="col-form-label">Cantidad:</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <select id="cantidadTS-${i}" class="form-select nb">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Largo -->
+                                <div class="row mb-2">
+                                    <div class="offset-md-1 col-md-3 text-end">
+                                        <label for="largoTS-${i}" class="col-form-label">Largo:</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" id="largoTS-${i}" class="form-control nb no-arrows">
+                                    </div>
+                                </div>
+
+                                <!-- Ancho -->
+                                <div class="row mb-2">
+                                    <div class="offset-md-1 col-md-3 text-end">
+                                        <label for="anchoTS-${i}" class="col-form-label">Ancho:</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" id="anchoTS-${i}" class="form-control nb no-arrows">
+                                    </div>
+                                </div>
+
+                                <!-- Grosor -->
+                                <div class="row mb-2">
+                                    <div class="offset-md-1 col-md-3 text-end">
+                                        <label for="grosorTS-${i}" class="col-form-label">Espesor:</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" id="grosorTS-${i}" class="form-control nb no-arrows">
+                                    </div>
+                                </div>
+                                <hr>`;
+                        }
+
+                        distribucion_superior.innerHTML = 
+                        `<div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="distribucionTS" class="col-form-label">Distribución:</label>
+                            </div>
+                            <div class="col-md-7 mb-3">
+                                <input type="text" id="distribucionTS" class="form-control nb" placeholder="Describa su distribución.">
+                                <p class="error" id="error-esp" style="color: red;"></p>
+                            </div>
+                        </div>`;
+                    });
+                }
+            });
+
+            plano_tarima.innerHTML= `<img src="./assets/TC02N2.png" alt="Plano de la tarima" height="280px" style="border: 1px solid black;">`;
             // Llamar a la función después de renderizar
             requestAnimationFrame(() => {
-                inicializarValidaciones();
+                inicializarValidacionesT();
             });
         };
     });
