@@ -52,8 +52,6 @@ function abrirModalItem(formData) {
             });
             crearElemListaSec('Separación', formData.tablaSuperior[0].separacionTS);
         }
-        lista_resumen.insertAdjacentHTML('beforeend', 
-            `<li id="distTS"><strong>Distribución:</strong> ${formData.distribucionTS}</li>`);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
         crearElemListaSec('Arreglo', formData.arregloTI);
@@ -82,12 +80,16 @@ function abrirModalItem(formData) {
             });
             crearElemListaSec('Separación', formData.tablaSuperior[0].separacionTS);
         }
-        lista_resumen.insertAdjacentHTML('beforeend', 
-            `<li id="distTS"><strong>Distribución:</strong> ${formData.distribucionTS}</li>`);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
-        crearElemListaPrin('Tacón', formData.cantidadTA, formData.largoTA, formData.anchoTA, formData.grosorTA);
+        if (formData.distribucionTA === 'Lateral') {
+            crearElemListaPrin('Tacón lateral', formData.cantidadTAL, formData.largoTAL, formData.anchoTAL, formData.grosorTAL);
+        } else {
+            crearElemListaPrin('Tacón lateral', formData.cantidadTAL, formData.largoTAL, formData.anchoTAL, formData.grosorTAL);
+            crearElemListaPrin('Tacón central', formData.cantidadTAC, formData.largoTAC, formData.anchoTAC, formData.grosorTAC);
+        }
+        crearElemListaSec('Distribución', formData.distribucionTA)
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Tablas de carga', formData.cantidadTC, formData.largoTC, formData.anchoTC, formData.grosorTC);
 

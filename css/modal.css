@@ -13,7 +13,7 @@
     border: none !important;
 }
 
-.card-title {
+.card-title, .card_resumen {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     padding-top: 5px;
@@ -30,7 +30,7 @@
 
 /*--- Estilos específicos de listas ---*/
 
-#tipoTarima , #subtipoTarima,#acomodoTarima, #tamGral{
+#tipoTarima , #subtipoTarima, #acomodoTarima, #tamGral {
     list-style: none;
     font-weight: bold;
 }

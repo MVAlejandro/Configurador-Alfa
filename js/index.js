@@ -6,8 +6,11 @@ import {validarCamposInvalidos,
         validarLargoTIB, validarAnchoTIB, validarGrosorTIB,
         validarLargoB, validarAnchoB, validarGrosorB} from "./validaciones/validaBarrote.js"
 // Importar funciones de validación Tacón
-import {validarLargoTST, validarAnchoTST,  
-        validarLargoTIT, validarAnchoTIT} from "./validaciones/validaTacon.js"
+import {validarLargoTST, validarAnchoTST, validarGrosorTST,  
+        validarLargoTIL, validarAnchoTIL, validarGrosorTIT,
+        validarLargoTIC, validarAnchoTIC,
+        validarLargoTA, validarAnchoTA, validarGrosorTA,
+        validarLargoTC, validarAnchoTC, validarGrosorTC} from "./validaciones/validaTacon.js"
 
 // Declarar el arreglo para guardar los objetos, y recupera en caso de existir
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []; 
@@ -27,12 +30,10 @@ export function inicializarValidacionesB() {
     const anchoTSIn = document.getElementById('anchoTS');
     const grosorTSIn = document.getElementById('grosorTS');
 
-    const cantidadTIIn = document.getElementById('cantidadTI');
     const largoTIIn = document.getElementById('largoTI');
     const anchoTIIn = document.getElementById('anchoTI');
     const grosorTIIn = document.getElementById('grosorTI');
 
-    const cantidadBIn = document.getElementById('cantidadB');
     const largoBIn = document.getElementById('largoB');
     const anchoBIn = document.getElementById('anchoB');
     const grosorBIn = document.getElementById('grosorB');
@@ -110,18 +111,49 @@ export function inicializarValidacionesT() {
     const anchoTSIn = document.getElementById('anchoTS');
     const grosorTSIn = document.getElementById('grosorTS');
 
-    const cantidadTIIn = document.getElementById('cantidadTI');
-    const largoTIIn = document.getElementById('largoTI');
-    const anchoTIIn = document.getElementById('anchoTI');
-    const grosorTIIn = document.getElementById('grosorTI');
+    const largoTILIn = document.getElementById('largoTIL');
+    const anchoTILIn = document.getElementById('anchoTIL');
+    const grosorTILIn = document.getElementById('grosorTIL');
+
+    const largoTICIn = document.getElementById('largoTIC');
+    const anchoTICIn = document.getElementById('anchoTIC');
+    const grosorTICIn = document.getElementById('grosorTIC');
+
+    const largoTALIn = document.getElementById('largoTAL');
+    const anchoTALIn = document.getElementById('anchoTAL');
+    const grosorTALIn = document.getElementById('grosorTAL');
+
+    const largoTACIn = document.getElementById('largoTAC');
+    const anchoTACIn = document.getElementById('anchoTAC');
+    const grosorTACIn = document.getElementById('grosorTAC');
+
+    const largoTCIn = document.getElementById('largoTC');
+    const anchoTCIn = document.getElementById('anchoTC');
+    const grosorTCIn = document.getElementById('grosorTC');
     
     const errorTS1 = document.getElementById('error-lTS');
     const errorTS2 = document.getElementById('error-aTS');
     const errorTS3 = document.getElementById('error-gTS');
 
-    const errorTI1 = document.getElementById('error-lTI');
-    const errorTI2 = document.getElementById('error-aTI');
-    const errorTI3 = document.getElementById('error-gTI');
+    const errorTIL1 = document.getElementById('error-lTIL');
+    const errorTIL2 = document.getElementById('error-aTIL');
+    const errorTIL3 = document.getElementById('error-gTIL');
+
+    const errorTIC1 = document.getElementById('error-lTIC');
+    const errorTIC2 = document.getElementById('error-aTIC');
+    const errorTIC3 = document.getElementById('error-gTIC');
+
+    const errorTAL1 = document.getElementById('error-lTAL');
+    const errorTAL2 = document.getElementById('error-aTAL');
+    const errorTAL3 = document.getElementById('error-gTAL');
+
+    const errorTAC1 = document.getElementById('error-lTAC');
+    const errorTAC2 = document.getElementById('error-aTAC');
+    const errorTAC3 = document.getElementById('error-gTAC');
+
+    const errorTC1 = document.getElementById('error-lTC');
+    const errorTC2 = document.getElementById('error-aTC');
+    const errorTC3 = document.getElementById('error-gTC');
 
         // TABLA SUPERIOR
     // Validación Largo Tabla Superior
@@ -135,28 +167,85 @@ export function inicializarValidacionesT() {
     }
 
     // Validación Grueso Tabla Superior
-    // if (anchoBIn && grosorTSIn && grosorTIIn && grosorGralIn && errorTS3) {
-    //     validarGrosorTS(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTS3);
-    // }
+    if (grosorTSIn && grosorTILIn && grosorTALIn && grosorTCIn && grosorGralIn && errorTS3) {
+        validarGrosorTST(grosorTSIn, grosorTILIn, grosorTALIn, grosorTCIn, grosorGralIn, errorTS3);
+    }
 
         // TABLA INFERIOR
-    // Validación Largo Tabla Inferior
-    if (largoTIIn && anchoGralIn && errorTI1) {
-        validarLargoTIT(largoTIIn, anchoGralIn, errorTI1);
+    // Validación Largo Tabla Inferior Lateral
+    if (largoTILIn && anchoGralIn && errorTIL1) {
+        validarLargoTIL(largoTILIn, anchoGralIn, errorTIL1);
+    }
+    // Validación Largo Tabla Inferior Central
+    if (largoTICIn && anchoTILIn && largoGralIn && errorTIC1) {
+        validarLargoTIC(largoTICIn, anchoTILIn, largoGralIn, errorTIC1);
     }
 
-    // Validación Ancho Tabla Inferior
-    if (anchoTSIn && anchoTIIn && errorTI2) {
-        validarAnchoTIT(anchoTSIn, anchoTIIn, errorTI2);
+    // Validación Ancho Tabla Inferior Lateral
+    if (largoTICIn && anchoTILIn && largoGralIn && errorTIL2) {
+        validarAnchoTIL(largoTICIn, anchoTILIn, largoGralIn, errorTIL2);
+    }
+    // Validación Ancho Tabla Inferior Central
+    if (anchoTSIn && anchoTICIn && errorTIC2) {
+        validarAnchoTIC(anchoTSIn, anchoTICIn, errorTIC2);
     }
 
-    // Validación Grueso Tabla Inferior
-    // if (anchoBIn && grosorTSIn && grosorTIIn && grosorGralIn && errorTI3) {
-    //     validarGrosorTI(anchoBIn, grosorTSIn, grosorTIIn, grosorGralIn, errorTI3);
-    // }
+    // Validación Grueso Tabla Inferior Lateral
+    if (grosorTSIn && grosorTILIn && grosorTALIn && grosorTCIn && grosorGralIn && errorTIL3) {
+        validarGrosorTIT(grosorTSIn, grosorTILIn, grosorTALIn, grosorTCIn, grosorGralIn, errorTIL3);
+    }
+    // Validación Grueso Tabla Inferior Central
+    if (grosorTSIn && grosorTICIn && grosorTALIn && grosorTCIn && grosorGralIn && errorTIC3) {
+        validarGrosorTIT(grosorTSIn, grosorTICIn, grosorTALIn, grosorTCIn, grosorGralIn, errorTIC3);
+    }
   
-        // TACON
+        // TACON LATERAL
+    // Validación Largo Tacón
+    if (largoTALIn && errorTAL1) {
+        validarLargoTA(largoTALIn, errorTAL1);
+    }
 
+    // Validación Ancho Tacón
+    if (anchoTALIn && anchoTCIn && errorTAL2) {
+        validarAnchoTA(anchoTALIn, anchoTCIn, errorTAL2);
+    }
+
+    // Validación Grueso Tacón
+    if (grosorTSIn && grosorTILIn && grosorTALIn && grosorTCIn && grosorGralIn && errorTAL3) {
+        validarGrosorTA(grosorTSIn, grosorTILIn, grosorTALIn, grosorTCIn, grosorGralIn, errorTAL3);
+    }
+
+        // TACON CENTRAL
+    // Validación Largo Tacón
+    if (largoTACIn && errorTAC1) {
+        validarLargoTA(largoTACIn, errorTAC1);
+    }
+
+    // Validación Ancho Tacón
+    if (anchoTACIn && anchoTCIn && errorTAC2) {
+        validarAnchoTA(anchoTACIn, anchoTCIn, errorTAC2);
+    }
+
+    // Validación Grueso Tacón
+    if (grosorTSIn && grosorTILIn && grosorTACIn && grosorTCIn && grosorGralIn && errorTAC3) {
+        validarGrosorTA(grosorTSIn, grosorTILIn, grosorTACIn, grosorTCIn, grosorGralIn, errorTAC3);
+    }
+
+        // TABLAS DE CARGA
+    // Validación Largo Tacón
+    if (largoTCIn && largoGralIn && errorTC1) {
+        validarLargoTC(largoTCIn, largoGralIn, errorTC1);
+    }
+
+    // Validación Ancho Tacón
+    if (anchoTCIn && anchoTALIn && errorTC2) {
+        validarAnchoTC(anchoTCIn, anchoTALIn, errorTC2);
+    }
+
+    // Validación Grueso Tacón
+    if (grosorTSIn && grosorTILIn && grosorTALIn && grosorTCIn && grosorGralIn && errorTC3) {
+        validarGrosorTC(grosorTSIn, grosorTILIn, grosorTALIn, grosorTCIn, grosorGralIn, errorTC3);
+    }
 }
 
 
@@ -194,8 +283,8 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
             alert('Por favor completa todos los campos de la tabla superior.');
             return;
         }
-
-        separacionTS = ((anchoGral - (anchoTS * cantidadTS)) / (cantidadTS - 1)).toFixed(2);
+        
+        separacionTS = ((largoGral - (anchoTS * cantidadTS)) / (cantidadTS - 1)).toFixed(2);
 
         tablaSuperiorData.push({
             cantidadTS, largoTS, anchoTS, grosorTS, separacionTS
@@ -203,10 +292,6 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
 
     } else if (variacionTS === 'Variable') {
         const numVar = parseInt(document.getElementById('num_variacion').value);
-
-        if (num_variacion === "1") {
-            return
-        }
 
         let totalOcupado = 0;
         let totalCantidad = 0;
@@ -237,7 +322,7 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
             });
         }
 
-        const separacionGlobal = ((anchoGral - totalOcupado) / (totalCantidad - 1)).toFixed(2);
+        const separacionGlobal = ((largoGral - totalOcupado) / (totalCantidad - 1)).toFixed(2);
 
         // Agregar separación a cada entrada
         variacionesTemp.forEach(variacion => {
@@ -255,21 +340,8 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
     // Obtener los datos de las tablas dependiendo el tipo de tarima
     // TARIMA DE BARROTE
     if (subtipo === 'Barrote') {
-        let distribucionTS = "Estándar";
         let arregloTI = document.getElementById('arregloTI').value;
-        let distBar = "Estándar";
-
-        // Si la variación de tablas superiores está activa, captura la descripción
-        if (variacionTS === 'Variable') {
-            const distribucionTS_texto = document.getElementById('distribucionTS').value;
-            if (distribucionTS_texto === "") {
-                alert('Por favor, coloque la descripción de la distribución superior');
-                return;
-            } else {
-                distribucionTS = distribucionTS_texto
-            }
-        }
-
+        let distBar = document.getElementById('distBar').value;
 
         // Si se elige un arreglo especial capturar la descripción
         if (arregloTI === 'Especial') {
@@ -287,17 +359,6 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         const largoB = parseFloat(document.getElementById('largoB').value);
         const anchoB = parseFloat(document.getElementById('anchoB').value);
         const grosorB = parseFloat(document.getElementById('grosorB').value);
-
-        // Si se elige saque capturar la distribución
-        if (tipoB.value === 'Con saque') {
-            const distBar_texto = document.getElementById('distBar').value;
-            if (distBar_texto === "") {
-                alert('Por favor, coloque la descripción de la distribución del saque');
-                return;
-            } else {
-                distBar = distBar_texto
-            }
-        }
 
         // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
         if (!largoGral || !anchoGral || !grosorGral || 
@@ -333,7 +394,7 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         formData = {
             tipo, subtipo, acomodo, precioUnit, cantidad,
             largoGral, anchoGral, grosorGral,
-            tablaSuperior: tablaSuperiorData, distribucionTS,
+            tablaSuperior: tablaSuperiorData,
             cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
             cantidadB, tipoB, largoB, anchoB, grosorB, distBar
         };
@@ -349,80 +410,129 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
 
     // TARIMA DE TACON
     } else if (subtipo === 'Tacón'){
-        let distribucionTS = "Estándar";
-
-        // Si la variación de tablas superiores está activa, captura la descripción
-        if (variacionTS === 'Variable') {
-            const distribucionTS_texto = document.getElementById('distribucionTS').value;
-            if (distribucionTS_texto === "") {
-                alert('Por favor, coloque la descripción de la distribución superior');
-                return;
-            } else {
-                distribucionTS = distribucionTS_texto
-            }
-        }
-
-        const cantidadTA = parseInt(document.getElementById('cantidadTA').value);
-        const largoTA = parseFloat(document.getElementById('largoTA').value);
-        const anchoTA = parseFloat(document.getElementById('anchoTA').value);
-        const grosorTA = parseFloat(document.getElementById('grosorTA').value);
+        const distribucionTA = document.getElementById('distribucionTA').value; 
+        const cantidadTAL = parseInt(document.getElementById('cantidadTAL').value);
+        const largoTAL = parseFloat(document.getElementById('largoTAL').value);
+        const anchoTAL = parseFloat(document.getElementById('anchoTAL').value);
+        const grosorTAL = parseFloat(document.getElementById('grosorTAL').value);
             
         const cantidadTC = parseInt(document.getElementById('cantidadTC').value);
         const largoTC = parseFloat(document.getElementById('largoTC').value);
         const anchoTC = parseFloat(document.getElementById('anchoTC').value);
         const grosorTC = parseFloat(document.getElementById('grosorTC').value);
 
-        // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
-        // Verificar si algún campo está vacío
-        if (!largoGral || !anchoGral || !grosorGral ||
-            !cantidadTI || !largoTI || !anchoTI || !grosorTI ||
-            !cantidadTA || !largoTA || !anchoTA || !grosorTA ||
-            !cantidadTC || !largoTC || !anchoTC || !grosorTC) {
-                
-            // Si algún campo está vacío, mostrar mensaje de error
-            alert('Por favor, complete todos los campos para agregar el producto.');
-            return; // Detener la ejecución y no continuar
-        } 
-        // Validar si hay campos inválidos
-        const campos = document.querySelectorAll('input');
-        if (!validarCamposInvalidos(campos)) {
-            alert('Corrige los errores antes de guardar.');
-            return; 
+        if (distribucionTA === 'Estándar') {
+            const cantidadTAC = parseInt(document.getElementById('cantidadTAC').value);
+            const largoTAC = parseFloat(document.getElementById('largoTAC').value);
+            const anchoTAC = parseFloat(document.getElementById('anchoTAC').value);
+            const grosorTAC = parseFloat(document.getElementById('grosorTAC').value);
+
+            // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
+            // Verificar si algún campo está vacío
+            if (!largoGral || !anchoGral || !grosorGral ||
+                !cantidadTI || !largoTI || !anchoTI || !grosorTI ||
+                !cantidadTAL || !largoTAL || !anchoTAL || !grosorTAL ||
+                !cantidadTAC || !largoTAC || !anchoTAC || !grosorTAC ||
+                !cantidadTC || !largoTC || !anchoTC || !grosorTC) {
+                    
+                // Si algún campo está vacío, mostrar mensaje de error
+                alert('Por favor, complete todos los campos para agregar el producto.');
+                return; // Detener la ejecución y no continuar
+            } 
+            // Validar si hay campos inválidos
+            const campos = document.querySelectorAll('input');
+            if (!validarCamposInvalidos(campos)) {
+                alert('Corrige los errores antes de guardar.');
+                return; 
+            }
+
+            // COSTO //
+            // Valores para calcular los costos
+            const costoBase = 500; // costo base tarima
+            const costoTablaSuperior = 100; // tabla superior
+            const costoTablaInferior = 80; // tabla inferior
+            const costoTacon = 50; // tacón 
+            const costoCarga = 70; // tablas de carga
+
+            // Calcular precio unitario de la tarima
+            const desgloce1 = costoBase + costoTablaSuperior; // base + tabla superior
+            const desgloce2 = costoTablaInferior + costoTacon; // tabla inferior + tacón 
+            const desgloce3 = costoTacon + costoCarga; // tacón chico + tablas de carga
+
+            const precioUnit = desgloce1 + desgloce2 + desgloce3;
+
+            // Crear un objeto con todos los datos del formulario
+            formData = {
+                tipo, subtipo, acomodo, precioUnit, cantidad,
+                largoGral, anchoGral, grosorGral,
+                tablaSuperior: tablaSuperiorData,
+                cantidadTI, largoTI, anchoTI, grosorTI,
+                cantidadTAL, largoTAL, anchoTAL, grosorTAL, distribucionTA,
+                cantidadTAC, largoTAC, anchoTAC, grosorTAC,
+                cantidadTC, largoTC, anchoTC, grosorTC
+            };
+
+            // Agregar el objeto creado al carrito
+            carrito.push(formData);
+            // Guardar el carrito en localStorage
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            // Limpiar los campos
+            location.reload();
+            // Mostrar alerta de agregado correctamente
+            alert('Datos guardados correctamente.');
+        } else {
+            // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
+            // Verificar si algún campo está vacío
+            if (!largoGral || !anchoGral || !grosorGral ||
+                !cantidadTI || !largoTI || !anchoTI || !grosorTI ||
+                !cantidadTAL || !largoTAL || !anchoTAL || !grosorTAL ||
+                !cantidadTC || !largoTC || !anchoTC || !grosorTC) {
+                    
+                // Si algún campo está vacío, mostrar mensaje de error
+                alert('Por favor, complete todos los campos para agregar el producto.');
+                return; // Detener la ejecución y no continuar
+            } 
+            // Validar si hay campos inválidos
+            const campos = document.querySelectorAll('input');
+            if (!validarCamposInvalidos(campos)) {
+                alert('Corrige los errores antes de guardar.');
+                return; 
+            }
+
+            // COSTO //
+            // Valores para calcular los costos
+            const costoBase = 500; // costo base tarima
+            const costoTablaSuperior = 100; // tabla superior
+            const costoTablaInferior = 80; // tabla inferior
+            const costoTacon = 50; // tacón 
+            const costoCarga = 70; // tablas de carga
+
+            // Calcular precio unitario de la tarima
+            const desgloce1 = costoBase + costoTablaSuperior; // base + tabla superior
+            const desgloce2 = costoTablaInferior + costoTacon; // tabla inferior + tacón 
+            const desgloce3 = costoTacon + costoCarga; // tacón chico + tablas de carga
+
+            const precioUnit = desgloce1 + desgloce2 + desgloce3;
+
+            // Crear un objeto con todos los datos del formulario
+            formData = {
+                tipo, subtipo, acomodo, precioUnit, cantidad,
+                largoGral, anchoGral, grosorGral,
+                tablaSuperior: tablaSuperiorData,
+                cantidadTI, largoTI, anchoTI, grosorTI,
+                cantidadTAL, largoTAL, anchoTAL, grosorTAL, distribucionTA,
+                cantidadTC, largoTC, anchoTC, grosorTC
+            };
+
+            // Agregar el objeto creado al carrito
+            carrito.push(formData);
+            // Guardar el carrito en localStorage
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            // Limpiar los campos
+            location.reload();
+            // Mostrar alerta de agregado correctamente
+            alert('Datos guardados correctamente.');
         }
-
-        // COSTO //
-        // Valores para calcular los costos
-        const costoBase = 500; // costo base tarima
-        const costoTablaSuperior = 100; // tabla superior
-        const costoTablaInferior = 80; // tabla inferior
-        const costoTacon = 50; // tacón 
-        const costoCarga = 70; // tablas de carga
-
-        // Calcular precio unitario de la tarima
-        const desgloce1 = costoBase + costoTablaSuperior; // base + tabla superior
-        const desgloce2 = costoTablaInferior + costoTacon; // tabla inferior + tacón 
-        const desgloce3 = costoTacon + costoCarga; // tacón chico + tablas de carga
-
-        const precioUnit = desgloce1 + desgloce2 + desgloce3;
-
-        // Crear un objeto con todos los datos del formulario
-        formData = {
-            tipo, subtipo, acomodo, precioUnit, cantidad,
-            largoGral, anchoGral, grosorGral,
-            tablaSuperior: tablaSuperiorData, distribucionTS,
-            cantidadTI, largoTI, anchoTI, grosorTI,
-            cantidadTA, largoTA, anchoTA, grosorTA,
-            cantidadTC, largoTC, anchoTC, grosorTC
-        };
-
-        // Agregar el objeto creado al carrito
-        carrito.push(formData);
-        // Guardar el carrito en localStorage
-        localStorage.setItem("carrito", JSON.stringify(carrito));
-        // Limpiar los campos
-        location.reload();
-        // Mostrar alerta de agregado correctamente
-        alert('Datos guardados correctamente.');
     }
 });
 
