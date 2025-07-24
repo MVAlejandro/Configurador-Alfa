@@ -13,23 +13,23 @@ export function validarCamposInvalidos(campos) {
 
 	// TABLA SUPERIOR
 // Validar Largo de Tabla Superior
-export function validarLargoTSB(largoTSIn, anchoGralIn, errorLargo) {
-    largoTSIn.addEventListener('input', function () {
-        const largoTS = parseFloat(largoTSIn.value.trim());
+export function validarLargoTSB(inputElement, anchoGralIn, errorElement) {
+    inputElement.addEventListener('input', function () {
+        const valor = parseFloat(inputElement.value.trim());
         const anchoGral = parseFloat(anchoGralIn.value.trim());
 
-        if (isNaN(largoTS) || largoTS <= 0) {
-            errorLargo.textContent = 'El largo debe ser un número mayor a 0';
-            largoTSIn.classList.add('is-invalid');
-            largoTSIn.classList.remove('is-valid');
-        } else if (largoTS === anchoGral) {
-            errorLargo.textContent = '';
-            largoTSIn.classList.remove('is-invalid');
-            largoTSIn.classList.add('is-valid');
+        if (isNaN(valor) || valor <= 0) {
+            errorElement.textContent = 'El largo debe ser un número mayor a 0';
+            inputElement.classList.add('is-invalid');
+            inputElement.classList.remove('is-valid');
+        } else if (valor === anchoGral) {
+            errorElement.textContent = '';
+            inputElement.classList.remove('is-invalid');
+            inputElement.classList.add('is-valid');
         } else {
-            errorLargo.textContent = 'El largo de la tabla debe ser igual al ancho general';
-            largoTSIn.classList.add('is-invalid');
-            largoTSIn.classList.remove('is-valid');
+            errorElement.textContent = 'El largo de la tabla debe ser igual al ancho general';
+            inputElement.classList.add('is-invalid');
+            inputElement.classList.remove('is-valid');
         }
     });
 }

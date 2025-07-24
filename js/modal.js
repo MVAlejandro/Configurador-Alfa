@@ -81,7 +81,12 @@ function abrirModalItem(formData) {
             crearElemListaSec('Separación', formData.tablaSuperior[0].separacionTS);
         }
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
-        crearElemListaPrin('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
+        if (Array.isArray(formData.tablaInferior)) {
+            formData.tablaInferior.forEach((tabla, i) => {
+                const titulo = formData.tablaInferior.length > 1 ? `Tabla inferior ${i + 1}` : 'Tabla inferior';
+                crearElemListaPrin(titulo, tabla.cantidadTI, tabla.largoTI, tabla.anchoTI, tabla.grosorTI);
+            });
+        }
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         if (formData.distribucionTA === 'Lateral') {
             crearElemListaPrin('Tacón lateral', formData.cantidadTAL, formData.largoTAL, formData.anchoTAL, formData.grosorTAL);

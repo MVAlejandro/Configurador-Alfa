@@ -28,10 +28,10 @@ export function InsertarFormularioTacon () {
                                     <!-- Cantidad -->
                                     <div class="row mb-3">
                                         <div class="col-md-3">
-                                            <label for="cantidadTS" class="col-form-label">Cantidad:</label>
+                                            <label for="cantidadTS-1" class="col-form-label">Cantidad:</label>
                                         </div>
                                         <div class="col-md-7">
-                                            <select id="cantidadTS" class="form-select nb">
+                                            <select id="cantidadTS-1" class="form-select nb">
                                                 <option value="6">6</option>
                                                 <option value="7">7</option>
                                                 <option value="8">8</option>
@@ -43,33 +43,33 @@ export function InsertarFormularioTacon () {
                                     <!-- Largo -->
                                     <div class="row mb-2">
                                         <div class="offset-md-1 col-md-3 text-end">
-                                            <label for="largoTS" class="col-form-label">Largo:</label>
+                                            <label for="largoTS-1" class="col-form-label">Largo:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="40" id="largoTS" class="form-control nb no-arrows">
-                                            <p class="error invalid-feedback" id="error-lTS" style="color: red;"></p>
+                                            <input type="number" value="40" id="largoTS-1" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-lTS-1" style="color: red;"></p>
                                         </div>
                                     </div>
 
                                     <!-- Ancho -->
                                     <div class="row mb-2">
                                         <div class="offset-md-1 col-md-3 text-end">
-                                            <label for="anchoTS" class="col-form-label">Ancho:</label>
+                                            <label for="anchoTS-1" class="col-form-label">Ancho:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="3.5" id="anchoTS" class="form-control nb no-arrows">
-                                            <p class="error invalid-feedback" id="error-aTS" style="color: red;"></p>
+                                            <input type="number" value="3.5" id="anchoTS-1" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-aTS-1" style="color: red;"></p>
                                         </div>
                                     </div>
 
                                     <!-- Grosor -->
                                     <div class="row mb-2">
                                         <div class="offset-md-1 col-md-3 text-end">
-                                            <label for="grosorTS" class="col-form-label">Espesor:</label>
+                                            <label for="grosorTS-1" class="col-form-label">Espesor:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="0.62" id="grosorTS" class="form-control nb no-arrows">
-                                            <p class="error invalid-feedback" id="error-gTS" style="color: red;"></p>
+                                            <input type="number" value="0.62" id="grosorTS-1" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-gTS-1" style="color: red;"></p>
                                         </div>
                                     </div>
 
@@ -77,7 +77,7 @@ export function InsertarFormularioTacon () {
                                     <div class="row mb-2">
                                         <div class="offset-md-1 col-md-3 text-end">
                                         </div>
-                                        <div id="separacionTS" class="col-md-6">
+                                        <div id="separacionTS-1" class="col-md-6">
                                                     
                                         </div>
                                     </div>
@@ -100,43 +100,43 @@ export function InsertarFormularioTacon () {
                                     <!-- Cantidad -->
                                     <div class="row mb-3">
                                         <div class="col-md-3">
-                                            <label for="cantidadTIL" class="col-form-label">Cantidad:</label>
+                                            <label for="cantidadTI-1" class="col-form-label">Cantidad:</label>
                                         </div>
                                         <div class="col-md-7">
-                                            <input type="number" value="2" id="cantidadTIL" class="form-control nb no-arrows" disabled>
+                                            <input type="number" value="2" id="cantidadTI-1" class="form-control nb no-arrows" disabled>
                                         </div>
                                     </div>
 
                                     <!-- Largo -->
                                     <div class="row mb-2">
                                         <div class="offset-md-1 col-md-3 text-end">
-                                            <label for="largoTIL" class="col-form-label">Largo:</label>
+                                            <label for="largoTI-1" class="col-form-label">Largo:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="40" id="largoTIL" class="form-control nb no-arrows">
-                                            <p class="error invalid-feedback" id="error-lTIL" style="color: red;"></p>
+                                            <input type="number" value="40" id="largoTI-1" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-lTI-1" style="color: red;"></p>
                                         </div>
                                     </div>
 
                                     <!-- Ancho -->
                                     <div class="row mb-2">
                                         <div class="offset-md-1 col-md-3 text-end">
-                                            <label for="anchoTIL" class="col-form-label">Ancho:</label>
+                                            <label for="anchoTI-1" class="col-form-label">Ancho:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="3.5" id="anchoTIL" class="form-control nb no-arrows">
-                                            <p class="error invalid-feedback" id="error-aTIL" style="color: red;"></p>
+                                            <input type="number" value="3.5" id="anchoTI-1" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-aTI-1" style="color: red;"></p>
                                         </div>
                                     </div>
 
                                     <!-- Grosor -->
                                     <div class="row mb-2">
                                         <div class="offset-md-1 col-md-3 text-end">
-                                            <label for="grosorTIL" class="col-form-label">Espesor:</label>
+                                            <label for="grosorTI-1" class="col-form-label">Espesor:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="0.62" id="grosorTIL" class="form-control nb no-arrows">
-                                            <p class="error invalid-feedback" id="error-gTIL" style="color: red;"></p>
+                                            <input type="number" value="0.62" id="grosorTI-1" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-gTI-1" style="color: red;"></p>
                                         </div>
                                     </div>
                                                     
@@ -145,43 +145,43 @@ export function InsertarFormularioTacon () {
                                     <!-- Cantidad -->
                                     <div class="row mb-3">
                                         <div class="col-md-3">
-                                            <label for="cantidadTIC" class="col-form-label">Cantidad:</label>
+                                            <label for="cantidadTI-2" class="col-form-label">Cantidad:</label>
                                         </div>
                                         <div class="col-md-7">
-                                            <input type="number" value="3" id="cantidadTIC" class="form-control nb no-arrows" disabled>
+                                            <input type="number" value="3" id="cantidadTI-2" class="form-control nb no-arrows" disabled>
                                         </div>
                                     </div>
 
                                     <!-- Largo -->
                                     <div class="row mb-2">
                                         <div class="offset-md-1 col-md-3 text-end">
-                                            <label for="largoTIC" class="col-form-label">Largo:</label>
+                                            <label for="largoTI-2" class="col-form-label">Largo:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="41" id="largoTIC" class="form-control nb no-arrows">
-                                            <p class="error invalid-feedback" id="error-lTIC" style="color: red;"></p>
+                                            <input type="number" value="41" id="largoTI-2" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-lTI-2" style="color: red;"></p>
                                         </div>
                                     </div>
 
                                     <!-- Ancho -->
                                     <div class="row mb-2">
                                         <div class="offset-md-1 col-md-3 text-end">
-                                            <label for="anchoTIC" class="col-form-label">Ancho:</label>
+                                            <label for="anchoTI-2" class="col-form-label">Ancho:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="3.5" id="anchoTIC" class="form-control nb no-arrows">
-                                            <p class="error invalid-feedback" id="error-aTIC" style="color: red;"></p>
+                                            <input type="number" value="3.5" id="anchoTI-2" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-aTI-2" style="color: red;"></p>
                                         </div>
                                     </div>
 
                                     <!-- Grosor -->
                                     <div class="row mb-2">
                                         <div class="offset-md-1 col-md-3 text-end">
-                                            <label for="grosorTIC" class="col-form-label">Espesor:</label>
+                                            <label for="grosorTI-2" class="col-form-label">Espesor:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="0.62" id="grosorTIC" class="form-control nb no-arrows">
-                                            <p class="error invalid-feedback" id="error-gTIC" style="color: red;"></p>
+                                            <input type="number" value="0.62" id="grosorTI-2" class="form-control nb no-arrows">
+                                            <p class="error invalid-feedback" id="error-gTI-2" style="color: red;"></p>
                                         </div>
                                     </div>
                             </div>                            

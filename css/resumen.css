@@ -41,6 +41,10 @@ main {
 }
 
 /*--- CONTENIDO PRINCIPAL ---*/
+.border {
+    padding: 10px 14px 10px 10px !important; 
+}
+
 .item_lista {
     font-size: 18px;
     border-bottom: 1px solid black; 

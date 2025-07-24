@@ -1,11 +1,16 @@
 
 // IMPORTACIÓN DE FUNCIONES EXTERNAS
 // Importar funciones de validación
-import {inicializarValidacionesB, inicializarValidacionesT} from './index.js';
+import {inicializarValidacionesB, inicializarValidacionesT} from './validaciones/validacionCampos.js';
 import {InsertarFormularioBarrote} from './formularios/barrote_form.js';
 import {InsertarFormularioTacon} from './formularios/tacon_form.js';
 import {insertarFormularioTSuperior} from './formularios/tablaSup_form.js';
 import {insertarFormularioTaconesVar} from './formularios/tacones_form.js';
+// Importar funciones de los planos
+import {dibujarBarrote} from './planos/plano_barrote.js';
+import {dibujarBarrote2} from './planos/plano_barrote2.js';
+import {dibujarTacon} from './planos/plano_tacon.js';
+import {dibujarTacon2} from './planos/plano_tacon2.js';
 
 // MOSTRAR EL FORMULARIO DE ACUERDO AL SUBTIPO DE TARIMA
 // Identificar el subtipo y el contenedor principal
@@ -84,11 +89,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-            plano_tarima.innerHTML = `<img src="./assets/ST02N.png" alt="Plano de la tarima" height="280px">`;
+            plano_tarima.innerHTML = `<canvas id="plano_barrote" width="700" height="400" style="border: 1px solid black"></canvas>`;
+
+            const variacionTS = document.getElementById('variacionTS');
+            dibujarBarrote();
+            variacionTS.addEventListener('change', function () {
+                if (variacionTS.value === 'Único') {
+                    dibujarBarrote();
+                } else {
+                    dibujarBarrote2();
+                }
+            });
+            
             // Llamar a la función después de renderizar
             requestAnimationFrame(() => {
                 inicializarValidacionesB();
             });
+            
+            
         } else if (subtipo.value === 'Tacón') {
             op_acomodo.innerHTML = 
             `<p class="titulo_opcion mb-0 me-3">Acomodo: </p>
@@ -124,7 +142,19 @@ document.addEventListener('DOMContentLoaded', function () {
             // Si se elige una distribución estándar de tacones mostrar formulario distinto
             insertarFormularioTaconesVar();
 
-            plano_tarima.innerHTML= `<img src="./assets/TC02N2.png" alt="Plano de la tarima" height="280px" style="border: 1px solid black;">`;
+            plano_tarima.innerHTML= `<canvas id="plano_tacon" width="700" height="400" style="border: 1px solid black"></canvas>`;
+            
+            const variacionTS = document.getElementById('variacionTS');
+            
+            dibujarTacon();
+            variacionTS.addEventListener('change', function () {
+                if (variacionTS.value === 'Único') {
+                    dibujarTacon();
+                } else {
+                    dibujarTacon2();
+                }
+            });
+
             // Llamar a la función después de renderizar
             requestAnimationFrame(() => {
                 inicializarValidacionesT();
