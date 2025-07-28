@@ -253,7 +253,7 @@ export function dibujarBarrote() {
 
             // Dibujar Barrotes
         const xB = offsetX3 + ((largoGral * escala2) - (largoB * escala2)) / 2; // Coordenadas centradas
-        const yB = offsetY3 + ((grosorGral * escala2) - (anchoB * escala2)) / 2;
+        const yB = offsetY3 + (grosorTS * escala2);
 
         drawFullRect(xB, yB, (largoB * escala2), (anchoB * escala2), "#787878");
 

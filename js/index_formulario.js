@@ -11,6 +11,8 @@ import {dibujarBarrote} from './planos/plano_barrote.js';
 import {dibujarBarrote2} from './planos/plano_barrote2.js';
 import {dibujarTacon} from './planos/plano_tacon.js';
 import {dibujarTacon2} from './planos/plano_tacon2.js';
+//
+import {actualizarCampos, asociarActualizacion} from './valores.js';
 
 // MOSTRAR EL FORMULARIO DE ACUERDO AL SUBTIPO DE TARIMA
 // Identificar el subtipo y el contenedor principal
@@ -29,15 +31,15 @@ document.addEventListener('DOMContentLoaded', function () {
             op_tamaño.innerHTML =
                 `<div class="d-flex align-items-center">
                     <div class="me-2 text-center">
-                        <input type="number" id="largoGral" class="form-control no-arrows gral" min="1" placeholder="Largo">
+                        <input type="number" id="largoGral" class="form-control no-arrows gral" placeholder="Largo">
                     </div>
                     <span class="mx-2">x</span>
                     <div class="me-2 text-center">
-                        <input type="number" id="anchoGral" class="form-control no-arrows gral" min="1" placeholder="Ancho">
+                        <input type="number" id="anchoGral" class="form-control no-arrows gral" placeholder="Ancho">
                     </div>
                     <span class="mx-2">x</span>
                     <div class="text-center">
-                        <input type="number" id="grosorGral" class="form-control no-arrows gral" min="1" placeholder="Grosor">
+                        <input type="number" id="grosorGral" class="form-control no-arrows gral" placeholder="Grosor">
                     </div>
                 </div>`;
             caracteristicas_tarima.innerHTML = ``;
@@ -53,17 +55,17 @@ document.addEventListener('DOMContentLoaded', function () {
             op_tamaño.innerHTML =
                 `<div class="d-flex align-items-center">
                     <div class="me-2 text-center">
-                        <input type="number" id="largoGral" class="form-control no-arrows gral" value="48" min="1" placeholder="Largo">
+                        <input type="number" id="largoGral" class="form-control no-arrows gral" value="48" data-rel="largo_gral" placeholder="Largo">
                         <small class="text-muted">Largo</small>
                     </div>
                     <span class="mx-2">x</span>
                     <div class="me-2 text-center">
-                        <input type="number" id="anchoGral" class="form-control no-arrows gral" value="40" min="1" placeholder="Ancho">
+                        <input type="number" id="anchoGral" class="form-control no-arrows gral" value="40" data-rel="ancho_gral" placeholder="Ancho">
                         <small class="text-muted">Ancho</small>
                     </div>
                     <span class="mx-2">x</span>
                     <div class="text-center">
-                        <input type="number" id="grosorGral" class="form-control no-arrows gral" value="5" min="1" placeholder="Grosor">
+                        <input type="number" id="grosorGral" class="form-control no-arrows gral" value="5" data-rel="grosor_gral" placeholder="Grosor">
                         <small class="text-muted">Grosor</small>
                     </div>
                 </div>`;
@@ -91,13 +93,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
             plano_tarima.innerHTML = `<canvas id="plano_barrote" width="700" height="400" style="border: 1px solid black"></canvas>`;
 
+            // Llamar a la función de asociación de datos
+            asociarActualizacion();
+
             const variacionTS = document.getElementById('variacionTS');
             dibujarBarrote();
             variacionTS.addEventListener('change', function () {
                 if (variacionTS.value === 'Único') {
                     dibujarBarrote();
-                } else {
+                } else if (variacionTS.value === 'Variable') {
                     dibujarBarrote2();
+                } else {
+                    return;
                 }
             });
             
@@ -118,17 +125,17 @@ document.addEventListener('DOMContentLoaded', function () {
             op_tamaño.innerHTML =
                 `<div class="d-flex align-items-center">
                     <div class="me-2 text-center">
-                        <input type="number" id="largoGral" class="form-control no-arrows gral" value="48" min="1" placeholder="Largo">
+                        <input type="number" id="largoGral" class="form-control no-arrows gral" value="48" data-rel="largo_gral" placeholder="Largo">
                         <small class="text-muted">Largo</small>
                     </div>
                     <span class="mx-2">x</span>
                     <div class="me-2 text-center">
-                        <input type="number" id="anchoGral" class="form-control no-arrows gral" value="40" min="1" placeholder="Ancho">
+                        <input type="number" id="anchoGral" class="form-control no-arrows gral" value="40" data-rel="ancho_gral" placeholder="Ancho">
                         <small class="text-muted">Ancho</small>
                     </div>
                     <span class="mx-2">x</span>
                     <div class="text-center">
-                        <input type="number" id="grosorGral" class="form-control no-arrows gral" value="5" min="1" placeholder="Grosor">
+                        <input type="number" id="grosorGral" class="form-control no-arrows gral" value="5" placeholder="Grosor">
                         <small class="text-muted">Grosor</small>
                     </div>
                 </div>`;
@@ -143,15 +150,19 @@ document.addEventListener('DOMContentLoaded', function () {
             insertarFormularioTaconesVar();
 
             plano_tarima.innerHTML= `<canvas id="plano_tacon" width="700" height="400" style="border: 1px solid black"></canvas>`;
+
+            // Llamar a la función de asociación de datos
+            asociarActualizacion();
             
             const variacionTS = document.getElementById('variacionTS');
-            
             dibujarTacon();
             variacionTS.addEventListener('change', function () {
                 if (variacionTS.value === 'Único') {
                     dibujarTacon();
-                } else {
+                } else if (variacionTS.value === 'Variable') {
                     dibujarTacon2();
+                } else {
+                    return;
                 }
             });
 

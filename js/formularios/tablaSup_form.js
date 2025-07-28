@@ -27,7 +27,7 @@ export function insertarFormularioTSuperior () {
                         <label for="largoTS-1" class="col-form-label">Largo:</label>
                     </div>
                     <div class="col-md-6">
-                        <input type="number" value="40" id="largoTS-1" class="form-control nb no-arrows">
+                        <input type="number" value="40" id="largoTS-1" class="form-control nb no-arrows" data-rel="ancho_gral">
                         <p class="error invalid-feedback" id="error-lTS-1" style="color: red;"></p>
                     </div>
                 </div>
@@ -87,7 +87,7 @@ export function insertarFormularioTSuperior () {
                                 <label for="largoTS-1" class="col-form-label">Largo:</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="number" id="largoTS-1" class="form-control nb no-arrows" value="40">
+                                <input type="number" id="largoTS-1" class="form-control nb no-arrows" value="40" data-rel="ancho_gral">
                                 <p class="error invalid-feedback" id="error-lTS-1" style="color: red;"></p>
                             </div>
                         </div>
@@ -146,7 +146,7 @@ export function insertarFormularioTSuperior () {
                                 <label for="largoTS-2" class="col-form-label">Largo:</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="number" id="largoTS-2" class="form-control nb no-arrows" value="40">
+                                <input type="number" id="largoTS-2" class="form-control nb no-arrows" value="40" data-rel="ancho_gral">
                                 <p class="error invalid-feedback" id="error-lTS-2" style="color: red;"></p>
                             </div>
                         </div>

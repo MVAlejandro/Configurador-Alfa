@@ -282,7 +282,7 @@ export function dibujarBarrote2() {
         drawCotaLineH(offsetX3, offsetY3-(2*escala2), offsetX3+(largoGral*escala2), offsetY3-(2*escala2), 0.6*escala2)
         drawTextH(largoGral, offsetX3, offsetY3-(2.5*escala2), offsetX3+(largoGral*escala2))
         drawCotaLineV(offsetX3-(2*escala2), offsetY3, offsetX3-(2*escala2), offsetY3+(grosorGral*escala2), 0.6*escala2)
-        drawTextV(anchoGral, offsetX3-(2.5*escala2), offsetY3, offsetY3+(1.1*grosorGral*escala2));
+        drawTextV(grosorGral, offsetX3-(2.5*escala2), offsetY3, offsetY3+(1.1*grosorGral*escala2));
 
             // Dibujar Tablas superiores
         if (variacionTS === 'Único') {

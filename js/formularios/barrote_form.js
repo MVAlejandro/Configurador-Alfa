@@ -46,7 +46,7 @@ export function InsertarFormularioBarrote () {
                                     <label for="largoTS-1" class="col-form-label">Largo:</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="number" value="40" id="largoTS-1" class="form-control nb no-arrows">
+                                    <input type="number" value="40" id="largoTS-1" class="form-control nb no-arrows" data-rel="ancho_gral">
                                     <p class="error invalid-feedback" id="error-lTS-1" style="color: red;"></p>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@ export function InsertarFormularioBarrote () {
                                 <label for="largoTI" class="col-form-label">Largo:</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="number" value="40" id="largoTI" class="form-control nb no-arrows">
+                                <input type="number" value="40" id="largoTI" class="form-control nb no-arrows" data-rel="ancho_gral">
                                 <p class="error invalid-feedback" id="error-lTI" style="color: red;"></p>
                             </div>
                         </div>
@@ -205,7 +205,7 @@ export function InsertarFormularioBarrote () {
                                 <label for="largoB" class="col-form-label">Largo:</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="number" value="48" id="largoB" class="form-control nb no-arrows">
+                                <input type="number" value="48" id="largoB" class="form-control nb no-arrows" data-rel="largo_gral">
                                 <p class="error invalid-feedback" id="error-lB" style="color: red;"></p>
                             </div>
                         </div>

@@ -203,7 +203,7 @@ export function dibujarTacon () {
 
             // Tablas de carga
         const xTC = offsetX3 + ((largoGral * escala2) - (largoTC * escala2)) / 2; // Coordenadas centradas
-        const yTC = offsetY3 + ((grosorGral * escala2) - (anchoTC * escala2)) / 2;
+        const yTC = offsetY3 + (grosorTS * escala2);
         drawFullRect(xTC, yTC, (largoTC * escala2), (grosorTC * escala2), "#787878");
 
             // Tacones

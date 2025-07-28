@@ -46,7 +46,7 @@ export function InsertarFormularioTacon () {
                                             <label for="largoTS-1" class="col-form-label">Largo:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="40" id="largoTS-1" class="form-control nb no-arrows">
+                                            <input type="number" value="40" id="largoTS-1" class="form-control nb no-arrows" data-rel="ancho_gral">
                                             <p class="error invalid-feedback" id="error-lTS-1" style="color: red;"></p>
                                         </div>
                                     </div>
@@ -113,7 +113,7 @@ export function InsertarFormularioTacon () {
                                             <label for="largoTI-1" class="col-form-label">Largo:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="40" id="largoTI-1" class="form-control nb no-arrows">
+                                            <input type="number" value="40" id="largoTI-1" class="form-control nb no-arrows" data-rel="ancho_gral">
                                             <p class="error invalid-feedback" id="error-lTI-1" style="color: red;"></p>
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@ export function InsertarFormularioTacon () {
                                             <label for="anchoTI-1" class="col-form-label">Ancho:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="3.5" id="anchoTI-1" class="form-control nb no-arrows">
+                                            <input type="number" value="3.5" id="anchoTI-1" class="form-control nb no-arrows" data-rel="ancho_TIL">
                                             <p class="error invalid-feedback" id="error-aTI-1" style="color: red;"></p>
                                         </div>
                                     </div>
@@ -169,7 +169,7 @@ export function InsertarFormularioTacon () {
                                             <label for="anchoTI-2" class="col-form-label">Ancho:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="3.5" id="anchoTI-2" class="form-control nb no-arrows">
+                                            <input type="number" value="3.5" id="anchoTI-2" class="form-control nb no-arrows" data-rel="ancho_TIC">
                                             <p class="error invalid-feedback" id="error-aTI-2" style="color: red;"></p>
                                         </div>
                                     </div>
@@ -231,7 +231,7 @@ export function InsertarFormularioTacon () {
                                             <label for="largoTAL" class="col-form-label">Largo:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="3.5" id="largoTAL" class="form-control nb no-arrows">
+                                            <input type="number" value="3.5" id="largoTAL" class="form-control nb no-arrows" data-rel="ancho_TIL">
                                             <p class="error invalid-feedback" id="error-lTAL" style="color: red;"></p>
                                         </div>
                                     </div>
@@ -242,7 +242,7 @@ export function InsertarFormularioTacon () {
                                             <label for="anchoTAL" class="col-form-label">Ancho:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="3.5" id="anchoTAL" class="form-control nb no-arrows">
+                                            <input type="number" value="3.5" id="anchoTAL" class="form-control nb no-arrows" data-rel="ancho_TIC">
                                             <p class="error invalid-feedback" id="error-aTAL" style="color: red;"></p>
                                         </div>
                                     </div>
@@ -291,7 +291,7 @@ export function InsertarFormularioTacon () {
                                             <label for="anchoTAC" class="col-form-label">Ancho:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="3.5" id="anchoTAC" class="form-control nb no-arrows">
+                                            <input type="number" value="3.5" id="anchoTAC" class="form-control nb no-arrows" data-rel="ancho_TIC">
                                             <p class="error invalid-feedback" id="error-aTAC" style="color: red;"></p>
                                         </div>
                                     </div>
@@ -336,7 +336,7 @@ export function InsertarFormularioTacon () {
                                         <label for="largoTC" class="col-form-label">Largo:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" value="48" id="largoTC" class="form-control nb no-arrows">
+                                        <input type="number" value="48" id="largoTC" class="form-control nb no-arrows" data-rel="largo_gral">
                                         <p class="error invalid-feedback" id="error-lTC" style="color: red;"></p>
                                     </div>
                                 </div>
@@ -347,7 +347,7 @@ export function InsertarFormularioTacon () {
                                         <label for="anchoTC" class="col-form-label">Ancho:</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="number" value="3.5" id="anchoTC" class="form-control nb no-arrows">
+                                        <input type="number" value="3.5" id="anchoTC" class="form-control nb no-arrows" data-rel="ancho_TIC">
                                         <p class="error invalid-feedback" id="error-aTC" style="color: red;"></p>
                                     </div>
                                 </div>
