@@ -13,6 +13,8 @@ import {dibujarTacon2} from './planos/plano_tacon2.js';
 //
 import {actualizarCampos, asociarActualizacion} from './valores.js';
 
+import {modalBarrote, modalTacon} from './formularios/modales_index.js'
+
 // MOSTRAR EL FORMULARIO DE ACUERDO AL SUBTIPO DE TARIMA
 // Identificar el subtipo y el contenedor principal
 document.addEventListener('DOMContentLoaded', function () {
@@ -42,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 </div>`;
             caracteristicas_tarima.innerHTML = ``;
-            plano_tarima.innerHTML = `<img src="./assets/Logo-Color-PNG-500x400-2.png" alt="Logo" height="230px" id="logo_main" class="mt-4">`;
+            plano_tarima.innerHTML = `<img src="./assets/Logo-Color-PNG-500x400-2.png" alt="Logo" id="logo_main" class="mt-4 img-fluid">`;
         } else if (subtipo.value === 'Barrote') {
             op_acomodo.innerHTML = 
                 `<p class="titulo_opcion mb-0 me-3">Acomodo: </p>
@@ -79,19 +81,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const inicio_saque = document.getElementById('inicio_saque');
 
             tipoB.addEventListener('change', function () {
-                if (tipoB.value === 'Corrido'){
-                    inicio_saque.innerHTML = ``;
+                if (tipoB.value === 'Corrido') {
+                    inicio_saque.style.display = 'none';
                 } else if (tipoB.value === 'Con saque') {
-                    inicio_saque.innerHTML = 
-                    `<div class="row mb-3">
-                        <div class="col-md-4 text-end">
-                            <label for="distB" class="col-form-label">Inicio saque:</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="number" value="6" id="distB" class="form-control nb no-arrows">
-                            <p class="error invalid-feedback" id="error-distB" style="color: red;"></p>
-                        </div>  
-                    </div>`;
+                    inicio_saque.style.display = 'block';
                 }
             });
 
@@ -131,7 +124,8 @@ document.addEventListener('DOMContentLoaded', function () {
             requestAnimationFrame(() => {
                 inicializarValidacionesB();
             });
-            
+
+            modalBarrote();
             
         } else if (subtipo.value === 'Tacón') {
             op_acomodo.innerHTML = 
@@ -186,6 +180,8 @@ document.addEventListener('DOMContentLoaded', function () {
             requestAnimationFrame(() => {
                 inicializarValidacionesT();
             });
+
+            modalTacon();
         };
     });
 });

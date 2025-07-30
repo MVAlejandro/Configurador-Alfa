@@ -23,11 +23,14 @@
     <!-- BARRA DE NAVEGACION SECUNDARIO -->
     <div id="btn_bar">
         <nav id="nav_secundario" class="navbar w-100">
+            <div class="col-auto">
+                <button id="btn_resumen" class="btn btn-success ms-5" type="button">Resumen</button>
+            </div> 
             <div class="col text-center">
                 <h2>Configurador de tarimas</h2>
-                </div>
+            </div>
             <div class="col-auto">
-                <button id="btn_agregar" class="btn btn-outline-success me-5" type="button">Agregar</button>
+                <button id="btn_siguiente" class="btn btn-outline-success me-5" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Siguiente</button>
             </div> 
         </nav>
     </div>
@@ -65,11 +68,11 @@
                             <div id="op_tamaño" class="d-flex flex-column">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2 text-center">
-                                        <input type="number" id="largoGral" class="form-control no-arrows gral" min="1" placeholder="Largo">
+                                        <input type="number" id="anchoGral" class="form-control no-arrows gral" min="1" placeholder="Ancho">
                                     </div>
                                     <span class="mx-2">x</span>
                                     <div class="me-2 text-center">
-                                        <input type="number" id="anchoGral" class="form-control no-arrows gral" min="1" placeholder="Ancho">
+                                        <input type="number" id="largoGral" class="form-control no-arrows gral" min="1" placeholder="Largo">
                                     </div>
                                     <span class="mx-2">x</span>
                                     <div class="text-center">
@@ -90,11 +93,32 @@
             <!-- Plano -->
             <div class="col-sm-8 plano d-flex justify-content-center align-items-start mt-3 mb-5">
                 <div id="plano_tarima">
-                    <img src="./assets/Logo-Color-PNG-500x400-2.png" alt="Logo" height="230px" id="logo_main" class="mt-4">
+                    <img src="./assets/Logo-Color-PNG-500x400-2.png" alt="Logo" id="logo_main" class="mt-4 img-fluid">
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Tolerancias</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div id="modal_form" class="container">
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button id="btn_agregar" type="button" class="btn btn-primary">Agregar</button>
+        </div>
+        </div>
+    </div>
+    </div>
 
     <!-- FOOTER -->
     <footer id="site_footer">

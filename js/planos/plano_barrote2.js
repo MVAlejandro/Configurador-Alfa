@@ -107,11 +107,6 @@ export function dibujarBarrote2() {
         const grosorTS = parseFloat(document.getElementById('grosorTS-1').value);
         const variacionTS = document.getElementById('variacionTS').value;
 
-        const cantidadTS2 = parseFloat(document.getElementById('cantidadTS-2').value);
-        const largoTS2 = parseFloat(document.getElementById('largoTS-2').value);
-        const anchoTS2 = parseFloat(document.getElementById('anchoTS-2').value);
-        const grosorTS2 = parseFloat(document.getElementById('grosorTS-2').value);
-
         const cantidadTI = parseFloat(document.getElementById('cantidadTI').value);
         const largoTI = parseFloat(document.getElementById('largoTI').value);
         const anchoTI = parseFloat(document.getElementById('anchoTI').value);
@@ -126,7 +121,6 @@ export function dibujarBarrote2() {
 
         // Calcular las separaciones
         let separacionTS = ((largoGral - (anchoTS * cantidadTS)) / (cantidadTS - 1)).toFixed(2)
-        let separacionTS2 = ((largoGral - (anchoTS2 * cantidadTS2)) / (cantidadTS2 - 1)).toFixed(2)
         let separacionTI = ((largoGral - (anchoTI * cantidadTI)) / (cantidadTI - 1)).toFixed(2)
         let separacionB = ((anchoGral - (grosorB * cantidadB)) / (cantidadB - 1)).toFixed(2)
 
@@ -181,7 +175,14 @@ export function dibujarBarrote2() {
                 const y = offsetY1;
                 drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#e5e5e5");
             }
-        } else {
+        } else if (variacionTS === 'Variable'){
+            const cantidadTS2 = parseFloat(document.getElementById('cantidadTS-2').value);
+            const largoTS2 = parseFloat(document.getElementById('largoTS-2').value);
+            const anchoTS2 = parseFloat(document.getElementById('anchoTS-2').value);
+            const grosorTS2 = parseFloat(document.getElementById('grosorTS-2').value);
+
+            let separacionTS2 = ((largoGral - (anchoTS2 * cantidadTS2)) / (cantidadTS2 - 1)).toFixed(2)
+
             // Tabla Superior 2
             for (let i = 0; i < cantidadTS2; i++) {
                 const x = offsetX1 + i * ((anchoTS2 * escala) + (separacionTS2 * escala));
@@ -214,7 +215,14 @@ export function dibujarBarrote2() {
                 const y = offsetY2;
                 drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#bdbdbd");
             }
-        } else {
+        } else if (variacionTS === 'Variable'){
+            const cantidadTS2 = parseFloat(document.getElementById('cantidadTS-2').value);
+            const largoTS2 = parseFloat(document.getElementById('largoTS-2').value);
+            const anchoTS2 = parseFloat(document.getElementById('anchoTS-2').value);
+            const grosorTS2 = parseFloat(document.getElementById('grosorTS-2').value);
+
+            let separacionTS2 = ((largoGral - (anchoTS2 * cantidadTS2)) / (cantidadTS2 - 1)).toFixed(2)
+
             // Tabla Superior 2
             for (let i = 0; i < cantidadTS2; i++) {
                 const x = offsetX2 + i * ((anchoTS2 * escala) + (separacionTS2 * escala));
@@ -308,11 +316,18 @@ export function dibujarBarrote2() {
             // Dibujar Tablas superiores
         if (variacionTS === 'Único') {
             for (let i = 0; i < cantidadTS; i++) {
-                const x = offsetX3 + i * ((anchoTS * escala) + (separacionTS * escala));
+                const x = offsetX3 + i * ((anchoTS * escala2) + (separacionTS * escala2));
                 const y = offsetY3;
-                drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#bdbdbd");
+                drawFullRect(x, y, (anchoTS * escala2), (grosorTS * escala2), "#bdbdbd");
             }
-        } else {
+        } else if (variacionTS === 'Variable'){
+            const cantidadTS2 = parseFloat(document.getElementById('cantidadTS-2').value);
+            const largoTS2 = parseFloat(document.getElementById('largoTS-2').value);
+            const anchoTS2 = parseFloat(document.getElementById('anchoTS-2').value);
+            const grosorTS2 = parseFloat(document.getElementById('grosorTS-2').value);
+
+            let separacionTS2 = ((largoGral - (anchoTS2 * cantidadTS2)) / (cantidadTS2 - 1)).toFixed(2)
+
             // Tabla Superior 2
             for (let i = 0; i < cantidadTS2; i++) {
                 const x = offsetX3 + i * ((anchoTS2 * escala2) + (separacionTS2 * escala2));

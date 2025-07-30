@@ -14,17 +14,9 @@ function crearHeader(){
                 <a id="nav_logo" class="navbar-brand" href="#">
                     <img src="./assets/Logo-Color-PNG-500x400-1.png" alt="Pallets Alfa logo" width="62px">
                 </a>
-                <div class="d-flex ms-auto">
-                    <button id="btn_resumen" class="btn btn-outline-light me-3" type="button">Resumen</button>
-                </div>
             </div>
         </nav>`
     );
-
-    // Crear evento al dar click en botón Resumen
-    document.getElementById('btn_resumen').addEventListener('click', function () {
-        window.location.href = './resumen.html';
-    });
 }
 
 function crearFooter(){
@@ -33,7 +25,7 @@ function crearFooter(){
             <hr>
             <div class="row align-items-center">
                 <div id="iso_footer" class="col text-start">
-                    <img src="./assets/iso-9001-1536x476.png" alt="ISO 9001" width="198px">
+                    <img src="./assets/iso-9001-1536x476.png" alt="ISO 9001" width="120px">
                 </div>
                 <div id="texto_footer" class="col text-end">
                     <p>Pallets Alfa Texcoco</p>

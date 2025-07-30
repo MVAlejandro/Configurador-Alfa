@@ -281,6 +281,10 @@ export function dibujarBarrote() {
             // Dibujar Saque
         if (tipoB === "Con saque") {
             const distB = parseFloat(document.getElementById('distB').value);
+            
+            drawCotaLineH(offsetX3, offsetY3+(grosorGral*escala2)+(2*escala2), offsetX3+(distB*escala2), offsetY3+(grosorGral*escala2)+(2*escala2), 0.6*escala2)
+            drawTextH(distB, offsetX3, offsetY3+(grosorGral*escala2)+(2*escala2)+(2*escala2), offsetX3+(distB*escala2))
+
             let hSaque = anchoB * 0.40
             function drawSaque(x, y, w, h, r) {
                 ctx.beginPath();

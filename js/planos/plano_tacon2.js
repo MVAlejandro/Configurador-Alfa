@@ -107,11 +107,6 @@ export function dibujarTacon2 () {
         const grosorTS = parseFloat(document.getElementById('grosorTS-1').value);
         const variacionTS = document.getElementById('variacionTS').value;
 
-        const cantidadTS2 = parseFloat(document.getElementById('cantidadTS-2').value);
-        const largoTS2 = parseFloat(document.getElementById('largoTS-2').value);
-        const anchoTS2 = parseFloat(document.getElementById('anchoTS-2').value);
-        const grosorTS2 = parseFloat(document.getElementById('grosorTS-2').value);
-
         const largoTI = parseFloat(document.getElementById('largoTI-1').value);
         const anchoTI = parseFloat(document.getElementById('anchoTI-1').value);
         const grosorTI = parseFloat(document.getElementById('grosorTI-1').value);
@@ -134,7 +129,6 @@ export function dibujarTacon2 () {
         const grosorTC = parseFloat(document.getElementById('grosorTC').value);
 
         let separacionTS = ((largoGral - (anchoTS * cantidadTS)) / (cantidadTS - 1)).toFixed(2)
-        let separacionTS2 = ((largoGral - (anchoTS2 * cantidadTS2)) / (cantidadTS2 - 1)).toFixed(2)
         let separacionTC = ((anchoGral - (anchoTC * cantidadTC)) / (cantidadTC - 1)).toFixed(2)
 
         const escala = canvasWidth*0.0064;
@@ -163,7 +157,14 @@ export function dibujarTacon2 () {
                 const y = offsetY1;
                 drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#e5e5e5");
             }
-        } else {
+        } else if (variacionTS === 'Variable') {
+            const cantidadTS2 = parseFloat(document.getElementById('cantidadTS-2').value);
+            const largoTS2 = parseFloat(document.getElementById('largoTS-2').value);
+            const anchoTS2 = parseFloat(document.getElementById('anchoTS-2').value);
+            const grosorTS2 = parseFloat(document.getElementById('grosorTS-2').value);
+
+            let separacionTS2 = ((largoGral - (anchoTS2 * cantidadTS2)) / (cantidadTS2 - 1)).toFixed(2)
+
             // Tabla Superior 2
             for (let i = 0; i < cantidadTS2; i++) {
                 const x = offsetX1 + i * ((anchoTS2 * escala) + (separacionTS2 * escala));
@@ -196,7 +197,14 @@ export function dibujarTacon2 () {
                 const y = offsetY2;
                 drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#bdbdbd");
             }
-        } else {
+        } else if (variacionTS === 'Variable') {
+            const cantidadTS2 = parseFloat(document.getElementById('cantidadTS-2').value);
+            const largoTS2 = parseFloat(document.getElementById('largoTS-2').value);
+            const anchoTS2 = parseFloat(document.getElementById('anchoTS-2').value);
+            const grosorTS2 = parseFloat(document.getElementById('grosorTS-2').value);
+
+            let separacionTS2 = ((largoGral - (anchoTS2 * cantidadTS2)) / (cantidadTS2 - 1)).toFixed(2)
+
             // Tabla Superior 2
             for (let i = 0; i < cantidadTS2; i++) {
                 const x = offsetX2 + i * ((anchoTS2 * escala) + (separacionTS2 * escala));
@@ -246,7 +254,14 @@ export function dibujarTacon2 () {
                 const y = offsetY3;
                 drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#bdbdbd");
             }
-        } else {
+        } else if (variacionTS === 'Variable') {
+            const cantidadTS2 = parseFloat(document.getElementById('cantidadTS-2').value);
+            const largoTS2 = parseFloat(document.getElementById('largoTS-2').value);
+            const anchoTS2 = parseFloat(document.getElementById('anchoTS-2').value);
+            const grosorTS2 = parseFloat(document.getElementById('grosorTS-2').value);
+
+            let separacionTS2 = ((largoGral - (anchoTS2 * cantidadTS2)) / (cantidadTS2 - 1)).toFixed(2)
+
             // Tabla Superior 2
             for (let i = 0; i < cantidadTS2; i++) {
                 const x = offsetX3 + i * ((anchoTS2 * escala2) + (separacionTS2 * escala2));

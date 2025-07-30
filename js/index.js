@@ -3,6 +3,10 @@
 // Importar funciones de validación de campos
 import {validarCamposInvalidos} from "./validaciones/validaBarrote.js"
 
+// Crear evento al dar click en botón Resumen
+document.getElementById('btn_resumen').addEventListener('click', function () {
+    window.location.href = './resumen.html';
+});
 
 // Declarar el arreglo para guardar los objetos, y recupera en caso de existir
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []; 
@@ -13,7 +17,7 @@ let formData = {};
 // Crear evento al dar click al botón Agregar
 document.getElementById('btn_agregar').addEventListener('click', function(event) {
     event.preventDefault();
-
+    
     let cantidad = 1;
     // Obtener los valores de los campos del formulario
     const tipo = document.getElementById('tipo').value;
@@ -22,6 +26,9 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
     const acomodo = document.getElementById('acomodo').value;
         
     // Obtener los datos de las tablas compartidos entre ambos tipos de tarima
+    const tolerancia1 = document.getElementById('tolerancia1').value;
+    const tolerancia2 = document.getElementById('tolerancia2').value;
+
     const largoGral = parseFloat(document.getElementById('largoGral').value);
     const anchoGral = parseFloat(document.getElementById('anchoGral').value);
     const grosorGral = parseFloat(document.getElementById('grosorGral').value);
@@ -94,6 +101,13 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
     // Obtener los datos de las tablas dependiendo el tipo de tarima
     // TARIMA DE BARROTE
     if (subtipo === 'Barrote') {
+        const tolerancia3 = document.getElementById('tolerancia3').value;
+        const toleranciasData = [];
+
+        toleranciasData.push({
+            tolerancia1, tolerancia2, tolerancia3
+        });
+
         const cantidadTI = parseInt(document.getElementById('cantidadTI').value);
         const largoTI = parseFloat(document.getElementById('largoTI').value);
         const anchoTI = parseFloat(document.getElementById('anchoTI').value);
@@ -158,7 +172,8 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
                 largoGral, anchoGral, grosorGral,
                 tablaSuperior: tablaSuperiorData,
                 cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
-                cantidadB, tipoB, distB, largoB, anchoB, grosorB, distBar
+                cantidadB, tipoB, distB, largoB, anchoB, grosorB, distBar,
+                tolerancias: toleranciasData
             };
         } else if (tipoB === 'Corrido') {
             // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
@@ -197,7 +212,8 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
                 largoGral, anchoGral, grosorGral,
                 tablaSuperior: tablaSuperiorData,
                 cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
-                cantidadB, tipoB, largoB, anchoB, grosorB, distBar
+                cantidadB, tipoB, largoB, anchoB, grosorB, distBar,
+                tolerancias: toleranciasData
             };
         }
 
@@ -212,6 +228,14 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
 
     // TARIMA DE TACON
     } else if (subtipo === 'Tacón'){
+        const tolerancia3 = document.getElementById('tolerancia3').value;
+        const tolerancia4 = document.getElementById('tolerancia4').value;
+        const toleranciasData = [];
+
+        toleranciasData.push({
+            tolerancia1, tolerancia2, tolerancia3, tolerancia4
+        });
+
         let tablaInferiorData = [];
         const numVar = 2;
 
@@ -290,7 +314,8 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
             tablaInferior: tablaInferiorData,
             cantidadTAL, largoTAL, anchoTAL, grosorTAL, 
             cantidadTAC, largoTAC, anchoTAC, grosorTAC,
-            cantidadTC, largoTC, anchoTC, grosorTC
+            cantidadTC, largoTC, anchoTC, grosorTC,
+            tolerancias: toleranciasData
         };
 
         // Agregar el objeto creado al carrito
@@ -301,17 +326,6 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         location.reload();
         // Mostrar alerta de agregado correctamente
         alert('Datos guardados correctamente.');
-        
-
-        // Agregar el objeto creado al carrito
-        carrito.push(formData);
-        // Guardar el carrito en localStorage
-        localStorage.setItem("carrito", JSON.stringify(carrito));
-        // Limpiar los campos
-        location.reload();
-        // Mostrar alerta de agregado correctamente
-        alert('Datos guardados correctamente.');
-        
     }
 });
 

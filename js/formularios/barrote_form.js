@@ -13,10 +13,10 @@ export function InsertarFormularioBarrote () {
                     <div class="accordion-body ms-4">
                         <!-- Variación -->
                         <div class="row mb-3">
-                            <div class="col-md-3">
+                            <div class="col-lg-3">
                                 <label for="variacionTS" class="col-form-label">Ancho:</label>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-lg-7">
                                 <select id="variacionTS" class="form-select nb">
                                 <option value="Único">Único</option>
                                 <option value="Variable">Variable</option>
@@ -27,10 +27,10 @@ export function InsertarFormularioBarrote () {
                         <div id="tabla_superior">
                             <!-- Cantidad -->
                             <div class="row mb-3">
-                                <div class="col-md-3">
+                                <div class="col-lg-3">
                                     <label for="cantidadTS-1" class="col-form-label">Cantidad:</label>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-lg-7">
                                     <select id="cantidadTS-1" class="form-select nb">
                                         <option value="6">6</option>
                                         <option value="7">7</option>
@@ -43,10 +43,10 @@ export function InsertarFormularioBarrote () {
     
                             <!-- Largo -->
                             <div class="row mb-2">
-                                <div class="offset-md-1 col-md-3 text-end">
+                                <div class="offset-lg-1 col-lg-3 text-end">
                                     <label for="largoTS-1" class="col-form-label">Largo:</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <input type="number" value="40" id="largoTS-1" class="form-control nb no-arrows" data-rel="ancho_gral">
                                     <p class="error invalid-feedback" id="error-lTS-1" style="color: red;"></p>
                                 </div>
@@ -54,10 +54,10 @@ export function InsertarFormularioBarrote () {
     
                             <!-- Ancho -->
                             <div class="row mb-2">
-                                <div class="offset-md-1 col-md-3 text-end">
+                                <div class="offset-lg-1 col-lg-3 text-end">
                                     <label for="anchoTS-1" class="col-form-label">Ancho:</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <input type="number" value="3.5" id="anchoTS-1" class="form-control nb no-arrows">
                                     <p class="error invalid-feedback" id="error-aTS-1" style="color: red;"></p>
                                 </div>
@@ -65,10 +65,10 @@ export function InsertarFormularioBarrote () {
     
                             <!-- Grosor -->
                             <div class="row mb-2">
-                                <div class="offset-md-1 col-md-3 text-end">
+                                <div class="offset-lg-1 col-lg-3 text-end">
                                     <label for="grosorTS-1" class="col-form-label">Espesor:</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <input type="number" value="0.62" id="grosorTS-1" class="form-control nb no-arrows">
                                     <p class="error invalid-feedback" id="error-gTS-1" style="color: red;"></p>
                                 </div>
@@ -76,9 +76,9 @@ export function InsertarFormularioBarrote () {
     
                             <!-- Separación -->
                             <div class="row mb-2">
-                                <div class="offset-md-1 col-md-3 text-end">
+                                <div class="offset-lg-1 col-lg-3 text-end">
                                 </div>
-                                <div id="separacionTS-1" class="col-md-6">
+                                <div id="separacionTS-1" class="col-lg-6">
                                                         
                                 </div>
                             </div>
@@ -99,10 +99,10 @@ export function InsertarFormularioBarrote () {
                     <div class="accordion-body ms-4">
                         <!-- Cantidad -->
                         <div class="row mb-3">
-                            <div class="col-md-3">
+                            <div class="col-lg-3">
                                 <label for="cantidadTI" class="col-form-label">Cantidad:</label>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-lg-7">
                                 <select id="cantidadTI" class="form-select nb">
                                     <option value="3">3</option>
                                     <option value="4">4</option>
@@ -114,10 +114,10 @@ export function InsertarFormularioBarrote () {
     
                         <!-- Largo -->
                         <div class="row mb-2">
-                            <div class="offset-md-1 col-md-3 text-end">
+                            <div class="offset-lg-1 col-lg-3 text-end">
                                 <label for="largoTI" class="col-form-label">Largo:</label>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-6">
                                 <input type="number" value="40" id="largoTI" class="form-control nb no-arrows" data-rel="ancho_gral">
                                 <p class="error invalid-feedback" id="error-lTI" style="color: red;"></p>
                             </div>
@@ -125,10 +125,10 @@ export function InsertarFormularioBarrote () {
     
                         <!-- Ancho -->
                         <div class="row mb-2">
-                            <div class="offset-md-1 col-md-3 text-end">
+                            <div class="offset-lg-1 col-lg-3 text-end">
                                 <label for="anchoTI" class="col-form-label">Ancho:</label>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-6">
                                 <input type="number" value="3.5" id="anchoTI" class="form-control nb no-arrows">
                                 <p class="error invalid-feedback" id="error-aTI" style="color: red;"></p>
                             </div>
@@ -136,10 +136,10 @@ export function InsertarFormularioBarrote () {
     
                         <!-- Grosor -->
                             <div class="row mb-2">
-                            <div class="offset-md-1 col-md-3 text-end">
+                            <div class="offset-lg-1 col-lg-3 text-end">
                                 <label for="grosorTI" class="col-form-label">Espesor:</label>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-6">
                                 <input type="number" value="0.62" id="grosorTI" class="form-control nb no-arrows">
                                 <p class="error invalid-feedback" id="error-gTI" style="color: red;"></p>
                             </div>
@@ -147,16 +147,16 @@ export function InsertarFormularioBarrote () {
     
                         <!-- Arreglo -->
                         <div class="row mb-3">
-                            <div class="col-md-3">
+                            <div class="col-lg-3">
                                 <label for="arregloTI" class="col-form-label">Arreglo:</label>
                             </div>
-                            <div class="col-md-7 mb-3">
+                            <div class="col-lg-7 mb-3">
                                 <select id="arregloTI" class="form-select nb">
                                     <option value="Distribuido">Distribuido</option>
                                     <option value="Especial">Especial</option>
                                 </select>
                             </div>
-                            <div id="arreglo_especial" class="col-md-10">
+                            <div id="arreglo_especial" class="col-lg-10">
                                             
                             </div>
                         </div>
@@ -176,10 +176,10 @@ export function InsertarFormularioBarrote () {
                     <div class="accordion-body ms-4">
                         <!-- Cantidad -->
                         <div class="row mb-3">
-                            <div class="col-md-3">
+                            <div class="col-lg-3">
                                 <label for="cantidadB" class="col-form-label">Cantidad:</label>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-lg-7">
                                 <select id="cantidadB" class="form-select nb">
                                     <option value="3">3</option>
                                     <option value="4">4</option>
@@ -190,35 +190,35 @@ export function InsertarFormularioBarrote () {
     
                         <!-- Tipo de barrote -->
                         <div class="row mb-3">
-                            <div class="col-md-3 text-end">
+                            <div class="col-lg-3 text-end">
                                 <label for="tipoB" class="col-form-label">Tipo:</label>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-lg-7">
                                 <select id="tipoB" class="form-select nb">
                                     <option value="Con saque">Con saque</option>
                                     <option value="Corrido">Corrido</option>
                                 </select>
                             </div>                         
                         </div>
-                        <div id="inicio_saque">
+                        <div id="inicio_saque" style="display: block;">
                             <div class="row mb-3">
-                                <div class="col-md-4 text-end">
+                                <div class="col-lg-4 text-end">
                                     <label for="distB" class="col-form-label">Inicio saque:</label>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <input type="number" value="6" id="distB" class="form-control nb no-arrows">
                                     <p class="error invalid-feedback" id="error-distB" style="color: red;"></p>
                                 </div>  
-                            </div>       
+                            </div>
                         </div>
                         <hr>
 
                         <!-- Largo -->
                         <div class="row mb-2">
-                            <div class="offset-md-1 col-md-3 text-end">
+                            <div class="offset-lg-1 col-lg-3 text-end">
                                 <label for="largoB" class="col-form-label">Largo:</label>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-6">
                                 <input type="number" value="48" id="largoB" class="form-control nb no-arrows" data-rel="largo_gral">
                                 <p class="error invalid-feedback" id="error-lB" style="color: red;"></p>
                             </div>
@@ -226,10 +226,10 @@ export function InsertarFormularioBarrote () {
     
                         <!-- Ancho -->
                         <div class="row mb-2">
-                            <div class="offset-md-1 col-md-3 text-end">
+                            <div class="offset-lg-1 col-lg-3 text-end">
                                 <label for="anchoB" class="col-form-label">Altura:</label>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-6">
                                 <input type="number" value="3.5" id="anchoB" class="form-control nb no-arrows">
                                 <p class="error invalid-feedback" id="error-aB" style="color: red;"></p>
                             </div>
@@ -237,10 +237,10 @@ export function InsertarFormularioBarrote () {
     
                         <!-- Grosor -->
                         <div class="row mb-2">
-                            <div class="offset-md-1 col-md-3 text-end">
+                            <div class="offset-lg-1 col-lg-3 text-end">
                                 <label for="grosorB" class="col-form-label">Espesor:</label>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-6">
                                 <input type="number" value="1.25" id="grosorB" class="form-control nb no-arrows">
                                 <p class="error invalid-feedback" id="error-gB" style="color: red;"></p>
                             </div>
@@ -248,10 +248,10 @@ export function InsertarFormularioBarrote () {
 
                         <!-- Distribución de barrotes -->
                         <div id="distribucion_barrote" class="row mb-3">
-                            <div class="col-md-3">
+                            <div class="col-lg-3">
                                 <label for="distBar" class="col-form-label">Distribución:</label>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-lg-7">
                                 <select id="distBar" class="form-select nb">
                                     <option value="Estándar">Estándar</option>
                                     <option value="Distribuido">Distribuido</option>
