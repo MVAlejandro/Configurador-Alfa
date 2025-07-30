@@ -23,6 +23,12 @@ function crearElemListaSec(nombre, descripcion) {
     );
 }
 
+function crearElemListaSecMed(nombre, descripcion) {
+    lista_resumen.insertAdjacentHTML('beforeend', 
+        `<li class="sub_descripcion ms-4">${nombre}: ${descripcion}"</li>`
+    );
+}
+
 // Función para llenar toda la información en el modal
 function abrirModalItem(formData) {
     // Limpiar contenedores antes de insertar la información
@@ -50,7 +56,7 @@ function abrirModalItem(formData) {
                 const titulo = formData.tablaSuperior.length > 1 ? `Tabla superior ${i + 1}` : 'Tabla superior';
                 crearElemListaPrin(titulo, tabla.cantidadTS, tabla.largoTS, tabla.anchoTS, tabla.grosorTS);
             });
-            crearElemListaSec('Separación', formData.tablaSuperior[0].separacionTS);
+            crearElemListaSecMed('Separación', formData.tablaSuperior[0].separacionTS);
         }
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
@@ -60,6 +66,7 @@ function abrirModalItem(formData) {
         crearElemListaSec('Tipo', formData.tipoB);
 
         if (formData.tipoB === 'Con saque') {
+            crearElemListaSecMed('Inicio de saque', formData.distB);
             crearElemListaSec('Distribución saque', formData.distBar);
         }
 
@@ -78,7 +85,7 @@ function abrirModalItem(formData) {
                 const titulo = formData.tablaSuperior.length > 1 ? `Tabla superior ${i + 1}` : 'Tabla superior';
                 crearElemListaPrin(titulo, tabla.cantidadTS, tabla.largoTS, tabla.anchoTS, tabla.grosorTS);
             });
-            crearElemListaSec('Separación', formData.tablaSuperior[0].separacionTS);
+            crearElemListaSecMed('Separación', formData.tablaSuperior[0].separacionTS);
         }
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         if (Array.isArray(formData.tablaInferior)) {
@@ -88,13 +95,8 @@ function abrirModalItem(formData) {
             });
         }
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
-        if (formData.distribucionTA === 'Lateral') {
-            crearElemListaPrin('Tacón lateral', formData.cantidadTAL, formData.largoTAL, formData.anchoTAL, formData.grosorTAL);
-        } else {
-            crearElemListaPrin('Tacón lateral', formData.cantidadTAL, formData.largoTAL, formData.anchoTAL, formData.grosorTAL);
-            crearElemListaPrin('Tacón central', formData.cantidadTAC, formData.largoTAC, formData.anchoTAC, formData.grosorTAC);
-        }
-        crearElemListaSec('Distribución', formData.distribucionTA)
+        crearElemListaPrin('Tacón lateral', formData.cantidadTAL, formData.largoTAL, formData.anchoTAL, formData.grosorTAL);
+        crearElemListaPrin('Tacón central', formData.cantidadTAC, formData.largoTAC, formData.anchoTAC, formData.grosorTAC);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Tablas de carga', formData.cantidadTC, formData.largoTC, formData.anchoTC, formData.grosorTC);
 
@@ -109,12 +111,22 @@ function abrirModalItem(formData) {
     // PROPIEDADES //
     // Fórmula para calcular la capacidad de carga
     const ts = formData.tablaSuperior[0]; // usar el primero como referencia
-    const capacidad_estatica_calculo = ((ts.largoTS * ts.anchoTS * ts.grosorTS) + (formData.largoTI * formData.anchoTI * formData.grosorTI)) * 10;
-    const capacidad_dinamica_calculo = capacidad_estatica_calculo * 0.64;
+    if (formData.subtipo === 'Barrote') {
+        let capacidad_estatica_calculo = ((ts.largoTS * ts.anchoTS * ts.grosorTS) + (formData.largoTI * formData.anchoTI * formData.grosorTI)) * 10;
+        let capacidad_dinamica_calculo = capacidad_estatica_calculo * 0.64;
 
-    // Mostrar los valores calculados
-    capacidad_estatica.innerHTML = `${capacidad_estatica_calculo.toFixed(2)} kg`;
-    capacidad_dinamica.innerHTML = `${capacidad_dinamica_calculo.toFixed(2)} kg`;
+        // Mostrar los valores calculados
+        capacidad_estatica.innerHTML = `${capacidad_estatica_calculo.toFixed(2)} kg`;
+        capacidad_dinamica.innerHTML = `${capacidad_dinamica_calculo.toFixed(2)} kg`;
+    } else if (formData.subtipo === 'Tacón') {
+        const ti = formData.tablaInferior[0]; // usar el primero como referencia
+        let capacidad_estatica_calculo = ((ts.largoTS * ts.anchoTS * ts.grosorTS) + (ti.largoTI * ti.anchoTI * ti.grosorTI)) * 10;
+        let capacidad_dinamica_calculo = capacidad_estatica_calculo * 0.64;
+
+        // Mostrar los valores calculados
+        capacidad_estatica.innerHTML = `${capacidad_estatica_calculo.toFixed(2)} kg`;
+        capacidad_dinamica.innerHTML = `${capacidad_dinamica_calculo.toFixed(2)} kg`;
+    }
 
     // COSTO //
     // Mostrar valores de los resultados

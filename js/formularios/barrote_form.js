@@ -14,7 +14,7 @@ export function InsertarFormularioBarrote () {
                         <!-- Variación -->
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="variacionTS" class="col-form-label">Grosor:</label>
+                                <label for="variacionTS" class="col-form-label">Ancho:</label>
                             </div>
                             <div class="col-md-7">
                                 <select id="variacionTS" class="form-select nb">
@@ -39,6 +39,7 @@ export function InsertarFormularioBarrote () {
                                     </select>
                                 </div>
                             </div>
+                            <hr>
     
                             <!-- Largo -->
                             <div class="row mb-2">
@@ -109,6 +110,7 @@ export function InsertarFormularioBarrote () {
                                 </select>
                             </div>
                         </div>
+                        <hr>
     
                         <!-- Largo -->
                         <div class="row mb-2">
@@ -196,8 +198,20 @@ export function InsertarFormularioBarrote () {
                                     <option value="Con saque">Con saque</option>
                                     <option value="Corrido">Corrido</option>
                                 </select>
-                            </div>
+                            </div>                         
                         </div>
+                        <div id="inicio_saque">
+                            <div class="row mb-3">
+                                <div class="col-md-4 text-end">
+                                    <label for="distB" class="col-form-label">Inicio saque:</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="number" value="6" id="distB" class="form-control nb no-arrows">
+                                    <p class="error invalid-feedback" id="error-distB" style="color: red;"></p>
+                                </div>  
+                            </div>       
+                        </div>
+                        <hr>
 
                         <!-- Largo -->
                         <div class="row mb-2">

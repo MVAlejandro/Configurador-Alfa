@@ -14,7 +14,7 @@ export function InsertarFormularioTacon () {
                                 <!-- Variación -->
                                 <div class="row mb-3">
                                     <div class="col-md-3">
-                                        <label for="variacionTS" class="col-form-label">Grosor:</label>
+                                        <label for="variacionTS" class="col-form-label">Ancho:</label>
                                     </div>
                                     <div class="col-md-7">
                                         <select id="variacionTS" class="form-select nb">
@@ -196,22 +196,8 @@ export function InsertarFormularioTacon () {
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
-                                <!-- Distribución -->
-                                <div class="row mb-3">
-                                    <div class="col-md-3">
-                                        <label for="distribucionTA" class="col-form-label">Distribución:</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <select id="distribucionTA" class="form-select nb">
-                                        <option value="Estándar">Estándar</option>
-                                        <option value="Lateral">Lateral</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div id="tacones">
-                                    <!-- Laterales -->
-                                    <h6>Tacones laterales</h6>
+                                <!-- Laterales -->
+                                <h6>Tacones laterales</h6>
                                     <!-- Cantidad -->
                                     <div class="row mb-3">
                                         <div class="col-md-3">
@@ -258,8 +244,8 @@ export function InsertarFormularioTacon () {
                                         </div>
                                     </div>
                                                     
-                                    <!-- Centrales -->
-                                    <h6>Tacones centrales</h6>
+                                <!-- Centrales -->
+                                <h6>Tacones centrales</h6>
                                     <!-- Cantidad -->
                                     <div class="row mb-3">
                                         <div class="col-md-3">
@@ -306,8 +292,6 @@ export function InsertarFormularioTacon () {
                                             <p class="error invalid-feedback" id="error-gTAC" style="color: red;"></p>
                                         </div>
                                     </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>

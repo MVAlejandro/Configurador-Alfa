@@ -208,15 +208,15 @@ export function dibujarBarrote() {
                 drawFullRect(offsetX2, offsetY2 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (largoB * escala), (grosorB * escala), "#787878");
             } else {
                 const alto = grosorB * escala;
-            const separacion = 6 * escala;
-            drawFullRect(offsetX2, offsetY1, (largoB * escala), alto, "#787878"); 
-            const y2 = y - (3 * alto / 2) - separacion;
-            drawFullRect(offsetX2, y2, largoB * escala, alto, "#787878");
-            const y3 = y - alto / 2;
-            drawFullRect(offsetX2, y3, largoB * escala, alto, "#787878");
-            const y4 = y + alto / 2 + separacion;
-            drawFullRect(offsetX2, y4, largoB * escala, alto, "#787878");
-            drawFullRect(offsetX2, offsetY1 + (cantidadB - 1) * ((alto) + (separacionB * escala)), (largoB * escala), alto, "#787878");
+                const separacion = 6 * escala;
+                drawFullRect(offsetX2, offsetY1, (largoB * escala), alto, "#787878"); 
+                const y2 = y - (3 * alto / 2) - separacion;
+                drawFullRect(offsetX2, y2, largoB * escala, alto, "#787878");
+                const y3 = y - alto / 2;
+                drawFullRect(offsetX2, y3, largoB * escala, alto, "#787878");
+                const y4 = y + alto / 2 + separacion;
+                drawFullRect(offsetX2, y4, largoB * escala, alto, "#787878");
+                drawFullRect(offsetX2, offsetY1 + (cantidadB - 1) * ((alto) + (separacionB * escala)), (largoB * escala), alto, "#787878");
             }
         } else {
             for (let i = 0; i < cantidadB; i++) {
@@ -227,10 +227,31 @@ export function dibujarBarrote() {
         }
 
             // Dibujar Tablas inferiores
-        for (let i = 0; i < cantidadTI; i++) {
-            const x = offsetX2 + i * ((anchoTI * escala) + (separacionTI * escala));
-            const y = offsetY2;
-            drawFullRect(x, y, (anchoTI * escala), (largoTI * escala), "#ffc0c0");
+        if (tipoB === "Con saque") {
+            const distB = parseFloat(document.getElementById('distB').value);
+            let separacionSaque = (largoGral-(2*(distB+9)))*escala;
+
+            drawFullRect(offsetX2, offsetY2, (anchoTI * escala), (largoTI * escala), "#ffc0c0"); 
+            drawFullRect(offsetX2 + ((largoGral-anchoTI)*escala), offsetY2, (anchoTI * escala), (largoTI * escala), "#ffc0c0");
+
+            const espacio = (separacionSaque - (cantidadTI - 2) * (anchoTI * escala)) / (cantidadTI - 1);
+
+            // Punto inicial del área central
+            const xInicio = offsetX2 + (distB + 9) * escala;
+
+            for (let i = 0; i < (cantidadTI - 2); i++) {
+                const x = xInicio + espacio * (i + 1) + (anchoTI * escala) * i;
+                const y = offsetY2;
+
+                drawFullRect(x, y, (anchoTI * escala), largoTI * escala, "#ffc0c0");
+            }
+
+        } else {
+            for (let i = 0; i < cantidadTI; i++) {
+                const x = offsetX2 + i * ((anchoTI * escala) + (separacionTI * escala));
+                const y = offsetY2;
+                drawFullRect(x, y, (anchoTI * escala), (largoTI * escala), "#ffc0c0");
+            }
         }
 
         // Vista lateral
@@ -259,6 +280,7 @@ export function dibujarBarrote() {
 
             // Dibujar Saque
         if (tipoB === "Con saque") {
+            const distB = parseFloat(document.getElementById('distB').value);
             let hSaque = anchoB * 0.40
             function drawSaque(x, y, w, h, r) {
                 ctx.beginPath();
@@ -273,26 +295,47 @@ export function dibujarBarrote() {
                 ctx.fill();
             }
 
-            const margen = 6 * escala2;
+            const margen = distB * escala2;
 
             // Coordenadas X
             const xMedio1 = xB + margen; 
-            const xMedio2 = xB + (largoB * escala2) - margen - (8.3*escala2); 
+            const xMedio2 = xB + (largoB * escala2) - margen - (9*escala2); 
 
-            drawSaque(xMedio1, (yB+((anchoB-hSaque) * escala2)), 8.3*escala2, (hSaque * escala2), 5);
-            drawSaque(xMedio2, (yB+((anchoB-hSaque) * escala2)), 8.3*escala2, (hSaque * escala2), 5);
+            drawSaque(xMedio1, (yB+((anchoB-hSaque) * escala2)), 9*escala2, (hSaque * escala2), 5);
+            drawSaque(xMedio2, (yB+((anchoB-hSaque) * escala2)), 9*escala2, (hSaque * escala2), 5);
         }
 
             // Dibujar Tablas inferiores
-        for (let i = 0; i < cantidadTI; i++) {
-            const x = offsetX3 + i * ((anchoTI * escala2) + (separacionTI * escala2));
-            const y = yB + (anchoB * escala2);
-            drawFullRect(x, y, (anchoTI * escala2), (grosorTI * escala2), "#ffc0c0");
+        if (tipoB === "Con saque") {
+            const distB = parseFloat(document.getElementById('distB').value);
+            let separacionSaque = (largoGral-(2*(distB+9)))*escala2;
+
+            drawFullRect(offsetX3, yB + (anchoB * escala2), (anchoTI * escala2), (grosorTI * escala2), "#ffc0c0"); 
+            drawFullRect(offsetX3 + ((largoGral-anchoTI)*escala2), yB + (anchoB * escala2), (anchoTI * escala2), (grosorTI * escala2), "#ffc0c0");
+
+            const espacio = (separacionSaque - (cantidadTI - 2) * (anchoTI * escala2)) / (cantidadTI - 1);
+
+            // Punto inicial del área central
+            const xInicio = offsetX3 + (distB + 9) * escala2;
+
+            for (let i = 0; i < (cantidadTI - 2); i++) {
+                const x = xInicio + espacio * (i + 1) + (anchoTI * escala2) * i;
+                const y = yB + (anchoB * escala2);
+
+                drawFullRect(x, y, (anchoTI * escala2), grosorTI * escala2, "#ffc0c0");
+            }
+
+        } else {
+            for (let i = 0; i < cantidadTI; i++) {
+                const x = offsetX3 + i * ((anchoTI * escala2) + (separacionTI * escala2));
+                const y = yB + (anchoB * escala2);
+                drawFullRect(x, y, (anchoTI * escala2), (grosorTI * escala2), "#ffc0c0");
+            }
         }
     }
 
     // Agregar eventos a los campos de entrada para redibujar el plano cuando cambie cualquier valor
-    const inputs = document.querySelectorAll('#largoGral, #anchoGral, #grosorGral, #cantidadTS-1, #largoTS-1, #anchoTS-1, #grosorTS-1, #cantidadTI, #largoTI, #anchoTI, #grosorTI, #cantidadB, #largoB, #anchoB, #grosorB, #tipoB, #distBar');
+    const inputs = document.querySelectorAll('#largoGral, #anchoGral, #grosorGral, #cantidadTS-1, #largoTS-1, #anchoTS-1, #grosorTS-1, #cantidadTI, #largoTI, #anchoTI, #grosorTI, #cantidadB, #largoB, #anchoB, #grosorB, #tipoB, #distB, #distBar');
 
     // Para cada input, agregar un event listener para ejecutar la función redibujarPlano cuando el valor cambie
     inputs.forEach(input => {

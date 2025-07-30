@@ -119,44 +119,87 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         const anchoB = parseFloat(document.getElementById('anchoB').value);
         const grosorB = parseFloat(document.getElementById('grosorB').value);
 
-        // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
-        if (!largoGral || !anchoGral || !grosorGral || 
-            !cantidadTI || !largoTI || !anchoTI || !grosorTI ||
-            !cantidadB || !largoB || !anchoB || !grosorB) {
-                    
-            alert('Por favor, complete todos los campos para agregar el producto.');
-            return;
+        if (tipoB === 'Con saque') {
+            const distB = parseFloat(document.getElementById('distB').value);
+
+            // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
+            if (!largoGral || !anchoGral || !grosorGral || 
+                !cantidadTI || !largoTI || !anchoTI || !grosorTI ||
+                !cantidadB || !largoB || !anchoB || !grosorB || !distB) {
+                        
+                alert('Por favor, complete todos los campos para agregar el producto.');
+                return;
+            }
+            
+            // Validar si hay campos inválidos
+            const campos = document.querySelectorAll('input');
+            if (!validarCamposInvalidos(campos)) {
+                alert('Corrige los errores antes de guardar.');
+                return;
+            }
+
+            // COSTO //
+            // Valores para calcular los costos
+            const costoBase = 500; // costo base tarima
+            const costoTablaSuperior = 100; // tabla superior
+            const costoTablaInferior = 80; // tabla inferior
+            const costoBarrote = 50; // tacón 
+
+            // Calcular precio unitario de la tarima
+            const desgloce1 = costoBase + costoTablaSuperior; // base + tabla superior
+            const desgloce2 = costoTablaInferior + costoBarrote; // tabla inferior + tacón 
+            const desgloce3 = costoBarrote + costoBarrote; // tacón chico + tablas de carga
+
+            const precioUnit = desgloce1 + desgloce2 + desgloce3;
+
+            // Crear un objeto con todos los datos del formulario
+            formData = {
+                tipo, subtipo, acomodo, precioUnit, cantidad,
+                largoGral, anchoGral, grosorGral,
+                tablaSuperior: tablaSuperiorData,
+                cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
+                cantidadB, tipoB, distB, largoB, anchoB, grosorB, distBar
+            };
+        } else if (tipoB === 'Corrido') {
+            // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
+            if (!largoGral || !anchoGral || !grosorGral || 
+                !cantidadTI || !largoTI || !anchoTI || !grosorTI ||
+                !cantidadB || !largoB || !anchoB || !grosorB) {
+                        
+                alert('Por favor, complete todos los campos para agregar el producto.');
+                return;
+            }
+            
+            // Validar si hay campos inválidos
+            const campos = document.querySelectorAll('input');
+            if (!validarCamposInvalidos(campos)) {
+                alert('Corrige los errores antes de guardar.');
+                return;
+            }
+
+            // COSTO //
+            // Valores para calcular los costos
+            const costoBase = 500; // costo base tarima
+            const costoTablaSuperior = 100; // tabla superior
+            const costoTablaInferior = 80; // tabla inferior
+            const costoBarrote = 50; // tacón 
+
+            // Calcular precio unitario de la tarima
+            const desgloce1 = costoBase + costoTablaSuperior; // base + tabla superior
+            const desgloce2 = costoTablaInferior + costoBarrote; // tabla inferior + tacón 
+            const desgloce3 = costoBarrote + costoBarrote; // tacón chico + tablas de carga
+
+            const precioUnit = desgloce1 + desgloce2 + desgloce3;
+
+            // Crear un objeto con todos los datos del formulario
+            formData = {
+                tipo, subtipo, acomodo, precioUnit, cantidad,
+                largoGral, anchoGral, grosorGral,
+                tablaSuperior: tablaSuperiorData,
+                cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
+                cantidadB, tipoB, largoB, anchoB, grosorB, distBar
+            };
         }
-        
-        // Validar si hay campos inválidos
-        const campos = document.querySelectorAll('input');
-        if (!validarCamposInvalidos(campos)) {
-            alert('Corrige los errores antes de guardar.');
-            return;
-        }
-
-        // COSTO //
-        // Valores para calcular los costos
-        const costoBase = 500; // costo base tarima
-        const costoTablaSuperior = 100; // tabla superior
-        const costoTablaInferior = 80; // tabla inferior
-        const costoBarrote = 50; // tacón 
-
-        // Calcular precio unitario de la tarima
-        const desgloce1 = costoBase + costoTablaSuperior; // base + tabla superior
-        const desgloce2 = costoTablaInferior + costoBarrote; // tabla inferior + tacón 
-        const desgloce3 = costoBarrote + costoBarrote; // tacón chico + tablas de carga
-
-        const precioUnit = desgloce1 + desgloce2 + desgloce3;
-
-        // Crear un objeto con todos los datos del formulario
-        formData = {
-            tipo, subtipo, acomodo, precioUnit, cantidad,
-            largoGral, anchoGral, grosorGral,
-            tablaSuperior: tablaSuperiorData,
-            cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
-            cantidadB, tipoB, largoB, anchoB, grosorB, distBar
-        };
 
         // Agregar el objeto creado al carrito
         carrito.push(formData);
@@ -191,7 +234,6 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
             });
         }
 
-        const distribucionTA = document.getElementById('distribucionTA').value; 
         const cantidadTAL = parseInt(document.getElementById('cantidadTAL').value);
         const largoTAL = parseFloat(document.getElementById('largoTAL').value);
         const anchoTAL = parseFloat(document.getElementById('anchoTAL').value);
@@ -202,116 +244,74 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         const anchoTC = parseFloat(document.getElementById('anchoTC').value);
         const grosorTC = parseFloat(document.getElementById('grosorTC').value);
 
-        if (distribucionTA === 'Estándar') {
-            const cantidadTAC = parseInt(document.getElementById('cantidadTAC').value);
-            const largoTAC = parseFloat(document.getElementById('largoTAC').value);
-            const anchoTAC = parseFloat(document.getElementById('anchoTAC').value);
-            const grosorTAC = parseFloat(document.getElementById('grosorTAC').value);
+        const cantidadTAC = parseInt(document.getElementById('cantidadTAC').value);
+        const largoTAC = parseFloat(document.getElementById('largoTAC').value);
+        const anchoTAC = parseFloat(document.getElementById('anchoTAC').value);
+        const grosorTAC = parseFloat(document.getElementById('grosorTAC').value);
 
-            // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
-            // Verificar si algún campo está vacío
-            if (!largoGral || !anchoGral || !grosorGral ||
-                !cantidadTAL || !largoTAL || !anchoTAL || !grosorTAL ||
-                !cantidadTAC || !largoTAC || !anchoTAC || !grosorTAC ||
-                !cantidadTC || !largoTC || !anchoTC || !grosorTC) {
+        // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
+        // Verificar si algún campo está vacío
+        if (!largoGral || !anchoGral || !grosorGral ||
+            !cantidadTAL || !largoTAL || !anchoTAL || !grosorTAL ||
+            !cantidadTAC || !largoTAC || !anchoTAC || !grosorTAC ||
+            !cantidadTC || !largoTC || !anchoTC || !grosorTC) {
                     
-                // Si algún campo está vacío, mostrar mensaje de error
-                alert('Por favor, complete todos los campos para agregar el producto.');
-                return; // Detener la ejecución y no continuar
-            } 
-            // Validar si hay campos inválidos
-            const campos = document.querySelectorAll('input');
-            if (!validarCamposInvalidos(campos)) {
-                alert('Corrige los errores antes de guardar.');
-                return; 
-            }
-
-            // COSTO //
-            // Valores para calcular los costos
-            const costoBase = 500; // costo base tarima
-            const costoTablaSuperior = 100; // tabla superior
-            const costoTablaInferior = 80; // tabla inferior
-            const costoTacon = 50; // tacón 
-            const costoCarga = 70; // tablas de carga
-
-            // Calcular precio unitario de la tarima
-            const desgloce1 = costoBase + costoTablaSuperior; // base + tabla superior
-            const desgloce2 = costoTablaInferior + costoTacon; // tabla inferior + tacón 
-            const desgloce3 = costoTacon + costoCarga; // tacón chico + tablas de carga
-
-            const precioUnit = desgloce1 + desgloce2 + desgloce3;
-
-            // Crear un objeto con todos los datos del formulario
-            formData = {
-                tipo, subtipo, acomodo, precioUnit, cantidad,
-                largoGral, anchoGral, grosorGral,
-                tablaSuperior: tablaSuperiorData,
-                tablaInferior: tablaInferiorData,
-                cantidadTAL, largoTAL, anchoTAL, grosorTAL, distribucionTA,
-                cantidadTAC, largoTAC, anchoTAC, grosorTAC,
-                cantidadTC, largoTC, anchoTC, grosorTC
-            };
-
-            // Agregar el objeto creado al carrito
-            carrito.push(formData);
-            // Guardar el carrito en localStorage
-            localStorage.setItem("carrito", JSON.stringify(carrito));
-            // Limpiar los campos
-            location.reload();
-            // Mostrar alerta de agregado correctamente
-            alert('Datos guardados correctamente.');
-        } else {
-            // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
-            // Verificar si algún campo está vacío
-            if (!largoGral || !anchoGral || !grosorGral ||
-                !cantidadTAL || !largoTAL || !anchoTAL || !grosorTAL ||
-                !cantidadTC || !largoTC || !anchoTC || !grosorTC) {
-                    
-                // Si algún campo está vacío, mostrar mensaje de error
-                alert('Por favor, complete todos los campos para agregar el producto.');
-                return; // Detener la ejecución y no continuar
-            } 
-            // Validar si hay campos inválidos
-            const campos = document.querySelectorAll('input');
-            if (!validarCamposInvalidos(campos)) {
-                alert('Corrige los errores antes de guardar.');
-                return; 
-            }
-
-            // COSTO //
-            // Valores para calcular los costos
-            const costoBase = 500; // costo base tarima
-            const costoTablaSuperior = 100; // tabla superior
-            const costoTablaInferior = 80; // tabla inferior
-            const costoTacon = 50; // tacón 
-            const costoCarga = 70; // tablas de carga
-
-            // Calcular precio unitario de la tarima
-            const desgloce1 = costoBase + costoTablaSuperior; // base + tabla superior
-            const desgloce2 = costoTablaInferior + costoTacon; // tabla inferior + tacón 
-            const desgloce3 = costoTacon + costoCarga; // tacón chico + tablas de carga
-
-            const precioUnit = desgloce1 + desgloce2 + desgloce3;
-
-            // Crear un objeto con todos los datos del formulario
-            formData = {
-                tipo, subtipo, acomodo, precioUnit, cantidad,
-                largoGral, anchoGral, grosorGral,
-                tablaSuperior: tablaSuperiorData,
-                tablaInferior: tablaInferiorData,
-                cantidadTAL, largoTAL, anchoTAL, grosorTAL, distribucionTA,
-                cantidadTC, largoTC, anchoTC, grosorTC
-            };
-
-            // Agregar el objeto creado al carrito
-            carrito.push(formData);
-            // Guardar el carrito en localStorage
-            localStorage.setItem("carrito", JSON.stringify(carrito));
-            // Limpiar los campos
-            location.reload();
-            // Mostrar alerta de agregado correctamente
-            alert('Datos guardados correctamente.');
+            // Si algún campo está vacío, mostrar mensaje de error
+            alert('Por favor, complete todos los campos para agregar el producto.');
+            return; // Detener la ejecución y no continuar
+        } 
+        // Validar si hay campos inválidos
+        const campos = document.querySelectorAll('input');
+        if (!validarCamposInvalidos(campos)) {
+            alert('Corrige los errores antes de guardar.');
+            return; 
         }
+
+        // COSTO //
+        // Valores para calcular los costos
+        const costoBase = 500; // costo base tarima
+        const costoTablaSuperior = 100; // tabla superior
+        const costoTablaInferior = 80; // tabla inferior
+        const costoTacon = 50; // tacón 
+        const costoCarga = 70; // tablas de carga
+
+        // Calcular precio unitario de la tarima
+        const desgloce1 = costoBase + costoTablaSuperior; // base + tabla superior
+        const desgloce2 = costoTablaInferior + costoTacon; // tabla inferior + tacón 
+        const desgloce3 = costoTacon + costoCarga; // tacón chico + tablas de carga
+
+        const precioUnit = desgloce1 + desgloce2 + desgloce3;
+
+        // Crear un objeto con todos los datos del formulario
+        formData = {
+            tipo, subtipo, acomodo, precioUnit, cantidad,
+            largoGral, anchoGral, grosorGral,
+            tablaSuperior: tablaSuperiorData,
+            tablaInferior: tablaInferiorData,
+            cantidadTAL, largoTAL, anchoTAL, grosorTAL, 
+            cantidadTAC, largoTAC, anchoTAC, grosorTAC,
+            cantidadTC, largoTC, anchoTC, grosorTC
+        };
+
+        // Agregar el objeto creado al carrito
+        carrito.push(formData);
+        // Guardar el carrito en localStorage
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        // Limpiar los campos
+        location.reload();
+        // Mostrar alerta de agregado correctamente
+        alert('Datos guardados correctamente.');
+        
+
+        // Agregar el objeto creado al carrito
+        carrito.push(formData);
+        // Guardar el carrito en localStorage
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        // Limpiar los campos
+        location.reload();
+        // Mostrar alerta de agregado correctamente
+        alert('Datos guardados correctamente.');
+        
     }
 });
 

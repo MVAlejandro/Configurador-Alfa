@@ -116,8 +116,6 @@ export function dibujarTacon () {
         const anchoTI2 = parseFloat(document.getElementById('anchoTI-2').value);
         const grosorTI2 = parseFloat(document.getElementById('grosorTI-2').value);
 
-        const distribucionTA = document.getElementById('distribucionTA').value;
-
         const largoTAL = parseFloat(document.getElementById('largoTAL').value);
         const anchoTAL = parseFloat(document.getElementById('anchoTAL').value);
         const grosorTAL = parseFloat(document.getElementById('grosorTAL').value);
@@ -208,21 +206,13 @@ export function dibujarTacon () {
 
             // Tacones
         const xTADer = offsetX3 + largoGral * escala2 - (largoTAL * escala2);
-        if (distribucionTA === 'Estándar') {
-            // Tacones colocados horizontalmente en 3
-            const xTA = offsetX3 + (largoGral * escala2) / 2 - (largoTAC * escala2) / 2;
-            const yTA = offsetY3 + (grosorTS * escala2) + (grosorTC * escala2);
+        // Tacones colocados horizontalmente en 3
+        const xTA = offsetX3 + (largoGral * escala2) / 2 - (largoTAC * escala2) / 2;
+        const yTA = offsetY3 + (grosorTS * escala2) + (grosorTC * escala2);
 
-            drawFullRect(offsetX3, yTA, (largoTAL * escala2), (grosorTAL * escala2), "#787878");
-            drawFullRect(xTA, yTA, (largoTAC * escala2), (grosorTAC * escala2), "#787878");
-            drawFullRect(xTADer, yTA, (largoTAL * escala2), (grosorTAL* escala2), "#787878");
-        } else if (distribucionTA === 'Lateral'){
-            // Tacones colocados en los laterales
-            const yTA = offsetY3 + (grosorTS * escala2) + (grosorTC * escala2); 
-
-            drawFullRect(offsetX3, yTA, (largoTAL * escala2), (grosorTAL * escala2), "#787878");
-            drawFullRect(xTADer, yTA, (largoTAL * escala2), (grosorTAL * escala2), "#787878");
-        } 
+        drawFullRect(offsetX3, yTA, (largoTAL * escala2), (grosorTAL * escala2), "#787878");
+        drawFullRect(xTA, yTA, (largoTAC * escala2), (grosorTAC * escala2), "#787878");
+        drawFullRect(xTADer, yTA, (largoTAL * escala2), (grosorTAL* escala2), "#787878");
 
             // Tablas inferiores
         const xTI = offsetX3 + ((largoGral * escala2) - (largoTI2 * escala2)) / 2; // Coordenadas centradas

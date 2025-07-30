@@ -5,7 +5,6 @@ import {inicializarValidacionesB, inicializarValidacionesT} from './validaciones
 import {InsertarFormularioBarrote} from './formularios/barrote_form.js';
 import {InsertarFormularioTacon} from './formularios/tacon_form.js';
 import {insertarFormularioTSuperior} from './formularios/tablaSup_form.js';
-import {insertarFormularioTaconesVar} from './formularios/tacones_form.js';
 // Importar funciones de los planos
 import {dibujarBarrote} from './planos/plano_barrote.js';
 import {dibujarBarrote2} from './planos/plano_barrote2.js';
@@ -31,11 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
             op_tamaño.innerHTML =
                 `<div class="d-flex align-items-center">
                     <div class="me-2 text-center">
-                        <input type="number" id="largoGral" class="form-control no-arrows gral" placeholder="Largo">
+                        <input type="number" id="anchoGral" class="form-control no-arrows gral" placeholder="Ancho">
                     </div>
                     <span class="mx-2">x</span>
                     <div class="me-2 text-center">
-                        <input type="number" id="anchoGral" class="form-control no-arrows gral" placeholder="Ancho">
+                        <input type="number" id="largoGral" class="form-control no-arrows gral" placeholder="Largo">
                     </div>
                     <span class="mx-2">x</span>
                     <div class="text-center">
@@ -55,13 +54,13 @@ document.addEventListener('DOMContentLoaded', function () {
             op_tamaño.innerHTML =
                 `<div class="d-flex align-items-center">
                     <div class="me-2 text-center">
-                        <input type="number" id="largoGral" class="form-control no-arrows gral" value="48" data-rel="largo_gral" placeholder="Largo">
-                        <small class="text-muted">Largo</small>
+                        <input type="number" id="anchoGral" class="form-control no-arrows gral" value="40" data-rel="ancho_gral" placeholder="Ancho">
+                        <small class="text-muted">Ancho</small>
                     </div>
                     <span class="mx-2">x</span>
                     <div class="me-2 text-center">
-                        <input type="number" id="anchoGral" class="form-control no-arrows gral" value="40" data-rel="ancho_gral" placeholder="Ancho">
-                        <small class="text-muted">Ancho</small>
+                        <input type="number" id="largoGral" class="form-control no-arrows gral" value="48" data-rel="largo_gral" placeholder="Largo">
+                        <small class="text-muted">Largo</small>
                     </div>
                     <span class="mx-2">x</span>
                     <div class="text-center">
@@ -75,6 +74,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Si se elige variación de grosor en Tabla superior mostrar un formulario distinto
             insertarFormularioTSuperior();
+
+            const tipoB = document.getElementById('tipoB');
+            const inicio_saque = document.getElementById('inicio_saque');
+
+            tipoB.addEventListener('change', function () {
+                if (tipoB.value === 'Corrido'){
+                    inicio_saque.innerHTML = ``;
+                } else if (tipoB.value === 'Con saque') {
+                    inicio_saque.innerHTML = 
+                    `<div class="row mb-3">
+                        <div class="col-md-4 text-end">
+                            <label for="distB" class="col-form-label">Inicio saque:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" value="6" id="distB" class="form-control nb no-arrows">
+                            <p class="error invalid-feedback" id="error-distB" style="color: red;"></p>
+                        </div>  
+                    </div>`;
+                }
+            });
 
             // Si se elige el arreglo especial, mostrar campo para describirlo
             const arreglo_especial = document.getElementById('arreglo_especial');
@@ -125,13 +144,13 @@ document.addEventListener('DOMContentLoaded', function () {
             op_tamaño.innerHTML =
                 `<div class="d-flex align-items-center">
                     <div class="me-2 text-center">
-                        <input type="number" id="largoGral" class="form-control no-arrows gral" value="48" data-rel="largo_gral" placeholder="Largo">
-                        <small class="text-muted">Largo</small>
+                        <input type="number" id="anchoGral" class="form-control no-arrows gral" value="40" data-rel="ancho_gral" placeholder="Ancho">
+                        <small class="text-muted">Ancho</small>
                     </div>
                     <span class="mx-2">x</span>
                     <div class="me-2 text-center">
-                        <input type="number" id="anchoGral" class="form-control no-arrows gral" value="40" data-rel="ancho_gral" placeholder="Ancho">
-                        <small class="text-muted">Ancho</small>
+                        <input type="number" id="largoGral" class="form-control no-arrows gral" value="48" data-rel="largo_gral" placeholder="Largo">
+                        <small class="text-muted">Largo</small>
                     </div>
                     <span class="mx-2">x</span>
                     <div class="text-center">
@@ -145,9 +164,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Si se elige variación de grosor en Tabla superior mostrar un formulario distinto
             insertarFormularioTSuperior();
-
-            // Si se elige una distribución estándar de tacones mostrar formulario distinto
-            insertarFormularioTaconesVar();
 
             plano_tarima.innerHTML= `<canvas id="plano_tacon" width="700" height="400" style="border: 1px solid black"></canvas>`;
 
