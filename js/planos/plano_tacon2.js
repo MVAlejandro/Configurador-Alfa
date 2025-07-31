@@ -115,10 +115,12 @@ export function dibujarTacon2 () {
         const anchoTI2 = parseFloat(document.getElementById('anchoTI-2').value);
         const grosorTI2 = parseFloat(document.getElementById('grosorTI-2').value);
 
+        const cantidadTAL = parseFloat(document.getElementById('cantidadTAL').value);
         const largoTAL = parseFloat(document.getElementById('largoTAL').value);
         const anchoTAL = parseFloat(document.getElementById('anchoTAL').value);
         const grosorTAL = parseFloat(document.getElementById('grosorTAL').value);
 
+        const cantidadTAC = parseFloat(document.getElementById('cantidadTAC').value);
         const largoTAC = parseFloat(document.getElementById('largoTAC').value);
         const anchoTAC = parseFloat(document.getElementById('anchoTAC').value);
         const grosorTAC = parseFloat(document.getElementById('grosorTAC').value);
@@ -184,6 +186,39 @@ export function dibujarTacon2 () {
             }
         }
 
+        // Vista lateral
+        const offsetX4 = xSup - ((grosorGral*escala) / 2);
+        const offsetY4 = offsetY1;
+
+        // drawLineRect(offsetX4, offsetY4, (grosorGral*escala), (anchoGral*escala));
+        drawCotaLineH(offsetX4, offsetY4-(2*escala), offsetX4+(grosorGral*escala), offsetY4-(2*escala), 1*escala)
+        drawTextH(grosorGral, offsetX4, offsetY4-(2.7*escala), offsetX4+(grosorGral*escala))
+
+            // Dibujar Tablas superiores
+        drawFullRect(offsetX4, offsetY4, (grosorTS*escala), (largoTS*escala), "#e5e5e5")
+
+            // Dibujar Tablas de carga
+        for (let i = 0; i < cantidadTC; i++) {
+            const x = offsetX4+(grosorTS*escala);
+            const y = offsetY4 + i * ((anchoTC * escala) + (separacionTC * escala));
+            drawFullRect(x, y, (grosorTC * escala), (anchoTC * escala), "#787878");
+        }
+
+            // Dibujar Tacones
+        if ((cantidadTAL === 6) || (cantidadTAC === 3)) {
+            const x = offsetX4+((grosorTS+grosorTC)*escala);
+            drawFullRect(x, offsetY4, (grosorTAL * escala), (anchoTAL * escala), "#787878");
+            drawFullRect(x, offsetY4+((anchoTAL * escala) + (separacionTC * escala)), (grosorTAL * escala), (anchoTAL * escala), "#787878");
+            drawFullRect(x, offsetY4+2*((anchoTAL * escala) + (separacionTC * escala)), (grosorTAL * escala), (anchoTAL * escala), "#787878");
+        } else {
+            const x = offsetX4+((grosorTS+grosorTC)*escala);
+            drawFullRect(x, offsetY4, (grosorTAL * escala), (anchoTAL * escala), "#787878");
+            drawFullRect(x, offsetY4+2*((anchoTAL * escala) + (separacionTC * escala)), (grosorTAL * escala), (anchoTAL * escala), "#787878");
+        }
+
+            // Dibujar Tablas inferiores
+        drawFullRect(offsetX4+((grosorTS+grosorTC+grosorTAL)*escala), offsetY4, (grosorTI*escala), (largoTI*escala), "#c0cbff")
+
         // Vista inferior
         const offsetX2 = (xInf - (largoGral * escala)) / 2;
         const offsetY2 = (yInf - (anchoGral * escala)) / 2;
@@ -223,7 +258,7 @@ export function dibujarTacon2 () {
                 }
             }
         }
-            // Tablas inferiores 
+            // Dibujar Tablas inferiores 
         const xCentro = offsetX2 + (largoGral * escala) / 2 - (largoTI2 * escala) / 2;
         const yCentro = offsetY2 + (anchoGral * escala) / 2 - (anchoTI2 * escala) / 2;
 
@@ -236,7 +271,7 @@ export function dibujarTacon2 () {
         // Tabla central
         drawFullRect(xCentro, yCentro, (largoTI2 * escala), (anchoTI2 * escala), "#c0cbff");
         
-        // Vista lateral
+        // Vista frontal
         const escala2 = canvasWidth*0.0093;
         const offsetX3 = (xLat - (largoGral * escala2)) / 2;
         const offsetY3 = (yLat - (grosorGral * escala2)) / 2;
@@ -281,12 +316,12 @@ export function dibujarTacon2 () {
             }
         }
 
-            // Tablas de carga
+            // Dibujar Tablas de carga
         const xTC = offsetX3 + ((largoGral * escala2) - (largoTC * escala2)) / 2; // Coordenadas centradas
         const yTC = offsetY3 + (grosorTS * escala2);
         drawFullRect(xTC, yTC, (largoTC * escala2), (grosorTC * escala2), "#787878");
 
-            // Tacones
+            // Dibujar Tacones
         const xTADer = offsetX3 + largoGral * escala2 - (largoTAL * escala2);
         // Tacones colocados horizontalmente en 3
         const xTA = offsetX3 + (largoGral * escala2) / 2 - (largoTAC * escala2) / 2;
@@ -296,7 +331,7 @@ export function dibujarTacon2 () {
         drawFullRect(xTA, yTA, (largoTAC * escala2), (grosorTAC * escala2), "#787878");
         drawFullRect(xTADer, yTA, (largoTAL * escala2), (grosorTAL* escala2), "#787878");
 
-            // Tablas inferiores
+            // Dibujar Tablas inferiores
         const xTI = offsetX3 + ((largoGral * escala2) - (largoTI2 * escala2)) / 2; // Coordenadas centradas
         const xTIDer = offsetX3 + largoGral * escala2 - (anchoTI * escala2);
         const yTI = offsetY3 + (grosorTS * escala2) + (grosorTC * escala2) + (grosorTAL * escala2);

@@ -18,7 +18,7 @@ export function dibujarBarrote() {
         const xLat = canvasWidth;
         const yLat = canvasHeight * 1.625;
     
-        // Volver a trazar la guía
+        // //Volver a trazar la guía
         // ctx.beginPath();
         // ctx.moveTo(xSup, 0);
         // ctx.lineTo(xSup, canvasHeight);
@@ -142,7 +142,7 @@ export function dibujarBarrote() {
         drawCotaLineV(offsetX1-(3*escala),offsetY1, offsetX1-(3*escala), offsetY1+(anchoGral*escala), 1*escala)
         drawTextV(anchoGral, offsetX1-(4*escala), offsetY1, offsetY1+(anchoGral*escala));
 
-            // Barrotes
+            // Dibujar Barrotes
         if (distBar === 'Estándar') {
             const y = offsetY1+anchoGral*escala/2 // Centro y del contenedor
             if (cantidadB === 3) {
@@ -181,6 +181,53 @@ export function dibujarBarrote() {
             drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#e5e5e5");
         }
 
+        // Vista lateral
+        const offsetX4 = xSup - ((grosorGral*escala) / 2);
+        const offsetY4 = offsetY1;
+
+        // drawLineRect(offsetX4, offsetY4, (grosorGral*escala), (anchoGral*escala));
+        drawCotaLineH(offsetX4, offsetY4-(2*escala), offsetX4+(grosorGral*escala), offsetY4-(2*escala), 1*escala)
+        drawTextH(grosorGral, offsetX4, offsetY4-(2.7*escala), offsetX4+(grosorGral*escala))
+
+            // Dibujar Tablas superiores
+        drawFullRect(offsetX4, offsetY4, (grosorTS*escala), (largoTS*escala), "#e5e5e5")
+
+            // Dibujar Barrotes
+        if (distBar === 'Estándar') {
+            const x = offsetX4+(grosorTS*escala);
+            const y = offsetY4+anchoGral*escala/2 // Centro y del contenedor
+            if (cantidadB === 3) {
+                drawFullRect(x, offsetY4, (anchoB * escala), (grosorB * escala), "#787878"); 
+                drawFullRect(x, y-((grosorB*escala)/2), (anchoB * escala), (grosorB * escala), "#787878");
+                drawFullRect(x, offsetY4 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (anchoB * escala), (grosorB * escala), "#787878"); 
+            } else if (cantidadB === 4) {
+                drawFullRect(x, offsetY4, (anchoB * escala), (grosorB * escala), "#787878"); 
+                drawFullRect(x, y-(3*escala), (anchoB * escala), (grosorB * escala), "#787878");
+                drawFullRect(x, y+(3*escala), (anchoB * escala), (grosorB * escala), "#787878");
+                drawFullRect(x, offsetY4 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (anchoB * escala), (grosorB * escala), "#787878");
+            } else {
+                const alto = grosorB * escala;
+                const separacion = 6 * escala;
+                drawFullRect(x, offsetY4, (anchoB * escala), alto, "#787878"); 
+                const y2 = y - (3 * alto / 2) - separacion;
+                drawFullRect(x, y2, anchoB * escala, alto, "#787878");
+                const y3 = y - alto / 2;
+                drawFullRect(x, y3, anchoB * escala, alto, "#787878");
+                const y4 = y + alto / 2 + separacion;
+                drawFullRect(x, y4, anchoB * escala, alto, "#787878");
+                drawFullRect(x, offsetY4 + (cantidadB - 1) * ((alto) + (separacionB * escala)), (anchoB * escala), alto, "#787878");
+            }
+        } else {
+            for (let i = 0; i < cantidadB; i++) {
+                const x = offsetX4+(grosorTS*escala);
+                const y = offsetY4 + i * ((grosorB * escala) + (separacionB * escala));
+                drawFullRect(x, y, (anchoB * escala), (grosorB * escala), "#787878");
+            }
+        }
+
+            // Dibujar Tablas inferiores
+        drawFullRect(offsetX4+((grosorTS+anchoB)*escala), offsetY4, (grosorTI*escala), (largoTI*escala), "#ffc0c0")
+
         // Vista inferior
         const offsetX2 = (xInf - (largoGral*escala)) / 2;
         const offsetY2 = (yInf - (anchoGral*escala)) / 2;
@@ -194,7 +241,7 @@ export function dibujarBarrote() {
             drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#bdbdbd");
         }
 
-            // Barrotes
+            // Dibujar Barrotes
         if (distBar === 'Estándar') {
             const y = offsetY2+anchoGral*escala/2 // Centro y del contenedor
             if (cantidadB === 3) {
@@ -254,7 +301,7 @@ export function dibujarBarrote() {
             }
         }
 
-        // Vista lateral
+        // Vista frontal
         const escala2 = canvasWidth*0.0093;
         const offsetX3 = (xLat - (largoGral*escala2)) / 2;
         const offsetY3 = (yLat - (grosorGral*escala2)) / 2;

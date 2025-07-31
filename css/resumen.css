@@ -68,3 +68,20 @@ main {
 #texto_footer {
     color: white;
 }
+
+
+@media (max-width: 768px) {
+  #btn_regresar {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    margin-left: 16px !important;
+  }
+}
+   
+@media (max-width: 768px) {
+  #btn_siguiente {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    margin-right: 16px !important;
+  }
+}

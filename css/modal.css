@@ -43,3 +43,10 @@
 #logo_main {
     opacity: 0.7;
 }
+
+
+@media (max-width: 768px) {
+  #logo_modal {
+    display: none !important;
+  }
+}

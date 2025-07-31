@@ -12,7 +12,7 @@ function crearHeader(){
         `<nav id="nav_principal" class="navbar">
             <div class="container-fluid">
                 <a id="nav_logo" class="navbar-brand" href="#">
-                    <img src="./assets/Logo-Color-PNG-500x400-1.png" alt="Pallets Alfa logo" width="62px">
+                    <img src="./assets/Logo-Color-PNG-62x51.png" alt="Pallets Alfa logo">
                 </a>
             </div>
         </nav>`
@@ -25,7 +25,7 @@ function crearFooter(){
             <hr>
             <div class="row align-items-center">
                 <div id="iso_footer" class="col text-start">
-                    <img src="./assets/iso-9001-1536x476.png" alt="ISO 9001" width="120px">
+                    <img src="./assets/iso-9001-150x46.png" alt="ISO 9001" width="120px">
                 </div>
                 <div id="texto_footer" class="col text-end">
                     <p>Pallets Alfa Texcoco</p>

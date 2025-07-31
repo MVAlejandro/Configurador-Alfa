@@ -1,3 +1,5 @@
+// IMPORTACIÓN DE FUNCIONES EXTERNAS
+import {actualizarCampos, asociarActualizacion} from '../valores.js';
 
 export function insertarFormularioTSuperior () {
     const variacionTS = document.getElementById('variacionTS');
@@ -182,6 +184,9 @@ export function insertarFormularioTSuperior () {
                             </div>
                         </div>
                         <hr>`;
+
+            // Llamar a la función de asociación de datos
+            asociarActualizacion();
 
         }
     });

@@ -72,9 +72,9 @@ function abrirModalItem(formData) {
 
         // Insertar el modelo de tarima de barrote
         if (formData.tipo === 'Nueva') {
-            modelo.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes nueva" width="520px" class="d-block mx-auto">`;
+            modelo.innerHTML = `<img src="./assets/Tarima-con-barrote-nueva-520x357.png" alt="Tarima de barrotes nueva" class="d-block mx-auto img-fluid">`;
         } else {
-            modelo.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes reciclada" width="520px" class="d-block mx-auto">`;
+            modelo.innerHTML = `<img src="./assets/Tarima-con-barrote-nueva-520x357.png" alt="Tarima de barrotes reciclada" class="d-block mx-auto img-fluid">`;
         }
     // Insertar información TARIMA DE TACON
     } else if (formData.subtipo === 'Tacón') {
@@ -102,9 +102,9 @@ function abrirModalItem(formData) {
 
         // Insertar el modelo de tarima de tacón
         if (formData.tipo === 'Nueva') {
-            modelo.innerHTML = `<img src="./assets/Tarima-con-tacon-nueva.png" alt="Tarima de tacón nueva" width="520px" class="d-block mx-auto">`;
+            modelo.innerHTML = `<img src="./assets/Tarima-con-tacon-nueva-520x357.png" alt="Tarima de tacón nueva" class="d-block mx-auto img-fluid">`;
         } else {
-            modelo.innerHTML = `<img src="./assets/Tarima-de-Tacon-reciclada.jpg" alt="Tarima de tacón reciclada" width="520px" class="d-block mx-auto">`;
+            modelo.innerHTML = `<img src="./assets/Tarima-de-tacon-reciclada-520x357.jpg" alt="Tarima de tacón reciclada" class="d-block mx-auto img-fluid">`;
         }
     }
 

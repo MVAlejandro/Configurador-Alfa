@@ -65,13 +65,13 @@ carrito.forEach((formData, index) => {
             
             </div>
             <div class="col-sm-9">
-                <div class="row mb-2">
-                    <div class="col-9">
+                <div class="row">
+                    <div class="col-lg-9">
                         <p id="item${index + 1}_texto" class="item_lista">
                             Tarima de ${formData.subtipo}, ${formData.tipo} (${formData.largoGral}" x ${formData.anchoGral}" x ${formData.grosorGral}")
                         </p>
                     </div>
-                    <div class="col text-center">
+                    <div class="col mb-2 text-end">
                         <button type="button" class="btn btn-primary abrir-modal" data-bs-toggle="modal" data-bs-target="#modal_producto" data-index="${index}">
                             Detalles
                         </button>
@@ -83,7 +83,7 @@ carrito.forEach((formData, index) => {
                         <label for="item${index + 1}_cantidad" class="col-form-label me-3">Lote estimado:</label>
                         <input type="number" value="${formData.cantidad}" id="item${index + 1}_cantidad" class="form-control no-arrows text-center cantidad_producto w-25" placeholder="Cantidad">
                     </div>
-                    <div class="col d-flex justify-content-center align-items-end">
+                    <div class="col d-flex justify-content-end align-items-end me-2">
                         <p id="item${index + 1}_precio" class="costo text-center mb-2">
                             <strong>$${formData.precioUnit}</strong>
                         </p>
@@ -112,13 +112,13 @@ carrito.forEach((formData, index) => {
     // Asignar cada miniatura por item
     const miniatura_item = document.getElementById(`miniatura_item_${index + 1}`);
     if (formData.tipo === 'Nueva' && formData.subtipo === 'Barrote') {
-        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes nueva" width="110px">`;
+        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-barrote-nueva-520x357.png" alt="Tarima de barrotes nueva" width="110px">`;
     } else if (formData.tipo === 'Reciclada' && formData.subtipo === 'Barrote') {
-        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-Barrote-Nueva.png" alt="Tarima de barrotes reciclada" width="110px">`;
+        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-barrote-nueva-520x357.png" alt="Tarima de barrotes reciclada" width="110px">`;
     } else if (formData.tipo === 'Nueva' && formData.subtipo === 'Tacón') {
-        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-tacon-nueva.png" alt="Tarima de tacón nueva" width="110px">`;
+        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-tacon-nueva-520x357.png" alt="Tarima de tacón nueva" width="110px">`;
     } else if (formData.tipo === 'Reciclada' && formData.subtipo === 'Tacón') {
-        miniatura_item.innerHTML = `<img src="./assets/Tarima-de-Tacon-reciclada.jpg" alt="Tarima de tacón reciclada" width="110px">`;
+        miniatura_item.innerHTML = `<img src="./assets/Tarima-de-tacon-reciclada-520x357.jpg" alt="Tarima de tacón reciclada" width="110px">`;
     };
         
     // Agregar evento de abrir el modal a cada botón

@@ -239,7 +239,7 @@ export function InsertarFormularioTacon () {
                                             <label for="grosorTAL" class="col-form-label">Espesor:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="3" id="grosorTAL" class="form-control nb no-arrows">
+                                            <input type="number" value="3" id="grosorTAL" class="form-control nb no-arrows" data-rel="grosor_TA">
                                             <p class="error invalid-feedback" id="error-gTAL" style="color: red;"></p>
                                         </div>
                                     </div>
@@ -255,7 +255,6 @@ export function InsertarFormularioTacon () {
                                             <select id="cantidadTAC" class="form-select nb">
                                                 <option value="3">3</option>
                                                 <option value="2">2</option>
-                                                <option value="1">1</option>
                                             </select>
                                         </div>
                                     </div>
@@ -288,7 +287,7 @@ export function InsertarFormularioTacon () {
                                             <label for="grosorTAC" class="col-form-label">Espesor:</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="number" value="3" id="grosorTAC" class="form-control nb no-arrows">
+                                            <input type="number" value="3" id="grosorTAC" class="form-control nb no-arrows" data-rel="grosor_TA">
                                             <p class="error invalid-feedback" id="error-gTAC" style="color: red;"></p>
                                         </div>
                                     </div>

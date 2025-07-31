@@ -2,6 +2,7 @@
 // IMPORTACIÓN DE FUNCIONES EXTERNAS
 // Importar funciones de validación
 import {inicializarValidacionesB, inicializarValidacionesT} from './validaciones/validacionCampos.js';
+// Importar funciones de creación de formularios
 import {InsertarFormularioBarrote} from './formularios/barrote_form.js';
 import {InsertarFormularioTacon} from './formularios/tacon_form.js';
 import {insertarFormularioTSuperior} from './formularios/tablaSup_form.js';
@@ -10,8 +11,9 @@ import {dibujarBarrote} from './planos/plano_barrote.js';
 import {dibujarBarrote2} from './planos/plano_barrote2.js';
 import {dibujarTacon} from './planos/plano_tacon.js';
 import {dibujarTacon2} from './planos/plano_tacon2.js';
-//
+// Importar funciones de vinculación de campos
 import {actualizarCampos, asociarActualizacion} from './valores.js';
+import {sincronizarTI} from './valores.js';
 
 import {modalBarrote, modalTacon} from './formularios/modales_index.js'
 
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (subtipo.value === '1') {
             op_acomodo.innerHTML = ``;
             op_tamaño.innerHTML =
-                `<div class="d-flex align-items-center">
+                `<div class="d-flex align-items-center responsive-flex">
                     <div class="me-2 text-center">
                         <input type="number" id="anchoGral" class="form-control no-arrows gral" placeholder="Ancho">
                     </div>
@@ -44,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 </div>`;
             caracteristicas_tarima.innerHTML = ``;
-            plano_tarima.innerHTML = `<img src="./assets/Logo-Color-PNG-500x400-2.png" alt="Logo" id="logo_main" class="mt-4 img-fluid">`;
+            plano_tarima.innerHTML = `<img src="./assets/Logo-Letras-PNG-420x187.png" alt="Logo" id="logo_main" class="mt-4 img-fluid">`;
         } else if (subtipo.value === 'Barrote') {
             op_acomodo.innerHTML = 
                 `<p class="titulo_opcion mb-0 me-3">Acomodo: </p>
@@ -54,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </select>`;
 
             op_tamaño.innerHTML =
-                `<div class="d-flex align-items-center">
+                `<div class="d-flex align-items-center responsive-flex">
                     <div class="me-2 text-center">
                         <input type="number" id="anchoGral" class="form-control no-arrows gral" value="40" data-rel="ancho_gral" placeholder="Ancho">
                         <small class="text-muted">Ancho</small>
@@ -136,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </select>`;
 
             op_tamaño.innerHTML =
-                `<div class="d-flex align-items-center">
+                `<div class="d-flex align-items-center responsive-flex">
                     <div class="me-2 text-center">
                         <input type="number" id="anchoGral" class="form-control no-arrows gral" value="40" data-rel="ancho_gral" placeholder="Ancho">
                         <small class="text-muted">Ancho</small>
@@ -163,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Llamar a la función de asociación de datos
             asociarActualizacion();
+            sincronizarTI();
             
             const variacionTS = document.getElementById('variacionTS');
             dibujarTacon();
