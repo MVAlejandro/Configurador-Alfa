@@ -4,6 +4,13 @@ document.getElementById('btn_regresar').addEventListener('click', function () {
     window.location.href = './index.html';
 });
 
+// Recuperar los datos del localStorage e introducir el nombre del cliente
+const cliente = JSON.parse(localStorage.getItem("clienteActual"));
+console.log(cliente);
+
+const cliente_activo = document.getElementById('cliente_activo');
+cliente_activo.innerText = cliente.nombre;
+
 // Recuperar los datos del localStorage
 const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 console.log(carrito);
@@ -153,4 +160,9 @@ document.querySelectorAll('.cantidad_producto').forEach((input, index) => {
 
 // Calcular al iniciar por si ya hay cantidades
 actualizarCantidadTotal();
+
+// Crear evento al dar click en botón Siguiente
+document.getElementById('btn_siguiente').addEventListener('click', function () {
+    window.location.href = './orden.html';
+});
 

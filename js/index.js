@@ -8,6 +8,13 @@ document.getElementById('btn_regresar').addEventListener('click', function () {
     window.location.href = './cliente.html';
 });
 
+// Recuperar los datos del localStorage e introducir el nombre del cliente
+const cliente = JSON.parse(localStorage.getItem("clienteActual"));
+console.log(cliente);
+
+const cliente_activo = document.getElementById('cliente_activo');
+cliente_activo.innerText = cliente.nombre;
+
 // Declarar el arreglo para guardar los objetos, y recupera en caso de existir
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []; 
 // Declarar el objeto formData para después

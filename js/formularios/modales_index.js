@@ -217,7 +217,7 @@ export function modalTacon () {
                         <!-- Grosor -->
                         <div class="row mb-2">
                             <div class="offset-lg-1 col-lg-3">
-                                <label for="toleranciaTA3" class="col-form-label">Espesor:</label>
+                                <label for="toleranciaTA3" class="col-form-label">Altura:</label>
                             </div>
                             <div class="col-lg-6">
                                 <select id="toleranciaTA3" class="form-select" aria-label="Default select example">
