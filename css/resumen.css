@@ -26,8 +26,8 @@ main {
     padding: 10px   
 }
 
-#btn_resumen {
-    display: none;
+.nav {
+    display: none !important;
 }
 
 /*--- BARRA DE NAVEGACION SECUNDARIO ---*/

@@ -39,6 +39,10 @@
     list-style: none;
 }
 
+.tolerancia {
+    font-size: small;
+}
+
 /*--- Logo en pantalla por defecto ---*/
 #logo_main {
     opacity: 0.7;

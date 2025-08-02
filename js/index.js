@@ -4,8 +4,8 @@
 import {validarCamposInvalidos} from "./validaciones/validaBarrote.js"
 
 // Crear evento al dar click en botón Resumen
-document.getElementById('btn_resumen').addEventListener('click', function () {
-    window.location.href = './resumen.html';
+document.getElementById('btn_regresar').addEventListener('click', function () {
+    window.location.href = './cliente.html';
 });
 
 // Declarar el arreglo para guardar los objetos, y recupera en caso de existir
@@ -26,8 +26,13 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
     const acomodo = document.getElementById('acomodo').value;
         
     // Obtener los datos de las tablas compartidos entre ambos tipos de tarima
-    const tolerancia1 = document.getElementById('tolerancia1').value;
-    const tolerancia2 = document.getElementById('tolerancia2').value;
+    const toleranciaTS1 = document.getElementById('toleranciaTS1').value;
+    const toleranciaTS2 = document.getElementById('toleranciaTS2').value;
+    const toleranciaTS3 = document.getElementById('toleranciaTS3').value;
+
+    const toleranciaTI1 = document.getElementById('toleranciaTI1').value;
+    const toleranciaTI2 = document.getElementById('toleranciaTI2').value;
+    const toleranciaTI3 = document.getElementById('toleranciaTI3').value;
 
     const largoGral = parseFloat(document.getElementById('largoGral').value);
     const anchoGral = parseFloat(document.getElementById('anchoGral').value);
@@ -101,11 +106,15 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
     // Obtener los datos de las tablas dependiendo el tipo de tarima
     // TARIMA DE BARROTE
     if (subtipo === 'Barrote') {
-        const tolerancia3 = document.getElementById('tolerancia3').value;
+        const toleranciaB1 = document.getElementById('toleranciaB1').value;
+        const toleranciaB2 = document.getElementById('toleranciaB2').value;
+        const toleranciaB3 = document.getElementById('toleranciaB3').value;
         const toleranciasData = [];
 
         toleranciasData.push({
-            tolerancia1, tolerancia2, tolerancia3
+            toleranciaTS1, toleranciaTS2, toleranciaTS3,
+            toleranciaTI1, toleranciaTI2, toleranciaTI3,
+            toleranciaB1, toleranciaB2, toleranciaB3
         });
 
         const cantidadTI = parseInt(document.getElementById('cantidadTI').value);
@@ -228,12 +237,20 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
 
     // TARIMA DE TACON
     } else if (subtipo === 'Tacón'){
-        const tolerancia3 = document.getElementById('tolerancia3').value;
-        const tolerancia4 = document.getElementById('tolerancia4').value;
+        const toleranciaTA1 = document.getElementById('toleranciaTA1').value;
+        const toleranciaTA2 = document.getElementById('toleranciaTA2').value;
+        const toleranciaTA3 = document.getElementById('toleranciaTA3').value;
+
+        const toleranciaTC1 = document.getElementById('toleranciaTC1').value;
+        const toleranciaTC2 = document.getElementById('toleranciaTC2').value;
+        const toleranciaTC3 = document.getElementById('toleranciaTC3').value;
         const toleranciasData = [];
 
         toleranciasData.push({
-            tolerancia1, tolerancia2, tolerancia3, tolerancia4
+            toleranciaTS1, toleranciaTS2, toleranciaTS3,
+            toleranciaTI1, toleranciaTI2, toleranciaTI3,
+            toleranciaTA1, toleranciaTA2, toleranciaTA3,
+            toleranciaTC1, toleranciaTC2, toleranciaTC3
         });
 
         let tablaInferiorData = [];

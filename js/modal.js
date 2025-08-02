@@ -29,6 +29,12 @@ function crearElemListaSecMed(nombre, descripcion) {
     );
 }
 
+function crearElemListaTolerancia(valor1, valor2, valor3) {
+    lista_resumen.insertAdjacentHTML('beforeend', 
+        `<li class="tolerancia ms-2"><em>Tolerancia: La: +- ${valor1}, An: +- ${valor2}, Es: +- ${valor3}</em></li>`
+    );
+}
+
 // Función para llenar toda la información en el modal
 function abrirModalItem(formData) {
     // Limpiar contenedores antes de insertar la información
@@ -56,13 +62,16 @@ function abrirModalItem(formData) {
                 const titulo = formData.tablaSuperior.length > 1 ? `Tabla superior ${i + 1}` : 'Tabla superior';
                 crearElemListaPrin(titulo, tabla.cantidadTS, tabla.largoTS, tabla.anchoTS, tabla.grosorTS);
             });
-            crearElemListaSecMed('Separación', formData.tablaSuperior[0].separacionTS);
         }
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTS1, formData.tolerancias[0].toleranciaTS2, formData.tolerancias[0].toleranciaTS3);
+        crearElemListaSecMed('Separación', formData.tablaSuperior[0].separacionTS);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTI1, formData.tolerancias[0].toleranciaTI2, formData.tolerancias[0].toleranciaTI3);
         crearElemListaSec('Arreglo', formData.arregloTI);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Barrote', formData.cantidadB, formData.largoB, formData.anchoB, formData.grosorB);
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaB1, formData.tolerancias[0].toleranciaB2, formData.tolerancias[0].toleranciaB3);
         crearElemListaSec('Tipo', formData.tipoB);
 
         if (formData.tipoB === 'Con saque') {
@@ -85,8 +94,9 @@ function abrirModalItem(formData) {
                 const titulo = formData.tablaSuperior.length > 1 ? `Tabla superior ${i + 1}` : 'Tabla superior';
                 crearElemListaPrin(titulo, tabla.cantidadTS, tabla.largoTS, tabla.anchoTS, tabla.grosorTS);
             });
-            crearElemListaSecMed('Separación', formData.tablaSuperior[0].separacionTS);
         }
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTS1, formData.tolerancias[0].toleranciaTS2, formData.tolerancias[0].toleranciaTS3);
+        crearElemListaSecMed('Separación', formData.tablaSuperior[0].separacionTS);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         if (Array.isArray(formData.tablaInferior)) {
             formData.tablaInferior.forEach((tabla, i) => {
@@ -94,11 +104,14 @@ function abrirModalItem(formData) {
                 crearElemListaPrin(titulo, tabla.cantidadTI, tabla.largoTI, tabla.anchoTI, tabla.grosorTI);
             });
         }
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTI1, formData.tolerancias[0].toleranciaTI2, formData.tolerancias[0].toleranciaTI3);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Tacón lateral', formData.cantidadTAL, formData.largoTAL, formData.anchoTAL, formData.grosorTAL);
         crearElemListaPrin('Tacón central', formData.cantidadTAC, formData.largoTAC, formData.anchoTAC, formData.grosorTAC);
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTA1, formData.tolerancias[0].toleranciaTA2, formData.tolerancias[0].toleranciaTA3);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Tablas de carga', formData.cantidadTC, formData.largoTC, formData.anchoTC, formData.grosorTC);
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTC1, formData.tolerancias[0].toleranciaTC2, formData.tolerancias[0].toleranciaTC3);
 
         // Insertar el modelo de tarima de tacón
         if (formData.tipo === 'Nueva') {

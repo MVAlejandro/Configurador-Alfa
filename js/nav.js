@@ -14,6 +14,11 @@ function crearHeader(){
                 <a id="nav_logo" class="navbar-brand" href="#">
                     <img src="./assets/Logo-Color-PNG-62x51.png" alt="Pallets Alfa logo">
                 </a>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item nav-op" id="nav-op1">
+                        <a style="color: #FFF;" class="nav-link" href="./resumen.html">Resumen</a>
+                    </li>
+                </ul>
             </div>
         </nav>`
     );

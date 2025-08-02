@@ -15,7 +15,7 @@ import {dibujarTacon2} from './planos/plano_tacon2.js';
 import {actualizarCampos, asociarActualizacion} from './valores.js';
 import {sincronizarTI} from './valores.js';
 
-import {modalBarrote, modalTacon} from './formularios/modales_index.js'
+import {modalGral, modalBarrote, modalTacon} from './formularios/modales_index.js'
 
 // MOSTRAR EL FORMULARIO DE ACUERDO AL SUBTIPO DE TARIMA
 // Identificar el subtipo y el contenedor principal
@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>`;
             caracteristicas_tarima.innerHTML = ``;
             plano_tarima.innerHTML = `<img src="./assets/Logo-Letras-PNG-420x187.png" alt="Logo" id="logo_main" class="mt-4 img-fluid">`;
+            const modal_form = document.getElementById('modal_form');
+            modal_form.innerHTML = ``;
         } else if (subtipo.value === 'Barrote') {
             op_acomodo.innerHTML = 
                 `<p class="titulo_opcion mb-0 me-3">Acomodo: </p>
@@ -127,7 +129,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 inicializarValidacionesB();
             });
 
-            modalBarrote();
+            modalGral()
+            modalBarrote()
             
         } else if (subtipo.value === 'Tacón') {
             op_acomodo.innerHTML = 
@@ -184,6 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 inicializarValidacionesT();
             });
 
+            modalGral()
             modalTacon();
         };
     });

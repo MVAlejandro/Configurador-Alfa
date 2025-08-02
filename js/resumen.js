@@ -56,7 +56,6 @@ function actualizarCantidadTotal() {
 
 // Función para generar los elementos
 carrito.forEach((formData, index) => {
-    console.log(formData);
     const item = 
     `<div id="item_container_${index + 1}" class="card-body border mb-3">
         <button id="btn_eliminar_${index + 1}" type="button" class="btn-close" aria-label="Close"></button>
