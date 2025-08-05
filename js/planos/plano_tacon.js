@@ -18,7 +18,7 @@ export function dibujarTacon () {
         const xLat = canvasWidth;
         const yLat = canvasHeight * 1.625;
     
-        // // Volver a trazar la guía
+        // Volver a trazar la guía
         // ctx.beginPath();
         // ctx.moveTo(xSup, 0);
         // ctx.lineTo(xSup, canvasHeight);
@@ -105,13 +105,12 @@ export function dibujarTacon () {
         const largoTS = parseFloat(document.getElementById('largoTS-1').value);
         const anchoTS = parseFloat(document.getElementById('anchoTS-1').value);
         const grosorTS = parseFloat(document.getElementById('grosorTS-1').value);
+        const variacionTS = document.getElementById('variacionTS').value;
 
-        const cantidadTI = parseFloat(document.getElementById('cantidadTI-1').value);
         const largoTI = parseFloat(document.getElementById('largoTI-1').value);
         const anchoTI = parseFloat(document.getElementById('anchoTI-1').value);
         const grosorTI = parseFloat(document.getElementById('grosorTI-1').value);
 
-        const cantidadTI2 = parseFloat(document.getElementById('cantidadTI-2').value);
         const largoTI2 = parseFloat(document.getElementById('largoTI-2').value);
         const anchoTI2 = parseFloat(document.getElementById('anchoTI-2').value);
         const grosorTI2 = parseFloat(document.getElementById('grosorTI-2').value);
@@ -152,11 +151,39 @@ export function dibujarTacon () {
             const y = offsetY1 + i * ((anchoTC * escala) + (separacionTC * escala));
             drawFullRect(x, y, (largoTC * escala), (anchoTC * escala), "#787878");
         }
+
             // Dibujar Tablas superiores
-        for (let i = 0; i < cantidadTS; i++) {
-            const x = offsetX1 + i * ((anchoTS * escala) + (separacionTS * escala));
-            const y = offsetY1;
-            drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#e5e5e5");
+        if (variacionTS === 'Único') {
+            for (let i = 0; i < cantidadTS; i++) {
+                const x = offsetX1 + i * ((anchoTS * escala) + (separacionTS * escala));
+                const y = offsetY1;
+                drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#e5e5e5");
+            }
+        } else if (variacionTS === 'Variable') {
+            const cantidadTS2 = parseFloat(document.getElementById('cantidadTS-2').value);
+            const largoTS2 = parseFloat(document.getElementById('largoTS-2').value);
+            const anchoTS2 = parseFloat(document.getElementById('anchoTS-2').value);
+            const grosorTS2 = parseFloat(document.getElementById('grosorTS-2').value);
+
+            let separacionTS2 = ((largoGral - (anchoTS2 * cantidadTS2)) / (cantidadTS2 - 1)).toFixed(2)
+
+            // Tabla Superior 2
+            for (let i = 0; i < cantidadTS2; i++) {
+                const x = offsetX1 + i * ((anchoTS2 * escala) + (separacionTS2 * escala));
+                const y = offsetY1;
+                drawFullRect(x, y, (anchoTS2 * escala), (largoTS2 * escala), "#e5e5e5");
+            }
+            // Tabla superior 1
+            let separacionTS1 = ((separacionTS2 - (anchoTS * cantidadTS/(cantidadTS2-1))) / ((cantidadTS/(cantidadTS2-1)) + 1)).toFixed(2)
+            
+            for (let j = 0; j < cantidadTS2 - 1; j++) {
+                let xTS1 = offsetX1 + ((anchoTS2 * escala) + (separacionTS1 * escala)) + j * ((anchoTS2 * escala) + (separacionTS2 * escala)); 
+                for (let i = 0; i < cantidadTS / (cantidadTS2 - 1); i++) {
+                    let x = xTS1 + i * ((anchoTS * escala) + (separacionTS1 * escala)); 
+                    let y = offsetY1;
+                    drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#e5e5e5");
+                }
+            }
         }
 
         // Vista lateral
@@ -164,8 +191,8 @@ export function dibujarTacon () {
         const offsetY4 = offsetY1;
 
         // drawLineRect(offsetX4, offsetY4, (grosorGral*escala), (anchoGral*escala));
-        drawCotaLineH(offsetX4, offsetY4-(2*escala), offsetX4+(grosorGral*escala), offsetY4-(2*escala), 1*escala)
-        drawTextH(grosorGral, offsetX4, offsetY4-(2.7*escala), offsetX4+(grosorGral*escala))
+        drawCotaLineH(offsetX4, offsetY4+(10+anchoGral*escala), offsetX4+(grosorGral*escala), offsetY4+(10+anchoGral*escala), 1*escala)
+        drawTextH(grosorGral, offsetX4, offsetY4+(10+anchoGral*escala)+(3*escala), offsetX4+(grosorGral*escala))
 
             // Dibujar Tablas superiores
         drawFullRect(offsetX4, offsetY4, (grosorTS*escala), (largoTS*escala), "#e5e5e5")
@@ -197,11 +224,39 @@ export function dibujarTacon () {
         const offsetY2 = (yInf - (anchoGral * escala)) / 2;
 
         drawLineRect(offsetX2, offsetY2, (largoGral * escala), (anchoGral * escala));
+
             // Dibujar Tablas superiores
-        for (let i = 0; i < cantidadTS; i++) {
-            const x = offsetX2 + i * ((anchoTS * escala) + (separacionTS * escala));
-            const y = offsetY2;
-            drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#bdbdbd");
+        if (variacionTS === 'Único') {
+            for (let i = 0; i < cantidadTS; i++) {
+                const x = offsetX2 + i * ((anchoTS * escala) + (separacionTS * escala));
+                const y = offsetY2;
+                drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#bdbdbd");
+            }
+        } else if (variacionTS === 'Variable') {
+            const cantidadTS2 = parseFloat(document.getElementById('cantidadTS-2').value);
+            const largoTS2 = parseFloat(document.getElementById('largoTS-2').value);
+            const anchoTS2 = parseFloat(document.getElementById('anchoTS-2').value);
+            const grosorTS2 = parseFloat(document.getElementById('grosorTS-2').value);
+
+            let separacionTS2 = ((largoGral - (anchoTS2 * cantidadTS2)) / (cantidadTS2 - 1)).toFixed(2)
+
+            // Tabla Superior 2
+            for (let i = 0; i < cantidadTS2; i++) {
+                const x = offsetX2 + i * ((anchoTS2 * escala) + (separacionTS2 * escala));
+                const y = offsetY2;
+                drawFullRect(x, y, (anchoTS2 * escala), (largoTS2 * escala), "#bdbdbd");
+            }
+            // Tabla superior 1
+            let separacionTS1 = ((separacionTS2 - (anchoTS * cantidadTS/(cantidadTS2-1))) / ((cantidadTS/(cantidadTS2-1)) + 1)).toFixed(2)
+            
+            for (let j = 0; j < cantidadTS2 - 1; j++) {
+                let xTS1 = offsetX2 + ((anchoTS2 * escala) + (separacionTS1 * escala)) + j * ((anchoTS2 * escala) + (separacionTS2 * escala)); 
+                for (let i = 0; i < cantidadTS / (cantidadTS2 - 1); i++) {
+                    let x = xTS1 + i * ((anchoTS * escala) + (separacionTS1 * escala)); 
+                    let y = offsetY2;
+                    drawFullRect(x, y, (anchoTS * escala), (largoTS * escala), "#bdbdbd");
+                }
+            }
         }
             // Dibujar Tablas inferiores 
         const xCentro = offsetX2 + (largoGral * escala) / 2 - (largoTI2 * escala) / 2;
@@ -210,10 +265,11 @@ export function dibujarTacon () {
         // Tablas laterales
         drawFullRect(offsetX2, offsetY2, (anchoTI * escala), (largoTI * escala), "#c0cbff"); // izquierda
         drawFullRect(offsetX2 + (largoGral * escala) - (anchoTI * escala), offsetY2, (anchoTI * escala), (largoTI * escala), "#c0cbff"); // derecha
-        // Tablas centrales
+
         drawFullRect(xCentro, offsetY2, (largoTI2 * escala), (anchoTI2 * escala), "#c0cbff"); // arriba
         drawFullRect(xCentro, offsetY2 + anchoGral * escala - (anchoTI2 * escala), (largoTI2 * escala), (anchoTI2 * escala), "#c0cbff"); // abajo
-        drawFullRect(xCentro, yCentro, (largoTI2 * escala), (anchoTI2 * escala), "#c0cbff"); // centro
+        // Tabla central
+        drawFullRect(xCentro, yCentro, (largoTI2 * escala), (anchoTI2 * escala), "#c0cbff");
         
         // Vista frontal
         const escala2 = canvasWidth*0.0093;
@@ -227,10 +283,37 @@ export function dibujarTacon () {
         drawTextV(grosorGral, offsetX3-(2.5*escala2), offsetY3, offsetY3+(1.1*grosorGral*escala2));
 
             // Dibujar Tablas superiores
-        for (let i = 0; i < cantidadTS; i++) {
-            const x = offsetX3 + i * ((anchoTS * escala2) + (separacionTS * escala2));
-            const y = offsetY3;
-            drawFullRect(x, y, (anchoTS * escala2), (grosorTS * escala2), "#bdbdbd");
+        if (variacionTS === 'Único') {
+            for (let i = 0; i < cantidadTS; i++) {
+                const x = offsetX3 + i * ((anchoTS * escala2) + (separacionTS * escala2));
+                const y = offsetY3;
+                drawFullRect(x, y, (anchoTS * escala2), (grosorTS * escala2), "#bdbdbd");
+            }
+        } else if (variacionTS === 'Variable') {
+            const cantidadTS2 = parseFloat(document.getElementById('cantidadTS-2').value);
+            const largoTS2 = parseFloat(document.getElementById('largoTS-2').value);
+            const anchoTS2 = parseFloat(document.getElementById('anchoTS-2').value);
+            const grosorTS2 = parseFloat(document.getElementById('grosorTS-2').value);
+
+            let separacionTS2 = ((largoGral - (anchoTS2 * cantidadTS2)) / (cantidadTS2 - 1)).toFixed(2)
+
+            // Tabla Superior 2
+            for (let i = 0; i < cantidadTS2; i++) {
+                const x = offsetX3 + i * ((anchoTS2 * escala2) + (separacionTS2 * escala2));
+                const y = offsetY3;
+                drawFullRect(x, y, (anchoTS2 * escala2), (grosorTS2 * escala2), "#bdbdbd");
+            }
+            // Tabla superior 1
+            let separacionTS1 = ((separacionTS2 - (anchoTS * cantidadTS/(cantidadTS2-1))) / ((cantidadTS/(cantidadTS2-1)) + 1)).toFixed(2)
+            
+            for (let j = 0; j < cantidadTS2 - 1; j++) {
+                let xTS1 = offsetX3 + ((anchoTS2 * escala2) + (separacionTS1 * escala2)) + j * ((anchoTS2 * escala2) + (separacionTS2 * escala2)); 
+                for (let i = 0; i < cantidadTS / (cantidadTS2 - 1); i++) {
+                    let x = xTS1 + i * ((anchoTS * escala2) + (separacionTS1 * escala2)); 
+                    let y = offsetY3;
+                    drawFullRect(x, y, (anchoTS * escala2), (grosorTS * escala2), "#bdbdbd");
+                }
+            }
         }
 
             // Dibujar Tablas de carga
@@ -262,7 +345,7 @@ export function dibujarTacon () {
     }
 
     // Agregar eventos a los campos de entrada para redibujar el plano cuando cambie cualquier valor
-    const inputs = document.querySelectorAll('#largoGral, #anchoGral, #grosorGral, #cantidadTS-1, #largoTS-1, #anchoTS-1, #grosorTS-1, #cantidadTI-1, #largoTI-1, #anchoTI-1, #grosorTI-1, #cantidadTI-2, #largoTI-2, #anchoTI-2, #grosorTI-2, #cantidadTAL, #distribucionTA, #largoTAL, #anchoTAL, #grosorTAL, #cantidadTAC, #largoTAC, #anchoTAC, #grosorTAC, #cantidadTC, #largoTC, #anchoTC, #grosorTC');
+    const inputs = document.querySelectorAll('#largoGral, #anchoGral, #grosorGral, #cantidadTS-1, #largoTS-1, #anchoTS-1, #grosorTS-1, #cantidadTS-2, #largoTS-2, #anchoTS-2, #grosorTS-2, #cantidadTI-1, #largoTI-1, #anchoTI-1, #grosorTI-1, #cantidadTI-2, #largoTI-2, #anchoTI-2, #grosorTI-2, #cantidadTAL, #distribucionTA, #largoTAL, #anchoTAL, #grosorTAL, #cantidadTAC, #largoTAC, #anchoTAC, #grosorTAC, #cantidadTC, #largoTC, #anchoTC, #grosorTC');
 
     // Para cada input, agregar un event listener para ejecutar la función redibujarPlano cuando el valor cambie
     inputs.forEach(input => {

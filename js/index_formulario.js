@@ -8,9 +8,7 @@ import {InsertarFormularioTacon} from './formularios/tacon_form.js';
 import {insertarFormularioTSuperior} from './formularios/tablaSup_form.js';
 // Importar funciones de los planos
 import {dibujarBarrote} from './planos/plano_barrote.js';
-import {dibujarBarrote2} from './planos/plano_barrote2.js';
 import {dibujarTacon} from './planos/plano_tacon.js';
-import {dibujarTacon2} from './planos/plano_tacon2.js';
 // Importar funciones de vinculación de campos
 import {actualizarCampos, asociarActualizacion} from './valores.js';
 import {sincronizarTI} from './valores.js';
@@ -81,6 +79,43 @@ document.addEventListener('DOMContentLoaded', function () {
             // Si se elige variación de grosor en Tabla superior mostrar un formulario distinto
             insertarFormularioTSuperior();
 
+            document.getElementById('acomodo').addEventListener('change', function() {
+                const acomodo = this.value;
+                const anchoGral = document.getElementById('anchoGral');
+                const largoGral = document.getElementById('largoGral');
+                    
+                // Seleccionar solo los inputs con data-rel específicos
+                const inputsAnchoLargo = document.querySelectorAll('[data-rel="ancho_gral"], [data-rel="largo_gral"]');
+                    
+                if (acomodo === "Invertido") {
+                    // Cambiar los valores cuando la opción es "Invertido"
+                    anchoGral.value = 48;
+                    largoGral.value = 40;
+
+                    // Actualizar otros inputs con data-rel correspondientes
+                    inputsAnchoLargo.forEach(input => {
+                        if (input.dataset.rel === 'ancho_gral') {
+                            input.value = 48;  // Asignar el valor de Ancho
+                        } else if (input.dataset.rel === 'largo_gral') {
+                            input.value = 40;  // Asignar el valor de Largo
+                        }
+                    });
+                } else {
+                    // Para la opción "Tradicional", dejamos los valores por defecto
+                    anchoGral.value = 40;
+                    largoGral.value = 48;
+
+                    inputsAnchoLargo.forEach(input => {
+                        if (input.dataset.rel === 'ancho_gral') {
+                            input.value = 40;  // Valor por defecto de Ancho
+                        } else if (input.dataset.rel === 'largo_gral') {
+                            input.value = 48;  // Valor por defecto de Largo
+                        }
+                    });
+                }
+                dibujarBarrote();
+            });
+
             const tipoB = document.getElementById('tipoB');
             const inicio_saque = document.getElementById('inicio_saque');
 
@@ -112,23 +147,18 @@ document.addEventListener('DOMContentLoaded', function () {
             // Llamar a la función de asociación de datos
             asociarActualizacion();
 
-            const variacionTS = document.getElementById('variacionTS');
+            // Llamar a la función de dibujar el plano
             dibujarBarrote();
             variacionTS.addEventListener('change', function () {
-                if (variacionTS.value === 'Único') {
-                    dibujarBarrote();
-                } else if (variacionTS.value === 'Variable') {
-                    dibujarBarrote2();
-                } else {
-                    return;
-                }
+                dibujarBarrote();
             });
             
-            // Llamar a la función después de renderizar
+            // Llamar a la función de validaciones después de renderizar
             requestAnimationFrame(() => {
                 inicializarValidacionesB();
             });
 
+            // Insertar modal de barrote
             modalGral()
             modalBarrote()
             
@@ -157,12 +187,52 @@ document.addEventListener('DOMContentLoaded', function () {
                         <small class="text-muted">Grosor</small>
                     </div>
                 </div>`;
-            
+
             // Insertar formulario inicial de tacón
             InsertarFormularioTacon();
 
             // Si se elige variación de grosor en Tabla superior mostrar un formulario distinto
             insertarFormularioTSuperior();
+
+            document.getElementById('acomodo').addEventListener('change', function() {
+                const acomodo = this.value;
+                const anchoGral = document.getElementById('anchoGral');
+                const largoGral = document.getElementById('largoGral');
+                const largoTI2 = document.getElementById('largoTI-2');
+                    
+                // Seleccionar solo los inputs con data-rel específicos
+                const inputsAnchoLargo = document.querySelectorAll('[data-rel="ancho_gral"], [data-rel="largo_gral"]');
+                    
+                if (acomodo === "Invertido") {
+                    // Cambiar los valores cuando la opción es "Invertido"
+                    anchoGral.value = 48;
+                    largoGral.value = 40;
+                    largoTI2.value = 33;
+
+                    // Actualizar otros inputs con data-rel correspondientes
+                    inputsAnchoLargo.forEach(input => {
+                        if (input.dataset.rel === 'ancho_gral') {
+                            input.value = 48;  // Asignar el valor de Ancho
+                        } else if (input.dataset.rel === 'largo_gral') {
+                            input.value = 40;  // Asignar el valor de Largo
+                        }
+                    });
+                } else {
+                    // Para la opción "Tradicional", dejamos los valores por defecto
+                    anchoGral.value = 40;
+                    largoGral.value = 48;
+                    largoTI2.value = 41;
+
+                    inputsAnchoLargo.forEach(input => {
+                        if (input.dataset.rel === 'ancho_gral') {
+                            input.value = 40;  // Valor por defecto de Ancho
+                        } else if (input.dataset.rel === 'largo_gral') {
+                            input.value = 48;  // Valor por defecto de Largo
+                        }
+                    });
+                }
+                dibujarTacon();
+            });
 
             plano_tarima.innerHTML= `<canvas id="plano_tacon" width="700" height="400" style="border: 1px solid black"></canvas>`;
 
@@ -170,16 +240,10 @@ document.addEventListener('DOMContentLoaded', function () {
             asociarActualizacion();
             sincronizarTI();
             
-            const variacionTS = document.getElementById('variacionTS');
+            // Llamar a la función de dibujar el plano
             dibujarTacon();
             variacionTS.addEventListener('change', function () {
-                if (variacionTS.value === 'Único') {
-                    dibujarTacon();
-                } else if (variacionTS.value === 'Variable') {
-                    dibujarTacon2();
-                } else {
-                    return;
-                }
+                dibujarTacon();
             });
 
             // Llamar a la función después de renderizar
