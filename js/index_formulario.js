@@ -1,7 +1,7 @@
 
 // IMPORTACIÓN DE FUNCIONES EXTERNAS
 // Importar funciones de validación
-import {inicializarValidacionesB, inicializarValidacionesT} from './validaciones/validacionCampos.js';
+import {inicializarValidacionesB, inicializarValidacionesT} from './validaciones/validaConfig.js';
 // Importar funciones de creación de formularios
 import {InsertarFormularioBarrote} from './formularios/barrote_form.js';
 import {InsertarFormularioTacon} from './formularios/tacon_form.js';

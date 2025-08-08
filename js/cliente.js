@@ -51,12 +51,12 @@ document.getElementById("btn_siguiente").addEventListener("click", function () {
         return;
     }
 
-    // Validar si hay campos inválidos
-    const campos = document.querySelectorAll('input');
-    if (!validarCamposInvalidos(campos)) {
-        alert('Corrige los errores antes de guardar.');
-        return;
-    }
+    // // Validar si hay campos inválidos
+    // const campos = document.querySelectorAll('input');
+    // if (!validarCamposInvalidos(campos)) {
+    //     alert('Corrige los errores antes de guardar.');
+    //     return;
+    // }
 
     cliente = {
         razonSocial, rfc, nombre, codigoPostal, direccion, numero, correo, destino

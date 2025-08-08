@@ -36,8 +36,8 @@ main {
     background-color: #F5F5F5;
 }
 
-#btn_agregar {
-    border: 1px solid #7B7B7B;
+.fin {
+    width: 50px;
 }
 
 /*--- FOOTER ---*/
@@ -60,7 +60,7 @@ main {
 }
    
 @media (max-width: 768px) {
-  #btn_siguiente {
+  #btn_aceptar {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
     margin-right: 16px !important;
