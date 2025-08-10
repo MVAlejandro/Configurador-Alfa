@@ -13,21 +13,22 @@ import {dibujarTacon} from './planos/plano_tacon.js';
 import {actualizarCampos, asociarActualizacion} from './valores.js';
 import {sincronizarTI} from './valores.js';
 
-import {modalGral, modalBarrote, modalTacon} from './formularios/modales_index.js'
+import {modalGral, modalBarrote, modalTacon, modalServicios, modalRecic} from './formularios/modales_index.js'
 
 // MOSTRAR EL FORMULARIO DE ACUERDO AL SUBTIPO DE TARIMA
 // Identificar el subtipo y el contenedor principal
 document.addEventListener('DOMContentLoaded', function () {
+    const btn_siguiente = document.getElementById('btn_siguiente');
     const op_tamaño = document.getElementById('op_tamaño');
-
     const subtipo = document.getElementById('subtipo');
     const op_acomodo = document.getElementById('op_acomodo');
     const caracteristicas_tarima = document.getElementById('caracteristicas_tarima');
     const plano_tarima = document.getElementById('plano_tarima');
 
     subtipo.addEventListener('change', function () {
-
         if (subtipo.value === '1') {
+            btn_siguiente.disabled = true;
+
             op_acomodo.innerHTML = ``;
             op_tamaño.innerHTML =
                 `<div class="d-flex align-items-center responsive-flex">
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const modal_form = document.getElementById('modal_form');
             modal_form.innerHTML = ``;
         } else if (subtipo.value === 'Barrote') {
+            btn_siguiente.disabled = false;
             op_acomodo.innerHTML = 
                 `<p class="titulo_opcion mb-0 me-3">Acomodo: </p>
                     <select id="acomodo" class="form-select" aria-label="Default select example">
@@ -161,8 +163,18 @@ document.addEventListener('DOMContentLoaded', function () {
             // Insertar modal de barrote
             modalGral()
             modalBarrote()
+            modalServicios();
+
+            const tipo = document.getElementById('tipo');
+            tipo.addEventListener('change', function () {
+                if (tipo.value === 'Reciclada'){
+                    modalRecic();
+                } 
+            });
+
             
         } else if (subtipo.value === 'Tacón') {
+            btn_siguiente.disabled = false;
             op_acomodo.innerHTML = 
             `<p class="titulo_opcion mb-0 me-3">Acomodo: </p>
                 <select id="acomodo" class="form-select" aria-label="Default select example">
@@ -253,6 +265,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
             modalGral()
             modalTacon();
+            modalServicios();
+
+            const tipo = document.getElementById('tipo');
+            tipo.addEventListener('change', function () {
+                if (tipo.value === 'Reciclada'){
+                    modalRecic();
+                } 
+            });
+
         };
     });
 });

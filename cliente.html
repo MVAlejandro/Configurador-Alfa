@@ -25,9 +25,6 @@
             <div class="col-auto">
                 <button id="btn_regresar" class="btn btn-outline-success ms-5" type="button">Regresar</button>
             </div> 
-            <div class="col text-center">
-                <h2 style="color: #F5F5F5;">Configurador</h2>
-            </div>
             <div class="col-auto">
                 <button id="btn_siguiente" class="btn btn-outline-success me-5" type="button">Siguiente</button>
             </div> 
@@ -35,18 +32,15 @@
     </div>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main id="main" class="container mt-5 d-flex justify-content-center">
-        <div class="card mb-3 ms-3 me-3 w-75">
-            <div class="row g-0">
-                <div id="img_form" class="col-md-5">
-                    <img src="./assets/Pallets-Alfa-Clientes-810x1439(2).jpg" class="img-fluid rounded-start" alt="Tarimas listas para envío">
-                </div>
-                <div class="col-md-7">
+    <main id="main">
+        <div class="row d-flex justify-content-end">
+            <div class="col-md-8 col-lg-6">
+                <div class="card m-5">
                 <div class="card-body">
                     <div class="container">
                         <div class="d-flex align-items-center justify-content-between flex-wrap">
                             <h1 class="card-title mt-3 mb-5">Cliente</h1>
-                            <img src="./assets/Logo-Color-PNG-62x51.png" alt="Logo" id="logo_footer" class="mb-3">
+                            <img src="./assets/Logo-Color-PNG-62x51.png" alt="Logo" class="mb-3">
                         </div>
                         <p><strong>Ingrese los datos del cliente a cotizar</strong></p>
                         <!-- Formulario -->
@@ -78,7 +72,7 @@
                             </div>
                             <div class="cliente form-floating mb-3">
                                 <input type="number" id="numero" class="form-control no-arrows" placeholder="Numero">
-                                <label for="numero">Número</label>
+                                <label for="numero">Número de teléfono</label>
                                 <p class="error invalid-feedback" id="error-numero" style="color: red;"></p>
                             </div>
                             <div class="cliente form-floating mb-3">
@@ -97,6 +91,7 @@
                 </div>
             </div>
         </div>
+        
     </main>
 
     <!-- FOOTER -->

@@ -111,8 +111,40 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
     }
 
     // Obtener los datos de las tablas dependiendo el tipo de tarima
+    // Función auxiliar para capturar el valor de los radios
+    function capturarValorRadio(nombreGrupo) {
+        const radios = document.querySelectorAll(`input[name="${nombreGrupo}"]`);
+        for (let radio of radios) {
+            if (radio.checked) {
+                return radio.id;  // Retorna el id del radio seleccionado
+            }
+        }
+    };
+    // Crear un arreglo para los valores seleccionados
+    let servicios = [];
+
     // TARIMA DE BARROTE
     if (subtipo === 'Barrote') {
+        // Captura los valores de los radios de servicios
+        if (tipo === 'Nueva') {
+            servicios.push({
+                Armado: capturarValorRadio("armado") === "armado1" ? "Sí" : "No",
+                HT: capturarValorRadio("HT") === "HT1" ? "Sí" : "No",
+                Pintura: capturarValorRadio("pintura") === "pintura1" ? "Sí" : "No",
+                Fumigacion: capturarValorRadio("fumigacion") === "fumigacion1" ? "Sí" : "No",
+                Transporte: capturarValorRadio("transporte") === "transporte1" ? "Sí" : "No"
+        });
+        } else {
+            servicios.push({
+                Reparado: capturarValorRadio("reparado") === "reparado1" ? "Sí" : "No",
+                Armado: capturarValorRadio("armado") === "armado1" ? "Sí" : "No",
+                HT: capturarValorRadio("HT") === "HT1" ? "Sí" : "No",
+                Pintura: capturarValorRadio("pintura") === "pintura1" ? "Sí" : "No",
+                Fumigacion: capturarValorRadio("fumigacion") === "fumigacion1" ? "Sí" : "No",
+                Transporte: capturarValorRadio("transporte") === "transporte1" ? "Sí" : "No"
+        });
+        }   
+
         const toleranciaB1 = document.getElementById('toleranciaB1').value;
         const toleranciaB2 = document.getElementById('toleranciaB2').value;
         const toleranciaB3 = document.getElementById('toleranciaB3').value;
@@ -189,7 +221,8 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
                 tablaSuperior: tablaSuperiorData,
                 cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
                 cantidadB, tipoB, distB, largoB, anchoB, grosorB, distBar,
-                tolerancias: toleranciasData
+                tolerancias: toleranciasData,
+                servicios: servicios
             };
         } else if (tipoB === 'Corrido') {
             // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
@@ -229,7 +262,8 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
                 tablaSuperior: tablaSuperiorData,
                 cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
                 cantidadB, tipoB, largoB, anchoB, grosorB, distBar,
-                tolerancias: toleranciasData
+                tolerancias: toleranciasData,
+                servicios: servicios
             };
         }
 
@@ -244,6 +278,26 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
 
     // TARIMA DE TACON
     } else if (subtipo === 'Tacón'){
+        // Captura los valores de los radios de servicios
+        if (tipo === 'Nueva') {
+            servicios.push({
+                Armado: capturarValorRadio("armado") === "armado1" ? "Sí" : "No",
+                HT: capturarValorRadio("HT") === "HT1" ? "Sí" : "No",
+                Pintura: capturarValorRadio("pintura") === "pintura1" ? "Sí" : "No",
+                Fumigacion: capturarValorRadio("fumigacion") === "fumigacion1" ? "Sí" : "No",
+                Transporte: capturarValorRadio("transporte") === "transporte1" ? "Sí" : "No"
+        });
+        } else {
+            servicios.push({
+                Reparado: capturarValorRadio("reparado") === "reparado1" ? "Sí" : "No",
+                Armado: capturarValorRadio("armado") === "armado1" ? "Sí" : "No",
+                HT: capturarValorRadio("HT") === "HT1" ? "Sí" : "No",
+                Pintura: capturarValorRadio("pintura") === "pintura1" ? "Sí" : "No",
+                Fumigacion: capturarValorRadio("fumigacion") === "fumigacion1" ? "Sí" : "No",
+                Transporte: capturarValorRadio("transporte") === "transporte1" ? "Sí" : "No"
+        });
+        }  
+
         const toleranciaTA1 = document.getElementById('toleranciaTA1').value;
         const toleranciaTA2 = document.getElementById('toleranciaTA2').value;
         const toleranciaTA3 = document.getElementById('toleranciaTA3').value;
@@ -339,7 +393,8 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
             cantidadTAL, largoTAL, anchoTAL, grosorTAL, 
             cantidadTAC, largoTAC, anchoTAC, grosorTAC,
             cantidadTC, largoTC, anchoTC, grosorTC,
-            tolerancias: toleranciasData
+            tolerancias: toleranciasData,
+            servicios: servicios
         };
 
         // Agregar el objeto creado al carrito

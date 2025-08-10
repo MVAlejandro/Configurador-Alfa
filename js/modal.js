@@ -1,7 +1,8 @@
 
 // CARACTERISTICAS //
-// Obtener el contenedor ul donde se agregarán los li
+// Obtener el lista_servicios ul donde se agregarán los li
 const lista_resumen = document.getElementById('lista_resumen');
+const lista_servicios = document.getElementById('lista_servicios');
 
 // Función para generar el tamaño de la tarima
 function crearTamGral(largoG, anchoG, grosorG) {
@@ -16,19 +17,19 @@ function crearElemListaPrin(nombre, cantidad, largo, ancho, grosor) {
         `<li><u>${nombre}:</u> ${cantidad} * (${largo}" x ${ancho}" x ${grosor}")</li>`
     );
 }
-
+// Función para generar los elementos secundarios de las tablas 
 function crearElemListaSec(nombre, descripcion) {
     lista_resumen.insertAdjacentHTML('beforeend', 
         `<li class="sub_descripcion ms-4">${nombre}: ${descripcion}</li>`
     );
 }
-
+// Función para generar los elementos de las tablas con medidas en pulgadas(")"
 function crearElemListaSecMed(nombre, descripcion) {
     lista_resumen.insertAdjacentHTML('beforeend', 
         `<li class="sub_descripcion ms-4">${nombre}: ${descripcion}"</li>`
     );
 }
-
+// Función para generar las tolerancias de las tablas
 function crearElemListaTolerancia(valor1, valor2, valor3) {
     lista_resumen.insertAdjacentHTML('beforeend', 
         `<li class="tolerancia ms-2"><em>Tolerancia: La: +- ${valor1}, An: +- ${valor2}, Es: +- ${valor3}</em></li>`
@@ -37,8 +38,9 @@ function crearElemListaTolerancia(valor1, valor2, valor3) {
 
 // Función para llenar toda la información en el modal
 function abrirModalItem(formData) {
-    // Limpiar contenedores antes de insertar la información
+    // Limpiar lista_servicioses antes de insertar la información
     lista_resumen.innerHTML = '';
+    lista_servicios.innerHTML = '';
     modelo.innerHTML = '';
     capacidad_estatica.innerHTML = '';
     capacidad_dinamica.innerHTML = '';
@@ -121,6 +123,19 @@ function abrirModalItem(formData) {
         }
     }
 
+
+    // SERVICIOS
+    // Verifica el último servicio agregado
+    const servicio = formData.servicios[formData.servicios.length - 1];
+
+    // Insertar el servicio a la lista
+    for (let propiedad in servicio) {
+        if (servicio[propiedad] === "Sí") {
+            lista_servicios.insertAdjacentHTML('beforeend', `<li>${propiedad}</li>`);
+        }
+    }       
+    
+
     // PROPIEDADES //
     // Fórmula para calcular la capacidad de carga
     const ts = formData.tablaSuperior[0]; // usar el primero como referencia
@@ -140,6 +155,7 @@ function abrirModalItem(formData) {
         capacidad_estatica.innerHTML = `${capacidad_estatica_calculo.toFixed(2)} kg`;
         capacidad_dinamica.innerHTML = `${capacidad_dinamica_calculo.toFixed(2)} kg`;
     }
+
 
     // COSTO //
     // Mostrar valores de los resultados

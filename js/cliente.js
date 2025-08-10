@@ -1,7 +1,8 @@
 
 // IMPORTACIÓN DE FUNCIONES EXTERNAS
 // Importar funciones de validación de campos
-import {validarText, validarRfc, validarEmail, validarTelefono, validarCP} from "./validaciones/validaCliente.js"
+import {validarCamposInvalidos} from "./validaciones/validaBarrote.js"
+import {validarText, validarNombre, validarRfc, validarEmail, validarTelefono, validarCP} from "./validaciones/validaCliente.js"
 
 // Declarar el objeto cliente para después
 let cliente = {};
@@ -38,7 +39,7 @@ document.getElementById("btn_siguiente").addEventListener("click", function () {
 
     validarText(razonSocialIn, error_razonSocial);
     validarRfc(rfcIn, error_rfc);
-    validarText(nombreIn, error_nombre);
+    validarNombre(nombreIn, error_nombre);
     validarCP(codigoPostalIn, error_codigoPostal);
     validarText(direccionIn, error_direccion);
     validarTelefono(numeroIn, error_numero);
@@ -51,12 +52,12 @@ document.getElementById("btn_siguiente").addEventListener("click", function () {
         return;
     }
 
-    // // Validar si hay campos inválidos
-    // const campos = document.querySelectorAll('input');
-    // if (!validarCamposInvalidos(campos)) {
-    //     alert('Corrige los errores antes de guardar.');
-    //     return;
-    // }
+    // Validar si hay campos inválidos
+    const campos = document.querySelectorAll('input');
+    if (!validarCamposInvalidos(campos)) {
+        alert('Corrige los errores antes de guardar.');
+        return;
+    }
 
     cliente = {
         razonSocial, rfc, nombre, codigoPostal, direccion, numero, correo, destino

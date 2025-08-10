@@ -285,3 +285,127 @@ export function modalTacon () {
                 </div>
             </div>`;
 }
+
+export function modalServicios() {
+    const modal_serv = document.getElementById("modal_serv");
+    modal_serv.innerHTML = 
+        `<!-- Reparado -->
+        <div id="reparado_cont" class="d-flex justify-content-center">
+            
+        </div>
+
+        <!-- Armado -->
+        <div class="d-flex justify-content-center">
+            <div class="col-6 ms-5">
+                <p>Armado</p>
+            </div>
+            <div class="form-check col-3">
+                <input class="form-check-input" type="radio" id="armado1" name="armado" checked>
+                <label class="form-check-label" for="armado1">
+                    Sí
+                </label>
+            </div>
+            <div class="form-check col-3">
+                <input class="form-check-input" type="radio" id="armado2" name="armado">
+                <label class="form-check-label" for="armado2">
+                    No
+                </label>
+            </div>
+        </div>
+
+        <!-- Tratamiento térmico -->
+        <div class="d-flex justify-content-center">
+            <div class="col-6 ms-5">
+                <p>Tratamiento térmico</p>
+            </div>
+            <div class="form-check col-3">
+                <input class="form-check-input" type="radio" id="HT1" name="HT">
+                <label class="form-check-label" for="HT1">
+                    Sí
+                </label>
+            </div>
+            <div class="form-check col-3">
+                <input class="form-check-input" type="radio" id="HT2" name="HT" checked>
+                <label class="form-check-label" for="HT2">
+                    No
+                </label>
+            </div>
+        </div>
+
+        <!-- Pintura -->
+        <div class="d-flex justify-content-center">
+            <div class="col-6 ms-5">
+                <p>Pintura</p>
+            </div>
+            <div class="form-check col-3">
+                <input class="form-check-input" type="radio" id="pintura1" name="pintura">
+                <label class="form-check-label" for="pintura1">
+                    Sí
+                </label>
+            </div>
+            <div class="form-check col-3">
+                <input class="form-check-input" type="radio" id="pintura2" name="pintura" checked>
+                <label class="form-check-label" for="pintura2">
+                    No
+                </label>
+            </div>
+        </div>
+
+        <!-- Fumigación -->
+        <div class="d-flex justify-content-center">
+            <div class="col-6 ms-5">
+                <p>Fumigación</p>
+            </div>
+            <div class="form-check col-3">
+                <input class="form-check-input" type="radio" id="fumigacion1" name="fumigacion">
+                <label class="form-check-label" for="fumigacion1">
+                    Sí
+                </label>
+            </div>
+            <div class="form-check col-3">
+                <input class="form-check-input" type="radio" id="fumigacion2" name="fumigacion" checked>
+                <label class="form-check-label" for="fumigacion2">
+                    No
+                </label>
+            </div>
+        </div>
+
+        <!-- Transporte -->
+        <div class="d-flex justify-content-center">
+            <div class="col-6 ms-5">
+                <p>Transporte</p>
+            </div>
+            <div class="form-check col-3">
+                <input class="form-check-input" type="radio" id="transporte1" name="transporte">
+                <label class="form-check-label" for="transporte1">
+                    Sí
+                </label>
+            </div>
+            <div class="form-check col-3">
+                <input class="form-check-input" type="radio" id="transporte2" name="transporte" checked>
+                <label class="form-check-label" for="transporte2">
+                    No
+                </label>
+            </div>
+        </div>`;
+}
+
+export function modalRecic() {
+    const reparado_cont = document.getElementById("reparado_cont");
+    reparado_cont.innerHTML = 
+    `<div class="col-6 ms-5">
+        <p>Reparado</p>
+    </div>
+    <div class="form-check col-3">
+        <input class="form-check-input" type="radio" id="reparado1" name="reparado" checked>
+        <label class="form-check-label" for="reparado1">
+            Sí
+        </label>
+    </div>
+    <div class="form-check col-3">
+        <input class="form-check-input" type="radio" id="reparado2" name="reparado">
+        <label class="form-check-label" for="reparado2">
+            No
+        </label>
+    </div>`;
+}

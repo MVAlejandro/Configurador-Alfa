@@ -29,7 +29,7 @@
                 <h2>Configurador</h2>
             </div>
             <div class="col-auto">
-                <button id="btn_siguiente" class="btn btn-outline-success me-5" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Siguiente</button>
+                <button id="btn_siguiente" class="btn btn-outline-success me-5" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" disabled>Siguiente</button>
             </div> 
         </nav>
     </div>
@@ -91,7 +91,7 @@
             </div>
 
             <!-- Plano -->
-            <div class="col-md-8 plano d-flex justify-content-center align-items-start mt-3 mb-5">
+            <div class="col-md-8 plano d-flex justify-content-center mt-3">
                 <div id="plano_tarima">
                     <img src="./assets/Logo-Letras-PNG-420x187.png" alt="Logo" id="logo_main" class="mt-4 img-fluid">
                 </div>
@@ -100,7 +100,7 @@
     </main>
 
     <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" aria-labelledby="staticBackdropLabel" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
@@ -110,7 +110,7 @@
         <div class="modal-body">
             <div class="container">
                 <form>
-                    <div  id="modal_form" class="col select-bar d-flex flex-column justify-content-center">
+                    <div id="modal_form" class="col select-bar d-flex flex-column justify-content-center">
 
                     </div>
                 </form>
@@ -118,11 +118,37 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button id="btn_sig_modal" type="button" class="btn btn-primary" data-bs-target="#staticBackdrop2" data-bs-toggle="modal">Siguiente</button>
+        </div>
+        </div>
+    </div>
+
+    </div>
+    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true" aria-labelledby="staticBackdropLabel2" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel2">Servicios</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <form>
+                    <div id="modal_serv" class="col select-bar d-flex flex-column justify-content-center">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="btn_ant_modal" class="btn btn-secondary" data-bs-target="#staticBackdrop" data-bs-toggle="modal">Regresar</button>
             <button id="btn_agregar" type="button" class="btn btn-primary">Agregar</button>
         </div>
         </div>
     </div>
     </div>
+
+
 
     <!-- FOOTER -->
     <footer id="site_footer">
