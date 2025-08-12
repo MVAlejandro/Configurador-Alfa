@@ -350,6 +350,10 @@ export function modalServicios() {
                 </label>
             </div>
         </div>
+        <!-- Color de pintado -->
+        <div id="serv_color" class="container ms-3">
+            
+        </div>
 
         <!-- Fumigación -->
         <div class="d-flex justify-content-center">
@@ -407,5 +411,23 @@ export function modalRecic() {
         <label class="form-check-label" for="reparado2">
             No
         </label>
+    </div>`;
+}
+
+export function modalPintura() {
+    const serv_color = document.getElementById("serv_color");
+    serv_color.innerHTML =
+    `<div class="row mb-3">
+        <div class=" col-md-3">
+            <label for="color" class="col-form-label">Color:</label>
+        </div>
+        <div class="col-11 col-md-7 offset-md-1">
+            <select id="color" class="form-select nb">
+                <option value="No">-----</option>
+                <option value="Azul">Azul</option>
+                <option value="Naranja">Naranja</option>
+                <option value="Verde">Verde</option>
+            </select>
+        </div>
     </div>`;
 }

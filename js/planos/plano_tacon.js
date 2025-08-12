@@ -355,3 +355,9 @@ export function dibujarTacon () {
     // Llamar a la función una vez al cargar para dibujar el plano inicialmente
     redibujarPlano();
 };
+
+// Función para obtener la imagen del canvas
+export function obtenerPlanoT() {
+    const plano = document.getElementById('plano_tacon');
+    return plano.toDataURL('image/png'); // Devuelve la imagen como base64
+}

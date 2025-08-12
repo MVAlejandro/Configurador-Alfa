@@ -12,8 +12,8 @@ import {dibujarTacon} from './planos/plano_tacon.js';
 // Importar funciones de vinculación de campos
 import {actualizarCampos, asociarActualizacion} from './valores.js';
 import {sincronizarTI} from './valores.js';
-
-import {modalGral, modalBarrote, modalTacon, modalServicios, modalRecic} from './formularios/modales_index.js'
+// Importar funciones de los modales del configurador
+import {modalGral, modalBarrote, modalTacon, modalServicios, modalRecic, modalPintura} from './formularios/modales_index.js'
 
 // MOSTRAR EL FORMULARIO DE ACUERDO AL SUBTIPO DE TARIMA
 // Identificar el subtipo y el contenedor principal
@@ -165,13 +165,34 @@ document.addEventListener('DOMContentLoaded', function () {
             modalBarrote()
             modalServicios();
 
+            // Insertar servicio de reparado a tipo reciclada
             const tipo = document.getElementById('tipo');
+            const reparado_cont = document.getElementById("reparado_cont");
             tipo.addEventListener('change', function () {
                 if (tipo.value === 'Reciclada'){
                     modalRecic();
-                } 
+                } else {
+                    reparado_cont.innerHTML = '';
+                }
             });
 
+            // Insertar opciones de color al servicio de pintura
+            const pintura1 = document.getElementById('pintura1');
+            const pintura2 = document.getElementById('pintura2');
+            const serv_color = document.getElementById('serv_color');
+
+            // Función para actualizar el contenido según la opción seleccionada
+            pintura1.addEventListener('change', function () {
+                if (pintura1.checked) {
+                    modalPintura(); 
+                }
+            });
+
+            pintura2.addEventListener('change', function () {
+                if (pintura2.checked) {
+                    serv_color.innerHTML = '';
+                }
+            });
             
         } else if (subtipo.value === 'Tacón') {
             btn_siguiente.disabled = false;
@@ -267,11 +288,33 @@ document.addEventListener('DOMContentLoaded', function () {
             modalTacon();
             modalServicios();
 
+            // Insertar servicio de reparado a tipo reciclada
             const tipo = document.getElementById('tipo');
+            const reparado_cont = document.getElementById("reparado_cont");
             tipo.addEventListener('change', function () {
                 if (tipo.value === 'Reciclada'){
                     modalRecic();
-                } 
+                } else {
+                    reparado_cont.innerHTML = '';
+                }
+            });
+
+            // Insertar opciones de color al servicio de pintura
+            const pintura1 = document.getElementById('pintura1');
+            const pintura2 = document.getElementById('pintura2');
+            const serv_color = document.getElementById('serv_color');
+
+            // Función para actualizar el contenido según la opción seleccionada
+            pintura1.addEventListener('change', function () {
+                if (pintura1.checked) {
+                    modalPintura(); 
+                }
+            });
+
+            pintura2.addEventListener('change', function () {
+                if (pintura2.checked) {
+                    serv_color.innerHTML = '';
+                }
             });
 
         };

@@ -466,3 +466,9 @@ export function dibujarBarrote() {
     // Llamar a la función una vez al cargar para dibujar el plano inicialmente
     redibujarPlano();
 };
+
+// Función para obtener la imagen del canvas
+export function obtenerPlanoB() {
+    const plano = document.getElementById('plano_barrote');
+    return plano.toDataURL('image/png'); // Devuelve la imagen como base64
+}

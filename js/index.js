@@ -2,6 +2,9 @@
 // IMPORTACIÓN DE FUNCIONES EXTERNAS
 // Importar funciones de validación de campos
 import {validarCamposInvalidos} from "./validaciones/validaBarrote.js"
+// Importar la función para obtener la imagen del plano
+import {obtenerPlanoB} from './planos/plano_barrote.js'; 
+import {obtenerPlanoT} from './planos/plano_tacon.js';
 
 // Crear evento al dar click en botón Resumen
 document.getElementById('btn_regresar').addEventListener('click', function () {
@@ -121,29 +124,43 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         }
     };
     // Crear un arreglo para los valores seleccionados
-    let servicios = [];
+    let servicios = {};
 
     // TARIMA DE BARROTE
     if (subtipo === 'Barrote') {
         // Captura los valores de los radios de servicios
+        const pinturaSeleccionada = capturarValorRadio("pintura");
         if (tipo === 'Nueva') {
-            servicios.push({
+            servicios = {
                 Armado: capturarValorRadio("armado") === "armado1" ? "Sí" : "No",
                 HT: capturarValorRadio("HT") === "HT1" ? "Sí" : "No",
                 Pintura: capturarValorRadio("pintura") === "pintura1" ? "Sí" : "No",
                 Fumigacion: capturarValorRadio("fumigacion") === "fumigacion1" ? "Sí" : "No",
                 Transporte: capturarValorRadio("transporte") === "transporte1" ? "Sí" : "No"
-        });
+            };
+
+            // Añadir el color de pintura si la opción es "Sí"
+            if (pinturaSeleccionada === "pintura1") {
+                const colorIn = document.getElementById("color");
+                servicios.Color = colorIn.value;
+            }
+
         } else {
-            servicios.push({
+            servicios = {
                 Reparado: capturarValorRadio("reparado") === "reparado1" ? "Sí" : "No",
                 Armado: capturarValorRadio("armado") === "armado1" ? "Sí" : "No",
                 HT: capturarValorRadio("HT") === "HT1" ? "Sí" : "No",
                 Pintura: capturarValorRadio("pintura") === "pintura1" ? "Sí" : "No",
                 Fumigacion: capturarValorRadio("fumigacion") === "fumigacion1" ? "Sí" : "No",
                 Transporte: capturarValorRadio("transporte") === "transporte1" ? "Sí" : "No"
-        });
-        }   
+            };
+
+            // Añadir el color de pintura si la opción es "Sí"
+            if (pinturaSeleccionada === "pintura1") {
+                const colorIn = document.getElementById("color");
+                servicios.Color = colorIn.value;
+            }
+        }
 
         const toleranciaB1 = document.getElementById('toleranciaB1').value;
         const toleranciaB2 = document.getElementById('toleranciaB2').value;
@@ -214,6 +231,9 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
 
             const precioUnit = desgloce1 + desgloce2 + desgloce3;
 
+            // Obtener la imagen del plano (base64) generado en el canvas
+            const imgPlano = obtenerPlanoB();
+
             // Crear un objeto con todos los datos del formulario
             formData = {
                 tipo, subtipo, acomodo, precioUnit, cantidad,
@@ -222,7 +242,8 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
                 cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
                 cantidadB, tipoB, distB, largoB, anchoB, grosorB, distBar,
                 tolerancias: toleranciasData,
-                servicios: servicios
+                servicios: servicios,
+                imgPlano: imgPlano
             };
         } else if (tipoB === 'Corrido') {
             // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
@@ -255,6 +276,9 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
 
             const precioUnit = desgloce1 + desgloce2 + desgloce3;
 
+            // Obtener la imagen del plano (base64) generado en el canvas
+            const imgPlano = obtenerPlanoB();
+
             // Crear un objeto con todos los datos del formulario
             formData = {
                 tipo, subtipo, acomodo, precioUnit, cantidad,
@@ -263,7 +287,8 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
                 cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
                 cantidadB, tipoB, largoB, anchoB, grosorB, distBar,
                 tolerancias: toleranciasData,
-                servicios: servicios
+                servicios: servicios,
+                imgPlano: imgPlano
             };
         }
 
@@ -279,24 +304,38 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
     // TARIMA DE TACON
     } else if (subtipo === 'Tacón'){
         // Captura los valores de los radios de servicios
+        const pinturaSeleccionada = capturarValorRadio("pintura");
         if (tipo === 'Nueva') {
-            servicios.push({
+            servicios = {
                 Armado: capturarValorRadio("armado") === "armado1" ? "Sí" : "No",
                 HT: capturarValorRadio("HT") === "HT1" ? "Sí" : "No",
                 Pintura: capturarValorRadio("pintura") === "pintura1" ? "Sí" : "No",
                 Fumigacion: capturarValorRadio("fumigacion") === "fumigacion1" ? "Sí" : "No",
                 Transporte: capturarValorRadio("transporte") === "transporte1" ? "Sí" : "No"
-        });
+            };
+
+            // Añadir el color de pintura si la opción es "Sí"
+            if (pinturaSeleccionada === "pintura1") {
+                const colorIn = document.getElementById("color");
+                servicios.Color = colorIn.value;
+            }
+
         } else {
-            servicios.push({
+            servicios = {
                 Reparado: capturarValorRadio("reparado") === "reparado1" ? "Sí" : "No",
                 Armado: capturarValorRadio("armado") === "armado1" ? "Sí" : "No",
                 HT: capturarValorRadio("HT") === "HT1" ? "Sí" : "No",
                 Pintura: capturarValorRadio("pintura") === "pintura1" ? "Sí" : "No",
                 Fumigacion: capturarValorRadio("fumigacion") === "fumigacion1" ? "Sí" : "No",
                 Transporte: capturarValorRadio("transporte") === "transporte1" ? "Sí" : "No"
-        });
-        }  
+            };
+
+            // Añadir el color de pintura si la opción es "Sí"
+            if (pinturaSeleccionada === "pintura1") {
+                const colorIn = document.getElementById("color");
+                servicios.Color = colorIn.value;
+            }
+        } 
 
         const toleranciaTA1 = document.getElementById('toleranciaTA1').value;
         const toleranciaTA2 = document.getElementById('toleranciaTA2').value;
@@ -384,6 +423,9 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
 
         const precioUnit = desgloce1 + desgloce2 + desgloce3;
 
+        // Obtener la imagen del plano (base64) generado en el canvas
+            const imgPlano = obtenerPlanoT();
+
         // Crear un objeto con todos los datos del formulario
         formData = {
             tipo, subtipo, acomodo, precioUnit, cantidad,
@@ -394,7 +436,8 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
             cantidadTAC, largoTAC, anchoTAC, grosorTAC,
             cantidadTC, largoTC, anchoTC, grosorTC,
             tolerancias: toleranciasData,
-            servicios: servicios
+            servicios: servicios,
+            imgPlano: imgPlano
         };
 
         // Agregar el objeto creado al carrito

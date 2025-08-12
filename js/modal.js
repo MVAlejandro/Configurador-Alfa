@@ -125,16 +125,20 @@ function abrirModalItem(formData) {
 
 
     // SERVICIOS
-    // Verifica el último servicio agregado
-    const servicio = formData.servicios[formData.servicios.length - 1];
+    // Verifica los servicios seleccionados
+    const servicio = formData.servicios;
 
     // Insertar el servicio a la lista
     for (let propiedad in servicio) {
         if (servicio[propiedad] === "Sí") {
             lista_servicios.insertAdjacentHTML('beforeend', `<li>${propiedad}</li>`);
         }
-    }       
-    
+    }
+
+    // Si existe la opción de color, mostrarla
+    if (servicio.hasOwnProperty('Color') && servicio['Color']) {
+        lista_servicios.insertAdjacentHTML('beforeend', `<li class="sub_descripcion ms-4">Color: ${servicio['Color']}</li>`);
+    }
 
     // PROPIEDADES //
     // Fórmula para calcular la capacidad de carga
@@ -173,4 +177,3 @@ function abrirModalItem(formData) {
 };
 
 const modalProducto = document.getElementById('modal_producto');
-

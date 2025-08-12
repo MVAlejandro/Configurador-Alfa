@@ -205,6 +205,195 @@ function crearPdf() {
     doc.text("Total", 159, 262)
     doc.text(`$${formatoMoneda(orden.totalEstimado * 1.16)}`, 177, 262);
 
+    // FUNCIONES
+    // Función para generar los elementos de las tablas
+    function crearElemListaPrin(nombre, cantidad, largo, ancho, grosor, x, y) {
+        doc.text(`${nombre}: ${cantidad} * (${largo}" x ${ancho}" x ${grosor}")`, x, y);
+    }
+    // Función para generar los elementos secundarios de las tablas 
+    function crearElemListaSec(nombre, descripcion, x, y) {
+        doc.text(`${nombre}: ${descripcion}`, x, y);
+    }
+    // Función para generar los elementos de las tablas con medidas en pulgadas(")"
+    function crearElemListaSecMed(nombre, descripcion, x, y) {
+        doc.text(`${nombre}: ${descripcion}"`, x, y);
+    }
+    // Función para generar las tolerancias de las tablas
+    function crearElemListaTolerancia(valor1, valor2, valor3,x, y) {
+        doc.text(`Tolerancia: La: +- ${valor1}, An: +- ${valor2}, Es: +- ${valor3}`, x, y);
+    }
+
+    // PLANOS POR PRODUCTO //
+    carrito.forEach((item, index) => {
+        // Si no es el primer producto, agregar nueva página
+        doc.addPage();
+
+        // Margen 
+        drawRect(10, 10, 215.9 - 2 * 10, 279.4 - 2 * 10, 0.5);
+
+        // Logo
+        doc.addImage('./assets/Logo-Color-PNG-396x324.png', 'PNG', 20, 20, 29, 23);
+
+        // Texto título
+        doc.setFontSize(14);
+        textCenter(`Ficha de requerimientos del producto ${index + 1}`, 215.9, 30);
+
+        // Tabla del plano
+        drawRect(15, 55, 186, 100, 0.1);
+        drawRect(15, 55, 186, 5, 0.1);
+
+        doc.setFontSize(10);
+        textCenter(`Tarima de ${item.subtipo}, ${item.tipo} (${item.largoGral}" x ${item.anchoGral}" x ${item.grosorGral}") - ${item.acomodo}`, 216, 59)
+        // Plano 
+        doc.addImage(item.imgPlano, "PNG", 29, 60, 160, 100);
+
+        // Tabla de las características
+        drawRect(15, 163, 186, 100, 0.1);
+        drawRect(15, 163, 186, 5, 0.1);
+        textCenter(`DESCRIPCIÓN`, 216, 167)
+        //Insertar descripción
+        let yPos = 176;
+        let yPos2 = 176;
+        doc.setFontSize(10);
+
+        // TARIMA DE BARROTE 
+        if (item.subtipo === 'Barrote') {
+            // Tabla superior
+            item.tablaSuperior.forEach((tabla, i) => {
+                const titulo = item.tablaSuperior.length > 1 ? `- Tabla superior ${i + 1}` : '- Tabla superior';
+                doc.text(`${titulo}: Cant. ${tabla.cantidadTS}, L: ${tabla.largoTS}", A: ${tabla.anchoTS}", G: ${tabla.grosorTS}"`, 22, yPos);
+                yPos += 6;
+            });
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "italic");
+            doc.text(`* Tolerancia: L: ${item.tolerancias[0].toleranciaTS1}", A: ${item.tolerancias[0].toleranciaTS2}", G: ${item.tolerancias[0].toleranciaTS3}"`, 22, yPos);
+            yPos += 6;
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.text(`- Separación: ${item.tablaSuperior[0].separacionTS}"`, 22, yPos); yPos += 6;
+            
+            // Tabla inferior
+            doc.line(20, yPos, 100, yPos); yPos += 6;
+            doc.text(`- Tabla inferior: Cant. ${item.cantidadTI}, L: ${item.largoTI}", A: ${item.anchoTI}", G: ${item.grosorTI}"`, 22, yPos);
+            yPos += 6;
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "italic");
+            doc.text(`* Tolerancias TI: ${item.tolerancias[0].toleranciaTI1}", ${item.tolerancias[0].toleranciaTI2}", ${item.tolerancias[0].toleranciaTI3}"`, 22, yPos);
+            yPos += 6;
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.text(`- Arreglo: ${item.arregloTI}`, 22, yPos); yPos += 6;
+
+            // Barrote
+            doc.line(20, yPos, 100, yPos); yPos += 6;
+            doc.text(`- Barrote: Cant. ${item.cantidadB}, L: ${item.largoB}", A: ${item.anchoB}", G: ${item.grosorB}"`, 22, yPos); yPos += 6;
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "italic");
+            doc.text(`* Tolerancias B: ${item.tolerancias[0].toleranciaB1}", ${item.tolerancias[0].toleranciaB2}", ${item.tolerancias[0].toleranciaB3}"`, 22, yPos);
+            yPos += 6;
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.text(`- Tipo: ${item.tipoB}`, 22, yPos); yPos += 6;
+
+            if (item.tipoB === 'Con saque') {
+                doc.text(`- Inicio de saque: ${item.distB}"`, 22, yPos); yPos += 6;
+                doc.text(`- Distribución saque: ${item.distBar}"`, 22, yPos); yPos += 6;
+            }
+
+            // Servicios
+            // Verifica los servicios seleccionados
+            const servicio = item.servicios;
+
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "bold");
+            doc.text(`SERVICIOS SOLICITADOS:`, 119, yPos2); yPos2 += 6;
+            // Insertar el servicio a la lista
+            doc.setFont("helvetica", "normal");
+            for (let propiedad in servicio) {
+                if (servicio[propiedad] === "Sí") {
+                    doc.text(`- ${propiedad}`, 124, yPos2); yPos2 += 6;
+                }
+            }
+
+            // Si existe la opción de color, mostrarla
+            if (servicio.hasOwnProperty('Color') && servicio['Color']) {
+                doc.text(`* Color: ${servicio['Color']}`, 129, yPos2); yPos2 += 6;
+            }
+
+        // TARIMA DE TACÓN
+        } else if (item.subtipo === 'Tacón') {
+            // Tabla superior
+            item.tablaSuperior.forEach((tabla, i) => {
+                const titulo = item.tablaSuperior.length > 1 ? `- Tabla superior ${i + 1}` : '- Tabla superior';
+                doc.text(`${titulo}: Cant. ${tabla.cantidadTS}, L: ${tabla.largoTS}", A: ${tabla.anchoTS}", G: ${tabla.grosorTS}"`, 22, yPos);
+                yPos += 6;
+            });
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "italic");
+            doc.text(`* Tolerancias TS: ${item.tolerancias[0].toleranciaTS1}", ${item.tolerancias[0].toleranciaTS2}", ${item.tolerancias[0].toleranciaTS3}"`, 22, yPos);
+            yPos += 6;
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.text(`- Separación: ${item.tablaSuperior[0].separacionTS}"`, 22, yPos); yPos += 6;
+
+            // Tabla inferior
+            doc.line(20, yPos, 100, yPos); yPos += 6;
+            item.tablaInferior.forEach((tabla, i) => {
+                const titulo = item.tablaInferior.length > 1 ? `- Tabla inferior ${i + 1}` : '- Tabla inferior';
+                doc.text(`${titulo}: Cant. ${tabla.cantidadTI}, L: ${tabla.largoTI}", A: ${tabla.anchoTI}", G: ${tabla.grosorTI}"`, 22, yPos);
+                yPos += 6;
+            });
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "italic");
+            doc.text(`* Tolerancias TI: ${item.tolerancias[0].toleranciaTI1}", ${item.tolerancias[0].toleranciaTI2}", ${item.tolerancias[0].toleranciaTI3}"`, 22, yPos);
+            yPos += 6;
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+
+            // Tacón lateral y central
+            doc.line(20, yPos, 100, yPos); yPos += 6;
+            doc.text(`- Tacón lateral: Cant. ${item.cantidadTAL}, L: ${item.largoTAL}", A: ${item.anchoTAL}", G: ${item.grosorTAL}"`, 22, yPos); yPos += 6;
+            doc.text(`- Tacón central: Cant. ${item.cantidadTAC}, L: ${item.largoTAC}", A: ${item.anchoTAC}", G: ${item.grosorTAC}"`, 22, yPos); yPos += 6;
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "italic");
+            doc.text(`* Tolerancias TA: ${item.tolerancias[0].toleranciaTA1}", ${item.tolerancias[0].toleranciaTA2}", ${item.tolerancias[0].toleranciaTA3}"`, 22, yPos);
+            yPos += 6;
+
+            // Tablas de carga
+            doc.line(20, yPos, 100, yPos); yPos += 6;
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.text(`- Tablas carga: Cant. ${item.cantidadTC}, L: ${item.largoTC}", A: ${item.anchoTC}", G: ${item.grosorTC}"`, 22, yPos); yPos += 6;
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "italic");
+            doc.text(`* Tolerancias TC: ${item.tolerancias[0].toleranciaTC1}", ${item.tolerancias[0].toleranciaTC2}", ${item.tolerancias[0].toleranciaTC3}"`, 22, yPos);
+            yPos += 6;
+
+            // Servicios
+            // Verifica los servicios seleccionados
+            const servicio = item.servicios;
+
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "bold");
+            doc.text(`SERVICIOS SOLICITADOS:`, 119, yPos2); yPos2 += 6;
+            // Insertar el servicio a la lista
+            doc.setFont("helvetica", "normal");
+            for (let propiedad in servicio) {
+                if (servicio[propiedad] === "Sí") {
+                    doc.text(`- ${propiedad}`, 124, yPos2); yPos2 += 6;
+                }
+            }
+
+            // Si existe la opción de color, mostrarla
+            if (servicio.hasOwnProperty('Color') && servicio['Color']) {
+                doc.text(`* Color: ${servicio['Color']}`, 129, yPos2); yPos2 += 6;
+            }
+        }
+
+        drawRect(108, 221, 93, 42.2, 0.1);
+    });
+
+
     return doc;
 }
 
