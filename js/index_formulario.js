@@ -1,7 +1,7 @@
 
 // IMPORTACIÓN DE FUNCIONES EXTERNAS
 // Importar funciones de validación
-import {inicializarValidacionesB, inicializarValidacionesT} from './validaciones/validaConfig.js';
+import {validarInputs} from './validaciones/valida_campos.js';
 // Importar funciones de creación de formularios
 import {InsertarFormularioBarrote} from './formularios/barrote_form.js';
 import {InsertarFormularioTacon} from './formularios/tacon_form.js';
@@ -10,7 +10,7 @@ import {insertarFormularioTSuperior} from './formularios/tablaSup_form.js';
 import {dibujarBarrote} from './planos/plano_barrote.js';
 import {dibujarTacon} from './planos/plano_tacon.js';
 // Importar funciones de vinculación de campos
-import {actualizarCampos, asociarActualizacion} from './valores.js';
+import {asociarActualizacion} from './valores.js';
 import {sincronizarTI} from './valores.js';
 // Importar funciones de los modales del configurador
 import {modalGral, modalBarrote, modalTacon, modalServicios, modalRecic, modalPintura} from './formularios/modales_index.js'
@@ -77,9 +77,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Insertar formulario inicial de barrote
             InsertarFormularioBarrote();
+            // Llamar a la función de asociación de datos
+            asociarActualizacion();
 
             // Si se elige variación de grosor en Tabla superior mostrar un formulario distinto
             insertarFormularioTSuperior();
+            // Llamar a la función de asociación de datos
+            asociarActualizacion();
 
             document.getElementById('acomodo').addEventListener('change', function() {
                 const acomodo = this.value;
@@ -146,9 +150,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             plano_tarima.innerHTML = `<canvas id="plano_barrote" width="700" height="400" style="border: 1px solid black"></canvas>`;
 
-            // Llamar a la función de asociación de datos
-            asociarActualizacion();
-
             // Llamar a la función de dibujar el plano
             dibujarBarrote();
             variacionTS.addEventListener('change', function () {
@@ -157,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
             
             // Llamar a la función de validaciones después de renderizar
             requestAnimationFrame(() => {
-                inicializarValidacionesB();
+                validarInputs();
             });
 
             // Insertar modal de barrote
@@ -223,9 +224,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Insertar formulario inicial de tacón
             InsertarFormularioTacon();
+            // Llamar a la función de asociación de datos
+            asociarActualizacion();
+            sincronizarTI();
 
             // Si se elige variación de grosor en Tabla superior mostrar un formulario distinto
             insertarFormularioTSuperior();
+            // Llamar a la función de asociación de datos
+            asociarActualizacion();
+            sincronizarTI();
 
             document.getElementById('acomodo').addEventListener('change', function() {
                 const acomodo = this.value;
@@ -268,10 +275,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             plano_tarima.innerHTML= `<canvas id="plano_tacon" width="700" height="400" style="border: 1px solid black"></canvas>`;
-
-            // Llamar a la función de asociación de datos
-            asociarActualizacion();
-            sincronizarTI();
             
             // Llamar a la función de dibujar el plano
             dibujarTacon();
@@ -281,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Llamar a la función después de renderizar
             requestAnimationFrame(() => {
-                inicializarValidacionesT();
+                validarInputs();
             });
 
             modalGral()

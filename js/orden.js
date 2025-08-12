@@ -68,7 +68,12 @@ function crearPdf() {
     textCenter("Col. San Bernardino, C.P. 56260, Texcoco, Estado de México", 215.9, 35)
     textCenter("Tel. 5959220372          RFC: SPE160311QI7", 215.9, 40)
 
+    // Número de página
+    doc.setFontSize(7);
+    doc.text("Página 1", 190, 15)
+
     // Folio y fecha 
+    doc.setFontSize(10);
     drawRect(175, 20, 25, 5, 0.1);
     drawRect(175, 25, 25, 5, 0.1);
     textCenter("Folio", 375, 24)
@@ -149,19 +154,18 @@ function crearPdf() {
     // Tabla comentarios
     drawRect(15, 221, 129, 43, 0.1);
     // Información importante
-    doc.text("INFORMACIÓN IMPORTANTE:", 16.5, 226)
-    doc.setFontSize(8);
-    doc.text("Este documento no tiene validez oficial. El presente presupuesto es únicamente informativo y", 16.5, 231)
-    doc.text("representa una estimación aproximada del 90% del valor final. Los precios y especificaciones están", 16.5, 234)
-    doc.text("sujetos a cambios sin previo aviso. Para confirmación de precios, condiciones o aclaraciones, por", 16.5, 237)
-    doc.text("favor consulte con su vendedor asignado.", 16.5, 240)
-    doc.text("Este documento no constituye un compromiso de venta ni una orden de compra vinculante.", 16.5, 243)
+    doc.text("INFORMACIÓN IMPORTANTE:", 17, 226)
+    doc.setFontSize(7);
+    doc.text("* Este documento no tiene validez oficial. El presente presupuesto es únicamente informativo y representa una", 17, 231)
+    doc.text("  estimación aproximada del 90% del valor final. Los precios y especificaciones están sujetos a cambios sin previo", 17, 234)
+    doc.text("  aviso. Para confirmación de precios, condiciones o aclaraciones, por favor consulte con su vendedor asignado.", 17, 237)
+    doc.text("* Este documento no constituye un compromiso de venta ni una orden de compra vinculante.", 17, 240)
 
     // Tolerancias
     doc.setFontSize(10);
-    doc.text("TOLERANCIAS:", 16, 249)
+    doc.text("TOLERANCIAS:", 17, 246)
 
-    let yPosition2 = 253; // La posición Y inicial del texto
+    let yPosition2 = 250; // La posición Y inicial del texto
     doc.setFontSize(8);
     carrito.forEach((item, index) => {
         const numero = index + 1;
@@ -174,7 +178,7 @@ function crearPdf() {
             const ti1 = tolerancias.toleranciaTI1 || "-";
             const b1  = tolerancias.toleranciaB1  || "-";
 
-            texto = `Tarima ${numero}: Tabla Sup = +-${ts1}", Tabla Inf = +-${ti1} y Barrote = +-${b1}"`;
+            texto = `- Tarima ${numero}: Tabla Sup = +-${ts1}", Tabla Inf = +-${ti1} y Barrote = +-${b1}"`;
 
         } else if (item.subtipo === "Tacón") {
             const ts1 = tolerancias.toleranciaTS1 || "-";
@@ -182,11 +186,11 @@ function crearPdf() {
             const ta1 = tolerancias.toleranciaTA1 || "-";
             const tc1 = tolerancias.toleranciaTC1 || "-";
 
-            texto = `Tarima ${numero}: Tabla Sup = +-${ts1}", Tabla Inf = +-${ti1}", Tacón = +-${ta1}" y Tabla Carga = +-${tc1}"`;
+            texto = `- Tarima ${numero}: Tabla Sup = +-${ts1}", Tabla Inf = +-${ti1}", Tacón = +-${ta1}" y Tabla Carga = +-${tc1}"`;
         } 
 
         // Imprimir el texto 
-        doc.text(texto, 18, yPosition2);
+        doc.text(texto, 17, yPosition2);
 
         yPosition2 += 4; // Espacio entre filas
     });
@@ -205,24 +209,6 @@ function crearPdf() {
     doc.text("Total", 159, 262)
     doc.text(`$${formatoMoneda(orden.totalEstimado * 1.16)}`, 177, 262);
 
-    // FUNCIONES
-    // Función para generar los elementos de las tablas
-    function crearElemListaPrin(nombre, cantidad, largo, ancho, grosor, x, y) {
-        doc.text(`${nombre}: ${cantidad} * (${largo}" x ${ancho}" x ${grosor}")`, x, y);
-    }
-    // Función para generar los elementos secundarios de las tablas 
-    function crearElemListaSec(nombre, descripcion, x, y) {
-        doc.text(`${nombre}: ${descripcion}`, x, y);
-    }
-    // Función para generar los elementos de las tablas con medidas en pulgadas(")"
-    function crearElemListaSecMed(nombre, descripcion, x, y) {
-        doc.text(`${nombre}: ${descripcion}"`, x, y);
-    }
-    // Función para generar las tolerancias de las tablas
-    function crearElemListaTolerancia(valor1, valor2, valor3,x, y) {
-        doc.text(`Tolerancia: La: +- ${valor1}, An: +- ${valor2}, Es: +- ${valor3}`, x, y);
-    }
-
     // PLANOS POR PRODUCTO //
     carrito.forEach((item, index) => {
         // Si no es el primer producto, agregar nueva página
@@ -237,6 +223,10 @@ function crearPdf() {
         // Texto título
         doc.setFontSize(14);
         textCenter(`Ficha de requerimientos del producto ${index + 1}`, 215.9, 30);
+
+        // Número de página
+        doc.setFontSize(7);
+        doc.text(`Página ${index + 2}`, 190, 15)
 
         // Tabla del plano
         drawRect(15, 55, 186, 100, 0.1);
@@ -255,6 +245,28 @@ function crearPdf() {
         let yPos = 176;
         let yPos2 = 176;
         doc.setFontSize(10);
+
+        // Función de servicios
+        function servicios() {
+            // Verifica los servicios seleccionados
+            const servicio = item.servicios;
+
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "bold");
+            doc.text(`SERVICIOS SOLICITADOS:`, 119, yPos2); yPos2 += 5;
+            // Insertar el servicio a la lista
+            doc.setFont("helvetica", "normal");
+            for (let propiedad in servicio) {
+                if (servicio[propiedad] === "Sí") {
+                    doc.text(`- ${propiedad}`, 124, yPos2); yPos2 += 5;
+                }
+            }
+
+            // Si existe la opción de color, mostrarla
+            if (servicio.hasOwnProperty('Color') && servicio['Color']) {
+                doc.text(`* Color: ${servicio['Color']}`, 129, yPos2); yPos2 += 5;
+            }
+        }
 
         // TARIMA DE BARROTE 
         if (item.subtipo === 'Barrote') {
@@ -278,7 +290,7 @@ function crearPdf() {
             yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancias TI: ${item.tolerancias[0].toleranciaTI1}", ${item.tolerancias[0].toleranciaTI2}", ${item.tolerancias[0].toleranciaTI3}"`, 22, yPos);
+            doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaTI1}", ${item.tolerancias[0].toleranciaTI2}", ${item.tolerancias[0].toleranciaTI3}"`, 22, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
@@ -289,7 +301,7 @@ function crearPdf() {
             doc.text(`- Barrote: Cant. ${item.cantidadB}, L: ${item.largoB}", A: ${item.anchoB}", G: ${item.grosorB}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancias B: ${item.tolerancias[0].toleranciaB1}", ${item.tolerancias[0].toleranciaB2}", ${item.tolerancias[0].toleranciaB3}"`, 22, yPos);
+            doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaB1}", ${item.tolerancias[0].toleranciaB2}", ${item.tolerancias[0].toleranciaB3}"`, 22, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
@@ -301,24 +313,7 @@ function crearPdf() {
             }
 
             // Servicios
-            // Verifica los servicios seleccionados
-            const servicio = item.servicios;
-
-            doc.setFontSize(10);
-            doc.setFont("helvetica", "bold");
-            doc.text(`SERVICIOS SOLICITADOS:`, 119, yPos2); yPos2 += 6;
-            // Insertar el servicio a la lista
-            doc.setFont("helvetica", "normal");
-            for (let propiedad in servicio) {
-                if (servicio[propiedad] === "Sí") {
-                    doc.text(`- ${propiedad}`, 124, yPos2); yPos2 += 6;
-                }
-            }
-
-            // Si existe la opción de color, mostrarla
-            if (servicio.hasOwnProperty('Color') && servicio['Color']) {
-                doc.text(`* Color: ${servicio['Color']}`, 129, yPos2); yPos2 += 6;
-            }
+            servicios();
 
         // TARIMA DE TACÓN
         } else if (item.subtipo === 'Tacón') {
@@ -330,7 +325,7 @@ function crearPdf() {
             });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancias TS: ${item.tolerancias[0].toleranciaTS1}", ${item.tolerancias[0].toleranciaTS2}", ${item.tolerancias[0].toleranciaTS3}"`, 22, yPos);
+            doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaTS1}", ${item.tolerancias[0].toleranciaTS2}", ${item.tolerancias[0].toleranciaTS3}"`, 22, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
@@ -345,7 +340,7 @@ function crearPdf() {
             });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancias TI: ${item.tolerancias[0].toleranciaTI1}", ${item.tolerancias[0].toleranciaTI2}", ${item.tolerancias[0].toleranciaTI3}"`, 22, yPos);
+            doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaTI1}", ${item.tolerancias[0].toleranciaTI2}", ${item.tolerancias[0].toleranciaTI3}"`, 22, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
@@ -356,7 +351,7 @@ function crearPdf() {
             doc.text(`- Tacón central: Cant. ${item.cantidadTAC}, L: ${item.largoTAC}", A: ${item.anchoTAC}", G: ${item.grosorTAC}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancias TA: ${item.tolerancias[0].toleranciaTA1}", ${item.tolerancias[0].toleranciaTA2}", ${item.tolerancias[0].toleranciaTA3}"`, 22, yPos);
+            doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaTA1}", ${item.tolerancias[0].toleranciaTA2}", ${item.tolerancias[0].toleranciaTA3}"`, 22, yPos);
             yPos += 6;
 
             // Tablas de carga
@@ -366,31 +361,27 @@ function crearPdf() {
             doc.text(`- Tablas carga: Cant. ${item.cantidadTC}, L: ${item.largoTC}", A: ${item.anchoTC}", G: ${item.grosorTC}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancias TC: ${item.tolerancias[0].toleranciaTC1}", ${item.tolerancias[0].toleranciaTC2}", ${item.tolerancias[0].toleranciaTC3}"`, 22, yPos);
+            doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaTC1}", ${item.tolerancias[0].toleranciaTC2}", ${item.tolerancias[0].toleranciaTC3}"`, 22, yPos);
             yPos += 6;
 
             // Servicios
-            // Verifica los servicios seleccionados
-            const servicio = item.servicios;
-
-            doc.setFontSize(10);
-            doc.setFont("helvetica", "bold");
-            doc.text(`SERVICIOS SOLICITADOS:`, 119, yPos2); yPos2 += 6;
-            // Insertar el servicio a la lista
-            doc.setFont("helvetica", "normal");
-            for (let propiedad in servicio) {
-                if (servicio[propiedad] === "Sí") {
-                    doc.text(`- ${propiedad}`, 124, yPos2); yPos2 += 6;
-                }
-            }
-
-            // Si existe la opción de color, mostrarla
-            if (servicio.hasOwnProperty('Color') && servicio['Color']) {
-                doc.text(`* Color: ${servicio['Color']}`, 129, yPos2); yPos2 += 6;
-            }
+            servicios();
         }
 
-        drawRect(108, 221, 93, 42.2, 0.1);
+        drawRect(104, 221, 97, 42.1, 0.1);
+        // Texto informativo
+        doc.setFontSize(7);
+        doc.text("* Las tablas y tacones de esta tarima no están exentas a tener nudillos macizos,", 107, 227)
+        doc.text("  procurando siempre que no se afecte la funcionalidad de la tarima.", 107, 230)
+        doc.text("* La presion del impacto del clavo puede ocasionar en algunas tarimas fisuras, sin", 107, 234)
+        doc.text("  afectar la funcionaliad de la tarima.", 107, 237)
+        doc.text("* Teniendo en cuenta que las imágenes mostradas son solo representativas y", 107, 241)
+        doc.text("  pueden no reflejar exactamente las variaciones individuales en el grosor,", 107, 244)
+        doc.text("  uniformidad y color ya que pueden estar construidas con diferentes tipos de", 107, 247)
+        doc.text("  madera, que pueden variar en función del material utilizado. Esto puede dar lugar", 107, 250)
+        doc.text("  a diferencias en su apariencia física, pero no afecta a su funcionalidad. Algunos", 107, 253)
+        doc.text("  ejemplos de tipos de madera utilizados son: pino, oyamel, encino, cedro, aile,", 107, 256)
+        doc.text("  melina, mango, hule, fresno, entre otros.", 107, 259)
     });
 
 

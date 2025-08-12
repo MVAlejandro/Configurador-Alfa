@@ -1,7 +1,7 @@
 
 // IMPORTACIÓN DE FUNCIONES EXTERNAS
 // Importar funciones de validación de campos
-import {validarCamposInvalidos} from "./validaciones/validaBarrote.js"
+import {validarCamposInvalidos} from "./validaciones/valida_campos.js"
 // Importar la función para obtener la imagen del plano
 import {obtenerPlanoB} from './planos/plano_barrote.js'; 
 import {obtenerPlanoT} from './planos/plano_tacon.js';

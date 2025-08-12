@@ -1,8 +1,8 @@
 
 // IMPORTACIÓN DE FUNCIONES EXTERNAS
 // Importar funciones de validación de campos
-import {validarCamposInvalidos} from "./validaciones/validaBarrote.js"
-import {validarText, validarNombre, validarRfc, validarEmail, validarTelefono, validarCP} from "./validaciones/validaCliente.js"
+import {validarCamposInvalidos} from "./validaciones/valida_campos.js"
+import {validarText, validarNombre, validarRfc, validarEmail, validarTelefono, validarCP} from "./validaciones/valida_cliente.js"
 
 // Declarar el objeto cliente para después
 let cliente = {};
