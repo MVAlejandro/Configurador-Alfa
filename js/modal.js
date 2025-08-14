@@ -85,7 +85,7 @@ function abrirModalItem(formData) {
         if (formData.tipo === 'Nueva') {
             modelo.innerHTML = `<img src="./assets/Tarima-con-barrote-nueva-520x357.png" alt="Tarima de barrotes nueva" class="d-block mx-auto img-fluid">`;
         } else {
-            modelo.innerHTML = `<img src="./assets/Tarima-con-barrote-nueva-520x357.png" alt="Tarima de barrotes reciclada" class="d-block mx-auto img-fluid">`;
+            modelo.innerHTML = `<img src="./assets/Tarima-con-barrote-reciclada-520x357.png" alt="Tarima de barrotes reciclada" class="d-block mx-auto img-fluid">`;
         }
     // Insertar información TARIMA DE TACON
     } else if (formData.subtipo === 'Tacón') {

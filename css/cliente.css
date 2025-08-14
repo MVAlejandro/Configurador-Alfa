@@ -1,4 +1,4 @@
-/* --- Fondo general --- */
+/* Fondo general */
 body {
     display: flex;
     flex-direction: column;
@@ -9,16 +9,18 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* --- Estructura --- */
+/* Estructura */
 main {
     flex: 1;
 }
+
 
 /*--- BARRA DE RELLENO SUPERIOR ---*/
 #top_bar {
     background-color: #8FC74A;
     height: 38.4px;
 }
+
 
 /*--- BARRA DE NAVEGACION PRINCIPAL ---*/
 #nav_principal {
@@ -37,17 +39,15 @@ main {
 }
 
 /*--- BARRA DE NAVEGACION SECUNDARIO ---*/
-
 #nav_secundario {
     background-color: #F5F5F5;
 }
-
 #btn_agregar {
     border: 1px solid #7B7B7B;
 }
 
 /*--- CONTENIDO PRINCIPAL ---*/
-
+/* Recuadro del formulario */
 .card {
     color: white !important;
     background-color: #00000033 !important;
@@ -56,12 +56,7 @@ main {
     animation: fadeInUp 0.8s ease;
 }
 
-/* --- Inputs --- */
-.form-control {
-    background-color: rgba(255, 255, 255, 0.781) !important;
-    border: 1px solid #7B7B7B !important;
-}
-
+/* Animaciones */
 @keyframes fadeInUp {
     from {
         opacity: 0; 
@@ -73,6 +68,13 @@ main {
     }
 }
 
+/* Inputs */
+.form-control {
+    background-color: rgba(255, 255, 255, 0.781) !important;
+    border: 1px solid #7B7B7B !important;
+}
+
+/* Eliminar flechas de inputs numericos */
 .no-arrows::-webkit-outer-spin-button,
 .no-arrows::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -80,17 +82,50 @@ main {
 }
 
 
-/*--- FOOTER ---*/
+/*--- MODAL DE CIERRE DE SESIÓN---*/
+.modal-content {
+    border-radius: 15px !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 0 25px rgba(143, 199, 74, 0.5) !important;
+    animation: fadeInScale 0.4s ease;
+}
 
+/* Encabezado modal */
+.modal-header {
+    background-color: #7B7B7B !important;
+    color: white !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+.modal-title {
+    font-weight: bold !important;
+}
+.btn-close {
+    filter: invert(1) brightness(1.2) !important;
+}
+
+/* Footer modal */
+.modal-footer .btn {
+    border: 1px solid #8FC74A !important;
+    color: #8FC74A;
+    background-color: transparent;
+    transition: all 0.2s ease;
+}
+.modal-footer .btn:hover {
+    background-color: #8FC74A;
+    color: black;
+}
+
+
+/*--- FOOTER ---*/
 #site_footer {
     background-color: #222222;
 }
-
 #texto_footer {
     color: white;
 }
 
 
+/* Media queries para botones */
 @media (max-width: 768px) {
   #btn_regresar {
     font-size: 0.8rem;
@@ -98,7 +133,6 @@ main {
     margin-left: 16px !important;
   }
 }
-   
 @media (max-width: 768px) {
   #btn_siguiente {
     font-size: 0.8rem;

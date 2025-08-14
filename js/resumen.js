@@ -120,7 +120,7 @@ carrito.forEach((formData, index) => {
     if (formData.tipo === 'Nueva' && formData.subtipo === 'Barrote') {
         miniatura_item.innerHTML = `<img src="./assets/Tarima-con-barrote-nueva-520x357.png" alt="Tarima de barrotes nueva" width="110px">`;
     } else if (formData.tipo === 'Reciclada' && formData.subtipo === 'Barrote') {
-        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-barrote-nueva-520x357.png" alt="Tarima de barrotes reciclada" width="110px">`;
+        miniatura_item.innerHTML = `<img src="./assets/Tarima-con-barrote-reciclada-520x357.png" alt="Tarima de barrotes reciclada" width="110px">`;
     } else if (formData.tipo === 'Nueva' && formData.subtipo === 'Tacón') {
         miniatura_item.innerHTML = `<img src="./assets/Tarima-con-tacon-nueva-520x357.png" alt="Tarima de tacón nueva" width="110px">`;
     } else if (formData.tipo === 'Reciclada' && formData.subtipo === 'Tacón') {

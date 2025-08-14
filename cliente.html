@@ -24,7 +24,7 @@
     <div id="btn_bar">
         <nav id="nav_secundario" class="navbar w-100">
             <div class="col-auto">
-                <button id="btn_regresar" class="btn btn-outline-success ms-5" type="button">Regresar</button>
+                <button id="btn_regresar" class="btn btn-outline-success ms-5" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Regresar</button>
             </div> 
             <div class="col-auto">
                 <button id="btn_siguiente" class="btn btn-outline-success me-5" type="button">Siguiente</button>
@@ -93,6 +93,27 @@
             </div>
         </div>
     </main>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Cerrar sesión</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <p>¿Desea cancelar la cotización?</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary fin" data-bs-dismiss="modal">No</button>
+            <button id="btn_cerrar" type="button" class="btn btn-primary fin">Sí</button>
+        </div>
+        </div>
+    </div>
+    </div>
 
     <!-- FOOTER -->
     <footer id="site_footer">

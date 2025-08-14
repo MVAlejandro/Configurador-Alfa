@@ -7,20 +7,19 @@
     animation: fadeInScale 0.4s ease;
 }
 
+/* Encabezado modal */
 .modal-header {
     background-color: #7B7B7B;
     color: white;
 }
-
-.btn-close {
+#close-modal {
     filter: invert(1) brightness(1.2) !important;
 }
-
 .modal-footer {
     background-color: #222222 !important;
 }
 
-/* Botón del footer */
+/* Footer modal */
 .modal-footer .btn {
     border: 1px solid #8FC74A !important;
     color: #8FC74A;
@@ -30,43 +29,38 @@
     color: black;
 }
 
-/*--- Cards de información ---*/
+/* Cards de información */
 .card_modal {
     border: none !important;
 }
-
 .card-title {
     color: #8FC74A !important;
 }
-
 .sub_descripcion {
     list-style: circle;
 }
-
 #costo_unitario, #costo_total, #cantidad_total {
     font-weight: bold;
 }
 
-/*--- Estilos específicos de listas ---*/
+/* Estilos específicos de listas */
 #tipoTarima , #subtipoTarima, #acomodoTarima, #tamGral {
     list-style: none !important;
     font-weight: bold !important;
 }
-
 #distTS {
     list-style: none !important;
 }
-
 .tolerancia {
     font-size: small !important;
 }
 
-/*--- Logo en pantalla por defecto ---*/
+/* Logo en pantalla por defecto */
 #logo_main {
     opacity: 0.7 !important;
 }
 
-/* Animación de entrada */
+/* Animaciones */
 @keyframes fadeInScale {
     from {
         opacity: 0 !important;
@@ -79,6 +73,7 @@
 }
 
 
+/* Media query para el logo del modal */
 @media (max-width: 768px) {
   #logo_modal {
     display: none !important;

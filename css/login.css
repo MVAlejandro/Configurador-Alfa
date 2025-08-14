@@ -1,10 +1,11 @@
-
+/* Fondo general */
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
+/* Estructura */
 main {
     flex: 1; 
 }
@@ -15,6 +16,7 @@ main {
     height: 38.4px;
 }
 
+
 /*--- BARRA DE NAVEGACION PRINCIPAL ---*/
 #nav_principal {
     background-color: #7B7B7B;
@@ -22,31 +24,29 @@ main {
     height: 74.8px;
     padding: 0px 50px 0px 40px;
 }
-
 #nav_logo {
     padding: 10px   
 }
-
 .nav {
     display: none !important;
 }
 
-/*--- BARRA DE NAVEGACION SECUNDARIO ---*/
 
+/*--- BARRA DE NAVEGACION SECUNDARIO ---*/
 #nav_secundario {
     background-color: #F5F5F5;
 }
-
 #btn_agregar {
     border: 1px solid #7B7B7B;
 }
 
 /*--- CONTENIDO PRINCIPAL ---*/
-
+/* Recuadro del formulario */
 .card {
     animation: fadeInUp 0.8s ease;
 }
 
+/* Animaciones */
 @keyframes fadeInUp {
     from {
         opacity: 0; /* empieza invisible */
@@ -58,17 +58,17 @@ main {
     }
 }
 
-/*--- FOOTER ---*/
 
+/*--- FOOTER ---*/
 #site_footer {
     background-color: #222222;
 }
-
 #texto_footer {
     color: white;
 }
 
 
+/* Media queries para botones */
 @media (max-width: 768px) {
   #btn_regresar {
     font-size: 0.8rem;
@@ -76,7 +76,6 @@ main {
     margin-left: 16px !important;
   }
 }
-   
 @media (max-width: 768px) {
   #btn_login {
     font-size: 0.8rem;

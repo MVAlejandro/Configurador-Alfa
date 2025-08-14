@@ -5,9 +5,9 @@ import {validarCamposInvalidos} from "./validaciones/valida_campos.js"
 import {validarText, validarNombre, validarRfc, validarEmail, validarTelefono, validarCP} from "./validaciones/valida_cliente.js"
 
 // Crear evento al dar click en botón Regresar
-document.getElementById('btn_regresar').addEventListener('click', function () {
+document.getElementById('btn_cerrar').addEventListener('click', function () {
     localStorage.clear();
-    window.location.href = './inicio.html';
+    window.location.href = './login.html';
 });
 
 // Declarar el objeto cliente para después
