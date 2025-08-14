@@ -4,6 +4,12 @@
 import {validarCamposInvalidos} from "./validaciones/valida_campos.js"
 import {validarText, validarNombre, validarRfc, validarEmail, validarTelefono, validarCP} from "./validaciones/valida_cliente.js"
 
+// Crear evento al dar click en botón Regresar
+document.getElementById('btn_regresar').addEventListener('click', function () {
+    localStorage.clear();
+    window.location.href = './inicio.html';
+});
+
 // Declarar el objeto cliente para después
 let cliente = {};
 
@@ -69,5 +75,5 @@ document.getElementById("btn_siguiente").addEventListener("click", function () {
     alert('Datos guardados correctamente.');
     console.log("Cliente guardado:", cliente);
 
-    window.location.href = './index.html';
+    window.location.href = './configurador.html';
   });

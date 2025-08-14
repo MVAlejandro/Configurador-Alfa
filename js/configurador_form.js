@@ -13,7 +13,7 @@ import {dibujarTacon} from './planos/plano_tacon.js';
 import {asociarActualizacion} from './valores.js';
 import {sincronizarTI} from './valores.js';
 // Importar funciones de los modales del configurador
-import {modalGral, modalBarrote, modalTacon, modalServicios, modalRecic, modalPintura} from './formularios/modales_index.js'
+import {modalGral, modalBarrote, modalTacon, modalServicios, modalRecic, modalPintura} from './formularios/modales_form.js'
 
 // MOSTRAR EL FORMULARIO DE ACUERDO AL SUBTIPO DE TARIMA
 // Identificar el subtipo y el contenedor principal

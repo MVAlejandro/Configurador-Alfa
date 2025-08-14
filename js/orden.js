@@ -401,7 +401,8 @@ window.addEventListener("load", function(event){
 
 document.getElementById('btn_final').addEventListener('click', function() {
     // Borrar todo el localStorage
-    localStorage.clear();
+    localStorage.removeItem("carrito");
+    localStorage.removeItem("clienteActual");
 
     // Redirigir al inicio
     window.location.href = 'index.html';

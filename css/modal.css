@@ -1,23 +1,42 @@
 
 /*--- CONTENIDO PRINCIPAL ---*/
+.modal-content {
+    border-radius: 15px !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 0 25px rgba(143, 199, 74, 0.5);
+    animation: fadeInScale 0.4s ease;
+}
+
 .modal-header {
     background-color: #7B7B7B;
-    color: white
+    color: white;
+}
+
+.btn-close {
+    filter: invert(1) brightness(1.2) !important;
 }
 
 .modal-footer {
     background-color: #222222 !important;
 }
+
+/* Botón del footer */
+.modal-footer .btn {
+    border: 1px solid #8FC74A !important;
+    color: #8FC74A;
+}
+.modal-footer .btn:hover {
+    background-color: #8FC74A;
+    color: black;
+}
+
 /*--- Cards de información ---*/
 .card_modal {
     border: none !important;
 }
 
-.card-title, .card_resumen {
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    padding-top: 5px;
-    padding-bottom: 5px;
+.card-title {
+    color: #8FC74A !important;
 }
 
 .sub_descripcion {
@@ -29,23 +48,34 @@
 }
 
 /*--- Estilos específicos de listas ---*/
-
 #tipoTarima , #subtipoTarima, #acomodoTarima, #tamGral {
-    list-style: none;
-    font-weight: bold;
+    list-style: none !important;
+    font-weight: bold !important;
 }
 
 #distTS {
-    list-style: none;
+    list-style: none !important;
 }
 
 .tolerancia {
-    font-size: small;
+    font-size: small !important;
 }
 
 /*--- Logo en pantalla por defecto ---*/
 #logo_main {
-    opacity: 0.7;
+    opacity: 0.7 !important;
+}
+
+/* Animación de entrada */
+@keyframes fadeInScale {
+    from {
+        opacity: 0 !important;
+        transform: scale(0.9) !important;
+    }
+    to {
+        opacity: 1 !important;
+        transform: scale(1) !important;
+    }
 }
 
 

@@ -1,0 +1,197 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1; 
+}
+
+/*--- BARRA DE RELLENO SUPERIOR ---*/
+#top_bar {
+    background-color: #8FC74A;
+    height: 38.4px;
+}
+
+/*--- BARRA DE NAVEGACION PRINCIPAL ---*/
+#nav_principal {
+    background-color: #7B7B7B;
+    border: 1px solid white;
+    height: 74.8px;
+    padding: 0px 50px 0px 40px;
+}
+
+#nav_logo {
+    padding: 10px   
+}
+
+.nav-op .nav-link:hover {
+  color: #8FC74A !important; 
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+/*--- BARRA DE NAVEGACION SECUNDARIO ---*/
+#nav_secundario {
+    background-color: #F5F5F5;
+}
+
+/*--- CONTENIDO PRINCIPAL ---*/
+/* Cliente activo */
+#main p u {
+    font-size: 1.1rem;
+}
+
+/* Barra lateral de opciones */
+.select-bar {
+    animation: fadeInLeft 0.7s ease;
+}
+
+/* Títulos de opciones */
+.titulo_opcion {
+    font-weight: bold;
+    color: #8FC74A;
+    letter-spacing: 1px;
+}
+
+/* Inputs tamaño */
+.form-control.gral {
+    border: 1px solid #7B7B7B !important;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+/* Imagen plano */
+#plano_tarima {
+    animation: fadeInRight 0.7s ease;
+}
+
+/* Animaciones */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.no-arrows::-webkit-outer-spin-button,
+.no-arrows::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/*--- Logo por defecto en página principal ---*/
+#logo_main {
+    opacity: 0.7;
+}
+
+/*--- MODALES DE TOLERANCIAS Y SERVICIOS ---*/
+.modal-content {
+    border-radius: 15px !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 0 25px rgba(143, 199, 74, 0.5) !important;
+    animation: fadeInScale 0.4s ease;
+}
+
+/* Encabezado */
+.modal-header {
+    background-color: #7B7B7B !important;
+    color: white !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.modal-title {
+    font-weight: bold !important;
+}
+
+.btn-close {
+    filter: invert(1) brightness(1.2) !important;
+}
+
+/* Footer */
+.modal-footer .btn {
+    border: 1px solid #8FC74A !important;
+    color: #8FC74A;
+    background-color: transparent;
+    transition: all 0.2s ease;
+}
+.modal-footer .btn:hover {
+    background-color: #8FC74A;
+    color: black;
+}
+
+/*--- Animación ---*/
+@keyframes fadeInScale {
+    from {
+        opacity: 0 !important;
+        transform: scale(0.9) !important;
+    }
+    to {
+        opacity: 1 !important;
+        transform: scale(1) !important;
+    }
+}
+
+/*--- FOOTER ---*/
+
+#site_footer {
+    background-color: #222222;
+}
+
+#texto_footer {
+    color: white;
+}
+
+
+
+@media (max-width: 1024px) {
+  #plano_barrote, #plano_tacon {
+    width: 600px;
+    height: 343px;
+  }
+}
+@media (max-width: 768px) {
+  #plano_barrote, #plano_tacon {
+    width: 450px;
+    height: 257px;
+  }
+}
+@media (max-width: 430px) {
+  #plano_barrote, #plano_tacon {
+    width: 390px;
+    height: 223px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  #btn_resumen {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    margin-left: 16px !important;
+  }
+}
+   
+@media (max-width: 768px) {
+  #btn_siguiente {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    margin-right: 16px !important;
+  }
+}

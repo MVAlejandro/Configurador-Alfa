@@ -11,7 +11,7 @@ function crearHeader(){
     header.insertAdjacentHTML("afterbegin",
         `<nav id="nav_principal" class="navbar">
             <div class="container-fluid">
-                <a id="nav_logo" class="navbar-brand" href="#">
+                <a id="nav_logo" class="navbar-brand" href="https://palletsalfatexcoco.com.mx/inicio/">
                     <img src="./assets/Logo-Color-PNG-62x51.png" alt="Pallets Alfa logo">
                 </a>
                 <ul class="nav justify-content-end">

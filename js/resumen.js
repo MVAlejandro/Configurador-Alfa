@@ -1,7 +1,7 @@
 
 // Crear evento al dar click en botón Regresar
 document.getElementById('btn_regresar').addEventListener('click', function () {
-    window.location.href = './index.html';
+    window.location.href = './configurador.html';
 });
 
 // Recuperar los datos del localStorage e introducir el nombre del cliente
