@@ -117,11 +117,10 @@ export function dibujarBarrote() {
         const anchoB = parseFloat(document.getElementById('anchoB').value);
         const grosorB = parseFloat(document.getElementById('grosorB').value);
         const tipoB = document.getElementById('tipoB').value;
-        const distBar = document.getElementById('distBar').value;
+        let distB = parseFloat(document.getElementById('distB').value);
 
         // Calcular las separaciones
         let separacionTS = ((largoGral - (anchoTS * cantidadTS)) / (cantidadTS - 1)).toFixed(2)
-        let separacionTI = ((largoGral - (anchoTI * cantidadTI)) / (cantidadTI - 1)).toFixed(2)
         let separacionB = ((anchoGral - (grosorB * cantidadB)) / (cantidadB - 1)).toFixed(2)
 
         const escala = canvasWidth*0.0064;
@@ -137,35 +136,28 @@ export function dibujarBarrote() {
         drawTextV(anchoGral, offsetX1-(4*escala), offsetY1, offsetY1+(anchoGral*escala));
 
             // Dibujar Barrotes
-        if (distBar === 'Estándar') {
-            const y = offsetY1+anchoGral*escala/2 // Centro y del contenedor
-            if (cantidadB === 3) {
-                drawFullRect(offsetX1, offsetY1, (largoB * escala), (grosorB * escala), "#787878"); 
-                drawFullRect(offsetX1, y-((grosorB*escala)/2), (largoB * escala), (grosorB * escala), "#787878");
-                drawFullRect(offsetX1, offsetY1 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (largoB * escala), (grosorB * escala), "#787878"); 
-            } else if (cantidadB === 4) {
-                drawFullRect(offsetX1, offsetY1, (largoB * escala), (grosorB * escala), "#787878"); 
-                drawFullRect(offsetX1, y-(3*escala), (largoB * escala), (grosorB * escala), "#787878");
-                drawFullRect(offsetX1, y+(3*escala), (largoB * escala), (grosorB * escala), "#787878");
-                drawFullRect(offsetX1, offsetY1 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (largoB * escala), (grosorB * escala), "#787878");
-            } else {
-                const alto = grosorB * escala;
-                const separacion = 6 * escala;
-                drawFullRect(offsetX1, offsetY1, (largoB * escala), alto, "#787878"); 
-                const y2 = y - (3 * alto / 2) - separacion;
-                drawFullRect(offsetX1, y2, largoB * escala, alto, "#787878");
-                const y3 = y - alto / 2;
-                drawFullRect(offsetX1, y3, largoB * escala, alto, "#787878");
-                const y4 = y + alto / 2 + separacion;
-                drawFullRect(offsetX1, y4, largoB * escala, alto, "#787878");
-                drawFullRect(offsetX1, offsetY1 + (cantidadB - 1) * ((alto) + (separacionB * escala)), (largoB * escala), alto, "#787878");
-            }
+        let y = offsetY1+anchoGral*escala/2 // Centro y del contenedor
+
+        if (cantidadB === 3) {
+            drawFullRect(offsetX1, offsetY1, (largoB * escala), (grosorB * escala), "#787878"); 
+            drawFullRect(offsetX1, y-((grosorB*escala)/2), (largoB * escala), (grosorB * escala), "#787878");
+            drawFullRect(offsetX1, offsetY1 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (largoB * escala), (grosorB * escala), "#787878"); 
+        } else if (cantidadB === 4) {
+            drawFullRect(offsetX1, offsetY1, (largoB * escala), (grosorB * escala), "#787878"); 
+            drawFullRect(offsetX1, y-(3*escala), (largoB * escala), (grosorB * escala), "#787878");
+            drawFullRect(offsetX1, y+(3*escala), (largoB * escala), (grosorB * escala), "#787878");
+            drawFullRect(offsetX1, offsetY1 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (largoB * escala), (grosorB * escala), "#787878");
         } else {
-            for (let i = 0; i < cantidadB; i++) {
-                const x = offsetX1;
-                const y = offsetY1 + i * ((grosorB * escala) + (separacionB * escala));
-                drawFullRect(x, y, (largoB * escala), (grosorB * escala), "#787878");
-            }
+            const alto = grosorB * escala;
+            const separacion = 6 * escala;
+            drawFullRect(offsetX1, offsetY1, (largoB * escala), alto, "#787878"); 
+            const y2 = y - (3 * alto / 2) - separacion;
+            drawFullRect(offsetX1, y2, largoB * escala, alto, "#787878");
+            const y3 = y - alto / 2;
+            drawFullRect(offsetX1, y3, largoB * escala, alto, "#787878");
+            const y4 = y + alto / 2 + separacion;
+            drawFullRect(offsetX1, y4, largoB * escala, alto, "#787878");
+            drawFullRect(offsetX1, offsetY1 + (cantidadB - 1) * ((alto) + (separacionB * escala)), (largoB * escala), alto, "#787878");
         }
 
             // Dibujar Tablas superiores
@@ -214,36 +206,28 @@ export function dibujarBarrote() {
         drawFullRect(offsetX4, offsetY4, (grosorTS*escala), (largoTS*escala), "#e5e5e5")
 
             // Dibujar Barrotes
-        if (distBar === 'Estándar') {
-            const x = offsetX4+(grosorTS*escala);
-            const y = offsetY4+anchoGral*escala/2 // Centro y del contenedor
-            if (cantidadB === 3) {
-                drawFullRect(x, offsetY4, (anchoB * escala), (grosorB * escala), "#787878"); 
-                drawFullRect(x, y-((grosorB*escala)/2), (anchoB * escala), (grosorB * escala), "#787878");
-                drawFullRect(x, offsetY4 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (anchoB * escala), (grosorB * escala), "#787878"); 
-            } else if (cantidadB === 4) {
-                drawFullRect(x, offsetY4, (anchoB * escala), (grosorB * escala), "#787878"); 
-                drawFullRect(x, y-(3*escala), (anchoB * escala), (grosorB * escala), "#787878");
-                drawFullRect(x, y+(3*escala), (anchoB * escala), (grosorB * escala), "#787878");
-                drawFullRect(x, offsetY4 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (anchoB * escala), (grosorB * escala), "#787878");
-            } else {
-                const alto = grosorB * escala;
-                const separacion = 6 * escala;
-                drawFullRect(x, offsetY4, (anchoB * escala), alto, "#787878"); 
-                const y2 = y - (3 * alto / 2) - separacion;
-                drawFullRect(x, y2, anchoB * escala, alto, "#787878");
-                const y3 = y - alto / 2;
-                drawFullRect(x, y3, anchoB * escala, alto, "#787878");
-                const y4 = y + alto / 2 + separacion;
-                drawFullRect(x, y4, anchoB * escala, alto, "#787878");
-                drawFullRect(x, offsetY4 + (cantidadB - 1) * ((alto) + (separacionB * escala)), (anchoB * escala), alto, "#787878");
-            }
+        const x = offsetX4+(grosorTS*escala);
+        y = offsetY4+anchoGral*escala/2 // Centro y del contenedor
+        if (cantidadB === 3) {
+            drawFullRect(x, offsetY4, (anchoB * escala), (grosorB * escala), "#787878"); 
+            drawFullRect(x, y-((grosorB*escala)/2), (anchoB * escala), (grosorB * escala), "#787878");
+            drawFullRect(x, offsetY4 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (anchoB * escala), (grosorB * escala), "#787878"); 
+        } else if (cantidadB === 4) {
+            drawFullRect(x, offsetY4, (anchoB * escala), (grosorB * escala), "#787878"); 
+            drawFullRect(x, y-(3*escala), (anchoB * escala), (grosorB * escala), "#787878");
+            drawFullRect(x, y+(3*escala), (anchoB * escala), (grosorB * escala), "#787878");
+            drawFullRect(x, offsetY4 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (anchoB * escala), (grosorB * escala), "#787878");
         } else {
-            for (let i = 0; i < cantidadB; i++) {
-                const x = offsetX4+(grosorTS*escala);
-                const y = offsetY4 + i * ((grosorB * escala) + (separacionB * escala));
-                drawFullRect(x, y, (anchoB * escala), (grosorB * escala), "#787878");
-            }
+            const alto = grosorB * escala;
+            const separacion = 6 * escala;
+            drawFullRect(x, offsetY4, (anchoB * escala), alto, "#787878"); 
+            const y2 = y - (3 * alto / 2) - separacion;
+            drawFullRect(x, y2, anchoB * escala, alto, "#787878");
+            const y3 = y - alto / 2;
+            drawFullRect(x, y3, anchoB * escala, alto, "#787878");
+            const y4 = y + alto / 2 + separacion;
+            drawFullRect(x, y4, anchoB * escala, alto, "#787878");
+            drawFullRect(x, offsetY4 + (cantidadB - 1) * ((alto) + (separacionB * escala)), (anchoB * escala), alto, "#787878");
         }
 
             // Dibujar Tablas inferiores
@@ -289,20 +273,19 @@ export function dibujarBarrote() {
             }
         }
 
-            // Barrotes
-        if (distBar === 'Estándar') {
-            const y = offsetY2+anchoGral*escala/2 // Centro y del contenedor
-            if (cantidadB === 3) {
-                drawFullRect(offsetX2, offsetY2, (largoB * escala), (grosorB * escala), "#787878"); 
-                drawFullRect(offsetX2, y-((grosorB*escala)/2), (largoB * escala), (grosorB * escala), "#787878");
-                drawFullRect(offsetX2, offsetY2 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (largoB * escala), (grosorB * escala), "#787878"); 
-            } else if (cantidadB === 4) {
-                drawFullRect(offsetX2, offsetY2, (largoB * escala), (grosorB * escala), "#787878"); 
-                drawFullRect(offsetX2, y-(3*escala), (largoB * escala), (grosorB * escala), "#787878");
-                drawFullRect(offsetX2, y+(3*escala), (largoB * escala), (grosorB * escala), "#787878");
-                drawFullRect(offsetX2, offsetY2 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (largoB * escala), (grosorB * escala), "#787878");
-            } else {
-                const alto = grosorB * escala;
+            // Dibujar Barrotes
+        y = offsetY2+anchoGral*escala/2 // Centro y del contenedor
+        if (cantidadB === 3) {
+            drawFullRect(offsetX2, offsetY2, (largoB * escala), (grosorB * escala), "#787878"); 
+            drawFullRect(offsetX2, y-((grosorB*escala)/2), (largoB * escala), (grosorB * escala), "#787878");
+            drawFullRect(offsetX2, offsetY2 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (largoB * escala), (grosorB * escala), "#787878"); 
+        } else if (cantidadB === 4) {
+            drawFullRect(offsetX2, offsetY2, (largoB * escala), (grosorB * escala), "#787878"); 
+            drawFullRect(offsetX2, y-(3*escala), (largoB * escala), (grosorB * escala), "#787878");
+            drawFullRect(offsetX2, y+(3*escala), (largoB * escala), (grosorB * escala), "#787878");
+            drawFullRect(offsetX2, offsetY2 + (cantidadB - 1) * ((grosorB * escala) + (separacionB * escala)), (largoB * escala), (grosorB * escala), "#787878");
+        } else {
+            const alto = grosorB * escala;
             const separacion = 6 * escala;
             drawFullRect(offsetX2, offsetY1, (largoB * escala), alto, "#787878"); 
             const y2 = y - (3 * alto / 2) - separacion;
@@ -313,41 +296,30 @@ export function dibujarBarrote() {
             drawFullRect(offsetX2, y4, largoB * escala, alto, "#787878");
             drawFullRect(offsetX2, offsetY1 + (cantidadB - 1) * ((alto) + (separacionB * escala)), (largoB * escala), alto, "#787878");
             }
-        } else {
-            for (let i = 0; i < cantidadB; i++) {
-                const x = offsetX2;
-                const y = offsetY2 + i * ((grosorB * escala) + (separacionB * escala));
-                drawFullRect(x, y, (largoB * escala), (grosorB * escala), "#787878");
-            }
-        }
 
             // Dibujar Tablas inferiores
-        if (tipoB === "Con saque") {
-            const distB = parseFloat(document.getElementById('distB').value);
-            let separacionSaque = (largoGral-(2*(distB+9)))*escala;
-
-            drawFullRect(offsetX2, offsetY2, (anchoTI * escala), (largoTI * escala), "#ffc0c0"); 
-            drawFullRect(offsetX2 + ((largoGral-anchoTI)*escala), offsetY2, (anchoTI * escala), (largoTI * escala), "#ffc0c0");
-
-            const espacio = (separacionSaque - (cantidadTI - 2) * (anchoTI * escala)) / (cantidadTI - 1);
-
-            // Punto inicial del área central
-            const xInicio = offsetX2 + (distB + 9) * escala;
-
-            for (let i = 0; i < (cantidadTI - 2); i++) {
-                const x = xInicio + espacio * (i + 1) + (anchoTI * escala) * i;
-                const y = offsetY2;
-
-                drawFullRect(x, y, (anchoTI * escala), largoTI * escala, "#ffc0c0");
-            }
-
+        if (tipoB === 'Corrido') {
+            distB = 6
         } else {
-            for (let i = 0; i < cantidadTI; i++) {
-                const x = offsetX2 + i * ((anchoTI * escala) + (separacionTI * escala));
-                const y = offsetY2;
-                drawFullRect(x, y, (anchoTI * escala), (largoTI * escala), "#ffc0c0");
-            }
+            distB = parseFloat(document.getElementById('distB').value);
         }
+        let separacionSaque = (largoGral-(2*(distB+9)))*escala;
+
+        drawFullRect(offsetX2, offsetY2, (anchoTI * escala), (largoTI * escala), "#ffc0c0"); 
+        drawFullRect(offsetX2 + ((largoGral-anchoTI)*escala), offsetY2, (anchoTI * escala), (largoTI * escala), "#ffc0c0");
+
+        let espacio = (separacionSaque - (cantidadTI - 2) * (anchoTI * escala)) / (cantidadTI - 1);
+
+        // Punto inicial del área central
+        let xInicio = offsetX2 + (distB + 9) * escala;
+
+        for (let i = 0; i < (cantidadTI - 2); i++) {
+            const x = xInicio + espacio * (i + 1) + (anchoTI * escala) * i;
+            const y = offsetY2;
+
+            drawFullRect(x, y, (anchoTI * escala), largoTI * escala, "#ffc0c0");
+        }
+
 
         // Vista frontal
         const escala2 = canvasWidth*0.0093;
@@ -416,7 +388,7 @@ export function dibujarBarrote() {
                 ctx.fill();
             }
 
-            const margen = 6 * escala2;
+            const margen = distB * escala2;
 
             // Coordenadas X
             const xMedio1 = xB + margen; 
@@ -427,36 +399,31 @@ export function dibujarBarrote() {
         }
 
             // Dibujar Tablas inferiores
-        if (tipoB === "Con saque") {
-            const distB = parseFloat(document.getElementById('distB').value);
-            let separacionSaque = (largoGral-(2*(distB+9)))*escala2;
-
-            drawFullRect(offsetX3, yB + (anchoB * escala2), (anchoTI * escala2), (grosorTI * escala2), "#ffc0c0"); 
-            drawFullRect(offsetX3 + ((largoGral-anchoTI)*escala2), yB + (anchoB * escala2), (anchoTI * escala2), (grosorTI * escala2), "#ffc0c0");
-
-            const espacio = (separacionSaque - (cantidadTI - 2) * (anchoTI * escala2)) / (cantidadTI - 1);
-
-            // Punto inicial del área central
-            const xInicio = offsetX3 + (distB + 9) * escala2;
-
-            for (let i = 0; i < (cantidadTI - 2); i++) {
-                const x = xInicio + espacio * (i + 1) + (anchoTI * escala2) * i;
-                const y = yB + (anchoB * escala2);
-
-                drawFullRect(x, y, (anchoTI * escala2), grosorTI * escala2, "#ffc0c0");
-            }
-
+        if (tipoB === 'Corrido') {
+            distB = 6
         } else {
-            for (let i = 0; i < cantidadTI; i++) {
-                const x = offsetX3 + i * ((anchoTI * escala2) + (separacionTI * escala2));
-                const y = yB + (anchoB * escala2);
-                drawFullRect(x, y, (anchoTI * escala2), (grosorTI * escala2), "#ffc0c0");
-            }
+            distB = parseFloat(document.getElementById('distB').value);
+        }
+        separacionSaque = (largoGral-(2*(distB+9)))*escala2;
+
+        drawFullRect(offsetX3, yB + (anchoB * escala2), (anchoTI * escala2), (grosorTI * escala2), "#ffc0c0"); 
+        drawFullRect(offsetX3 + ((largoGral-anchoTI)*escala2), yB + (anchoB * escala2), (anchoTI * escala2), (grosorTI * escala2), "#ffc0c0");
+
+        espacio = (separacionSaque - (cantidadTI - 2) * (anchoTI * escala2)) / (cantidadTI - 1);
+
+        // Punto inicial del área central
+        xInicio = offsetX3 + (distB + 9) * escala2;
+
+        for (let i = 0; i < (cantidadTI - 2); i++) {
+            const x = xInicio + espacio * (i + 1) + (anchoTI * escala2) * i;
+            const y = yB + (anchoB * escala2);
+
+            drawFullRect(x, y, (anchoTI * escala2), grosorTI * escala2, "#ffc0c0");
         }
     }
 
     // Agregar eventos a los campos de entrada para redibujar el plano cuando cambie cualquier valor
-    const inputs = document.querySelectorAll('#largoGral, #anchoGral, #grosorGral, #cantidadTS-1, #largoTS-1, #anchoTS-1, #grosorTS-1,#cantidadTS-2, #largoTS-2, #anchoTS-2, #grosorTS-2, #cantidadTI, #largoTI, #anchoTI, #grosorTI, #cantidadB, #largoB, #anchoB, #grosorB, #tipoB, #distBar');
+    const inputs = document.querySelectorAll('#largoGral, #anchoGral, #grosorGral, #cantidadTS-1, #largoTS-1, #anchoTS-1, #grosorTS-1,#cantidadTS-2, #largoTS-2, #anchoTS-2, #grosorTS-2, #cantidadTI, #largoTI, #anchoTI, #grosorTI, #cantidadB, #distB, #largoB, #anchoB, #grosorB, #tipoB, #distBar');
 
     // Para cada input, agregar un event listener para ejecutar la función redibujarPlano cuando el valor cambie
     inputs.forEach(input => {

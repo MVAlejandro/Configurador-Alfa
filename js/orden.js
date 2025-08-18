@@ -292,12 +292,11 @@ function crearPdf() {
             doc.setFont("helvetica", "italic");
             doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaTI1}", ${item.tolerancias[0].toleranciaTI2}", ${item.tolerancias[0].toleranciaTI3}"`, 22, yPos);
             yPos += 6;
-            doc.setFontSize(10);
-            doc.setFont("helvetica", "normal");
-            doc.text(`- Arreglo: ${item.arregloTI}`, 22, yPos); yPos += 6;
 
             // Barrote
             doc.line(20, yPos, 100, yPos); yPos += 6;
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
             doc.text(`- Barrote: Cant. ${item.cantidadB}, L: ${item.largoB}", A: ${item.anchoB}", G: ${item.grosorB}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
@@ -309,7 +308,6 @@ function crearPdf() {
 
             if (item.tipoB === 'Con saque') {
                 doc.text(`- Inicio de saque: ${item.distB}"`, 22, yPos); yPos += 6;
-                doc.text(`- Distribución saque: ${item.distBar}"`, 22, yPos); yPos += 6;
             }
 
             // Servicios
@@ -401,9 +399,8 @@ window.addEventListener("load", function(event){
 
 document.getElementById('btn_final').addEventListener('click', function() {
     // Borrar todo el localStorage
-    localStorage.removeItem("carrito");
+    localStorage.clear();localStorage.removeItem("carrito");
     localStorage.removeItem("clienteActual");
-
     // Redirigir al inicio
     window.location.href = 'index.html';
 });

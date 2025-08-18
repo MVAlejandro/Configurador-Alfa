@@ -70,7 +70,6 @@ function abrirModalItem(formData) {
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
         crearElemListaTolerancia(formData.tolerancias[0].toleranciaTI1, formData.tolerancias[0].toleranciaTI2, formData.tolerancias[0].toleranciaTI3);
-        crearElemListaSec('Arreglo', formData.arregloTI);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Barrote', formData.cantidadB, formData.largoB, formData.anchoB, formData.grosorB);
         crearElemListaTolerancia(formData.tolerancias[0].toleranciaB1, formData.tolerancias[0].toleranciaB2, formData.tolerancias[0].toleranciaB3);
@@ -78,7 +77,6 @@ function abrirModalItem(formData) {
 
         if (formData.tipoB === 'Con saque') {
             crearElemListaSecMed('Inicio de saque', formData.distB);
-            crearElemListaSec('Distribución saque', formData.distBar);
         }
 
         // Insertar el modelo de tarima de barrote

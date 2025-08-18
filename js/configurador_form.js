@@ -133,21 +133,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-            // Si se elige el arreglo especial, mostrar campo para describirlo
-            const arreglo_especial = document.getElementById('arreglo_especial');
-            const arregloTI = document.getElementById('arregloTI');
-
-            arregloTI.addEventListener('change', function () {
-                if (arregloTI.value === 'Distribuido'){
-                    arreglo_especial.innerHTML = 
-                    ``;
-                } else if (arregloTI.value === 'Especial') {
-                    arreglo_especial.innerHTML = 
-                    `<input type="text" id="arregloEsp" class="form-control nb" placeholder="Describa su arreglo.">
-                    <p class="error" id="error-esp" style="color: red;"></p>`;
-                }
-            });
-
             plano_tarima.innerHTML = `<canvas id="plano_barrote" width="700" height="400" style="border: 1px solid black"></canvas>`;
 
             // Llamar a la función de dibujar el plano

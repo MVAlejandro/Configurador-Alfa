@@ -145,22 +145,6 @@ export function InsertarFormularioBarrote () {
                             </div>
                         </div>
     
-                        <!-- Arreglo -->
-                        <div class="row mb-3">
-                            <div class="col-lg-3">
-                                <label for="arregloTI" class="col-form-label">Arreglo:</label>
-                            </div>
-                            <div class="col-lg-7 mb-3">
-                                <select id="arregloTI" class="form-select nb">
-                                    <option value="Distribuido">Distribuido</option>
-                                    <option value="Especial">Especial</option>
-                                </select>
-                            </div>
-                            <div id="arreglo_especial" class="col-lg-10">
-                                            
-                            </div>
-                        </div>
-    
                     </div>                            
                 </div>
             </div>
@@ -246,18 +230,6 @@ export function InsertarFormularioBarrote () {
                             </div>
                         </div>
 
-                        <!-- Distribución de barrotes -->
-                        <div id="distribucion_barrote" class="row mb-3">
-                            <div class="col-lg-3">
-                                <label for="distBar" class="col-form-label">Distribución:</label>
-                            </div>
-                            <div class="col-lg-7">
-                                <select id="distBar" class="form-select nb">
-                                    <option value="Estándar">Estándar</option>
-                                    <option value="Distribuido">Distribuido</option>
-                                </select>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -178,20 +178,6 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         const anchoTI = parseFloat(document.getElementById('anchoTI').value);
         const grosorTI = parseFloat(document.getElementById('grosorTI').value);
 
-        let arregloTI = document.getElementById('arregloTI').value;
-        let distBar = document.getElementById('distBar').value;
-
-        // Si se elige un arreglo especial capturar la descripción
-        if (arregloTI === 'Especial') {
-            const arregloTI_texto = document.getElementById('arregloEsp').value;
-            if (arregloTI_texto === "") {
-                alert('Por favor, coloque la descripción del arreglo inferior');
-                return;
-            } else {
-                arregloTI = arregloTI_texto
-            }
-        }
-
         const cantidadB = parseInt(document.getElementById('cantidadB').value);
         const tipoB = document.getElementById('tipoB').value;
         const largoB = parseFloat(document.getElementById('largoB').value);
@@ -239,13 +225,14 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
                 tipo, subtipo, acomodo, precioUnit, cantidad,
                 largoGral, anchoGral, grosorGral,
                 tablaSuperior: tablaSuperiorData,
-                cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
-                cantidadB, tipoB, distB, largoB, anchoB, grosorB, distBar,
+                cantidadTI, largoTI, anchoTI, grosorTI,
+                cantidadB, tipoB, distB, largoB, anchoB, grosorB,
                 tolerancias: toleranciasData,
                 servicios: servicios,
                 imgPlano: imgPlano
             };
         } else if (tipoB === 'Corrido') {
+            let distB = 6;
             // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
             if (!largoGral || !anchoGral || !grosorGral || 
                 !cantidadTI || !largoTI || !anchoTI || !grosorTI ||
@@ -284,8 +271,8 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
                 tipo, subtipo, acomodo, precioUnit, cantidad,
                 largoGral, anchoGral, grosorGral,
                 tablaSuperior: tablaSuperiorData,
-                cantidadTI, largoTI, anchoTI, grosorTI, arregloTI,
-                cantidadB, tipoB, largoB, anchoB, grosorB, distBar,
+                cantidadTI, largoTI, anchoTI, grosorTI,
+                cantidadB, tipoB, largoB, anchoB, grosorB,
                 tolerancias: toleranciasData,
                 servicios: servicios,
                 imgPlano: imgPlano
