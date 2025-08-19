@@ -64,6 +64,11 @@ main {
     transition: all 0.2s ease;
 }
 
+/* Eliminar bordes del acordeon */
+.accordion-item {
+    border: none !important;
+}
+
 /* Eliminar flechas de inputs numericos */
 .no-arrows::-webkit-outer-spin-button,
 .no-arrows::-webkit-inner-spin-button {

@@ -36,13 +36,11 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
     const acomodo = document.getElementById('acomodo').value;
         
     // Obtener los datos de las tablas compartidos entre ambos tipos de tarima
-    const toleranciaTS1 = document.getElementById('toleranciaTS1').value;
-    const toleranciaTS2 = document.getElementById('toleranciaTS2').value;
-    const toleranciaTS3 = document.getElementById('toleranciaTS3').value;
+    const materialTS = document.getElementById('materialTS').value;
+    const materialTI = document.getElementById('materialTI').value;
 
-    const toleranciaTI1 = document.getElementById('toleranciaTI1').value;
-    const toleranciaTI2 = document.getElementById('toleranciaTI2').value;
-    const toleranciaTI3 = document.getElementById('toleranciaTI3').value;
+    const toleranciaTS = document.getElementById('toleranciaTS').value;
+    const toleranciaTI = document.getElementById('toleranciaTI').value;
 
     const largoGral = parseFloat(document.getElementById('largoGral').value);
     const anchoGral = parseFloat(document.getElementById('anchoGral').value);
@@ -162,15 +160,18 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
             }
         }
 
-        const toleranciaB1 = document.getElementById('toleranciaB1').value;
-        const toleranciaB2 = document.getElementById('toleranciaB2').value;
-        const toleranciaB3 = document.getElementById('toleranciaB3').value;
+        const materialB = document.getElementById('materialB').value;
+        const materialesData = []
+
+        materialesData.push({
+            materialTS, materialTI, materialB
+        })
+
+        const toleranciaB = document.getElementById('toleranciaB').value;
         const toleranciasData = [];
 
         toleranciasData.push({
-            toleranciaTS1, toleranciaTS2, toleranciaTS3,
-            toleranciaTI1, toleranciaTI2, toleranciaTI3,
-            toleranciaB1, toleranciaB2, toleranciaB3
+            toleranciaTS, toleranciaTI, toleranciaB
         });
 
         const cantidadTI = parseInt(document.getElementById('cantidadTI').value);
@@ -227,6 +228,7 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
                 tablaSuperior: tablaSuperiorData,
                 cantidadTI, largoTI, anchoTI, grosorTI,
                 cantidadB, tipoB, distB, largoB, anchoB, grosorB,
+                materiales: materialesData,
                 tolerancias: toleranciasData,
                 servicios: servicios,
                 imgPlano: imgPlano
@@ -273,6 +275,7 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
                 tablaSuperior: tablaSuperiorData,
                 cantidadTI, largoTI, anchoTI, grosorTI,
                 cantidadB, tipoB, largoB, anchoB, grosorB,
+                materiales: materialesData,
                 tolerancias: toleranciasData,
                 servicios: servicios,
                 imgPlano: imgPlano
@@ -324,20 +327,20 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
             }
         } 
 
-        const toleranciaTA1 = document.getElementById('toleranciaTA1').value;
-        const toleranciaTA2 = document.getElementById('toleranciaTA2').value;
-        const toleranciaTA3 = document.getElementById('toleranciaTA3').value;
+        const materialTA = document.getElementById('materialTA').value;
+        const materialTC = document.getElementById('materialTC').value;
+        const materialesData = []
 
-        const toleranciaTC1 = document.getElementById('toleranciaTC1').value;
-        const toleranciaTC2 = document.getElementById('toleranciaTC2').value;
-        const toleranciaTC3 = document.getElementById('toleranciaTC3').value;
+        materialesData.push({
+            materialTS, materialTI, materialTA, materialTC
+        })
+
+        const toleranciaTA = document.getElementById('toleranciaTA').value;
+        const toleranciaTC = document.getElementById('toleranciaTC').value;
         const toleranciasData = [];
 
         toleranciasData.push({
-            toleranciaTS1, toleranciaTS2, toleranciaTS3,
-            toleranciaTI1, toleranciaTI2, toleranciaTI3,
-            toleranciaTA1, toleranciaTA2, toleranciaTA3,
-            toleranciaTC1, toleranciaTC2, toleranciaTC3
+            toleranciaTS, toleranciaTI, toleranciaTA, toleranciaTC
         });
 
         let tablaInferiorData = [];
@@ -422,6 +425,7 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
             cantidadTAL, largoTAL, anchoTAL, grosorTAL, 
             cantidadTAC, largoTAC, anchoTAC, grosorTAC,
             cantidadTC, largoTC, anchoTC, grosorTC,
+            materiales: materialesData,
             tolerancias: toleranciasData,
             servicios: servicios,
             imgPlano: imgPlano

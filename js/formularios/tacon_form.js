@@ -11,6 +11,21 @@ export function InsertarFormularioTacon () {
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
+                                <!-- Material -->
+                                <div class="row mb-3">
+                                    <div class="col-lg-3">
+                                        <label for="materialTS" class="col-form-label">Material:</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <select id="materialTS" class="form-select nb">
+                                            <option value="Pino">Pino</option>
+                                            <option value="Oyamel">Oyamel</option>
+                                            <option value="Reciclado">Reciclado</option>
+                                            <option value="Híbrido">Híbrido</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <!-- Variación -->
                                 <div class="row mb-3">
                                     <div class="col-md-3">
@@ -95,6 +110,21 @@ export function InsertarFormularioTacon () {
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
+                                <!-- Material -->
+                                <div class="row mb-3">
+                                    <div class="col-lg-3">
+                                        <label for="materialTI" class="col-form-label">Material:</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <select id="materialTI" class="form-select nb">
+                                            <option value="Pino">Pino</option>
+                                            <option value="Oyamel">Oyamel</option>
+                                            <option value="Reciclado">Reciclado</option>
+                                            <option value="Híbrido">Híbrido</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <!-- Laterales -->
                                 <h6>Tablas inferiores laterales</h6>
                                     <!-- Cantidad -->
@@ -196,6 +226,21 @@ export function InsertarFormularioTacon () {
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
+                                <!-- Material -->
+                                <div class="row mb-3">
+                                    <div class="col-lg-3">
+                                        <label for="materialTA" class="col-form-label">Material:</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <select id="materialTA" class="form-select nb">
+                                            <option value="Pino">Pino</option>
+                                            <option value="Oyamel">Oyamel</option>
+                                            <option value="Reciclado">Reciclado</option>
+                                            <option value="Híbrido">Híbrido</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <!-- Laterales -->
                                 <h6>Tacones laterales</h6>
                                     <!-- Cantidad -->
@@ -303,6 +348,21 @@ export function InsertarFormularioTacon () {
                         </h2>
                         <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionCaracter">
                             <div class="accordion-body ms-4">
+                                <!-- Material -->
+                                <div class="row mb-3">
+                                    <div class="col-lg-3">
+                                        <label for="materialTC" class="col-form-label">Material:</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <select id="materialTC" class="form-select nb">
+                                            <option value="Pino">Pino</option>
+                                            <option value="Oyamel">Oyamel</option>
+                                            <option value="Reciclado">Reciclado</option>
+                                            <option value="Híbrido">Híbrido</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <!-- Cantidad -->
                                 <div class="row mb-3">
                                     <div class="col-md-3">

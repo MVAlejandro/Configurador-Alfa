@@ -30,9 +30,9 @@ function crearElemListaSecMed(nombre, descripcion) {
     );
 }
 // Función para generar las tolerancias de las tablas
-function crearElemListaTolerancia(valor1, valor2, valor3) {
+function crearElemListaTolerancia(valor) {
     lista_resumen.insertAdjacentHTML('beforeend', 
-        `<li class="tolerancia ms-2"><em>Tolerancia: La: +- ${valor1}, An: +- ${valor2}, Es: +- ${valor3}</em></li>`
+        `<li class="tolerancia ms-2"><em>Tolerancias: +- ${valor}</em></li>`
     );
 }
 
@@ -65,14 +65,17 @@ function abrirModalItem(formData) {
                 crearElemListaPrin(titulo, tabla.cantidadTS, tabla.largoTS, tabla.anchoTS, tabla.grosorTS);
             });
         }
-        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTS1, formData.tolerancias[0].toleranciaTS2, formData.tolerancias[0].toleranciaTS3);
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTS);
         crearElemListaSecMed('Separación', formData.tablaSuperior[0].separacionTS);
+        crearElemListaSec('Material', formData.materiales[0].materialTS);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Tabla inferior', formData.cantidadTI, formData.largoTI, formData.anchoTI, formData.grosorTI);
-        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTI1, formData.tolerancias[0].toleranciaTI2, formData.tolerancias[0].toleranciaTI3);
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTI);
+        crearElemListaSec('Material', formData.materiales[0].materialTI);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Barrote', formData.cantidadB, formData.largoB, formData.anchoB, formData.grosorB);
-        crearElemListaTolerancia(formData.tolerancias[0].toleranciaB1, formData.tolerancias[0].toleranciaB2, formData.tolerancias[0].toleranciaB3);
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaB);
+        crearElemListaSec('Material', formData.materiales[0].materialB);
         crearElemListaSec('Tipo', formData.tipoB);
 
         if (formData.tipoB === 'Con saque') {
@@ -95,7 +98,7 @@ function abrirModalItem(formData) {
                 crearElemListaPrin(titulo, tabla.cantidadTS, tabla.largoTS, tabla.anchoTS, tabla.grosorTS);
             });
         }
-        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTS1, formData.tolerancias[0].toleranciaTS2, formData.tolerancias[0].toleranciaTS3);
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTS);
         crearElemListaSecMed('Separación', formData.tablaSuperior[0].separacionTS);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         if (Array.isArray(formData.tablaInferior)) {
@@ -104,14 +107,14 @@ function abrirModalItem(formData) {
                 crearElemListaPrin(titulo, tabla.cantidadTI, tabla.largoTI, tabla.anchoTI, tabla.grosorTI);
             });
         }
-        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTI1, formData.tolerancias[0].toleranciaTI2, formData.tolerancias[0].toleranciaTI3);
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTI);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Tacón lateral', formData.cantidadTAL, formData.largoTAL, formData.anchoTAL, formData.grosorTAL);
         crearElemListaPrin('Tacón central', formData.cantidadTAC, formData.largoTAC, formData.anchoTAC, formData.grosorTAC);
-        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTA1, formData.tolerancias[0].toleranciaTA2, formData.tolerancias[0].toleranciaTA3);
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTA);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         crearElemListaPrin('Tablas de carga', formData.cantidadTC, formData.largoTC, formData.anchoTC, formData.grosorTC);
-        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTC1, formData.tolerancias[0].toleranciaTC2, formData.tolerancias[0].toleranciaTC3);
+        crearElemListaTolerancia(formData.tolerancias[0].toleranciaTC);
 
         // Insertar el modelo de tarima de tacón
         if (formData.tipo === 'Nueva') {

@@ -174,17 +174,17 @@ function crearPdf() {
         let texto = "";
 
         if (item.subtipo === "Barrote") {
-            const ts1 = tolerancias.toleranciaTS1 || "-";
-            const ti1 = tolerancias.toleranciaTI1 || "-";
-            const b1  = tolerancias.toleranciaB1  || "-";
+            const ts1 = tolerancias.toleranciaTS || "-";
+            const ti1 = tolerancias.toleranciaTI || "-";
+            const b1  = tolerancias.toleranciaB  || "-";
 
             texto = `- Tarima ${numero}: Tabla Sup = +-${ts1}", Tabla Inf = +-${ti1} y Barrote = +-${b1}"`;
 
         } else if (item.subtipo === "Tacón") {
-            const ts1 = tolerancias.toleranciaTS1 || "-";
-            const ti1 = tolerancias.toleranciaTI1 || "-";
-            const ta1 = tolerancias.toleranciaTA1 || "-";
-            const tc1 = tolerancias.toleranciaTC1 || "-";
+            const ts1 = tolerancias.toleranciaTS || "-";
+            const ti1 = tolerancias.toleranciaTI || "-";
+            const ta1 = tolerancias.toleranciaTA || "-";
+            const tc1 = tolerancias.toleranciaTC || "-";
 
             texto = `- Tarima ${numero}: Tabla Sup = +-${ts1}", Tabla Inf = +-${ti1}", Tacón = +-${ta1}" y Tabla Carga = +-${tc1}"`;
         } 
@@ -278,7 +278,8 @@ function crearPdf() {
             });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancia: L: ${item.tolerancias[0].toleranciaTS1}", A: ${item.tolerancias[0].toleranciaTS2}", G: ${item.tolerancias[0].toleranciaTS3}"`, 22, yPos);
+            doc.text(`* Material: ${item.materiales[0].materialTS}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaTS}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
@@ -290,7 +291,8 @@ function crearPdf() {
             yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaTI1}", ${item.tolerancias[0].toleranciaTI2}", ${item.tolerancias[0].toleranciaTI3}"`, 22, yPos);
+            doc.text(`* Material: ${item.materiales[0].materialTI}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaTI}"`, 65, yPos);
             yPos += 6;
 
             // Barrote
@@ -300,7 +302,8 @@ function crearPdf() {
             doc.text(`- Barrote: Cant. ${item.cantidadB}, L: ${item.largoB}", A: ${item.anchoB}", G: ${item.grosorB}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaB1}", ${item.tolerancias[0].toleranciaB2}", ${item.tolerancias[0].toleranciaB3}"`, 22, yPos);
+            doc.text(`* Material: ${item.materiales[0].materialB}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaB}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
@@ -323,7 +326,8 @@ function crearPdf() {
             });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaTS1}", ${item.tolerancias[0].toleranciaTS2}", ${item.tolerancias[0].toleranciaTS3}"`, 22, yPos);
+            doc.text(`* Material: ${item.materiales[0].materialTS}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaTS}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
@@ -338,7 +342,8 @@ function crearPdf() {
             });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaTI1}", ${item.tolerancias[0].toleranciaTI2}", ${item.tolerancias[0].toleranciaTI3}"`, 22, yPos);
+            doc.text(`* Material: ${item.materiales[0].materialTI}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaTI}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
@@ -349,7 +354,8 @@ function crearPdf() {
             doc.text(`- Tacón central: Cant. ${item.cantidadTAC}, L: ${item.largoTAC}", A: ${item.anchoTAC}", G: ${item.grosorTAC}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaTA1}", ${item.tolerancias[0].toleranciaTA2}", ${item.tolerancias[0].toleranciaTA3}"`, 22, yPos);
+            doc.text(`* Material: ${item.materiales[0].materialTA}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaTA}"`, 65, yPos);
             yPos += 6;
 
             // Tablas de carga
@@ -359,7 +365,8 @@ function crearPdf() {
             doc.text(`- Tablas carga: Cant. ${item.cantidadTC}, L: ${item.largoTC}", A: ${item.anchoTC}", G: ${item.grosorTC}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Tolerancia: ${item.tolerancias[0].toleranciaTC1}", ${item.tolerancias[0].toleranciaTC2}", ${item.tolerancias[0].toleranciaTC3}"`, 22, yPos);
+            doc.text(`* Material: ${item.materiales[0].materialTC}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaTC}"`, 65, yPos);
             yPos += 6;
 
             // Servicios
@@ -399,8 +406,9 @@ window.addEventListener("load", function(event){
 
 document.getElementById('btn_final').addEventListener('click', function() {
     // Borrar todo el localStorage
-    localStorage.clear();localStorage.removeItem("carrito");
+    localStorage.removeItem("carrito");
     localStorage.removeItem("clienteActual");
+
     // Redirigir al inicio
-    window.location.href = 'index.html';
+    window.location.href = 'cliente.html';
 });
