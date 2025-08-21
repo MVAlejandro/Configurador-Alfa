@@ -9,7 +9,7 @@ const cliente = JSON.parse(localStorage.getItem("clienteActual"));
 const carrito = JSON.parse(localStorage.getItem("carrito"));
 
 // Calcular total
-const total = carrito.reduce((sum, item) => sum + item.cantidad * item.precioUnit, 0);
+const total = carrito.reduce((sum, item) => sum + item.producto.cantidad * item.producto.precioUnit, 0);
 
 // Generar folio
 function generarIDUnico() {
@@ -135,11 +135,11 @@ function crearPdf() {
     const descuento = 0;
     carrito.forEach(item => {
         const rowData = [
-            `Tarima de ${item.subtipo}, ${item.tipo} (${item.largoGral}" x ${item.anchoGral}" x ${item.grosorGral}")`, 
-            String(item.cantidad),  
-            `$${formatoMoneda(item.precioUnit)}`,
-            `$${formatoMoneda(descuento * item.cantidad)}`, 
-            `$${formatoMoneda((item.cantidad * item.precioUnit)-(descuento*item.cantidad))}` 
+            `Tarima de ${item.producto.subtipo}, ${item.producto.tipo} (${item.producto.largoGral}" x ${item.producto.anchoGral}" x ${item.producto.grosorGral}")`, 
+            String(item.producto.cantidad),  
+            `$${formatoMoneda(item.producto.precioUnit)}`,
+            `$${formatoMoneda(descuento * item.producto.cantidad)}`, 
+            `$${formatoMoneda((item.producto.cantidad * item.producto.precioUnit)-(descuento*item.producto.cantidad))}` 
         ];
 
         rowData.forEach((cell, index) => {
@@ -169,22 +169,21 @@ function crearPdf() {
     doc.setFontSize(8);
     carrito.forEach((item, index) => {
         const numero = index + 1;
-        const tolerancias = item.tolerancias[0] || {};
 
         let texto = "";
 
-        if (item.subtipo === "Barrote") {
-            const ts1 = tolerancias.toleranciaTS || "-";
-            const ti1 = tolerancias.toleranciaTI || "-";
-            const b1  = tolerancias.toleranciaB  || "-";
+        if (item.producto.subtipo === "Barrote") {
+            const ts1 = item.parrillaTS[0].toleranciaTS || "-";
+            const ti1 = item.parrillaTI[0].toleranciaTI || "-";
+            const b1  = item.parrillaTC[0].toleranciaB  || "-";
 
             texto = `- Tarima ${numero}: Tabla Sup = +-${ts1}", Tabla Inf = +-${ti1} y Barrote = +-${b1}"`;
 
-        } else if (item.subtipo === "Tacón") {
-            const ts1 = tolerancias.toleranciaTS || "-";
-            const ti1 = tolerancias.toleranciaTI || "-";
-            const ta1 = tolerancias.toleranciaTA || "-";
-            const tc1 = tolerancias.toleranciaTC || "-";
+        } else if (item.producto.subtipo === "Tacón") {
+            const ts1 = item.parrillaTS[0].toleranciaTS || "-";
+            const ti1 = item.parrillaTI[0].toleranciaTI || "-";
+            const ta1 = item.parrillaTC[0].toleranciaTA || "-";
+            const tc1 = item.parrillaTC[1].toleranciaTC || "-";
 
             texto = `- Tarima ${numero}: Tabla Sup = +-${ts1}", Tabla Inf = +-${ti1}", Tacón = +-${ta1}" y Tabla Carga = +-${tc1}"`;
         } 
@@ -208,6 +207,7 @@ function crearPdf() {
     doc.setFontSize(11);
     doc.text("Total", 159, 262)
     doc.text(`$${formatoMoneda(orden.totalEstimado * 1.16)}`, 177, 262);
+
 
     // PLANOS POR PRODUCTO //
     carrito.forEach((item, index) => {
@@ -233,7 +233,7 @@ function crearPdf() {
         drawRect(15, 55, 186, 5, 0.1);
 
         doc.setFontSize(10);
-        textCenter(`Tarima de ${item.subtipo}, ${item.tipo} (${item.largoGral}" x ${item.anchoGral}" x ${item.grosorGral}") - ${item.acomodo}`, 216, 59)
+        textCenter(`Tarima de ${item.producto.subtipo}, ${item.producto.tipo} (${item.producto.largoGral}" x ${item.producto.anchoGral}" x ${item.producto.grosorGral}") - ${item.producto.acomodo}`, 216, 59)
         // Plano 
         doc.addImage(item.imgPlano, "PNG", 29, 60, 160, 100);
 
@@ -269,104 +269,109 @@ function crearPdf() {
         }
 
         // TARIMA DE BARROTE 
-        if (item.subtipo === 'Barrote') {
+        if (item.producto.subtipo === 'Barrote') {
             // Tabla superior
-            item.tablaSuperior.forEach((tabla, i) => {
-                const titulo = item.tablaSuperior.length > 1 ? `- Tabla superior ${i + 1}` : '- Tabla superior';
+            item.parrillaTS.forEach((tabla, i) => {
+                const titulo = item.parrillaTS.length > 1 ? `- Tabla superior ${i + 1}` : '- Tabla superior';
                 doc.text(`${titulo}: Cant. ${tabla.cantidadTS}, L: ${tabla.largoTS}", A: ${tabla.anchoTS}", G: ${tabla.grosorTS}"`, 22, yPos);
                 yPos += 6;
             });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.materiales[0].materialTS}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaTS}"`, 65, yPos);
+            doc.text(`* Material: ${item.parrillaTS[0].materialTS}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.parrillaTS[0].toleranciaTS}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
-            doc.text(`- Separación: ${item.tablaSuperior[0].separacionTS}"`, 22, yPos); yPos += 6;
+            doc.text(`- Separación: ${item.parrillaTS[0].separacionTS}"`, 22, yPos); yPos += 6;
             
             // Tabla inferior
             doc.line(20, yPos, 100, yPos); yPos += 6;
-            doc.text(`- Tabla inferior: Cant. ${item.cantidadTI}, L: ${item.largoTI}", A: ${item.anchoTI}", G: ${item.grosorTI}"`, 22, yPos);
-            yPos += 6;
+            item.parrillaTI.forEach((tabla, i) => {
+                const titulo = item.parrillaTI.length > 1 ? `- Tabla inferior ${i + 1}` : '- Tabla inferior';
+                doc.text(`${titulo}: Cant. ${tabla.cantidadTI}, L: ${tabla.largoTI}", A: ${tabla.anchoTI}", G: ${tabla.grosorTI}"`, 22, yPos);
+                yPos += 6;
+            });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.materiales[0].materialTI}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaTI}"`, 65, yPos);
+            doc.text(`* Material: ${item.parrillaTI[0].materialTI}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.parrillaTI[0].toleranciaTI}"`, 65, yPos);
             yPos += 6;
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
 
             // Barrote
             doc.line(20, yPos, 100, yPos); yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
-            doc.text(`- Barrote: Cant. ${item.cantidadB}, L: ${item.largoB}", A: ${item.anchoB}", G: ${item.grosorB}"`, 22, yPos); yPos += 6;
+            doc.text(`- Barrote: Cant. ${item.parrillaTC[0].cantidadB}, L: ${item.parrillaTC[0].largoB}", A: ${item.parrillaTC[0].anchoB}", G: ${item.parrillaTC[0].grosorB}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.materiales[0].materialB}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaB}"`, 65, yPos);
+            doc.text(`* Material: ${item.parrillaTC[0].materialB}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.parrillaTC[0].toleranciaB}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
             doc.text(`- Tipo: ${item.tipoB}`, 22, yPos); yPos += 6;
 
-            if (item.tipoB === 'Con saque') {
-                doc.text(`- Inicio de saque: ${item.distB}"`, 22, yPos); yPos += 6;
+            if (item.producto.tipoB === 'Con saque') {
+                doc.text(`- Inicio de saque: ${item.parrillaTC[0].distB}"`, 22, yPos); yPos += 6;
             }
 
             // Servicios
             servicios();
 
         // TARIMA DE TACÓN
-        } else if (item.subtipo === 'Tacón') {
+        } else if (item.producto.subtipo === 'Tacón') {
             // Tabla superior
-            item.tablaSuperior.forEach((tabla, i) => {
-                const titulo = item.tablaSuperior.length > 1 ? `- Tabla superior ${i + 1}` : '- Tabla superior';
+            item.parrillaTS.forEach((tabla, i) => {
+                const titulo = item.parrillaTS.length > 1 ? `- Tabla superior ${i + 1}` : '- Tabla superior';
                 doc.text(`${titulo}: Cant. ${tabla.cantidadTS}, L: ${tabla.largoTS}", A: ${tabla.anchoTS}", G: ${tabla.grosorTS}"`, 22, yPos);
                 yPos += 6;
             });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.materiales[0].materialTS}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaTS}"`, 65, yPos);
+            doc.text(`* Material: ${item.parrillaTS[0].materialTS}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.parrillaTS[0].toleranciaTS}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
-            doc.text(`- Separación: ${item.tablaSuperior[0].separacionTS}"`, 22, yPos); yPos += 6;
+            doc.text(`- Separación: ${item.parrillaTS[0].separacionTS}"`, 22, yPos); yPos += 6;
 
             // Tabla inferior
             doc.line(20, yPos, 100, yPos); yPos += 6;
-            item.tablaInferior.forEach((tabla, i) => {
-                const titulo = item.tablaInferior.length > 1 ? `- Tabla inferior ${i + 1}` : '- Tabla inferior';
+            item.parrillaTI.forEach((tabla, i) => {
+                const titulo = item.parrillaTI.length > 1 ? `- Tabla inferior ${i + 1}` : '- Tabla inferior';
                 doc.text(`${titulo}: Cant. ${tabla.cantidadTI}, L: ${tabla.largoTI}", A: ${tabla.anchoTI}", G: ${tabla.grosorTI}"`, 22, yPos);
                 yPos += 6;
             });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.materiales[0].materialTI}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaTI}"`, 65, yPos);
+            doc.text(`* Material: ${item.parrillaTI[0].materialTI}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.parrillaTI[0].toleranciaTI}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
 
             // Tacón lateral y central
             doc.line(20, yPos, 100, yPos); yPos += 6;
-            doc.text(`- Tacón lateral: Cant. ${item.cantidadTAL}, L: ${item.largoTAL}", A: ${item.anchoTAL}", G: ${item.grosorTAL}"`, 22, yPos); yPos += 6;
-            doc.text(`- Tacón central: Cant. ${item.cantidadTAC}, L: ${item.largoTAC}", A: ${item.anchoTAC}", G: ${item.grosorTAC}"`, 22, yPos); yPos += 6;
+            doc.text(`- Tacón lateral: Cant. ${item.parrillaTC[0].cantidadTAL}, L: ${item.parrillaTC[0].largoTAL}", A: ${item.parrillaTC[0].anchoTAL}", G: ${item.parrillaTC[0].grosorTAL}"`, 22, yPos); yPos += 6;
+            doc.text(`- Tacón central: Cant. ${item.parrillaTC[0].cantidadTAC}, L: ${item.parrillaTC[0].largoTAC}", A: ${item.parrillaTC[0].anchoTAC}", G: ${item.parrillaTC[0].grosorTAC}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.materiales[0].materialTA}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaTA}"`, 65, yPos);
+            doc.text(`* Material: ${item.parrillaTC[0].materialTA}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.parrillaTC[0].toleranciaTA}"`, 65, yPos);
             yPos += 6;
 
             // Tablas de carga
             doc.line(20, yPos, 100, yPos); yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
-            doc.text(`- Tablas carga: Cant. ${item.cantidadTC}, L: ${item.largoTC}", A: ${item.anchoTC}", G: ${item.grosorTC}"`, 22, yPos); yPos += 6;
+            doc.text(`- Tablas carga: Cant. ${item.parrillaTC[1].cantidadTC}, L: ${item.parrillaTC[1].largoTC}", A: ${item.parrillaTC[1].anchoTC}", G: ${item.parrillaTC[1].grosorTC}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.materiales[0].materialTC}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.tolerancias[0].toleranciaTC}"`, 65, yPos);
+            doc.text(`* Material: ${item.parrillaTC[1].materialTC}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.parrillaTC[1].toleranciaTC}"`, 65, yPos);
             yPos += 6;
 
             // Servicios

@@ -18,9 +18,11 @@ console.log(carrito);
 
 const lista_productos = document.getElementById('lista_productos');
 const titulo_modal = document.getElementById('titulo_modal');
+
 // Declarar variables de precio total
 const precio_total_texto = document.getElementById('precio_total');
 let precio_total = 0;
+
 // Declarar variables de cantidad total
 const productos_total_texto = document.getElementById('productos_total');
 
@@ -53,7 +55,7 @@ function actualizarCantidadTotal() {
         const cantidad = parseInt(input.value.trim());
         if (!isNaN(cantidad) && cantidad > 0) {
             productos_total += cantidad;
-            precio_total += cantidad * carrito[index].precioUnit;
+            precio_total += cantidad * carrito[index].producto.precioUnit;
         }
     });
 
@@ -74,7 +76,7 @@ carrito.forEach((formData, index) => {
                 <div class="row">
                     <div class="col-lg-9">
                         <p id="item${index + 1}_texto" class="item_lista">
-                            Tarima de ${formData.subtipo}, ${formData.tipo} (${formData.largoGral}" x ${formData.anchoGral}" x ${formData.grosorGral}")
+                            Tarima de ${formData.producto.subtipo}, ${formData.producto.tipo} (${formData.producto.largoGral}" x ${formData.producto.anchoGral}" x ${formData.producto.grosorGral}")
                         </p>
                     </div>
                     <div class="col mb-2 text-end">
@@ -87,15 +89,14 @@ carrito.forEach((formData, index) => {
                 <div class="row d-flex mb-3">
                     <div class="col-9 d-flex align-items-end justify-content-end">
                         <label for="item${index + 1}_cantidad" class="col-form-label me-3">Lote estimado:</label>
-                        <input type="number" value="${formData.cantidad}" id="item${index + 1}_cantidad" class="form-control no-arrows text-center cantidad_producto w-25" placeholder="Cantidad">
+                        <input type="number" value="${formData.producto.cantidad}" id="item${index + 1}_cantidad" class="form-control no-arrows text-center cantidad_producto w-25" placeholder="Cantidad">
                     </div>
                     <div class="col d-flex justify-content-end align-items-end me-2">
                         <p id="item${index + 1}_precio" class="costo text-center mb-2">
-                            <strong>$${formData.precioUnit}</strong>
+                            <strong>$${formData.producto.precioUnit}</strong>
                         </p>
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -117,13 +118,13 @@ carrito.forEach((formData, index) => {
 
     // Asignar cada miniatura por item
     const miniatura_item = document.getElementById(`miniatura_item_${index + 1}`);
-    if (formData.tipo === 'Nueva' && formData.subtipo === 'Barrote') {
+    if (formData.producto.tipo === 'Nueva' && formData.producto.subtipo === 'Barrote') {
         miniatura_item.innerHTML = `<img src="./assets/Tarima-con-barrote-nueva-520x357.png" alt="Tarima de barrotes nueva" width="110px">`;
-    } else if (formData.tipo === 'Reciclada' && formData.subtipo === 'Barrote') {
+    } else if (formData.producto.tipo === 'Reciclada' && formData.producto.subtipo === 'Barrote') {
         miniatura_item.innerHTML = `<img src="./assets/Tarima-con-barrote-reciclada-520x357.png" alt="Tarima de barrotes reciclada" width="110px">`;
-    } else if (formData.tipo === 'Nueva' && formData.subtipo === 'Tacón') {
+    } else if (formData.producto.tipo === 'Nueva' && formData.producto.subtipo === 'Tacón') {
         miniatura_item.innerHTML = `<img src="./assets/Tarima-con-tacon-nueva-520x357.png" alt="Tarima de tacón nueva" width="110px">`;
-    } else if (formData.tipo === 'Reciclada' && formData.subtipo === 'Tacón') {
+    } else if (formData.producto.tipo === 'Reciclada' && formData.producto.subtipo === 'Tacón') {
         miniatura_item.innerHTML = `<img src="./assets/Tarima-de-tacon-reciclada-520x357.jpg" alt="Tarima de tacón reciclada" width="110px">`;
     };
         
@@ -135,8 +136,13 @@ carrito.forEach((formData, index) => {
             const index = btn.getAttribute('data-index');
             const formData = carrito[index];
 
+            if (!formData || !formData.producto) {
+            alert('No se pudieron cargar los detalles del producto.');
+            return;
+        }
+        
             titulo_modal.innerHTML = 
-                `Tarima de ${formData.subtipo}, ${formData.tipo} (${formData.largoGral}" x ${formData.anchoGral}" x ${formData.grosorGral}")`;
+                `Tarima de ${formData.producto.subtipo}, ${formData.producto.tipo} (${formData.producto.largoGral}" x ${formData.producto.anchoGral}" x ${formData.producto.grosorGral}")`;
             
             abrirModalItem(formData);
         });
@@ -149,7 +155,7 @@ document.querySelectorAll('.cantidad_producto').forEach((input, index) => {
 
         // Actualizar cantidad en el carrito si es válida
         if (!isNaN(nuevaCantidad) && nuevaCantidad >= 0) {
-            carrito[index].cantidad = nuevaCantidad;
+            carrito[index].producto.cantidad = nuevaCantidad;
             localStorage.setItem("carrito", JSON.stringify(carrito));
         }
 
