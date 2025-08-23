@@ -55,7 +55,7 @@ function actualizarCantidadTotal() {
         const cantidad = parseInt(input.value.trim());
         if (!isNaN(cantidad) && cantidad > 0) {
             productos_total += cantidad;
-            precio_total += cantidad * carrito[index].producto.precioUnit;
+            precio_total += cantidad * carrito[index].producto.precio_unit;
         }
     });
 
@@ -76,7 +76,7 @@ carrito.forEach((formData, index) => {
                 <div class="row">
                     <div class="col-lg-9">
                         <p id="item${index + 1}_texto" class="item_lista">
-                            Tarima de ${formData.producto.subtipo}, ${formData.producto.tipo} (${formData.producto.largoGral}" x ${formData.producto.anchoGral}" x ${formData.producto.grosorGral}")
+                            Tarima de ${formData.producto.subtipo}, ${formData.producto.tipo} (${formData.producto.largo_gral}" x ${formData.producto.ancho_gral}" x ${formData.producto.grosor_gral}")
                         </p>
                     </div>
                     <div class="col mb-2 text-end">
@@ -93,7 +93,7 @@ carrito.forEach((formData, index) => {
                     </div>
                     <div class="col d-flex justify-content-end align-items-end me-2">
                         <p id="item${index + 1}_precio" class="costo text-center mb-2">
-                            <strong>$${formData.producto.precioUnit}</strong>
+                            <strong>$${formData.producto.precio_unit}</strong>
                         </p>
                     </div>
                 </div>
@@ -142,7 +142,7 @@ carrito.forEach((formData, index) => {
         }
         
             titulo_modal.innerHTML = 
-                `Tarima de ${formData.producto.subtipo}, ${formData.producto.tipo} (${formData.producto.largoGral}" x ${formData.producto.anchoGral}" x ${formData.producto.grosorGral}")`;
+                `Tarima de ${formData.producto.subtipo}, ${formData.producto.tipo} (${formData.producto.largo_gral}" x ${formData.producto.ancho_gral}" x ${formData.producto.grosor_gral}")`;
             
             abrirModalItem(formData);
         });

@@ -53,38 +53,38 @@ function abrirModalItem(formData) {
         <li id="acomodoTarima">Acomodo: ${formData.producto.acomodo}</li>
     `);
 
-    crearTamGral(formData.producto.largoGral, formData.producto.anchoGral, formData.producto.grosorGral);
+    crearTamGral(formData.producto.largo_gral, formData.producto.ancho_gral, formData.producto.grosor_gral);
 
     // Insertar información TARIMA DE BARROTE
     if (formData.producto.subtipo === 'Barrote') {
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         // Mostrar tabla superior (puede ser una o varias)
-        if (Array.isArray(formData.parrillaTS)) {
-            formData.parrillaTS.forEach((tabla, i) => {
-                const titulo = formData.parrillaTS.length > 1 ? `Tabla superior ${i + 1}` : 'Tabla superior';
-                crearElemListaPrin(titulo, tabla.cantidadTS, tabla.largoTS, tabla.anchoTS, tabla.grosorTS);
+        if (Array.isArray(formData.componenteTS)) {
+            formData.componenteTS.forEach((tabla, i) => {
+                const titulo = formData.componenteTS.length > 1 ? `Tabla superior ${i + 1}` : 'Tabla superior';
+                crearElemListaPrin(titulo, tabla.cantidad_TS, tabla.largo_TS, tabla.ancho_TS, tabla.grosor_TS);
             });
         }
-        crearElemListaTolerancia(formData.parrillaTS[0].toleranciaTS);
-        crearElemListaSecMed('Separación', formData.parrillaTS[0].separacionTS);
-        crearElemListaSec('Material', formData.parrillaTS[0].materialTS);
+        crearElemListaTolerancia(formData.componenteTS[0].tolerancia_TS);
+        crearElemListaSecMed('Separación', formData.componenteTS[0].separacion_TS);
+        crearElemListaSec('Material', formData.componenteTS[0].material_TS);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
-        if (Array.isArray(formData.parrillaTI)) {
-            formData.parrillaTI.forEach((tabla, i) => {
-                const titulo = formData.parrillaTI.length > 1 ? `Tabla inferior ${i + 1}` : 'Tabla inferior';
-                crearElemListaPrin(titulo, tabla.cantidadTI, tabla.largoTI, tabla.anchoTI, tabla.grosorTI);
+        if (Array.isArray(formData.componenteTI)) {
+            formData.componenteTI.forEach((tabla, i) => {
+                const titulo = formData.componenteTI.length > 1 ? `Tabla inferior ${i + 1}` : 'Tabla inferior';
+                crearElemListaPrin(titulo, tabla.cantidad_TI, tabla.largo_TI, tabla.ancho_TI, tabla.grosor_TI);
             });
         }
-        crearElemListaTolerancia(formData.parrillaTI[0].toleranciaTI);
-        crearElemListaSec('Material', formData.parrillaTI[0].materialTI);
+        crearElemListaTolerancia(formData.componenteTI[0].tolerancia_TI);
+        crearElemListaSec('Material', formData.componenteTI[0].material_TI);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
-        crearElemListaPrin('Barrote', formData.parrillaTC[0].cantidadB, formData.parrillaTC[0].largoB, formData.parrillaTC[0].anchoB, formData.parrillaTC[0].grosorB);
-        crearElemListaTolerancia(formData.parrillaTC[0].toleranciaB);
-        crearElemListaSec('Material', formData.parrillaTC[0].materialB);
-        crearElemListaSec('Tipo', formData.parrillaTC[0].tipoB);
+        crearElemListaPrin('Barrote', formData.componenteB.cantidad_B, formData.componenteB.largo_B, formData.componenteB.ancho_B, formData.componenteB.grosor_B);
+        crearElemListaTolerancia(formData.componenteB.tolerancia_B);
+        crearElemListaSec('Material', formData.componenteB.material_B);
+        crearElemListaSec('Tipo', formData.componenteB.tipo_B);
 
-        if (formData.parrillaTC[0].tipoB === 'Con saque') {
-            crearElemListaSecMed('Inicio de saque', formData.parrillaTC[0].tipoB);
+        if (formData.componenteB.tipo_B === 'Con saque') {
+            crearElemListaSecMed('Inicio de saque', formData.componenteB.dist_B);
         }
 
         // Insertar el modelo de tarima de barrote
@@ -97,33 +97,33 @@ function abrirModalItem(formData) {
     } else if (formData.producto.subtipo === 'Tacón') {
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         // Mostrar tabla superior (puede ser una o varias)
-        if (Array.isArray(formData.parrillaTS)) {
-            formData.parrillaTS.forEach((tabla, i) => {
-                const titulo = formData.parrillaTS.length > 1 ? `Tabla superior ${i + 1}` : 'Tabla superior';
-                crearElemListaPrin(titulo, tabla.cantidadTS, tabla.largoTS, tabla.anchoTS, tabla.grosorTS);
+        if (Array.isArray(formData.componenteTS)) {
+            formData.componenteTS.forEach((tabla, i) => {
+                const titulo = formData.componenteTS.length > 1 ? `Tabla superior ${i + 1}` : 'Tabla superior';
+                crearElemListaPrin(titulo, tabla.cantidad_TS, tabla.largo_TS, tabla.ancho_TS, tabla.grosor_TS);
             });
         }
-        crearElemListaTolerancia(formData.parrillaTS[0].toleranciaTS);
-        crearElemListaSecMed('Separación', formData.parrillaTS[0].separacionTS);
-        crearElemListaSec('Material', formData.parrillaTS[0].materialTS);
+        crearElemListaTolerancia(formData.componenteTS[0].tolerancia_TS);
+        crearElemListaSecMed('Separación', formData.componenteTS[0].separacion_TS);
+        crearElemListaSec('Material', formData.componenteTS[0].material_TS);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
-        if (Array.isArray(formData.parrillaTI)) {
-            formData.parrillaTI.forEach((tabla, i) => {
-                const titulo = formData.parrillaTI.length > 1 ? `Tabla inferior ${i + 1}` : 'Tabla inferior';
-                crearElemListaPrin(titulo, tabla.cantidadTI, tabla.largoTI, tabla.anchoTI, tabla.grosorTI);
+        if (Array.isArray(formData.componenteTI)) {
+            formData.componenteTI.forEach((tabla, i) => {
+                const titulo = formData.componenteTI.length > 1 ? `Tabla inferior ${i + 1}` : 'Tabla inferior';
+                crearElemListaPrin(titulo, tabla.cantidad_TI, tabla.largo_TI, tabla.ancho_TI, tabla.grosor_TI);
             });
         }
-        crearElemListaTolerancia(formData.parrillaTI[0].toleranciaTI);
-        crearElemListaSec('Material', formData.parrillaTI[0].materialTI);
+        crearElemListaTolerancia(formData.componenteTI[0].tolerancia_TI);
+        crearElemListaSec('Material', formData.componenteTI[0].material_TI);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
-        crearElemListaPrin('Tacón lateral', formData.parrillaTC[0].cantidadTAL, formData.parrillaTC[0].largoTAL, formData.parrillaTC[0].anchoTAL, formData.parrillaTC[0].grosorTAL);
-        crearElemListaPrin('Tacón central', formData.parrillaTC[0].cantidadTAC, formData.parrillaTC[0].largoTAC, formData.parrillaTC[0].anchoTAC, formData.parrillaTC[0].grosorTAC);
-        crearElemListaTolerancia(formData.parrillaTC[0].toleranciaTA);
-        crearElemListaSec('Material', formData.parrillaTC[0].materialTA);
+        crearElemListaPrin('Tacón lateral', formData.componenteTAL.cantidad_TAL, formData.componenteTAL.largo_TAL, formData.componenteTAL.ancho_TAL, formData.componenteTAL.grosor_TAL);
+        crearElemListaPrin('Tacón central', formData.componenteTAC.cantidad_TAC, formData.componenteTAC.largo_TAC, formData.componenteTAC.ancho_TAC, formData.componenteTAC.grosor_TAC);
+        crearElemListaTolerancia(formData.componenteTAL.tolerancia_TA);
+        crearElemListaSec('Material', formData.componenteTAL.material_TA);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
-        crearElemListaPrin('Tablas de carga', formData.parrillaTC[1].cantidadTC, formData.parrillaTC[1].largoTC, formData.parrillaTC[1].anchoTC, formData.parrillaTC[1].grosorTC);
-        crearElemListaTolerancia(formData.parrillaTC[1].toleranciaTC);
-        crearElemListaSec('Material', formData.parrillaTC[1].materialTC);
+        crearElemListaPrin('Tablas de carga', formData.componenteTC.cantidad_TC, formData.componenteTC.largo_TC, formData.componenteTC.ancho_TC, formData.componenteTC.grosor_TC);
+        crearElemListaTolerancia(formData.componenteTC.tolerancia_TC);
+        crearElemListaSec('Material', formData.componenteTC.material_TC);
 
         // Insertar el modelo de tarima de tacón
         if (formData.producto.tipo === 'Nueva') {
@@ -152,10 +152,10 @@ function abrirModalItem(formData) {
 
     // PROPIEDADES //
     // Fórmula para calcular la capacidad de carga
-    const ts = formData.parrillaTS[0]; // usar el primero como referencia
-    const ti = formData.parrillaTI[0]; // usar el primero como referencia
+    const ts = formData.componenteTS[0]; // usar el primero como referencia
+    const ti = formData.componenteTI[0]; // usar el primero como referencia
     if (formData.producto.subtipo === 'Barrote') {
-        let capacidad_estatica_calculo = ((ts.largoTS * ts.anchoTS * ts.grosorTS) + (ti.largoTI * ti.anchoTI * ti.grosorTI)) * 10;
+        let capacidad_estatica_calculo = ((ts.largo_TS * ts.ancho_TS * ts.grosor_TS) + (ti.largo_TI * ti.ancho_TI * ti.grosor_TI)) * 10;
         let capacidad_dinamica_calculo = capacidad_estatica_calculo * 0.64;
 
         // Mostrar los valores calculados
@@ -163,7 +163,7 @@ function abrirModalItem(formData) {
         capacidad_dinamica.innerHTML = `${capacidad_dinamica_calculo.toFixed(2)} kg`;
 
     } else if (formData.producto.subtipo === 'Tacón') {
-        let capacidad_estatica_calculo = ((ts.largoTS * ts.anchoTS * ts.grosorTS) + (ti.largoTI * ti.anchoTI * ti.grosorTI)) * 10;
+        let capacidad_estatica_calculo = ((ts.largo_TS * ts.ancho_TS * ts.grosor_TS) + (ti.largo_TI * ti.ancho_TI * ti.grosor_TI)) * 10;
         let capacidad_dinamica_calculo = capacidad_estatica_calculo * 0.64;
 
         // Mostrar los valores calculados
@@ -174,11 +174,11 @@ function abrirModalItem(formData) {
 
     // COSTO //
     // Mostrar valores de los resultados
-    costo_unitario.innerHTML = `$${formData.producto.precioUnit}`;
+    costo_unitario.innerHTML = `$${formData.producto.precio_unit}`;
 
     cantidad_total.innerHTML= `${formData.producto.cantidad}`;
 
-    const total = formData.producto.precioUnit * formData.producto.cantidad;
+    const total = formData.producto.precio_unit * formData.producto.cantidad;
     const totalFormateado = total.toLocaleString('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2

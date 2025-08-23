@@ -3,33 +3,33 @@
 // Importar funciones de validación de campos
 import {validarCamposInvalidos} from "../validaciones/valida_campos.js"
 
-export function parrillaTSData() {
-    const largoGral = parseFloat(document.getElementById('largoGral').value);
+export function componenteTSData() {
+    const largo_gral = parseFloat(document.getElementById('largoGral').value);
     // Obtener los datos de las tablas superiores
-    const materialTS = document.getElementById('materialTS').value;
-    const toleranciaTS = document.getElementById('toleranciaTS').value;
+    const material_TS = document.getElementById('materialTS').value;
+    const tolerancia_TS = document.getElementById('toleranciaTS').value;
         
     const variacionTS = document.getElementById('variacionTS')?.value || 'Único';
-    let parrillaTS = [];
-    let cantidadTS, largoTS, anchoTS, grosorTS, separacionTS;
+    let componenteTS = [];
+    let cantidad_TS, largo_TS, ancho_TS, grosor_TS, separacion_TS;
     
     if (variacionTS === 'Único') {
         // Recolección estándar
-        cantidadTS = parseInt(document.getElementById('cantidadTS-1').value);
-        largoTS = parseFloat(document.getElementById('largoTS-1').value);
-        anchoTS = parseFloat(document.getElementById('anchoTS-1').value);
-        grosorTS = parseFloat(document.getElementById('grosorTS-1').value);
+        cantidad_TS = parseInt(document.getElementById('cantidadTS-1').value);
+        largo_TS = parseFloat(document.getElementById('largoTS-1').value);
+        ancho_TS = parseFloat(document.getElementById('anchoTS-1').value);
+        grosor_TS = parseFloat(document.getElementById('grosorTS-1').value);
     
         // Validar antes de guardar los valores
-        if (!cantidadTS || !largoTS || !anchoTS || !grosorTS) {
+        if (!cantidad_TS || !largo_TS || !ancho_TS || !grosor_TS) {
             alert('Por favor completa todos los campos de la tabla superior.');
             return;
         }
             
-        separacionTS = ((largoGral - (anchoTS * cantidadTS)) / (cantidadTS - 1)).toFixed(2);
+        separacion_TS = ((largo_gral - (ancho_TS * cantidad_TS)) / (cantidad_TS - 1)).toFixed(2);
     
-        parrillaTS.push({
-            cantidadTS, largoTS, anchoTS, grosorTS, separacionTS, materialTS, toleranciaTS
+        componenteTS.push({
+            cantidad_TS, largo_TS, ancho_TS, grosor_TS, separacion_TS, material_TS, tolerancia_TS
         });
     
     } else if (variacionTS === 'Variable') {
@@ -56,44 +56,44 @@ export function parrillaTSData() {
             totalOcupado += ancho * cant;
     
             variacionesTemp.push({
-                cantidadTS: cant,
-                largoTS: largo,
-                anchoTS: ancho,
-                grosorTS: grosor,
-                materialTS,
-                toleranciaTS
+                cantidad_TS: cant,
+                largo_TS: largo,
+                ancho_TS: ancho,
+                grosor_TS: grosor,
+                material_TS,
+                tolerancia_TS
                 // separacionTS se agregará después
             });
         }
     
-        const separacionGlobal = ((largoGral - totalOcupado) / (totalCantidad - 1)).toFixed(2);
+        const separacionGlobal = ((largo_gral - totalOcupado) / (totalCantidad - 1)).toFixed(2);
     
         // Agregar separación a cada entrada
         variacionesTemp.forEach(variacion => {
-            variacion.separacionTS = separacionGlobal;
-            parrillaTS.push(variacion);
+            variacion.separacion_TS = separacionGlobal;
+            componenteTS.push(variacion);
         });
     }
 
-    return parrillaTS;
+    return componenteTS;
 }
 
-export function parrillaTIData() {
+export function componenteTIData() {
     const subtipo = document.getElementById('subtipo').value;
     // Obtener los datos de las tablas inferiores
-    const materialTI = document.getElementById('materialTI').value;
-    const toleranciaTI = document.getElementById('toleranciaTI').value;
+    const material_TI = document.getElementById('materialTI').value;
+    const tolerancia_TI = document.getElementById('toleranciaTI').value;
 
-    let parrillaTI = [];
+    let componenteTI = [];
 
     // TARIMA DE BARROTE
     if (subtipo === 'Barrote') {
-        const cantidadTI = parseInt(document.getElementById('cantidadTI').value);
-        const largoTI = parseFloat(document.getElementById('largoTI').value);
-        const anchoTI = parseFloat(document.getElementById('anchoTI').value);
-        const grosorTI = parseFloat(document.getElementById('grosorTI').value);
+        const cantidad_TI = parseInt(document.getElementById('cantidadTI').value);
+        const largo_TI = parseFloat(document.getElementById('largoTI').value);
+        const ancho_TI = parseFloat(document.getElementById('anchoTI').value);
+        const grosor_TI = parseFloat(document.getElementById('grosorTI').value);
 
-        if (!cantidadTI || !largoTI || !anchoTI || !grosorTI) {
+        if (!cantidad_TI || !largo_TI || !ancho_TI || !grosor_TI) {
             alert('Por favor, complete todos los campos para agregar el producto.');
             return;
         }
@@ -105,8 +105,8 @@ export function parrillaTIData() {
             return;
         }
 
-        parrillaTI.push({
-            cantidadTI, largoTI, anchoTI, grosorTI, materialTI, toleranciaTI
+        componenteTI.push({
+            cantidad_TI, largo_TI, ancho_TI, grosor_TI, material_TI, tolerancia_TI
         });
 
     } else if (subtipo === 'Tacón'){ 
@@ -123,100 +123,142 @@ export function parrillaTIData() {
                 return;
             }
 
-            parrillaTI.push({
-                cantidadTI: cant,
-                largoTI: largo,
-                anchoTI: ancho,
-                grosorTI: grosor,
-                materialTI,
-                toleranciaTI
+            componenteTI.push({
+                cantidad_TI: cant,
+                largo_TI: largo,
+                ancho_TI: ancho,
+                grosor_TI: grosor,
+                material_TI,
+                tolerancia_TI
             });
         }
     }
 
-    return parrillaTI;
+    return componenteTI;
 }
 
-export function parrillaTCData() {
-    const subtipo = document.getElementById('subtipo').value;
-    let parrillaTC = [];
+export function componenteBData() {
+    let componenteB = {};
+    const material_B = document.getElementById('materialB').value;
+    const tolerancia_B = document.getElementById('toleranciaB').value;
 
-    // TARIMA DE BARROTE
-    if (subtipo === 'Barrote') {
-        const materialB = document.getElementById('materialB').value;
-        const toleranciaB = document.getElementById('toleranciaB').value;
+    const cantidad_B = parseInt(document.getElementById('cantidadB').value);
+    const tipo_B = document.getElementById('tipoB').value;
+    const largo_B = parseFloat(document.getElementById('largoB').value);
+    const ancho_B = parseFloat(document.getElementById('anchoB').value);
+    const grosor_B = parseFloat(document.getElementById('grosorB').value);
+    const dist_B = parseFloat(document.getElementById('distB')?.value) || null;
 
-        const cantidadB = parseInt(document.getElementById('cantidadB').value);
-        const tipoB = document.getElementById('tipoB').value;
-        const largoB = parseFloat(document.getElementById('largoB').value);
-        const anchoB = parseFloat(document.getElementById('anchoB').value);
-        const grosorB = parseFloat(document.getElementById('grosorB').value);
-
-        // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
-        if (!cantidadB || !largoB || !anchoB || !grosorB || !distB) {     
-            alert('Por favor, complete todos los campos para agregar el producto.');
-            return;
-        }
+    // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
+    if (!cantidad_B || !largo_B || !ancho_B || !grosor_B) {     
+        alert('Por favor, complete todos los campos para agregar el producto.');
+        return;
+    }
             
-        // Validar si hay campos inválidos
-        const campos = document.querySelectorAll('input');
-        if (!validarCamposInvalidos(campos)) {
-            alert('Corrige los errores antes de guardar.');
-            return;
-        }
-
-        parrillaTC.push({
-            cantidadB, tipoB, largoB, anchoB, grosorB, materialB, toleranciaB,
-            distB: tipoB === 'Con saque' ? distB : null
-        });
-
-    // TARIMA DE TACON
-    } else if (subtipo === 'Tacón') {
-        const materialTA = document.getElementById('materialTA').value;
-        const materialTC = document.getElementById('materialTC').value;
-        const toleranciaTA = document.getElementById('toleranciaTA').value;
-        const toleranciaTC = document.getElementById('toleranciaTC').value;
-
-        const cantidadTAL = parseInt(document.getElementById('cantidadTAL').value);
-        const largoTAL = parseFloat(document.getElementById('largoTAL').value);
-        const anchoTAL = parseFloat(document.getElementById('anchoTAL').value);
-        const grosorTAL = parseFloat(document.getElementById('grosorTAL').value);
-            
-        const cantidadTC = parseInt(document.getElementById('cantidadTC').value);
-        const largoTC = parseFloat(document.getElementById('largoTC').value);
-        const anchoTC = parseFloat(document.getElementById('anchoTC').value);
-        const grosorTC = parseFloat(document.getElementById('grosorTC').value);
-
-        const cantidadTAC = parseInt(document.getElementById('cantidadTAC').value);
-        const largoTAC = parseFloat(document.getElementById('largoTAC').value);
-        const anchoTAC = parseFloat(document.getElementById('anchoTAC').value);
-        const grosorTAC = parseFloat(document.getElementById('grosorTAC').value);
-
-        // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
-        // Verificar si algún campo está vacío
-        if (!cantidadTAL || !largoTAL || !anchoTAL || !grosorTAL ||
-            !cantidadTAC || !largoTAC || !anchoTAC || !grosorTAC ||
-            !cantidadTC || !largoTC || !anchoTC || !grosorTC) {
-                    
-            // Si algún campo está vacío, mostrar mensaje de error
-            alert('Por favor, complete todos los campos para agregar el producto.');
-            return; // Detener la ejecución y no continuar
-        } 
-
-        // Validar si hay campos inválidos
-        const campos = document.querySelectorAll('input');
-        if (!validarCamposInvalidos(campos)) {
-            alert('Corrige los errores antes de guardar.');
-            return; 
-        }
-
-        parrillaTC.push({
-            cantidadTAL, largoTAL, anchoTAL, grosorTAL,
-            cantidadTAC, largoTAC, anchoTAC, grosorTAC, materialTA, toleranciaTA
-        }, {
-            cantidadTC, largoTC, anchoTC, grosorTC, materialTC, toleranciaTC
-        });
+    // Validar si hay campos inválidos
+    const campos = document.querySelectorAll('input');
+    if (!validarCamposInvalidos(campos)) {
+        alert('Corrige los errores antes de guardar.');
+        return;
     }
 
-    return parrillaTC;
+    componenteB = {
+        cantidad_B, tipo_B, largo_B, ancho_B, grosor_B, material_B, tolerancia_B,
+        distB: tipo_B === 'Con saque' ? dist_B : null
+    };
+
+    return componenteB;
+}
+
+export function componenteTALData() {
+    let componenteTAL = {};
+    const material_TA = document.getElementById('materialTA').value;
+    const tolerancia_TA = document.getElementById('toleranciaTA').value;
+
+    const cantidad_TAL = parseInt(document.getElementById('cantidadTAL').value);
+    const largo_TAL = parseFloat(document.getElementById('largoTAL').value);
+    const ancho_TAL = parseFloat(document.getElementById('anchoTAL').value);
+    const grosor_TAL = parseFloat(document.getElementById('grosorTAL').value);
+
+    // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
+    // Verificar si algún campo está vacío
+    if (!cantidad_TAL || !largo_TAL || !ancho_TAL || !grosor_TAL) {
+        alert('Por favor, complete todos los campos para agregar el producto.');
+        return; // Detener la ejecución y no continuar
+    } 
+
+    // Validar si hay campos inválidos
+    const campos = document.querySelectorAll('input');
+    if (!validarCamposInvalidos(campos)) {
+        alert('Corrige los errores antes de guardar.');
+        return; 
+    }
+
+    componenteTAL = {
+            cantidad_TAL, largo_TAL, ancho_TAL, grosor_TAL, material_TA, tolerancia_TA
+    };
+
+    return componenteTAL;
+}
+
+export function componenteTACData() {
+    let componenteTAC = {};
+    const material_TA = document.getElementById('materialTA').value;
+    const tolerancia_TA = document.getElementById('toleranciaTA').value;
+
+    const cantidad_TAC = parseInt(document.getElementById('cantidadTAC').value);
+    const largo_TAC = parseFloat(document.getElementById('largoTAC').value);
+    const ancho_TAC = parseFloat(document.getElementById('anchoTAC').value);
+    const grosor_TAC = parseFloat(document.getElementById('grosorTAC').value);
+
+    // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
+    // Verificar si algún campo está vacío
+    if (!cantidad_TAC || !largo_TAC || !ancho_TAC || !grosor_TAC) {
+        alert('Por favor, complete todos los campos para agregar el producto.');
+        return; // Detener la ejecución y no continuar
+    } 
+
+    // Validar si hay campos inválidos
+    const campos = document.querySelectorAll('input');
+    if (!validarCamposInvalidos(campos)) {
+        alert('Corrige los errores antes de guardar.');
+        return; 
+    }
+
+    componenteTAC = {
+            cantidad_TAC, largo_TAC, ancho_TAC, grosor_TAC, material_TA, tolerancia_TA
+    };
+
+    return componenteTAC;
+}
+
+export function componenteTCData() {
+    let componenteTC = {};
+    const material_TC = document.getElementById('materialTA').value;
+    const tolerancia_TC = document.getElementById('toleranciaTA').value;
+
+    const cantidad_TC = parseInt(document.getElementById('cantidadTC').value);
+    const largo_TC = parseFloat(document.getElementById('largoTC').value);
+    const ancho_TC = parseFloat(document.getElementById('anchoTC').value);
+    const grosor_TC = parseFloat(document.getElementById('grosorTC').value);
+
+    // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
+    // Verificar si algún campo está vacío
+    if (!cantidad_TC || !largo_TC || !ancho_TC || !grosor_TC) {
+        alert('Por favor, complete todos los campos para agregar el producto.');
+        return; // Detener la ejecución y no continuar
+    } 
+
+    // Validar si hay campos inválidos
+    const campos = document.querySelectorAll('input');
+    if (!validarCamposInvalidos(campos)) {
+        alert('Corrige los errores antes de guardar.');
+        return; 
+    }
+
+    componenteTC = {
+            cantidad_TC, largo_TC, ancho_TC, grosor_TC, material_TC, tolerancia_TC
+    };
+
+    return componenteTC;
 }

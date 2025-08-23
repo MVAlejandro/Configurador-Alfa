@@ -9,7 +9,7 @@ const cliente = JSON.parse(localStorage.getItem("clienteActual"));
 const carrito = JSON.parse(localStorage.getItem("carrito"));
 
 // Calcular total
-const total = carrito.reduce((sum, item) => sum + item.producto.cantidad * item.producto.precioUnit, 0);
+const total = carrito.reduce((sum, item) => sum + item.producto.cantidad * item.producto.precio_unit, 0);
 
 // Generar folio
 function generarIDUnico() {
@@ -135,11 +135,11 @@ function crearPdf() {
     const descuento = 0;
     carrito.forEach(item => {
         const rowData = [
-            `Tarima de ${item.producto.subtipo}, ${item.producto.tipo} (${item.producto.largoGral}" x ${item.producto.anchoGral}" x ${item.producto.grosorGral}")`, 
+            `Tarima de ${item.producto.subtipo}, ${item.producto.tipo} (${item.producto.largo_gral}" x ${item.producto.ancho_gral}" x ${item.producto.grosor_gral}")`, 
             String(item.producto.cantidad),  
-            `$${formatoMoneda(item.producto.precioUnit)}`,
+            `$${formatoMoneda(item.producto.precio_unit)}`,
             `$${formatoMoneda(descuento * item.producto.cantidad)}`, 
-            `$${formatoMoneda((item.producto.cantidad * item.producto.precioUnit)-(descuento*item.producto.cantidad))}` 
+            `$${formatoMoneda((item.producto.cantidad * item.producto.precio_unit)-(descuento*item.producto.cantidad))}` 
         ];
 
         rowData.forEach((cell, index) => {
@@ -173,17 +173,17 @@ function crearPdf() {
         let texto = "";
 
         if (item.producto.subtipo === "Barrote") {
-            const ts1 = item.parrillaTS[0].toleranciaTS || "-";
-            const ti1 = item.parrillaTI[0].toleranciaTI || "-";
-            const b1  = item.parrillaTC[0].toleranciaB  || "-";
+            const ts1 = item.componenteTS[0].tolerancia_TS || "-";
+            const ti1 = item.componenteTI[0].tolerancia_TI || "-";
+            const b1  = item.componenteB.tolerancia_B  || "-";
 
             texto = `- Tarima ${numero}: Tabla Sup = +-${ts1}", Tabla Inf = +-${ti1} y Barrote = +-${b1}"`;
 
         } else if (item.producto.subtipo === "Tacón") {
-            const ts1 = item.parrillaTS[0].toleranciaTS || "-";
-            const ti1 = item.parrillaTI[0].toleranciaTI || "-";
-            const ta1 = item.parrillaTC[0].toleranciaTA || "-";
-            const tc1 = item.parrillaTC[1].toleranciaTC || "-";
+            const ts1 = item.componenteTS[0].tolerancia_TS || "-";
+            const ti1 = item.componenteTI[0].tolerancia_TI || "-";
+            const ta1 = item.componenteTAL.tolerancia_TA || "-";
+            const tc1 = item.componenteTC.tolerancia_TC || "-";
 
             texto = `- Tarima ${numero}: Tabla Sup = +-${ts1}", Tabla Inf = +-${ti1}", Tacón = +-${ta1}" y Tabla Carga = +-${tc1}"`;
         } 
@@ -271,31 +271,31 @@ function crearPdf() {
         // TARIMA DE BARROTE 
         if (item.producto.subtipo === 'Barrote') {
             // Tabla superior
-            item.parrillaTS.forEach((tabla, i) => {
-                const titulo = item.parrillaTS.length > 1 ? `- Tabla superior ${i + 1}` : '- Tabla superior';
-                doc.text(`${titulo}: Cant. ${tabla.cantidadTS}, L: ${tabla.largoTS}", A: ${tabla.anchoTS}", G: ${tabla.grosorTS}"`, 22, yPos);
+            item.componenteTS.forEach((tabla, i) => {
+                const titulo = item.componenteTS.length > 1 ? `- Tabla superior ${i + 1}` : '- Tabla superior';
+                doc.text(`${titulo}: Cant. ${tabla.cantidad_TS}, L: ${tabla.largo_TS}", A: ${tabla.ancho_TS}", G: ${tabla.grosor_TS}"`, 22, yPos);
                 yPos += 6;
             });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.parrillaTS[0].materialTS}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.parrillaTS[0].toleranciaTS}"`, 65, yPos);
+            doc.text(`* Material: ${item.componenteTS[0].material_TS}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.componenteTS[0].tolerancia_TS}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
-            doc.text(`- Separación: ${item.parrillaTS[0].separacionTS}"`, 22, yPos); yPos += 6;
+            doc.text(`- Separación: ${item.componenteTS[0].separacion_TS}"`, 22, yPos); yPos += 6;
             
             // Tabla inferior
             doc.line(20, yPos, 100, yPos); yPos += 6;
-            item.parrillaTI.forEach((tabla, i) => {
-                const titulo = item.parrillaTI.length > 1 ? `- Tabla inferior ${i + 1}` : '- Tabla inferior';
-                doc.text(`${titulo}: Cant. ${tabla.cantidadTI}, L: ${tabla.largoTI}", A: ${tabla.anchoTI}", G: ${tabla.grosorTI}"`, 22, yPos);
+            item.componenteTI.forEach((tabla, i) => {
+                const titulo = item.componenteTI.length > 1 ? `- Tabla inferior ${i + 1}` : '- Tabla inferior';
+                doc.text(`${titulo}: Cant. ${tabla.cantidad_TI}, L: ${tabla.largo_TI}", A: ${tabla.ancho_TI}", G: ${tabla.grosor_TI}"`, 22, yPos);
                 yPos += 6;
             });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.parrillaTI[0].materialTI}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.parrillaTI[0].toleranciaTI}"`, 65, yPos);
+            doc.text(`* Material: ${item.componenteTI[0].material_TI}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.componenteTI[0].tolerancia_TI}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
@@ -304,18 +304,18 @@ function crearPdf() {
             doc.line(20, yPos, 100, yPos); yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
-            doc.text(`- Barrote: Cant. ${item.parrillaTC[0].cantidadB}, L: ${item.parrillaTC[0].largoB}", A: ${item.parrillaTC[0].anchoB}", G: ${item.parrillaTC[0].grosorB}"`, 22, yPos); yPos += 6;
+            doc.text(`- Barrote: Cant. ${item.componenteB.cantidad_B}, L: ${item.componenteB.largo_B}", A: ${item.componenteB.ancho_B}", G: ${item.componenteB.grosor_B}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.parrillaTC[0].materialB}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.parrillaTC[0].toleranciaB}"`, 65, yPos);
+            doc.text(`* Material: ${item.componenteB.material_B}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.componenteB.tolerancia_B}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
-            doc.text(`- Tipo: ${item.tipoB}`, 22, yPos); yPos += 6;
+            doc.text(`- Tipo: ${item.componenteB.tipo_B}`, 22, yPos); yPos += 6;
 
             if (item.producto.tipoB === 'Con saque') {
-                doc.text(`- Inicio de saque: ${item.parrillaTC[0].distB}"`, 22, yPos); yPos += 6;
+                doc.text(`- Inicio de saque: ${item.componenteB.dist_B}"`, 22, yPos); yPos += 6;
             }
 
             // Servicios
@@ -324,54 +324,54 @@ function crearPdf() {
         // TARIMA DE TACÓN
         } else if (item.producto.subtipo === 'Tacón') {
             // Tabla superior
-            item.parrillaTS.forEach((tabla, i) => {
-                const titulo = item.parrillaTS.length > 1 ? `- Tabla superior ${i + 1}` : '- Tabla superior';
-                doc.text(`${titulo}: Cant. ${tabla.cantidadTS}, L: ${tabla.largoTS}", A: ${tabla.anchoTS}", G: ${tabla.grosorTS}"`, 22, yPos);
+            item.componenteTS.forEach((tabla, i) => {
+                const titulo = item.componenteTS.length > 1 ? `- Tabla superior ${i + 1}` : '- Tabla superior';
+                doc.text(`${titulo}: Cant. ${tabla.cantidad_TS}, L: ${tabla.largo_TS}", A: ${tabla.ancho_TS}", G: ${tabla.grosor_TS}"`, 22, yPos);
                 yPos += 6;
             });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.parrillaTS[0].materialTS}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.parrillaTS[0].toleranciaTS}"`, 65, yPos);
+            doc.text(`* Material: ${item.componenteTS[0].material_TS}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.componenteTS[0].tolerancia_TS}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
-            doc.text(`- Separación: ${item.parrillaTS[0].separacionTS}"`, 22, yPos); yPos += 6;
+            doc.text(`- Separación: ${item.componenteTS[0].separacion_TS}"`, 22, yPos); yPos += 6;
 
             // Tabla inferior
             doc.line(20, yPos, 100, yPos); yPos += 6;
-            item.parrillaTI.forEach((tabla, i) => {
-                const titulo = item.parrillaTI.length > 1 ? `- Tabla inferior ${i + 1}` : '- Tabla inferior';
-                doc.text(`${titulo}: Cant. ${tabla.cantidadTI}, L: ${tabla.largoTI}", A: ${tabla.anchoTI}", G: ${tabla.grosorTI}"`, 22, yPos);
+            item.componenteTI.forEach((tabla, i) => {
+                const titulo = item.componenteTI.length > 1 ? `- Tabla inferior ${i + 1}` : '- Tabla inferior';
+                doc.text(`${titulo}: Cant. ${tabla.cantidad_TI}, L: ${tabla.largo_TI}", A: ${tabla.ancho_TI}", G: ${tabla.grosor_TI}"`, 22, yPos);
                 yPos += 6;
             });
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.parrillaTI[0].materialTI}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.parrillaTI[0].toleranciaTI}"`, 65, yPos);
+            doc.text(`* Material: ${item.componenteTI[0].material_TI}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.componenteTI[0].tolerancia_TI}"`, 65, yPos);
             yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
 
             // Tacón lateral y central
             doc.line(20, yPos, 100, yPos); yPos += 6;
-            doc.text(`- Tacón lateral: Cant. ${item.parrillaTC[0].cantidadTAL}, L: ${item.parrillaTC[0].largoTAL}", A: ${item.parrillaTC[0].anchoTAL}", G: ${item.parrillaTC[0].grosorTAL}"`, 22, yPos); yPos += 6;
-            doc.text(`- Tacón central: Cant. ${item.parrillaTC[0].cantidadTAC}, L: ${item.parrillaTC[0].largoTAC}", A: ${item.parrillaTC[0].anchoTAC}", G: ${item.parrillaTC[0].grosorTAC}"`, 22, yPos); yPos += 6;
+            doc.text(`- Tacón lateral: Cant. ${item.componenteTAL.cantidad_TAL}, L: ${item.componenteTAL.largo_TAL}", A: ${item.componenteTAL.ancho_TAL}", G: ${item.componenteTAL.grosor_TAL}"`, 22, yPos); yPos += 6;
+            doc.text(`- Tacón central: Cant. ${item.componenteTAC.cantidad_TAC}, L: ${item.componenteTAC.largo_TAC}", A: ${item.componenteTAC.ancho_TAC}", G: ${item.componenteTAC.grosor_TAC}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.parrillaTC[0].materialTA}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.parrillaTC[0].toleranciaTA}"`, 65, yPos);
+            doc.text(`* Material: ${item.componenteTAL.material_TA}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.componenteTAL.tolerancia_TA}"`, 65, yPos);
             yPos += 6;
 
             // Tablas de carga
             doc.line(20, yPos, 100, yPos); yPos += 6;
             doc.setFontSize(10);
             doc.setFont("helvetica", "normal");
-            doc.text(`- Tablas carga: Cant. ${item.parrillaTC[1].cantidadTC}, L: ${item.parrillaTC[1].largoTC}", A: ${item.parrillaTC[1].anchoTC}", G: ${item.parrillaTC[1].grosorTC}"`, 22, yPos); yPos += 6;
+            doc.text(`- Tablas carga: Cant. ${item.componenteTC.cantidad_TC}, L: ${item.componenteTC.largo_TC}", A: ${item.componenteTC.ancho_TC}", G: ${item.componenteTC.grosor_TC}"`, 22, yPos); yPos += 6;
             doc.setFontSize(9);
             doc.setFont("helvetica", "italic");
-            doc.text(`* Material: ${item.parrillaTC[1].materialTC}`, 22, yPos);
-            doc.text(`* Tolerancias: +- ${item.parrillaTC[1].toleranciaTC}"`, 65, yPos);
+            doc.text(`* Material: ${item.componenteTC.material_TC}`, 22, yPos);
+            doc.text(`* Tolerancias: +- ${item.componenteTC.tolerancia_TC}"`, 65, yPos);
             yPos += 6;
 
             // Servicios

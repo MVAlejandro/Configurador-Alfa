@@ -12,14 +12,14 @@ export function productoData() {
     const subtipo = document.getElementById('subtipo').value;
     const acomodo = document.getElementById('acomodo').value;
 
-    const largoGral = parseFloat(document.getElementById('largoGral').value);
-    const anchoGral = parseFloat(document.getElementById('anchoGral').value);
-    const grosorGral = parseFloat(document.getElementById('grosorGral').value);
+    const largo_gral = parseFloat(document.getElementById('largoGral').value);
+    const ancho_gral = parseFloat(document.getElementById('anchoGral').value);
+    const grosor_gral = parseFloat(document.getElementById('grosorGral').value);
 
     let cantidad = 1;
-    let precioUnit = 0;
+    let precio_unit = 0;
 
-    if (!largoGral || !anchoGral || !grosorGral) {
+    if (!largo_gral || !ancho_gral || !grosor_gral) {
         alert('Por favor, complete todos los campos para agregar el producto.');
         return;
     }
@@ -33,8 +33,8 @@ export function productoData() {
 
     // Crear un objeto con todos los datos del formulario
     producto = {
-        tipo, subtipo, acomodo, precioUnit, cantidad,
-        largoGral, anchoGral, grosorGral,
+        tipo, subtipo, acomodo, precio_unit, cantidad,
+        largo_gral, ancho_gral, grosor_gral,
     };
 
     return producto;

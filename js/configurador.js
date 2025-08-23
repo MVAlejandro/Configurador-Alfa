@@ -2,7 +2,7 @@
 // IMPORTACIÓN DE FUNCIONES EXTERNAS
 // Importar funciones de creación de producto
 import {productoData} from "./datos/producto..js"
-import {parrillaTSData, parrillaTIData, parrillaTCData} from "./datos/parrillas.js"
+import {componenteTSData, componenteTIData, componenteBData, componenteTALData, componenteTACData, componenteTCData} from "./datos/parrillas.js"
 import {serviciosData} from "./datos/servicios.js"
 // Importar la función para obtener la imagen del plano
 import {obtenerPlanoB} from './planos/plano_barrote.js'; 
@@ -36,19 +36,30 @@ document.getElementById('btn_agregar').addEventListener('click', function(event)
         // Obtener la imagen del plano (base64) generado en el canvas
         imgPlano = obtenerPlanoB();
 
+        formData = {
+            producto: productoData(), 
+            componenteTS: componenteTSData(), 
+            componenteTI: componenteTIData(), 
+            componenteB: componenteBData(),
+            servicios: serviciosData(), 
+            imgPlano
+        }
+
     // TARIMA DE TACON
     } else if (subtipo === 'Tacón'){
         // Obtener la imagen del plano (base64) generado en el canvas
         imgPlano = obtenerPlanoT();
-    }
 
-    formData = {
-        producto: productoData(), 
-        parrillaTS: parrillaTSData(), 
-        parrillaTI: parrillaTIData(), 
-        parrillaTC: parrillaTCData(),
-        servicios: serviciosData(), 
-        imgPlano
+        formData = {
+            producto: productoData(), 
+            componenteTS: componenteTSData(), 
+            componenteTI: componenteTIData(), 
+            componenteTAL: componenteTALData(),
+            componenteTAC: componenteTACData(), 
+            componenteTC: componenteTCData(),
+            servicios: serviciosData(), 
+            imgPlano
+        }
     }
 
     // Agregar el objeto creado al carrito
