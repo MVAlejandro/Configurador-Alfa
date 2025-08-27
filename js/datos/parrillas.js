@@ -29,7 +29,7 @@ export function componenteTSData() {
         separacion_TS = ((largo_gral - (ancho_TS * cantidad_TS)) / (cantidad_TS - 1)).toFixed(2);
     
         componenteTS.push({
-            cantidad_TS, largo_TS, ancho_TS, grosor_TS, separacion_TS, material_TS, tolerancia_TS
+            cantidad_TS, largo_TS, ancho_TS, grosor_TS, material_TS, tolerancia_TS, separacion_TS
         });
     
     } else if (variacionTS === 'Variable') {

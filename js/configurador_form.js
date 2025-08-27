@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const modal_form = document.getElementById('modal_form');
             modal_form.innerHTML = ``;
         } else if (subtipo.value === 'Barrote') {
-            btn_siguiente.disabled = false;
             op_acomodo.innerHTML = 
                 `<p class="titulo_opcion mb-0 me-3">Acomodo: </p>
                     <select id="acomodo" class="form-select" aria-label="Default select example">
@@ -156,9 +155,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const reparado_cont = document.getElementById("reparado_cont");
             tipo.addEventListener('change', function () {
                 if (tipo.value === 'Reciclada'){
+                    btn_siguiente.disabled = false;
                     modalRecic();
-                } else {
+                } else if (tipo.value === 'Nueva'){
+                    btn_siguiente.disabled = false;
                     reparado_cont.innerHTML = '';
+                } else {
+                    btn_siguiente.disabled = true;
                 }
             });
 
@@ -181,7 +184,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             
         } else if (subtipo.value === 'Tacón') {
-            btn_siguiente.disabled = false;
             op_acomodo.innerHTML = 
             `<p class="titulo_opcion mb-0 me-3">Acomodo: </p>
                 <select id="acomodo" class="form-select" aria-label="Default select example">
@@ -281,9 +283,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const reparado_cont = document.getElementById("reparado_cont");
             tipo.addEventListener('change', function () {
                 if (tipo.value === 'Reciclada'){
+                    btn_siguiente.disabled = false;
                     modalRecic();
-                } else {
+                } else if (tipo.value === 'Nueva'){
+                    btn_siguiente.disabled = false;
                     reparado_cont.innerHTML = '';
+                } else {
+                    btn_siguiente.disabled = true;
                 }
             });
 

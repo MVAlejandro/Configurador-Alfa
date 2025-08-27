@@ -1,6 +1,10 @@
 
 export function serviciosData() {
     // Obtener los datos de las tablas dependiendo el tipo de tarima
+    const tipo = document.getElementById('tipo').value;
+    // Crear un arreglo para los valores seleccionados
+    let servicios = {};
+
     // Función auxiliar para capturar el valor de los radios
     function capturarValorRadio(nombreGrupo) {
         const radios = document.querySelectorAll(`input[name="${nombreGrupo}"]`);
@@ -10,8 +14,6 @@ export function serviciosData() {
             }
         }
     };
-    // Crear un arreglo para los valores seleccionados
-    let servicios = {};
 
     // Captura los valores de los radios de servicios
         const pinturaSeleccionada = capturarValorRadio("pintura");

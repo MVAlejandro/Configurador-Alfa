@@ -17,7 +17,7 @@
     // Obtener el nombre del archivo actual
     const paginaActual = window.location.pathname.split("/").pop();
     if (paginaActual !== "cliente.html") {
-        const clienteActual = localStorage.getItem("clienteActual");
+        const clienteActual = localStorage.getItem("cliente_activo");
         if (!clienteActual) {
             window.location.href = "cliente.html";
             return;

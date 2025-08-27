@@ -223,8 +223,10 @@ export function modalPintura() {
             <select id="color" class="form-select nb">
                 <option value="No">-----</option>
                 <option value="Azul">Azul</option>
-                <option value="Naranja">Naranja</option>
+                <option value="Rojo">Rojo</option>
                 <option value="Verde">Verde</option>
+                <option value="Naranja">Naranja</option>
+                <option value="Gris">Gris</option>
             </select>
         </div>
     </div>`;

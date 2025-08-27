@@ -68,6 +68,7 @@ function abrirModalItem(formData) {
         crearElemListaTolerancia(formData.componenteTS[0].tolerancia_TS);
         crearElemListaSecMed('Separación', formData.componenteTS[0].separacion_TS);
         crearElemListaSec('Material', formData.componenteTS[0].material_TS);
+        // Mostrar tabla inferior (puede ser una o varias)
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
         if (Array.isArray(formData.componenteTI)) {
             formData.componenteTI.forEach((tabla, i) => {
@@ -78,6 +79,7 @@ function abrirModalItem(formData) {
         crearElemListaTolerancia(formData.componenteTI[0].tolerancia_TI);
         crearElemListaSec('Material', formData.componenteTI[0].material_TI);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
+        // Mostrar barrotes
         crearElemListaPrin('Barrote', formData.componenteB.cantidad_B, formData.componenteB.largo_B, formData.componenteB.ancho_B, formData.componenteB.grosor_B);
         crearElemListaTolerancia(formData.componenteB.tolerancia_B);
         crearElemListaSec('Material', formData.componenteB.material_B);
@@ -107,6 +109,7 @@ function abrirModalItem(formData) {
         crearElemListaSecMed('Separación', formData.componenteTS[0].separacion_TS);
         crearElemListaSec('Material', formData.componenteTS[0].material_TS);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
+        // Mostrar tabla inferior (puede ser una o varias)
         if (Array.isArray(formData.componenteTI)) {
             formData.componenteTI.forEach((tabla, i) => {
                 const titulo = formData.componenteTI.length > 1 ? `Tabla inferior ${i + 1}` : 'Tabla inferior';
@@ -116,11 +119,13 @@ function abrirModalItem(formData) {
         crearElemListaTolerancia(formData.componenteTI[0].tolerancia_TI);
         crearElemListaSec('Material', formData.componenteTI[0].material_TI);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
+        // Mostrar tacón lateral y central
         crearElemListaPrin('Tacón lateral', formData.componenteTAL.cantidad_TAL, formData.componenteTAL.largo_TAL, formData.componenteTAL.ancho_TAL, formData.componenteTAL.grosor_TAL);
         crearElemListaPrin('Tacón central', formData.componenteTAC.cantidad_TAC, formData.componenteTAC.largo_TAC, formData.componenteTAC.ancho_TAC, formData.componenteTAC.grosor_TAC);
         crearElemListaTolerancia(formData.componenteTAL.tolerancia_TA);
         crearElemListaSec('Material', formData.componenteTAL.material_TA);
         lista_resumen.insertAdjacentHTML('beforeend', `<hr>`);
+        // Mostrar tablas de carga
         crearElemListaPrin('Tablas de carga', formData.componenteTC.cantidad_TC, formData.componenteTC.largo_TC, formData.componenteTC.ancho_TC, formData.componenteTC.grosor_TC);
         crearElemListaTolerancia(formData.componenteTC.tolerancia_TC);
         crearElemListaSec('Material', formData.componenteTC.material_TC);

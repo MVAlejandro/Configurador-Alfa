@@ -1,33 +1,19 @@
 
+// IMPORTACIÓN DE FUNCIONES EXTERNAS
+// Importar función adaptadora para convertir datos API a JSON
+import {adaptarDatosParaPdf} from './api/orden_api.js'
+
 // Crear evento al dar click en botón Regresar
 document.getElementById('btn_regresar').addEventListener('click', function () {
     window.location.href = './resumen.html';
 });
 
-// Recuperar los datos del localStorage y guardar en la orden
-const cliente = JSON.parse(localStorage.getItem("clienteActual"));
-const carrito = JSON.parse(localStorage.getItem("carrito"));
+async function crearPdf(ordenAdaptada) {
+    const { jsPDF } = window.jspdf;
 
-// Calcular total
-const total = carrito.reduce((sum, item) => sum + item.producto.cantidad * item.producto.precio_unit, 0);
+    const cliente = ordenAdaptada.cliente;
+    const carrito = ordenAdaptada.productos;
 
-// Generar folio
-function generarIDUnico() {
-  return 'A-' + Math.floor(Math.random() * 10000);
-}
-
-const orden = {
-  folio: generarIDUnico(), 
-  cliente: cliente,
-  productos: carrito,
-  fechaCreacion: new Date().toISOString(),
-  totalEstimado: total,
-};
-console.log(orden);
-
-const { jsPDF } = window.jspdf;
-
-function crearPdf() {
     const doc = new jsPDF({
         format: 'letter'
     });
@@ -77,7 +63,7 @@ function crearPdf() {
     drawRect(175, 20, 25, 5, 0.1);
     drawRect(175, 25, 25, 5, 0.1);
     textCenter("Folio", 375, 24)
-    textCenter(`${orden.folio}`, 375, 29)
+    textCenter(`${ordenAdaptada.folio}`, 375, 29)
 
     drawRect(175, 32, 25, 5, 0.1);
     drawRect(175, 37, 25, 5, 0.1);
@@ -199,14 +185,14 @@ function crearPdf() {
     drawRect(148.5, 221, 52.5, 43, 0.1);
     // Insertar subtotal
     doc.text("Subtotal", 150, 226)
-    doc.text(`$${formatoMoneda(orden.totalEstimado)}`, 180.5, 226);
+    doc.text(`$${formatoMoneda(ordenAdaptada.totalEstimado)}`, 180.5, 226);
     // Insertar IVA
     doc.text("IVA al 16%", 150, 231)
-    doc.text(`$${formatoMoneda(orden.totalEstimado * 0.16)}`, 180.5, 231);
+    doc.text(`$${formatoMoneda(ordenAdaptada.totalEstimado * 0.16)}`, 180.5, 231);
     // Insertar total
     doc.setFontSize(11);
     doc.text("Total", 159, 262)
-    doc.text(`$${formatoMoneda(orden.totalEstimado * 1.16)}`, 177, 262);
+    doc.text(`$${formatoMoneda(ordenAdaptada.totalEstimado * 1.16)}`, 177, 262);
 
 
     // PLANOS POR PRODUCTO //
@@ -233,7 +219,7 @@ function crearPdf() {
         drawRect(15, 55, 186, 5, 0.1);
 
         doc.setFontSize(10);
-        textCenter(`Tarima de ${item.producto.subtipo}, ${item.producto.tipo} (${item.producto.largoGral}" x ${item.producto.anchoGral}" x ${item.producto.grosorGral}") - ${item.producto.acomodo}`, 216, 59)
+        textCenter(`Tarima de ${item.producto.subtipo}, ${item.producto.tipo} (${item.producto.largo_gral}" x ${item.producto.ancho_gral}" x ${item.producto.grosor_gral}") - ${item.producto.acomodo}`, 216, 59)
         // Plano 
         doc.addImage(item.imgPlano, "PNG", 29, 60, 160, 100);
 
@@ -398,22 +384,48 @@ function crearPdf() {
     return doc;
 }
 
-window.addEventListener("load", function(event){
-    const doc = crearPdf();
-
-    // // Convertir a URL y mostrarlo en el iframe
-    const pdfBlob = doc.output("blob");
-    const blobUrl = URL.createObjectURL(pdfBlob);
-
-    document.getElementById("pdfPreview").src = blobUrl;
-    //   window.open(blobUrl, '_blank');
+window.addEventListener("load", async function() {
+    try {
+        // Obtener ID de orden de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const idOrden = urlParams.get('id_orden');
+        
+        console.log('ID Orden de URL:', idOrden); // Debug
+        
+        if (!idOrden) {
+            throw new Error('No se encontró ID de orden en la URL');
+        }
+        
+        // 1. Adaptar datos de la API
+        const ordenAdaptada = await adaptarDatosParaPdf(idOrden);
+        
+        console.log('Datos adaptados recibidos:', ordenAdaptada); // Debug
+        
+        if (!ordenAdaptada) {
+            throw new Error('La función adaptadora no retornó datos');
+        }
+        
+        // 2. Generar PDF con los datos adaptados
+        const doc = await crearPdf(ordenAdaptada);
+        
+        // 3. Mostrar PDF
+        const pdfBlob = doc.output("blob");
+        const blobUrl = URL.createObjectURL(pdfBlob);
+        document.getElementById("pdfPreview").src = blobUrl;
+        
+    } catch (error) {
+        console.error('Error COMPLETO:', error);
+        console.error('Mensaje:', error.message);
+        console.error('Stack:', error.stack);
+        alert('Error al generar el PDF: ' + error.message);
+    }
 });
 
 document.getElementById('btn_final').addEventListener('click', function() {
-    // Borrar todo el localStorage
+    // Borrar orden del localStorage
     localStorage.removeItem("carrito");
     localStorage.removeItem("clienteActual");
 
-    // Redirigir al inicio
+    // Redirigir a cliente
     window.location.href = 'cliente.html';
 });

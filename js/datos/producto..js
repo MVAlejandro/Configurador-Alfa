@@ -16,7 +16,6 @@ export function productoData() {
     const ancho_gral = parseFloat(document.getElementById('anchoGral').value);
     const grosor_gral = parseFloat(document.getElementById('grosorGral').value);
 
-    let cantidad = 1;
     let precio_unit = 0;
 
     if (!largo_gral || !ancho_gral || !grosor_gral) {
@@ -33,7 +32,7 @@ export function productoData() {
 
     // Crear un objeto con todos los datos del formulario
     producto = {
-        tipo, subtipo, acomodo, precio_unit, cantidad,
+        tipo, subtipo, acomodo, precio_unit,
         largo_gral, ancho_gral, grosor_gral,
     };
 

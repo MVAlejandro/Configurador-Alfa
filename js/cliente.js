@@ -10,11 +10,8 @@ document.getElementById('btn_cerrar').addEventListener('click', function () {
     window.location.href = './login.html';
 });
 
-// Declarar el objeto cliente para después
-let cliente = {};
-
 // Crear evento al dar click en botón Siguiente
-document.getElementById("btn_siguiente").addEventListener("click", function () {
+document.getElementById("btn_siguiente").addEventListener("click", async function () {
     const razonSocial = document.getElementById("razon").value.trim();
     const rfc = document.getElementById("rfc").value.trim();
     const nombre = document.getElementById("nombre").value.trim();
@@ -52,7 +49,7 @@ document.getElementById("btn_siguiente").addEventListener("click", function () {
     validarEmail(correoIn, error_correo);
     validarText(destinoIn, error_destino);
 
-    // VALIDAR LOS CAMPOS ANTES DE GUARDAR LA INFORMACIÓN
+    // Validar los campos antes de guardar la información
     if (!razonSocial || !rfc || !nombre || !codigoPostal || !direccion || !numero || !correo || !destino) {         
         alert('Por favor, complete todos los campos para continuar.');
         return;
@@ -65,15 +62,42 @@ document.getElementById("btn_siguiente").addEventListener("click", function () {
         return;
     }
 
-    cliente = {
-        razonSocial, rfc, nombre, codigoPostal, direccion, numero, correo, destino
+    // Crear objeto cliente para mandar a la API
+    const clienteData = {
+        razon_social: razonSocial,
+        rfc: rfc,
+        nombre: nombre,
+        codigo_postal: codigoPostal,
+        direccion: direccion,
+        numero_telefono: numero,
+        correo: correo,
+        destino: destino
     }
 
-    // Guardar en localStorage
-    localStorage.setItem("clienteActual", JSON.stringify(cliente));
-    // Mostrar alerta de agregado correctamente
-    alert('Datos guardados correctamente.');
-    console.log("Cliente guardado:", cliente);
+    // Mandar información del cliente a API
+    try {
+        const res = await fetch('http://127.0.0.1:8000/api/clientes/registrar_o_buscar/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(clienteData)
+        });
+        const data = await res.json();
+        if (data.created) {
+            alert('Cliente registrado correctamente.');
+        } else {
+            alert('Cliente ya existía, se usará el registro existente.');
+        }
 
-    window.location.href = './configurador.html';
+        // Guardar en localStorage el cliente activo
+        localStorage.setItem("cliente_activo", JSON.stringify({
+            id_cliente: data.id_cliente,
+            nombre: clienteData.nombre
+        }));
+
+        // Redirigir
+        window.location.href = './configurador.html';
+    } catch (err) {
+        console.error("Error al registrar cliente:", error);
+        alert('Error al agregar el cliente: ' + error.message);
+    }
   });
